@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="20">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WL_Home_TC_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="HomePage_AllLinks_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Support_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="SupportMenu_End2End"/> </methods> </class> </classes> </test>  
+<test name="TC_WL_SupportRequest_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_SupportRequest_Suite"> <methods> <include name="SupportRequest_Page"/> </methods> </class> </classes> </test>
+<test name="TC_WL_PaymentHistory_007"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_BillingSuite"> <methods> <include name="PaymentHistory_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_billing_008"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_BillingSuite"> <methods> <include name="PayNow_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_reports_009"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_BillingSuite"> <methods> <include name="Reports_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_paperBills_010"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_BillingSuite"> <methods> <include name="paperBills_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_viewBills_011"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_BillingSuite"> <methods> <include name="viewBills_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_autoPay_012"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_BillingSuite"> <methods> <include name="autoPay_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_notificationsMenu_End2End_015"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_NotificationsSuite"> <methods> <include name="notificationsMenu_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_intenet_TV_Phone"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="intenet_TV_Phone"/> </methods> </class> </classes> </test> 
+<test name="TC_WL_Email"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="Email_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_referFriends"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="referFriends_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Shop_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="Blog_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Blog_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="Shop_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_News"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="News_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_ContactUs_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomeSuite"> <methods> <include name="ContactUs_End2End"/> </methods> </class> </classes> </test>
+
+<!-- <test name="TC_WL_MyProfile_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_MyProfileSuite"> <methods> <include name="MyProfile_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_TextAlerts_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomePageSuite"> <methods> <include name="WindstreamTextAlert_114574"/> </methods> </class> </classes> </test>
+ <test name="TC_WL_ConsumerOffers_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_HomePageSuite"> <methods> <include name="ConsumerOffers"/> </methods> </class> </classes> </test> -->
+
+<!--  
+-->
+</suite>

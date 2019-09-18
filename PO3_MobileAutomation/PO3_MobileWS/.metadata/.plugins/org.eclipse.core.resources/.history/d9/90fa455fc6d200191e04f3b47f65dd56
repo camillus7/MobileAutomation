@@ -1,0 +1,202 @@
+package com.webautomation.pageobject.we_pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_AccountPage {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+
+	public WE_AccountPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+
+	@FindBy(xpath = "//h4[contains(.,'Account Hierarchy')]")
+	public WebElement accountHierarchy;
+	
+	@FindBy(xpath = "//p[contains(.,'View your list of accounts')]")
+	public WebElement ViewYourListOfaccounts;
+	
+	@FindBy(xpath = "//table/tbody")
+	public WebElement accountHierarchyTable;
+	
+	@FindBy(xpath = "//button[@id='toggleFilters']")
+	public WebElement filters;
+	
+	@FindBy(xpath = "//a[contains(.,'Account ID')]")
+	public WebElement accountIDSort;
+	
+	@FindBy(xpath = "//a[contains(.,'Account Name  (Billable Accounts in Bold)')]")
+	public WebElement accountNameSort;
+	
+	@FindBy(xpath = "//button[@data-id='AccountName']")
+	public WebElement accountSelect;
+	
+	@FindBy(xpath = "//button[@id='btnDefault']")
+	public WebElement makeTheseFiltersMyDefault;
+	
+	@FindBy(xpath = "//button[contains(.,'Clear Filters')]")
+	public WebElement clearFilters;
+	
+	@FindBy(xpath = "//button[contains(.,'Apply Filters')]")
+	public WebElement applyFilters;
+	
+	@FindBy(xpath = "//h4[contains(.,'Company Contacts')]")
+	public WebElement companyContacts;
+	
+	@FindBy(xpath = "//p[contains(.,'Manage your company')]")
+	public WebElement manageYourCompany;
+	
+	@FindBy(xpath = "//input[@id='FirstName']")
+	public WebElement firstNameFilter;
+	
+	@FindBy(xpath = "//input[@id='LastName']")
+	public WebElement lastNameFilter;
+	
+	@FindBy(xpath = "//input[@id='PhoneNumber']")
+	public WebElement phoneNumberFilter;
+	
+	@FindBy(xpath = "//input[@id='Email']")
+	public WebElement emailFilter;
+	
+	@FindBy(xpath = "//button[@class='icon light edit editContactDetails']")
+	public WebElement editContact;
+	
+	@FindBy(xpath = "//button[@class='icon light delete deleteContactDetails']")
+	public WebElement deleteContact;
+
+	@FindBy(xpath = "//button[@id='btnCancel']")
+	public WebElement cancelDeleteContact;
+	
+	@FindBy(xpath = "//*[@id='btnOk']")
+	public WebElement OkDeleteContact;
+	
+	@FindBy(xpath = "//button[@id='btnNewContact']")
+	public WebElement createNewContact;
+	
+	@FindBy(xpath = "//a[contains(.,'Back')]")
+	public WebElement back;
+	
+	@FindBy(xpath = "//input[@id='txtFirstName']")
+	public WebElement firstNameTxt;
+	
+	@FindBy(xpath = "//input[@id='txtLastName']")
+	public WebElement lastNameTxt;
+	
+	@FindBy(xpath = "//input[@id='txtEmail']")
+	public WebElement emailTxt;
+	
+	@FindBy(xpath = "//input[@id='txtFax']")	
+	public WebElement faxNumber;
+	
+	@FindBy(xpath = "//input[@id='txtWorkPhoneNumber']")
+	public WebElement workPhoneNumber;
+	
+	@FindBy(xpath = "//input[@id='txtMobilePhoneNumber']")
+	public WebElement mobilePhoneNumber;
+	
+	@FindBy(xpath = "//input[@id='txtHomePhoneNumber']")
+	public WebElement homePhoneNumber;
+	
+	@FindBy(xpath = "//label[@for='radWorkPhoneNumber']")
+	public WebElement workPhoneRadioBtn;
+	
+	@FindBy(xpath = "//label[@for='radMobPhoneNumber']")
+	public WebElement mobilePhoneRadioBtn;
+	
+	@FindBy(xpath = "//label[@for='radHomePhoneNumber']")
+	public WebElement homePhoneRadioBtn;
+	
+	@FindBy(xpath = "//button[@id='btnSaveContact']")
+	public WebElement saveContact;
+	
+	@FindBy(xpath = "//button[@id='btnCancelContact']")
+	public WebElement clearContact;
+	
+	@FindBy(xpath = "//span[@class='floatwarningclose']")
+	public WebElement warningCloseX;
+	
+    //@FindBy(xpath = "//*[@id='mCSB_1_container']/div[1]/div[1]/button")
+	//@FindBy(css = "button.checkbox")
+	@FindBy(xpath = "//*[@id='chk0']")
+	public WebElement accountChechboxFirstRecord;
+	
+	@FindBy(xpath = "//button[@data-id='ddlAccounts']")
+	public WebElement accountContacts;
+	
+	@FindBy(xpath = "//button[@data-id='ddlRoles']")
+	public WebElement contactRoles;
+
+	
+	//@FindBy(xpath = "//*[@id='mCSB_1_container']/div[1]/div[2]/div/button")
+	public WebElement contactRolesSelectFirstRecord;
+	
+	@FindBy(xpath = "//h4[contains(.,'Notification Center')]")
+	public WebElement notificationCenter;
+	
+	@FindBy(xpath = "//p[contains(.,'Manage alert/notification settings')]")
+	public WebElement manageAlertNotificationSettings;
+	
+	@FindBy(xpath = "//a[contains(.,'Add Rule')]")
+	public WebElement addRule;
+	
+	@FindBy(xpath = "//button[@id='btnExport']")
+	public WebElement export;
+	
+	@FindBy(xpath = "//button[contains(.,'Export to Excel')]")
+	public WebElement exportToExcel;
+	
+	@FindBy(xpath = "//button[contains(.,'Export to PDF')]")
+	public WebElement exportToPDF;
+	
+	@FindBy(xpath = "//button[@data-id='ddlName']")
+	public WebElement nameNotificationCenter;
+	
+	@FindBy(xpath = "//button[@data-id='ddlProfile']")
+	public WebElement selectRecipient;
+	
+	@FindBy(xpath = "//button[@id='btnNext']")
+	public WebElement next;
+	
+	@FindBy(xpath = "//button[@id='btnPrevious']")
+	public WebElement previous;
+	
+	@FindBy(xpath = "//input[@id='txtContactFirstName']")
+	public WebElement firstNameTxtNC;
+	
+	@FindBy(xpath = "//input[@id='txtContactLastName']")
+	public WebElement lastNameTxtNC;
+	
+	@FindBy(xpath = "//input[@id='txtContactEmailAddress']")
+	public WebElement emailAddressTxtNC;
+	
+	@FindBy(xpath = "//input[@id='txtContactPhoneNumber']")
+	public WebElement phoneNumberTxtNC;
+	
+	@FindBy(xpath = "//button[@id='btnAddReceipient']")
+	public WebElement btnAddReceipient;
+	
+	@FindBy(xpath = "//button[@id='btnCancelReciepient']")
+	public WebElement cancelReciepient;
+	
+	@FindBy(xpath = "//button[contains(.,'Manage Notifications')]")
+	public WebElement manageNotificationsBtn;
+	
+	@FindBy(xpath = "//button[@data-original-title='Clear Notification Preferences']")
+	public WebElement clearNotificationPreferencesBtn;
+	
+	
+	/*	@FindBy(xpath = "xxxxxxxxx")
+	public WebElement xxxxxxxxxxx;*/
+	
+	
+	
+}

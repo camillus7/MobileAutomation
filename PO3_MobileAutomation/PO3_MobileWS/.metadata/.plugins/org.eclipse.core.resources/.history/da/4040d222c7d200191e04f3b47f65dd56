@@ -1,0 +1,681 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_Support_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	
+	private String strTicketID="";
+	private String strTicketStatus="";
+	private String strTicketServiceType="";
+	private String strTicketReportedProblem="";
+	private String strTicketAccountOMS="";
+	private String strTicketServiceNumber="";
+	private String strTicketServiceAddress="";
+
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void Support_Community_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Support -> Community";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.community(userStoryDescription, we_HomePage, we_SupportPage, winHandleBefore);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Support_Community() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> Community";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.community(userStoryDescription, we_HomePage, we_SupportPage, winHandleBefore);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void Support_Training() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "Support -> Office Suite Training";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> Office Suite Training");
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.officeSuiteTraining, "Office Suite Training");
+			driver.getWindowHandles();
+
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+
+					Assert.assertTrue(vc.waitUntilTextIsPresent(
+							"https://www.windstreamenterprise.com/m/weekly-myofficesuite-training/"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Weekly MyOfficeSuite Training"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent(
+							"Our free MyOfficeSuite training series is available to all OfficeSuite"));
+				}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void Support_ContactUs() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> Contact Us";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.contactUs(userStoryDescription, we_HomePage, we_SupportPage);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void Support_ContactUs_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Support -> Contact Us";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.contactUs(userStoryDescription, we_HomePage, we_SupportPage);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Support_GetHelp() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> Get Help";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.getHelp(userStoryDescription, we_HomePage, we_SupportPage);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Support_GetHelp_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Support -> Get Help";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.getHelp(userStoryDescription, we_HomePage, we_SupportPage);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Support_NationwideStatus() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> Nationwide Status";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.nationwideStatus, "Nationwide Status");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Nationwide Network Status  - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.viewRealTimeNationwideStatus, "View real-time nationwide network status");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Nationwide Network Status  - Windstream Enterprise"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This page displays network outage information that may potentially impact one or more of your sites. If you have any open trouble tickets related to the network outage"));
+			if (!vc.getWebDriverUtils().elementAvailablity(we_SupportPage.applyFilters, "Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_SupportPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Number of Potentially Affected Locations"));
+			vc.getWebDriverUtils().clickElement(we_SupportPage.outageSortTable, "Outage Sort");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.startedSortTable, "Started Sort");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.statusSortTable, "Status Sort");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.numberOfPetentialLocationsSortTable, "Number of Potentially Affected Locations Sort");
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			
+			vc.getWebDriverUtils().enterText(we_SupportPage.numberOfLocation,"0123456789", "Invalid - Number of Location");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("No data available"));
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			
+			vc.getWebDriverUtils().enterText(we_SupportPage.outage,"NET123456789", "Invalid Outage");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("No data available"));
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			
+			vc.getWebDriverUtils().enterText(we_SupportPage.numberOfLocation,"1", "Valid - Number of Location");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.detailsFirstRecord, "Details - First Record"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_SupportPage.detailsFirstRecord, "Details Text Validation").trim().equalsIgnoreCase("Details"));
+			vc.getWebDriverUtils().clickElement(we_SupportPage.detailsFirstRecord, "Details First Record");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			
+			vc.getWebDriverUtils().enterText(we_SupportPage.outage,"NET", "Valid - Outage");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.locationsFirstRecord, "Locations - First Record"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_SupportPage.locationsFirstRecord, "Locations Text Validation").trim().equalsIgnoreCase("Locations"));
+			vc.getWebDriverUtils().clickElement(we_SupportPage.locationsFirstRecord, "Locations First Record");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Site"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Ticket Number"));
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			
+			driver.navigate().refresh();
+			vc.getWebDriverUtils().clickElement(we_SupportPage.statusHideClosedTickets, "Hide Closed Tickets");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.allLogs, "All logs");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.logs15, "15 Logs");
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.nextPage, "Next Page");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.prevPage, "Previous Page");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.lastPage, "Last Page");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.firstPage, "First Page");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void Support_EscalationProcess() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> Escalation Process";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.escalationProcess, "Escalation Process");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Escalation Process - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.windstreamServiceAssuranceAndCarePoints, "Windstream Service Assurance and Care points of contact for elevated issue escalation");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Escalation Process - Windstream Enterprise"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Maintenance/Repair Escalation List"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Escalation Guidelines"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please have your trouble ticket number and contact information available"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("855.352.2731"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Level 1 escalation will be reviewed by a supervisor or lead and the appropriate technician will contact the customer within 30 minutes"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Level 2 escalations will be reviewed by the appropriate manager and our customer will be contacted within 1 hour"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Reason for requesting an escalation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Level"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Second Level"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Third Level"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Fourth Level"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Fifth Level"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Escalation Team"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("@windstream.com"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("After Hours Management"));
+			
+			Reporter.log("************** Click 'here' - to create a ticket***************",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.here, "Here");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("New Support Request  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Create Support Request"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Details"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Issue Details"));
+			driver.navigate().back();
+			
+			Reporter.log("************** Help Center ***************",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.helpCenter, "Help Center");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Help Center  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Top Data and Internet Related Help Topics"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Top Voice Related Help Topics"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Top Security Related Help Topics"));
+
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.networkHelpCenterImage, "href", "Network Help Center - Image Validation").trim().contains("Support/HelpCenter/DataInternetHelpCenter"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.voiceHelpCenterImage, "href", "Voice & Unified Communications Help Center - Image Validation").trim().contains("Support/HelpCenter/VoiceHelpCenter"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.securityHelpCenterImage, "href", "Security Help Center - Image Validation").trim().contains("Support/HelpCenter/SecurityHelpCenter"));
+			
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.allNetworkHelp, "href", "All Network Help - Link Validation").trim().contains("Support/HelpCenter/DataInternetHelpCenter"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.allVoiceUnifiedCommunicationsHelp, "href", "All Voice & Unified Communications Help  - Link Validation").trim().contains("Support/HelpCenter/VoiceHelpCenter"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.allSecurityHelp, "href", "All Security Help  - Link Validation").trim().contains("Support/HelpCenter/SecurityHelpCenter"));
+			
+			Reporter.log("****** Help Center  - Network Submenu *****",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.networkHelpCenterSubMenu, "Network Help Center - Sub menu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Data and Internet Help Center  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Top Articles &amp; Documentation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recently Updated Tickets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Data and Internet Videos"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Need to Create a New Ticket"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.go, "onclick", "Go - Link Validation").trim().contains("Support/ServiceTicket/Add"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.search, "Search"), "Search button validation");
+			
+			Reporter.log("****** Help Center  - Voice Submenu *****",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.voiceHelPCenterSubMenu, "Voice Help Center - Sub menu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Help Center  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Top Voice Articles &amp; Documentation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User and Equipment Guides"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Services Training Registration"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Services Videos"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recently Updated Tickets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Need to Create a New Ticket"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.go, "onclick", "Go - Link Validation").trim().contains("Support/ServiceTicket/Add"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.search, "Search"), "Search button validation");
+			
+			
+			Reporter.log("****** Help Center  - Security Submenu *****",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.securityHelpCenterSubMenu, "Security Help Center - Sub menu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Security Help Center  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Top Security Articles &amp; Documentation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User and Equipment Guides"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recently Updated Tickets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Need to Create a New Ticket"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.go, "onclick", "Go - Link Validation").trim().contains("Support/ServiceTicket/Add"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.search, "Search"), "Search button validation");
+			
+			
+			Reporter.log("************** Create Ticket ***************",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.createTicket, "Create Ticket");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("New Support Request  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Create Support Request"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Details"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Issue Details"));
+			driver.navigate().back();
+			
+			Reporter.log("************** Ticket Status ***************",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.ticketStatusEscalationProcess, "Ticket Status");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Support Request Status  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Refresh Support Request List"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Ticket ID"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service Type"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Reported Problem"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service Address"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Filters"));
+			driver.navigate().back();
+			
+			Reporter.log("************** Forms ***************",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.forms, "Forms");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Forms  - Windstream Enterprise"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.ndaSubMenu, "href", "NDA Sub menu").trim().contains("Windstream-NDA.pdf"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.w9SubMenu, "href", "W9 Sub menu").trim().contains("ELNK_EHC_2016_W-9.pdf"));
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.changeOfOwnershipRequestFormSubMenu, "Change of Request Ownership - Submenu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Change of Ownership  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("What type of Ownership Change are you requesting"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name Change - The change is to the name only - the Federal Tax ID # is NOT changing"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Federal Tax ID # Changing - with Name change or independent of Name change"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Releasing only part of what is on the account to a new owner"));
+			driver.navigate().back();
+			vc.getWebDriverUtils().checkPageIsReady();
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.mutualNonDisclosureAgreement, "href", "Mutual NDA Image").trim().contains("Windstream-NDA.pdf"));
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_SupportPage.w9RequestForEarthlinkTaxpayerIdentification, "href", "W9 Image").trim().contains("ELNK_EHC_2016_W-9.pdf"));
+			vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.changeOfOwnershipRequest, "Change of Request Ownership - Image");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Change of Ownership  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("What type of Ownership Change are you requesting"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name Change - The change is to the name only - the Federal Tax ID # is NOT changing"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Federal Tax ID # Changing - with Name change or independent of Name change"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Releasing only part of what is on the account to a new owner"));
+			driver.navigate().back();
+			
+			Reporter.log("************** Escalation Process ***************",true);
+			vc.getWebDriverUtils().clickElement(we_SupportPage.escalationProcessSubMenu, "Escalation Process Sub menu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Escalation Process - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The trouble reported is beyond the standard repair intervals"));
+			 
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void Support_NewSupportRequest_BVN() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToCreateSupportRequest(userStoryDescription, we_HomePage);
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "OfficeSuite";
+			String serviceType = "Index1";
+			String reportedProblem ="ACD Trouble";
+			String specifcIssue = "";
+
+			we_SupportPage.createSupportRequest_IssueDetails(serviceType, reportedProblem, specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(selectService, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+			//we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);	
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Support_NewSupportRequest_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToCreateSupportRequest(userStoryDescription, we_HomePage);
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "Data";
+			String serviceType = "Data";
+			String reportedProblem ="Application Performance";
+			String specifcIssue = "Down";
+
+			we_SupportPage.createSupportRequest_IssueDetails(selectService, reportedProblem, specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(serviceType, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+			//we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void Support_NewSupportRequest_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToCreateSupportRequest(userStoryDescription, we_HomePage);
+			
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "DEVICE MONITORING - Circuit";
+			String serviceType = "DEVICE MONITORING";
+			String reportedProblem ="Change Request";
+			String specifcIssue = "Managed Router Configuration Request";
+			
+			we_SupportPage.createSupportRequest_IssueDetails(selectService, reportedProblem, specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(serviceType, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+		//	we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void SupportRequests_NewSupportRequest_FlyOut_BVNOS() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToSupportRequest_CreateSupportRequestFlyOut(userStoryDescription, we_HomePage);
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "OfficeSuite";
+			String serviceType = "Index1";
+			String reportedProblem ="Call Waiting";
+			String specifcIssue = "";
+
+			we_SupportPage.createSupportRequest_IssueDetails(serviceType, reportedProblem, specifcIssue);
+			we_SupportPage.createSupportRequest_IssueDetails("Index1","Call Waiting","");
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(selectService, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+			//we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void SupportRequests_NewSupportRequest_FlyOut_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToSupportRequest_CreateSupportRequestFlyOut(userStoryDescription, we_HomePage);
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "Data";
+			String serviceType = "Data";
+			String reportedProblem ="Change Requests";
+			String specifcIssue = "Access List Change";
+			we_SupportPage.createSupportRequest_IssueDetails(selectService, reportedProblem, specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(serviceType, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+			//we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void SupportRequests_NewSupportRequest_FlyOut_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToSupportRequest_CreateSupportRequestFlyOut(userStoryDescription, we_HomePage);
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "SD-WAN";
+			String serviceType = "SD-WAN";
+			String reportedProblem ="Application Performance";
+			String specifcIssue = "Advanced Application Reporting Issue";
+			we_SupportPage.createSupportRequest_IssueDetails(selectService,reportedProblem,specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(serviceType, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+			//we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Support_ViewSupportRequest() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Support -> View Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> View Support Request");
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.supportRequestMenu, "Support Requests Menu");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.refreshSupportRequestList, "Refresh Support Request");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Ticket ID"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service Type"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Reported Problem"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service Address"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.ticketTableStatus, "Ticket Table"));
+			
+			if (!vc.getWebDriverUtils().elementAvailablity(we_SupportPage.applyFilters, "Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_SupportPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketStatus, "Ticket Status", "Open");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketStatus, "Ticket Status", "Closed");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketStatus, "Ticket Status", "Cancelled");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketStatus, "Ticket Status", "Resolved");
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketReportedProblem, "Ticket Reported Problem", "Proactive Circuit Down");
+			/*vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketAccountOMS, "TicketAccount/OMS #", "4738745 - Keystone Steel");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketServiceAddress, "Ticket Service Address", "7000 S Adams St, Peoria, IL");
+			*/
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.ticketLastUpdated, "Ticket Last Updated", "Custom");
+
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.ticketEndDateCalendar, "End Date Calendar");
+			if (vc.getWebDriverUtils().elementAvailablity(we_SupportPage.activeDate, "Active Date")) {
+				vc.getWebDriverUtils().clickElement(we_SupportPage.activeDate, "Active Date - End Date Calendar");
+			} else {
+				vc.getWebDriverUtils().clickElement(we_SupportPage.ticketEndDate, "End Date");
+			}
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.ticketStartDateCalendar, "Start Date Calendar");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.activeDate, "Active Date - Start Date Calendar");
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.ticketTableStatus, "Ticket Table"));
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.clearFilters, "Clear Filters");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.ticketTableStatus, "Ticket Table"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+}

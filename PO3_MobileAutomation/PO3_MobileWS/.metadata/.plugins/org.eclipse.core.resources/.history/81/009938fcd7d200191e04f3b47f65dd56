@@ -1,0 +1,235 @@
+package com.webautomation.pageobject.empPortal_pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class EmpPortal_PortalSearchPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public EmpPortal_PortalSearchPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	@FindBy(linkText="Portal Search")
+	public WebElement portalSearchMenu;
+	
+	
+	@FindBy(xpath="//a[@href='/Employees/Company'] ")
+	public WebElement portalSearchTab;
+	
+	@FindBy(linkText="My Clients List")
+	public WebElement myClientsListTab;
+	
+	
+	@FindBy(xpath="//a[@class='network submenu']")
+	public WebElement companySubMenu;
+	
+	
+	@FindBy(linkText="My Clients List")
+	public WebElement myClientsListSubMenu;
+	
+	@FindBy(xpath="//a[contains(.,'Notification Search')]")
+	public WebElement notificationSearchSubMenu;
+	
+	@FindBy(xpath="//a[@href='/Employees/CustomerAdvocate/Index']")
+	public WebElement customerAdvocatesSubMenu;
+	
+	@FindBy(linkText="Account Details")
+	public WebElement accountDetailsTab;
+	
+	@FindBy(linkText="Company Activity")
+	public WebElement companyActivityTab;
+	
+	@FindBy(linkText="View Audit Logs")
+	public WebElement viewAuditLogsTab;
+	
+	@FindBy(linkText="Notification History")
+	public WebElement notificationHistoryTab;
+	
+	@FindBy(linkText="Company Notes")
+	public WebElement companyNotesTab;
+	
+	@FindBy(linkText="Contacts")
+	public WebElement contactsTab;
+	
+	@FindBy(xpath="//label[1]/button")
+	public WebElement portalClientsRadio;
+	
+	@FindBy(xpath="//label[2]/button")
+	public WebElement nonPortalClientsRadio;
+	
+	@FindBy(xpath="//label[3]/button")
+	public WebElement iDontKnowRadio;
+	
+	@FindBy(xpath="//input[@id='CompanySearch_BillingAccountNumber']")
+	public WebElement accountNumber;
+	
+	@FindBy(xpath="//input[@id='CompanySearch_ClientName']")
+	public WebElement clientName;
+	
+	@FindBy(xpath="//input[@id='CompanySearch_Username']")
+	public WebElement username;
+	
+	@FindBy(xpath="//button[@data-id='CompanySearch_ProductFamilyIds']")
+	public WebElement productFamily;
+	
+	@FindBy(xpath="//button[@data-id='CompanySearch_BusinessUnit']")
+	public WebElement businessEntityType;
+	
+	@FindBy(xpath="//input[@value='Search']")
+	public WebElement searchBtn;
+	
+	@FindBy(xpath="//input[@value='Reset']")
+	public WebElement resetBtn;
+	
+
+	//Notifications Search
+	@FindBy(xpath="//input[@value='Search']")
+	public WebElement searchNotifications;
+	
+	@FindBy(xpath="//a[contains(.,'Reset')]")
+	public WebElement resetNotifications;
+	
+	@FindBy(xpath="//a[contains(.,'Go')]")
+	public WebElement goDownLoadAs;
+
+	@FindBy(xpath="//button[@data-id='NotificationDate_range']")
+	public WebElement notificationDate;
+	
+	@FindBy(xpath="//button[@data-id='NotificationStatusId']")
+	public WebElement notificationStatus;
+	
+	@FindBy(xpath="//input[@id='NotificationDate_start']")
+	public WebElement notificationDateStart;
+	
+	@FindBy(xpath="//input[@id='NotificationDate_end']")
+	public WebElement notificationDateEnd;
+	
+	@FindBy(xpath="//button[@data-id='NotificationEventId']")
+	public WebElement notificationEvent;
+	
+	@FindBy(xpath="//button[@data-id='NotificationTemplateId']")
+	public WebElement notificationTemplate;
+	
+	@FindBy(xpath="//input[@id='Subject']")
+	public WebElement notificationEmailSubject;
+	
+	@FindBy(xpath="//input[@id='ToEmailAddress']")
+	public WebElement notificationEmailAddress;
+	
+	@FindBy(xpath="//*[@id='tblNotificationSearch']/tbody/tr[1]/td[7]/a")
+	public WebElement viewEmail1;
+	
+	
+	@FindBy(xpath="//a[contains(.,'Close Filters')]")
+	public WebElement closeFilters;
+	
+	@FindBy(xpath="//a[contains(.,'Filter Your Results')]")
+	public WebElement filterYourResults;
+	
+	@FindBy(xpath="//input[@id='CustomerAdvocates_FirstName']")
+	public WebElement firstName_CustomerAdvocates;
+	
+	@FindBy(xpath="//input[@id='CustomerAdvocates_LastName']")
+	public WebElement lastName_CustomerAdvocates;
+	
+	@FindBy(xpath="//input[@value='Filter']")
+	public WebElement filter;
+	
+	@FindBy(xpath="//input[@value='Reset']")
+	public WebElement reset;
+	
+
+	@FindBy(xpath="//*[@id='tblCustomerAdvocates']/tbody/tr[1]/td[4]/a")
+	public WebElement clients1;
+	
+	@FindBy(xpath="//*[@id='tblCustomerAdvocates_wrapper']/div[9]/div[2]/span[2]")
+	public WebElement prevCustomerAdvocates;
+	
+	@FindBy(xpath="//*[@id='tblCustomerAdvocates_wrapper']/div[9]/div[2]/span[4]")
+	public WebElement nextCustomerAdvocates;
+	
+	@FindBy(xpath=".//*[@id='tblCustomerAdvocates_wrapper']/div[9]/div[1]/a[1]")
+	public WebElement results15perPageCustomerAdvocates;
+	
+	@FindBy(xpath=".//*[@id='tblCustomerAdvocates_wrapper']/div[9]/div[1]/a[2]")
+	public WebElement results40perPageCustomerAdvocates;
+	
+	@FindBy(xpath=".//*[@id='tblCustomerAdvocates_wrapper']/div[9]/div[1]/a[3]")
+	public WebElement results100perPageCustomerAdvocates;
+	
+	@FindBy(xpath="//*[@id='tblCustomerAdvocates_wrapper']/div[9]/div[1]/a[4]")
+	public WebElement allCustomerAdvocatesCount;
+	
+	//User Search
+	
+	@FindBy(xpath="//a[@class='user submenu']")
+	public WebElement userSubMenu;
+	
+	@FindBy(xpath="//a[@href='/Employees/User/Index']")
+	public WebElement searchUsersSubMenu;
+	
+	@FindBy(xpath="//a[@href='/Employees/User/MyUsersList']")
+	public WebElement myUsersListSubMenu;
+	
+	@FindBy(xpath="//input[@id='UserSearch_FirstName']")
+	public WebElement firstNameUserSearch;
+	
+	@FindBy(xpath="//input[@id='UserSearch_EmailAddress']")
+	public WebElement emailAddressUserSearch;
+	
+	@FindBy(xpath="//input[@id='UserSearch_LastName']")
+	public WebElement lastNameUserSearch;
+	
+	@FindBy(xpath="//input[@id='UserSearch_Username']")
+	public WebElement userNameUserSearch;
+	
+	@FindBy(xpath="//tr[1]/td[10]/a")
+	public WebElement detailsUserSearch;
+	
+	@FindBy(xpath="//tr[1]/td[11]/div/button")
+	public WebElement actionsUserSearch;
+	
+	@FindBy(xpath="//tr[1]/td[11]/div/ul[1]")
+	public WebElement actionsDropDownListUserSearch;
+	
+	@FindBy(xpath="//a[contains(.,'Show more.')]")
+	public WebElement showMore;
+	
+	@FindBy(xpath="//a[contains(.,'Show less.')]")
+	public WebElement showLess;
+	
+	@FindBy(xpath="//input[@value='Save Changes']")
+	public WebElement saveChanges;
+	
+	@FindBy(xpath="//*[@id='UserClearCacheWarningModal']/div/div[3]/a[1]")
+	public WebElement cancelWarningUserSearchClearCache;
+	
+	@FindBy(xpath="//*[@id='UserClearCacheWarningModal']/div/div[3]/a[2]")
+	public WebElement yesWarningUserSearchClearCache;
+	
+
+	@FindBy(xpath="//a[contains(.,'Sign Out')]")
+	public WebElement signOut;
+	
+	@FindBy(linkText="xxxxxxxxx")
+	public WebElement xxxxx;
+
+}	
+
+
+
+
+

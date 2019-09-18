@@ -1,0 +1,93 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CircuitUtilizationWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_CircuitUtilizationWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Circuit Utilization')]")
+	public WebElement circuitUtilizationCheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Circuit Utilization']//a[contains(@class,'filter fr pointer white frColorWhitehBlue')]")
+	public WebElement filterIcon;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Circuit Utilization']//a[contains(.,'View Report')]")
+	public WebElement viewReport;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Circuit Utilization']//div[@class='ico-text ff-CL']")
+	public WebElement circuitUtilizedCount;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Circuit Utilization']//div[@class='ico-text ff-CL'][1]")
+	public WebElement overUtilzed;
+
+	@FindBy(xpath = "//div[@class='ico-text ff-CL'][2]")
+	public WebElement underUtilized;
+
+	@FindBy(xpath = "//h1[contains(.,'Network Tools')]")
+	public WebElement viewReportsTitle;
+
+	@FindBy(xpath = "//ul[@id='LeftThresholdLocationIds']//li")
+	public WebElement availableLocations;
+
+	@FindBy(xpath = "//button[@class='light check icon primary widget_foot_btn' and @type='submit']")
+	public WebElement saveButton;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Circuit Utilization']/div[1]/button")
+	public WebElement settingsIcon;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Circuit Utilization']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void circuitUtilzationWidget_Functionality() throws InterruptedException {
+
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Circuit Utilization"));
+		vc.getWebDriverUtils().elementAvailablity(filterIcon, "FilterIcon");
+		vc.getWebDriverUtils().clickElement(filterIcon, "Filter");
+		List<WebElement> locations = driver.findElements(By.xpath("//ul[@id='LeftThresholdLocationIds']//li"));
+		Reporter.log("Total No of Location available are==>" + locations.size(), true);
+		vc.getWebDriverUtils().clickHiddenElement(saveButton, "Save");
+
+		if (vc.getWebDriverUtils().elementAvailablity(circuitUtilizedCount, "CircuitUtilizedCount") == true) {
+			List<WebElement> count = driver.findElements(
+					By.xpath("//div[@data-widgettitle='Circuit Utilization']//div[@class='ico-text ff-CL']"));
+
+			for (int i = 0; i < 2;) {
+				System.out.println("OverUtilized Count==>" + count.get(0).getText());
+				System.out.println("UnderUtilized Count ==>" + count.get(1).getText());
+				break;
+			}
+		}
+			vc.getWebDriverUtils().elementAvailablity(viewReport, "View_ReportLink");
+			vc.getWebDriverUtils().clickElement(viewReport, "View_ReportLink");
+			vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Network Utilization - Windstream Enterprise");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Network Tools"));
+			driver.navigate().back();
+			vc.getWebDriverUtils().checkPageIsReady();
+
+			Reporter.log("********** Remove Widget ************", true);
+			cw.removeAddedWidget("Circuit Utilization");
+
+		
+
+	}
+
+}

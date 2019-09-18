@@ -1,0 +1,773 @@
+package com.webautomation.pageobject.we_pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import com.webautomation.validation.Validator;
+
+public class WE_ServicesPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_ServicesPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath="xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+	
+	
+	@FindBy(xpath="//button[@class='icon back']")
+	public WebElement iconBack;
+
+	@FindBy(xpath="//a[@class='user MenuService submenu']")
+	public WebElement MyServices;
+	
+	@FindBy(xpath="//a[contains(.,'Products')]")
+	public WebElement productsSubMenu;
+	
+	@FindBy(xpath="//a[contains(.,'Tools')]")
+	public WebElement toolsSubMenu;
+	
+	//My Services
+
+	//Products -> Office Suite
+	//Business Hours
+	@FindBy(xpath="//div/ul[1]/li[3]/a")
+	public WebElement businessHours;
+	
+	//CCS Extension
+	@FindBy(linkText="CCS Extension")
+	public WebElement ccsExtension;
+	
+	@FindBy(xpath="//a[@class='btn-down light btnExpandCollapseFilters ws-icon ws-menu closed']")
+	public WebElement ccsExtensionOpenFilter;
+
+	@FindBy(xpath="//a[@class='light btnExpandCollapseFilters ws-icon ws-menu btn-up open']")
+	public WebElement ccsExtensionCloseFilter;
+	
+	@FindBy(xpath="//input[@id='CCSExtensionsController_Name']")
+	public WebElement ccsExtensionsController_Name;
+	
+	@FindBy(xpath="//input[@id='CCSExtensionsController_Extension']")
+	public WebElement ccsExtensionsController_Extension;
+	
+	@FindBy(xpath="//input[@id='CCSExtensionsController_PermissionGroupSelectedValue']")
+	public WebElement ccsExtensionsController_PermissionGroupSelectedValue;
+	
+	@FindBy(xpath="//button[@id='btnSaveCCSExt']")
+	public WebElement saveCCSExtension;
+	
+	@FindBy(xpath=".//*[@id='tblCCSExtensionsController']/tbody/tr[1]/td[1]")
+	public WebElement ccsNameFirstRecord;
+	
+	@FindBy(xpath="//*[@id='tblCCSExtensionsController']/tbody/tr[1]/td[2]")
+	public WebElement ccsExtensionFirstRecord;
+	
+	@FindBy(xpath="//*[@id='tblCCSExtensionsController']/tbody/tr[1]/td[3]/div/button")
+	public WebElement permissionGroupFirstRecord;
+	
+/*	@FindBy(css=".btn.dropdown-toggle.selectpicker.btn-default")
+	public WebElement permissionGroupDefaultFirstRecord;*/
+	
+	@FindBy(xpath="//*[@id='mCSB_1_container']")
+	public WebElement permissionGroupTable;
+
+	
+	@FindBy(xpath="//a[contains(.,'Conferencing')]")
+	public WebElement conferencing;
+	
+	@FindBy(xpath="//*[@id='excludeFooter']/header/nav/ul/li[2]/div/ul/li[2]/div/ul/li[1]/div/ul[3]/li[4]/a")
+	public WebElement phoneKeyProfiles;
+	
+	
+	//Conferening elements
+	
+	@FindBy(xpath="html/body/div[2]/div/div/p[3]/a")
+	public WebElement joinAConference;
+	
+	@FindBy(xpath="html/body/div[2]/div/div/p[4]/a")
+	public WebElement startAConference;
+	
+	@FindBy(xpath="html/body/div[2]/div/div/p[5]/a")
+	public WebElement archive;
+	
+	//Services elements start here
+
+	@FindBy(linkText="CCS Console")
+	public WebElement ccsConsole;
+	
+	@FindBy(linkText="Manage Blocked Numbers")
+	public WebElement manageBlockedNumbers;
+	
+	@FindBy(linkText="My Call Handling")
+	public WebElement myCallHandling;
+	
+	@FindBy(linkText="My Call Log")
+	public WebElement myCallLog;
+	
+	@FindBy(linkText="My Call Groups")
+	public WebElement myCallGroups;
+	
+	@FindBy(linkText="My Extensions")
+	public WebElement myExtensions;
+	
+	@FindBy(linkText="My Online Fax")
+	public WebElement myOnlineFax;
+	
+	@FindBy(linkText="My Phones")
+	public WebElement myPhones;
+	
+	@FindBy(linkText="My VoiceMail")
+	public WebElement myVoiceMail;
+	
+	@FindBy(linkText="Start a Screen Share")
+	public WebElement startAScreenShare;
+	
+	@FindBy(linkText="Start a Video Meeting")
+	public WebElement startAVideoMeeting;
+	
+	//@FindBy(xpath="//button[@id='ordersExport']")
+	@FindBy(xpath="//button[@id='btnExport']")
+	public WebElement export;
+	
+	@FindBy(xpath="//button[@id='LocationsExport']")
+	public WebElement exportLocations;
+	
+	//button[@id='']
+	
+	@FindBy(xpath="//button[contains(.,'Export to Excel')]")
+	public WebElement exportToExcel;
+	
+	@FindBy(xpath="//button[contains(.,'Export to PDF')]")
+	public WebElement exportToPDF;
+	
+	//Services -> My Call Log
+		@FindBy(xpath="//button[@class='icon filter menu filterToggler']")
+		public WebElement menuFilterClickToOpen;
+		
+		@FindBy(xpath="//button[@class='icon filter menu filterToggler open']")
+		public WebElement menuFilterClickToClose;
+		
+		@FindBy(xpath="//input[@id='CallDateTime']")
+		public WebElement callDate;
+		
+		@FindBy(xpath="//input[@id='PhoneNumber']")
+		public WebElement phoneNumber;
+		
+		@FindBy(xpath="//input[@id='AnsweredBy']")
+		public WebElement answeredBy;
+		
+		@FindBy(xpath="//button[@data-id='ddlDirection']")
+		public WebElement direction;
+		
+		@FindBy(xpath="//input[@id='Name']")
+		public WebElement name;
+		
+		@FindBy(xpath="//input[@id='Duration']")
+		public WebElement duration;
+		
+		@FindBy(xpath="//button[@id='MyCallHistoryClearFilter']")
+		public WebElement myCallHistoryClearFilter;
+		
+		@FindBy(xpath="//button[@id='MyCallHistoryApplyFilter']")
+		public WebElement myCallHistoryApplyFilter;
+		
+	//Services - My Call Groups
+	
+	
+	@FindBy(xpath="//*[@id='tblMyCallGroups']/tbody/tr[1]/td[1]")
+	public WebElement expandableButtonDown;
+	
+	@FindBy(xpath="//a[@class='expandable btn btn-up']")
+	public WebElement expandableButtonUp;
+	
+	//Products elements start here
+	
+		//Services - Products - Wifi Admin
+		@FindBy(xpath="//a[contains(.,'WIFI Admin')]")
+		public WebElement wifiAdmin;
+	
+		// Services - Hosted Contact Center
+		
+		
+		@FindBy(xpath="//a[contains(.,'Hosted Contact Center')]")
+		public WebElement hostedContactCenter;
+		
+		@FindBy(xpath="//input[@id='GenericSignIn_btnSignIn']")
+		public WebElement signInHCS;
+		
+		@FindBy(xpath="//select[@id='GenericSignIn_ddlLanguage']")
+		public WebElement languageHCS;
+		
+		@FindBy(xpath="//a[@id='GenericSignIn_lnkForgotPassword']")
+		public WebElement forgotPasswordHCS;
+		
+		@FindBy(xpath="//input[@id='btnContinue']")
+		public WebElement continueHCS;
+		
+		@FindBy(xpath="//input[@id='btnCancel']")
+		public WebElement cancelHCS;
+		
+		//Services - Products - Online Fax
+		@FindBy(xpath="//a[@href='https://fax.earthlinkbusiness.com']")
+		public WebElement onlineFax;
+		
+		@FindBy(xpath="//input[@id='btnLogin']")
+		public WebElement loginOnlineFax;
+		
+		@FindBy(xpath="//a[contains(.,'Forgot password?')]")
+		public WebElement forgotPasswordOnlineFax;
+		
+		@FindBy(xpath="//input[@id='btnSendPass']")
+		public WebElement sendPasswordOnlineFax;
+		
+		@FindBy(xpath="//a[contains(.,'Back to log in')]")
+		public WebElement backToLogInOnlineFax;
+		// Toll Free - Routing
+		
+		@FindBy(xpath = "(//a[contains(.,'Toll Free')])[1]")
+		public WebElement tollFreeRouting;
+		
+		@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/TollFreeWOLServices']")
+		public WebElement manageRouting;
+		
+		@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/TollFreeWOLServices']")
+		public WebElement repointTollFreeNumber;
+		
+		@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/RoutingReport']")
+		public WebElement routingReport;
+		
+		@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/TollFreeSearchActivation']")
+		public WebElement searchActivateNewNumber;
+		
+		
+		@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/TollFreeSearchActivation']")
+		public WebElement getANewNumber;
+	
+	
+		@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/ChangeHistory']")
+		public WebElement changeHistory;
+		
+		
+		
+		//Manage Routing
+		@FindBy(xpath = "//label[@for='single-toll-free']")
+		public WebElement singleTollFreeRadio;
+		
+		@FindBy(xpath = "//label[@for='multiple-toll-free']")
+		public WebElement multiNumberPointRadio;
+		
+		@FindBy(xpath = "//*[@id='ddlTollFreeWOLMul']/span")
+		public WebElement multipleSelectedView;
+		
+		@FindBy(xpath = "//button[@data-id='ddlWOLTollFree']")
+		public WebElement pickNumber;
+		
+		@FindBy(xpath = "//div[@id='ddlTollFreeWOLMul']")
+		public WebElement pickNumberMultiDropDown;
+		
+		@FindBy(xpath = "//input[@id='tollFreeMult_SearchBox']")
+		public WebElement pickNumberMultiSearchInputText ;
+		
+		@FindBy(xpath = "//*[@id='all-toll-frees']/span[2]/label")
+		public WebElement pickNumberMultiFirstRecord;
+		
+		@FindBy(xpath = "//*[@id='all-toll-frees']/span[3]/label")
+		public WebElement pickNumberMultiSecondRecord;
+		
+		@FindBy(xpath = "//*[@id='ddlTollFreeWOLMul']/span")
+		public WebElement pickNumberMultiSelectedViewToolTip;
+		
+		@FindBy(xpath = "//label[@for='ring-to-number']")
+		public WebElement ringToNumberRadio;
+		
+		@FindBy(xpath = "//input[@id='ring-to-number-text']")
+		public WebElement ringToNumberInputText;
+		
+		@FindBy(xpath = "//label[@for='ring-to-number-flex']")
+		public WebElement ringToNumberWithFlexDNISRadio;
+		
+		@FindBy(xpath = "//input[@id='ring-number-flex-multi']")
+		public WebElement ringToNumberWithFlexDNISInputText;
+		
+		@FindBy(xpath = "//input[@id='dns-digits-text']")
+		public WebElement dnisDigitsInputText;
+		
+		@FindBy(xpath = "//label[@for='enhanced-ruoting']")
+		public WebElement enhancedRoutingSchemaRadio;
+		
+		@FindBy(xpath = "//input[@id='enhanced-ruoting-picker-multi']")
+		public WebElement enhancedRoutingSchemaInputText;
+		
+		@FindBy(xpath = "//button[@id='continueSecondScreen']")
+		public WebElement okReminder;
+		
+		@FindBy(xpath = "//button[@class='icon close']")
+		public WebElement cancelReminder;
+		
+		
+		//tr[1]/td[1] = Alterened Toll free first Record
+		//tr[1]/td[2] = New Ring to Number
+
+		
+		@FindBy(xpath="//button[@data-id='ddlAccount']")
+		public WebElement selectAccountReport;
+		
+		@FindBy(xpath = "//button[@data-id='ddlWOLTollFree']")
+		public WebElement selectTollFreeNumbers;
+		
+		@Deprecated
+		@FindBy(xpath = "//input[@name='RepointNumber']")
+		public WebElement ringToNumber;
+		
+		@FindBy(xpath = "//button[@id='nextBtn']")
+		public WebElement next;
+		
+		@FindBy(xpath = "//button[@id='backBtn']")
+		public WebElement back;
+		
+		@FindBy(xpath = "//button[@id='backBtnAtSubmit']")
+		public WebElement backBtnAtSubmit;
+		
+		
+		@FindBy(xpath = "//*[@id='mCSB_1_container']/ul/li[1]/p/label")
+		public WebElement myTollFreeNumberFirstRecord;
+		
+		@FindBy(xpath = "//button[@class='Rmovenumber']")
+		public WebElement rightMoveNumber;
+		
+		@FindBy(xpath = "//*[@id='mCSB_2_container']/ul/li/p/label")
+		public WebElement tollFreeNumberToAlterFirstRecord;
+		
+		@FindBy(xpath = "//button[@class='Lmovenumber']")
+		public WebElement leftMoveNumber;
+		
+		@FindBy(xpath = "//button[contains(.,'Move All Numbers')]")
+		public WebElement moveAllNumbers;
+		
+		@FindBy(xpath = "//button[contains(.,'Revert All numbers')]")
+		public WebElement revertAllNumbers;
+		
+		@FindBy(xpath = "//button[@id='AltrTollFreeRouting']")
+		public WebElement alterTollFreeRouting;
+		
+		@FindBy(xpath = "//button[@id='submitBtn']")
+		public WebElement submit;
+		
+		@FindBy(xpath = "//span[@class='successIcon fl']")
+		public WebElement successStatusTollfree;
+
+		
+		// Routing Report
+		
+		@FindBy(xpath = "//input[@id='NPA']")
+		public WebElement npa;
+		
+		@FindBy(xpath = "//input[@id='NXX']")
+		public WebElement nxx;
+		
+		@FindBy(xpath = "//input[@id='StationNumber']")
+		public WebElement stationNumber;
+		
+		@FindBy(xpath = "//*[@id='dvRoutingReportGrid']/div[3]/ul/li[2]/span")
+		public WebElement routingReportGridZeroRecords;
+		
+		@FindBy(xpath = "//span[contains(@class,'k-pager-info k-label')]")
+		public WebElement routingReportRecordCount;
+		
+		@FindBy(xpath = "//span[@class='k-icon k-i-seek-w']")
+		public WebElement firstPage;
+		
+		@FindBy(xpath = "//span[@class='k-icon k-i-arrow-w']")
+		public WebElement prevPage;
+		
+		@FindBy(xpath = "//span[@class='k-icon k-i-arrow-e']")
+		public WebElement nextPage;
+		
+		@FindBy(xpath = "//span[@class='k-icon k-i-seek-e']")
+		public WebElement lastPage;
+		
+		//Search and Activate New Number
+		
+		@FindBy(xpath = "//button[@data-id='ddlTelePhoneNumber']")
+		public WebElement selectTelephoneNo;
+		
+		@FindBy(xpath = "//button[@class='checkbox']")
+		public WebElement checkThisBoxIfNumbersShouldBeConsecutive;
+		
+		@FindBy(xpath = "//*[@id='mCSB_1_container']/ul/li[1]/p/label")
+		public WebElement availableTollFreeNumbersFirstRecord;
+		
+		@FindBy(xpath = "//*[@id='mCSB_2_container']/ul/li/p/label")
+		public WebElement selectedTollFreeNumbersFirstRecord;
+	
+		
+		@FindBy(xpath = "//button[@title='Select Telephone No']")
+		public WebElement tollFreeNumberToMatchConfiguration;
+		
+		@FindBy(xpath = "//tbody/tr/td[2]/button")
+		public WebElement matchConfigCheckbox;
+		
+		@FindBy(xpath = "//input[contains(@id,'txtDNS')]")
+		public WebElement dnisText;
+		
+		@FindBy(xpath = "//tbody/tr/td[5]/span/button")
+		public WebElement directoryList;
+		
+		@FindBy(xpath = "//tbody/tr/td[6]/span/button")
+		public WebElement blockCanada;
+		
+		@FindBy(xpath = "//tbody/tr/td[7]/span/button")
+		public WebElement blockCaribbean;
+		
+		@FindBy(xpath = "//button[@id='btnDireListSend']")
+		public WebElement yesRatesDirectoryList;
+		
+		@FindBy(xpath = "//button[@id='btnDireListCancel']")
+		public WebElement noRatesDirectoryList;
+		
+		
+		@FindBy(xpath = "//button[contains(.,'Submit Order')]")
+		public WebElement submitOrder;
+		
+	//	@FindBy(xpath = "//*[@id='content-wrapper']/div/div/div/div[2]/div[2]/p[1]")
+		@FindBy(xpath = "//*[@id='content-wrapper']/div/div/div/div[2]/div[1]/span")
+		public WebElement confirmationNumber;
+		
+		@FindBy(xpath = "//button[contains(.,'Toll-Free Home')]")
+		public WebElement tollFreeHome;
+		
+		@FindBy(xpath = "//button[@class='icon light submit primary tollFreeHome button']")
+		public WebElement close;
+		
+		@FindBy(xpath = "//button[@id='tollfreeBtn']")
+		public WebElement closeTollFreeRepoint;
+		
+		@FindBy(xpath = "//button[@class='icon light submit buttonPersons primary']")
+		public WebElement nextStep1;
+		
+		@FindBy(xpath = "//button[contains(@class,'icon light more primary submit buttonPersons goto-step-3-l2 buttonPerson')]")
+		public WebElement nextStep2;
+		
+		@FindBy(xpath = "//button[contains(@class,'icon light submit buttonPersons primary goto-step-4-l2 buttonPerson')]")
+		public WebElement nextStep3;
+		
+		@FindBy(xpath = "//button[contains(@class,'icon light submit buttonPersons primary goto-step-5-l2 buttonPerson')]")
+		public WebElement nextStep4;
+		
+		//Change History
+		
+		@FindBy(xpath = "//button[@data-id='ChangeHistory_CreatedDate_range']")
+		public WebElement createdDate;
+		
+		@FindBy(xpath="(//i[@class='icon-calendar'])[1]")
+		public WebElement startDateCalendarIcon;	
+		
+		@FindBy(xpath="//td[@class='day active']")
+		public WebElement dayActiveDefault;	
+		
+		//Services - Products - Toll free
+		@FindBy(xpath="//a[@href='/Services/TollFreeVoice/Index']")
+		public WebElement tollFree;
+			
+			@FindBy(xpath="//button[@data-id='billingAccountId']")
+			public WebElement selectAccount;
+			
+			@FindBy(xpath="//a[@href='/Services/TollFreeVoice']")
+			public WebElement tollFreeReRoute;
+			
+			@FindBy(xpath="//a[@href='/Services/TollFreeVoice/TollFreeUtilizationReport']")
+			public WebElement tollFreeUtilizationReport;
+			
+			@FindBy(xpath="//button[contains(.,'My Phone Book')]")
+			public WebElement myPhoneBook;
+			
+			@FindBy(xpath="//span[@class='k-icon k-i-close']")
+			public WebElement closeXMyPhoneBook;
+			
+			@FindBy(xpath="//button[@id='btnCancel']")
+			public WebElement cancelMyPhoneBook;
+			
+			@FindBy(xpath="//input[contains(@id,'PhoneNumber')]")
+			public WebElement phoneNumberTxt;
+			
+			@FindBy(xpath="//a[@href='TFMassReroute.aspx']")
+			public WebElement clickHereToSelectMultipleForMassReRoute;
+			
+			@FindBy(xpath="//a[@href='TFMassRoutingHistory.aspx']")
+			public WebElement clickHereToCancelLastMassReRoute;
+			
+			@FindBy(xpath="//span[@id='ctl00_lblPageTitle']")
+			public WebElement tollFreeReportPageTitle;
+			
+			@FindBy(xpath="//*[@id='ctl00_mnuMainMenun0']/table/tbody/tr/td/a/span")
+			public WebElement returnToTollfreeListing;
+			
+			@FindBy(xpath="//*[@id='ctl00_mnuMainMenun1']/table/tbody/tr/td/a/span")
+			public WebElement routingPlans;
+			
+			// Toll Free Utilization Report
+
+			@FindBy(xpath="//input[contains(@id,'searchBtn')]")
+			public WebElement searchBtn;
+			
+			@FindBy(xpath="//input[contains(@id,'btnClear')]")
+			public WebElement clearBtn;
+			
+			@FindBy(xpath="//a[contains(.,'Toll Free')]")
+			public WebElement tollFreeReportFrame;
+			
+			@FindBy(xpath="//a[contains(.,'Trunk Group')]")
+			public WebElement trunkGroupReportFrame;
+			
+			@FindBy(xpath="//select[contains(@id,'ddlReport')]")
+			public WebElement reportTypeDropDownReportFrame;
+			
+			@FindBy(xpath="//input[contains(@id,'txtbxFromDate')]")
+			public WebElement beginDateReportframe;
+			
+			@FindBy(xpath="//input[contains(@id,'txtbxToDate')]")
+			public WebElement endDateReportframe;
+			
+			@FindBy(xpath="//select[contains(@id,'drpTrunkGroups')]")
+			public WebElement trunkGroupsDropDownReportFrame;
+			
+			@FindBy(xpath="//a[contains(.,'Home')]")
+			public WebElement homeReportFrame;
+			
+		//Services - Products - SD-WAN
+		@FindBy(xpath="//li[@class='subsubmenuicon']")
+		public WebElement sdWAN;
+		
+		@FindBy(xpath="//a[@href='/SdWan/Monitoring/StandalonePortal']")
+		public WebElement mySites;
+		//a[@href='/ControlPanel/SDWAN/GoToSDWANAccessControlUrl']
+		@FindBy(xpath="//a[@href='/ControlPanel/SDWAN/GoToSDWANAccessControlUrl']")
+		public WebElement sdWANAccessControl;
+		
+		@FindBy(xpath="//a[contains(.,'MFA Setup Guide')]")
+		public WebElement mfaSetupGuide;
+		
+		@FindBy(css="#_pendo-badge_koqaLx_kNhKadB7YOfT_gQf4Psc")
+		public WebElement mfaSetupGuideToolTip;
+		
+		@FindBy(css="#_pendo-close-guide_")
+		public WebElement mfaSetupCloseGuide;
+
+		
+	//	@FindBy(xpath="//a[@class='subsubmenu unifiedCommunications']")
+		@FindBy(xpath="//*[@id='excludeFooter']/header/nav/ul/li[2]/div/ul/li[2]/div/ul/li[1]/a")
+		//@FindBy(css=".subsubmenu.unifiedCommunications")
+		public WebElement officeSuite;
+		
+		@FindBy(className="subsubmenu MenuService")
+		public WebElement subMenuService;
+		
+		@FindBy(xpath="//a[contains(.,'Toll Free(UC)')]")
+		public WebElement tollFreeUC;
+		
+		// Manage Department
+		@FindBy(linkText="Manage Departments")
+		public WebElement manageDepartments;
+		
+			@FindBy(id="btnNewDepartment")
+			public WebElement createNewDepartment;
+			
+			@FindBy(id="txtDepartmentName")
+			public WebElement departmentName;
+			
+			@FindBy(id="btnSaveDepartment")
+			public WebElement saveDepartment;
+			
+			@FindBy(id="moveAllContactAffected")
+			public WebElement markAllAffected;
+			
+			@FindBy(id="moveAllContactUnAffected")
+			public WebElement markAllUnAffected;
+			
+			@FindBy(id="searchBox")
+			public WebElement availableUsersSearch;
+			
+			@FindBy(id="targetListUserSearch")
+			public WebElement selectedUsersSearch;
+			
+			@FindBy(xpath="//button[@class='icon light edit']")
+			public WebElement editDepartment;
+		
+			@FindBy(xpath="//button[@class='icon light delete manageDepartmentDelete']")
+			public WebElement deleteDepartment;
+			
+			@FindBy(xpath="//button[@id='yesButton']")
+			public WebElement yesDeleteDepartment;
+			
+			@FindBy(xpath="//button[@id='noButton']")
+			public WebElement noDeleteDepartment;
+				
+			//@FindBy(css=".k-icon.k-i-close")
+			@FindBy(xpath="//div/div/div/a/span")
+			public WebElement closeXDepartmentDialog;
+	
+
+	//Tools elements start here
+	
+		@FindBy(xpath="//a[@href='/Services/Home/ViewActiveServices']")
+		public WebElement activeServices;
+		
+		@FindBy(linkText="Locations")
+		public WebElement locations;
+		
+		@FindBy(xpath="//a[@href='/Admin/Home/CompanyLocations']")
+		public WebElement mergeLocations;
+
+		
+		@FindBy(linkText="Speed Test")
+		public WebElement speedTest;
+		
+	//Locations
+		
+		
+		@FindBy(xpath="//button[@id='toggleFilters']")
+		public WebElement filterLocations;
+		
+		@FindBy(xpath="//*[@id='content-tabs']/li[1]/a")
+		public WebElement locationsContentTab;
+		
+		@FindBy(xpath="//a[@href='/Admin/Home/CompanySecurity']")
+		public WebElement securityLevelsContentTab;
+		
+		@FindBy(xpath="//button[@value='Save Changes']")
+		public WebElement saveChanges;
+		
+		@FindBy(xpath = "(//button[@class='checkbox'])[1]")
+		public WebElement locationMergeManagerCheckbox;
+		
+		@FindBy(xpath = "//input[@id='locationSearch']")
+		public WebElement locationSearch;
+		
+		@FindBy(xpath = "//a[@id='resetSearch']")
+		public WebElement resetSearch;
+		
+		@FindBy(xpath = "(//button[contains(@type,'button')])[2]")
+		public WebElement onlyShowLocationsCheckBox;
+		
+		@FindBy(xpath = "//a[contains(.,'Enable')]")
+		public WebElement enableLocationMerge;
+		
+		@FindBy(xpath = "//a[@class='submit primary light btn icon close'][contains(.,'Cancel')]")
+		public WebElement cancelLocationMerge;
+		
+		@FindBy(xpath = "(//div[contains(@class,'close')])[3]")
+		public WebElement closeLocationMerge;
+		
+		@FindBy(xpath = "//a[contains(@id,'csvDownloadButton')]")
+		public WebElement downloadLocations;
+		
+	//WOL - Locations	
+		@FindBy(xpath = "//input[@id='txtManagedRouter']")
+		public WebElement managedRouter;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'Account')]")
+		public WebElement accountSort;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'Name')]")
+		public WebElement nameSort;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'Address')]")
+		public WebElement addressSort;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'WAN Circuit ID')]")
+		public WebElement wanCircuitIDSort;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'Bandwidth')]")
+		public WebElement bandwidthSort;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'Service(s)')]")
+		public WebElement servicesSort;
+		
+		@FindBy(xpath = "//a[@class='k-link'][contains(.,'Managed Router')]")
+		public WebElement managedRouterSort;
+		
+		//Tools -> Active Services
+		
+		@FindBy(xpath=".//*[@id='toggleFilters']|//a[contains(.,'Filters')]")
+		public WebElement filters;
+		
+		@FindBy(xpath="//a[@class='light btnExpandCollapseFilters ws-icon ws-menu btn-down open']")
+		public WebElement activeServicesFilterOpen;
+		
+		@FindBy(xpath="//a[@class='light btnExpandCollapseFilters ws-icon ws-menu btn-up closed']")
+		public WebElement activeServiceFilterClose;
+		
+		@FindBy(xpath="//button[@value='Make these filters my default']")
+		public WebElement makeDefaultFilter;
+		
+		@FindBy(xpath="//button[@value='Clear Filters']|//*[@id='btnReset']")
+		public WebElement clearFilters;
+		
+		@FindBy(xpath="//button[contains(.,'Apply Filters')]")
+		public WebElement applyFilters;
+		
+		@FindBy(xpath="//button[@data-id='ActiveServicesList_ProductFamily']")
+		public WebElement productFamily;
+		
+		@FindBy(xpath="//button[@data-id='ActiveServicesList_ProductType']")
+		public WebElement productType;
+		
+		@FindBy(xpath="//button[@data-id='ActiveServicesList_Product']")
+		public WebElement product;
+		
+		@FindBy(xpath="//*[@id='tblActiveServicesList']")
+		public WebElement activeServicesTable;
+		
+		@FindBy(xpath="//button[@data-id='ActiveServicesList_ServiceStartDate_range']")
+		public WebElement serviceStartDateRange;
+		
+		@FindBy(xpath="//input[@id='ActiveServicesList_ServiceStartDate_start']")
+		public WebElement serviceStartDateStart;
+		
+		@FindBy(xpath="//input[@id='ActiveServicesList_ServiceStartDate_end']")
+		public WebElement serviceStartDateEnd;
+		
+		@FindBy(xpath="//button[@data-id='ActiveServicesList_ServiceEndDate_range']")
+		public WebElement serviceEndDateRange;
+		
+		@FindBy(xpath="//input[@id='ActiveServicesList_ServiceEndDate_start']")
+		public WebElement serviceEndDateStart;
+		
+		@FindBy(xpath="//input[@id='ActiveServicesList_ServiceEndDate_end']")
+		public WebElement serviceEndDateEnd;	 
+		
+		//Tools -> Network Tools
+		
+		@FindBy(xpath="//a[contains(@href,'/Services/MonitoredRouter/Index')]")
+		public WebElement networkTools;
+		
+		@FindBy(xpath="//a[@href='/Services/MonitoredRouter']")
+		public WebElement overview;
+		
+		@FindBy(xpath="//a[@href='/Services/MonitoredRouter/Availability']")
+		public WebElement availability;
+		
+		@FindBy(xpath="//a[@href='/Services/MonitoredRouter/NetworkUtilization']")
+		public WebElement networkUtilization;
+		
+		@FindBy(xpath="//a[@href='/Services/MonitoredRouter/RouterPerformance']")
+		public WebElement routerPerformance;
+		
+		@FindBy(xpath="//a[@href='/Services/MonitoredRouter/RouterConfiguration']")
+		public WebElement routerConfiguration;
+		
+		@FindBy(xpath="//a[@href='/Services/MonitoredRouter/ChronicWatch']")
+		public WebElement chronicWatchList;
+		
+		@FindBy(xpath="//a[@href='/Services/ThresholdManager/Index/NetworkUtilization']")
+		public WebElement thresholdManager;
+		
+		
+	 
+}
+   

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG_Mobile" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="WE_UI Check">
+	<classes>
+		<class name="com.mobileautomation.tests.WeConnect_OfficeSuite">
+			<methods>
+				<include name="weConnect_getMenuList" />
+			</methods>
+		</class>
+	</classes>
+</test>
+
+<test name="WE-OfficeSuite-CreateandDelete Group">
+	<classes>
+		<class name="com.mobileautomation.tests.WeConnect_OfficeSuite">
+			<methods>
+				<include name="weConnect_CreateandDeleteGroup" />
+			</methods>
+		</class>
+	</classes>
+</test>
+
+<test name="WE-OfficeSuite-AddFavorite-contact">
+	<classes>
+		<class name="com.mobileautomation.tests.WeConnect_OfficeSuite">
+			<methods>
+				<include name="weConnect_ContactAddFavorite" />
+			</methods>
+		</class>
+	</classes>
+</test>
+
+<test name="WE-OfficeSuite-AddFavorite-Group">
+	<classes>
+		<class name="com.mobileautomation.tests.WeConnect_OfficeSuite">
+			<methods>
+				<include name="weConnect_GroupsAddFavorite" />
+			</methods>
+		</class>
+	</classes>
+</test>
+	
+</suite>
+

@@ -1,0 +1,159 @@
+package Base;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.ParseException;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+
+import com.mobile.MyWin.pageobject.MyWinMobile_BillingPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_ChangePasswordPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_LandingPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_LoginPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_ManageAutoPayPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_ManagePaymentMethodPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_MorePage;
+import com.mobile.MyWin.pageobject.MyWinMobile_SupportRequestPage;
+import com.mobile.WeConnect.pageobject.WeConnect_BillingPage;
+import com.mobile.WeConnect.pageobject.WeConnect_BillingPage2;
+import com.mobile.WeConnect.pageobject.WeConnect_LandingPage;
+import com.mobile.WeConnect.pageobject.WeConnect_LoginPage;
+import com.mobile.WeConnect.pageobject.WeConnect_OfficeSuiteUCPage;
+import com.mobile.WeConnect.pageobject.WeConnect_OrdersPage;
+import com.mobile.WeConnect.pageobject.WeConnect_ProfileSettingsPage;
+import com.mobile.WeConnect.pageobject.WeConnect_SupportRequestPage;
+import com.mobile.commonpageobjects.AutoPay;
+import com.mobile.commonpageobjects.BillingPage;
+import com.webautomation.validation.DateValidator;
+import com.webautomation.validation.Validator;
+
+//import WebDriver.Drivermanager;
+import WebDriver.WebDriverFactory;
+import commonUtil.DataProviderReader_SelGrid;
+import commonUtil.ExcelUtils_SelGrid;
+import commonUtil.PropertiesUtil;
+import commonUtil.WebDriverTimingUtil;
+import commonUtil.WebDriverUtils;
+
+public class BaseSteps_android  {
+
+
+
+	protected	Actions action;
+	protected	DataProviderReader_SelGrid dataProviderReader_SelGrid;
+	protected	DataProviderReader_SelGrid dp = new DataProviderReader_SelGrid();
+	protected	DateValidator dateValidator;
+	
+	
+	//commom
+	protected BillingPage commomBillingPage;
+	protected AutoPay commomAutopayPage;
+
+	//weconnect
+	
+	protected WeConnect_LoginPage weConnect_LoginPage;
+	protected WeConnect_LandingPage weConnect_Landingscreen;
+	protected WeConnect_OfficeSuiteUCPage weConnect_OfficeSuite;
+	protected WeConnect_ProfileSettingsPage weConnect_ProfileSettingsPage;
+	protected WeConnect_OrdersPage weConnect_OrdersPage;
+	protected WeConnect_BillingPage weConnect_BillingPage;
+	
+	protected WeConnect_BillingPage2 weConnect_BillingPage2;
+	
+	
+	
+	protected	ExcelUtils_SelGrid excelUtils_SelGrid;
+	protected	Validator vc;
+	
+	protected AndroidDriver<?> driver;
+	protected	WebDriverTimingUtil webDriverTimingUtil;
+	protected	WebDriverUtils webDriverUtils;
+	
+	//Consumer
+	protected MyWinMobile_LoginPage myWinMobile_LoginPage;
+	protected MyWinMobile_LandingPage myWinMobile_LandingPage;
+	protected MyWinMobile_BillingPage myWinMobile_BillingPage;
+	protected MyWinMobile_ManageAutoPayPage myWinMobile_ManageAutoPayPage;	
+	protected MyWinMobile_SupportRequestPage myWinMobile_SupportRequestPage;
+	protected MyWinMobile_MorePage myWinMobile_MorePage;
+	protected MyWinMobile_ChangePasswordPage myWinMobile_ChangePasswordPage;
+	protected MyWinMobile_ManagePaymentMethodPage myWinMobile_ManagePaymentMethodPage;
+	
+	//WeConnect
+	protected WeConnect_SupportRequestPage weConnect_SupportRequestPage;
+	
+	
+	protected String testMethodName;
+	
+	
+	
+
+	@BeforeMethod
+	
+	public void beforeMethod(Method method) throws IOException, ParseException, InterruptedException{
+		
+		
+			setUpPageObjects();
+			//driver.get(PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY));
+			//myWinMobile_LoginPage.verifyvalidLogin();
+			testMethodName = method.getName();
+	}
+
+	@AfterMethod
+	public void afterMethod() throws InterruptedException {
+		//myWinMobile_LoginPage.Signout();
+		driver.quit();
+	}
+
+	public void setUpPageObjects() throws IOException, ParseException, InterruptedException {
+		driver = WebDriverFactory.getAndroidDriver();
+		vc = new Validator(driver);
+		vc.setDriver(driver);
+		
+		
+		//landingscreen = PageFactory.initElements(driver, WeConnect_LandingPage.class);
+		
+		//common
+		commomBillingPage = PageFactory.initElements(driver, BillingPage.class);
+		commomAutopayPage = PageFactory.initElements(driver, AutoPay.class);
+		
+		//weconnect		
+		weConnect_LoginPage = PageFactory.initElements(driver, WeConnect_LoginPage.class);
+		weConnect_Landingscreen= PageFactory.initElements(driver, WeConnect_LandingPage.class);
+		weConnect_OfficeSuite = PageFactory.initElements(driver, WeConnect_OfficeSuiteUCPage.class);
+		weConnect_OrdersPage = PageFactory.initElements(driver, WeConnect_OrdersPage.class);
+		weConnect_ProfileSettingsPage = PageFactory.initElements(driver, WeConnect_ProfileSettingsPage.class);
+		weConnect_BillingPage = PageFactory.initElements(driver, WeConnect_BillingPage.class);
+		
+		weConnect_BillingPage2 = PageFactory.initElements(driver, WeConnect_BillingPage2.class);
+		
+		//consumer
+		myWinMobile_LoginPage = PageFactory.initElements(driver, MyWinMobile_LoginPage.class);
+		myWinMobile_LandingPage = PageFactory.initElements(driver, MyWinMobile_LandingPage.class);
+		myWinMobile_BillingPage = PageFactory.initElements(driver, MyWinMobile_BillingPage.class);
+		myWinMobile_ManageAutoPayPage = PageFactory.initElements(driver, MyWinMobile_ManageAutoPayPage.class);
+		myWinMobile_SupportRequestPage = PageFactory.initElements(driver, MyWinMobile_SupportRequestPage.class);
+		myWinMobile_MorePage = PageFactory.initElements(driver, MyWinMobile_MorePage.class);
+		myWinMobile_ChangePasswordPage = PageFactory.initElements(driver, MyWinMobile_ChangePasswordPage.class);
+		myWinMobile_ManagePaymentMethodPage = PageFactory.initElements(driver,MyWinMobile_ManagePaymentMethodPage.class);
+		
+		
+		//WeConnect
+		weConnect_SupportRequestPage = PageFactory.initElements(driver, WeConnect_SupportRequestPage.class);
+		
+		dateValidator = new DateValidator();
+		excelUtils_SelGrid  = new ExcelUtils_SelGrid();
+		webDriverTimingUtil  = PageFactory.initElements(driver, WebDriverTimingUtil.class);
+		webDriverTimingUtil = new WebDriverTimingUtil();
+		webDriverUtils =  new WebDriverUtils(driver);
+		//dateFunction = PageFactory.initElements(driver, DateFunction.class);
+		
+			}
+
+}

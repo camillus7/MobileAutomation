@@ -1,0 +1,3255 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='utf-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>Mobile - Execution Report</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent standard default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1)" view='testrunner-logs-view'><i class='material-icons'>note</i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>Mobile Automation Results</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>Aug 23, 2019 12:40:17 PM</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.2</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+						<li status='warning'><a href='#!'>Warning <i class='material-icons orange-text'>warning</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>we_VerifyDueAmount</span>
+						<span class='test-time'>Aug 23, 2019 12:40:17 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:40:17 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:40:53 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 36s+457ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_VerifyDueAmount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : VerifyDueAmount is same in Landing and Billing</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing -  VerifyDueAmount is same in Landing and Billing</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   Billing -  VerifyDueAmount is same in Landing and Billing   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=Billing-Title</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'Billing-Title' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Get text for element CurrentBalanceDue := $11,208.74</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>TOTAL AMOUNT DUE IN BILLING SCREEN IS  ====> $11,208.74</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>TOTAL AMOUNT DUE IS IN PAYMENT SCREEN IS====> $11,208.74</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Dueamount is same in Billing and in Payment Screen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing -  VerifyDueAmount is same in Landing and Billing Successfully executed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_VerifyDueAmount ==> Test case passed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>we_SchedulePayment</span>
+						<span class='test-time'>Aug 23, 2019 12:41:09 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:41:09 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:42:15 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 6s+91ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_SchedulePayment</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : SchedulePayment</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing -  SchedulePayment</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   Billing -  SchedulePayment   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=AccountDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'AccountDetails' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on PayNow-Button loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=PaymentDate-DateSelection</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := PaymentDate-DateSelection</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'PaymentDate-DateSelection' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Schedule Payment options is not available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing -  SchedulePayment Successfully executed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_SchedulePayment ==> Test case passed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>we_MakePayment</span>
+						<span class='test-time'>Aug 23, 2019 12:42:31 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:42:31 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:44:30 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 59s+658ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_MakePayment</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : Billing-MakePayment</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing-MakePayment</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   Billing-MakePayment   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=AccountDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'AccountDetails' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Accounts available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>TOTAL AMOUNT DUE IS ====> $11,208.74</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Account Number to be selected is Account #4738745</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on PayNow-Button loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>OtherAmount Radiobutton Selected</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>1 entered in the CustomAmount field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on NextButton loaded in 3 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=CardDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := CardDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'CardDetails' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>No Cards Available. Adding Card...</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := Billing-Screen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_MakePayment ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\we_MakePayment_error23-08-2019 12-44-30.png' width='10%' src='.\screenshots\we_MakePayment_error23-08-2019 12-44-30.png' data-src='.\screenshots\we_MakePayment_error23-08-2019 12-44-30.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>we_EnrollAutoPay</span>
+						<span class='test-time'>Aug 23, 2019 12:44:46 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:44:46 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:46:12 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 26s+79ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_EnrollAutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : ManageAutoPay - Enroll AutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>ManageAutoPay - Enroll AutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   ManageAutoPay - Enroll AutoPay   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Options loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=ManagePaymentMethod</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'ManagePaymentMethod' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=ManageAutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'ManageAutoPay' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on ManageAutopay loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=ManageAutoPay-Screen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'ManageAutoPay-Screen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=NotEnrolledInAutopay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'NotEnrolledInAutopay' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>You are not Enrolled in AutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on TermsandConditions-Checkbox loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on EnrollAutopay loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>PLEASE SELECT A PAYMENT METHOD</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>******ERROR PROMPT IS DISPLAYED TO SELECT PAYMENT METHOD******</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on OK loaded in 3 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on PaymentOption-Dropdown loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=Cards</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'Cards' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Card loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Selected KEYSTONE  CO. ********4234 from Saved Payment Option</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on DueDate-Dropdown loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := SelectDate</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_EnrollAutoPay ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\we_EnrollAutoPay_error23-08-2019 12-46-12.png' width='10%' src='.\screenshots\we_EnrollAutoPay_error23-08-2019 12-46-12.png' data-src='.\screenshots\we_EnrollAutoPay_error23-08-2019 12-46-12.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>we_DeenrollAutoPay</span>
+						<span class='test-time'>Aug 23, 2019 12:46:29 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:46:29 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:47:06 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 37s+456ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_DeenrollAutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : ManageAutoPay - De-Enroll AutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>ManageAutoPay - De-Enroll AutoPay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   ManageAutoPay - De-Enroll AutoPay   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Options loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on ManageAutopay loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=ManageAutoPay-Screen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'ManageAutoPay-Screen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User is not Enrolled in Autopay</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>ManageAutoPay - De-Enroll AutoPay Successfully executed</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_DeenrollAutoPay ==> Test case passed</td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>we_AddElectronicCheck</span>
+						<span class='test-time'>Aug 23, 2019 12:47:22 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:47:22 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:58:08 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 10m 45s+549ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_AddElectronicCheck</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : AddElectronicCheck</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>ManagePaymentMethods - Add Electonic Check Functionality</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   ManagePaymentMethods - AddElectonicCheck Functionality   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Options loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on ManagePaymentmethod loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=AddPaymentMethod</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'AddPaymentMethod' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on AddPaymentMethod loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=PaymentType</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := PaymentType</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'PaymentType' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_AddElectronicCheck ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\we_AddElectronicCheck_error23-08-2019 12-58-08.png' width='10%' src='.\screenshots\we_AddElectronicCheck_error23-08-2019 12-58-08.png' data-src='.\screenshots\we_AddElectronicCheck_error23-08-2019 12-58-08.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>we_AddCredit_DebitCard</span>
+						<span class='test-time'>Aug 23, 2019 12:58:26 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:58:26 PM</span>
+	<span class='label end-time'>Aug 23, 2019 12:59:39 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 12s+981ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_AddCredit_DebitCard</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : AddCredit_DebitCard</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>ManagePaymentMethods - Add Credit/Debit Card</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   ManagePaymentMethods - Add Credit/Debit Card   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Billing-Screen loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := No-BillingAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'No-BillingAccount' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Billing Account is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Account loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Options loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on ManagePaymentmethod loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=AddPaymentMethod</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'AddPaymentMethod' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on AddPaymentMethod loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=PaymentType</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := PaymentType</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'PaymentType' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_AddCredit_DebitCard ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\we_AddCredit_DebitCard_error23-08-2019 12-59-39.png' width='10%' src='.\screenshots\we_AddCredit_DebitCard_error23-08-2019 12-59-39.png' data-src='.\screenshots\we_AddCredit_DebitCard_error23-08-2019 12-59-39.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>we_Notification</span>
+						<span class='test-time'>Aug 23, 2019 12:59:56 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 12:59:56 PM</span>
+	<span class='label end-time'>Aug 23, 2019 01:00:59 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 2s+517ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_Notification</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : BVN_User</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : weonlinetest6</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass666</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : NotificationSubscription</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>NotificationSubscription</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   NotificationSubscription   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on NotificationSubscription loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***ADD PROFILE***</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on AddNewProfile loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=AddContact-Screen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'AddContact-Screen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>We entered in the FirstName field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Last entered in the LastName field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>testing@we.com entered in the Email field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>PhoneNo : element not found</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := LinkNewAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_Notification ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\we_Notification_error23-08-2019 01-00-59.png' width='10%' src='.\screenshots\we_Notification_error23-08-2019 01-00-59.png' data-src='.\screenshots\we_Notification_error23-08-2019 01-00-59.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>we_CompanyContacts</span>
+						<span class='test-time'>Aug 23, 2019 01:01:15 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 01:01:15 PM</span>
+	<span class='label end-time'>Aug 23, 2019 01:02:17 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 2s+200ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_CompanyContacts</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : BVN_User</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : weonlinetest6</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass666</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : NotificationSubscription</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>CompanyContacts</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   CompanyContacts   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on CompanyContacts loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***ADD NEW CONTACT***</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on AddNewContact loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=AddContact-Screen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'AddContact-Screen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>We entered in the FirstName field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Last entered in the LastName field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>testing@we.com entered in the Email field</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>PhoneNo : element not found</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := LinkNewAccount</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>we_CompanyContacts ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\we_CompanyContacts_error23-08-2019 01-02-17.png' width='10%' src='.\screenshots\we_CompanyContacts_error23-08-2019 01-02-17.png' data-src='.\screenshots\we_CompanyContacts_error23-08-2019 01-02-17.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>weConnect_ProfileSettings</span>
+						<span class='test-time'>Aug 23, 2019 01:02:32 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 01:02:32 PM</span>
+	<span class='label end-time'>Aug 23, 2019 01:03:07 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 34s+777ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>weConnect_ProfileSettings</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : Automation</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : Ahillazar</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass1</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : OfficeSuiteSettings - SetPresenceStatus and CustomStatus</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>OfficeSuiteSettings - SetPresenceStatus and CustomStatus</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   OfficeSuiteSettings - SetPresenceStatus and CustomStatus   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on ProfileIcon loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := Status</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>weConnect_ProfileSettings ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\weConnect_ProfileSettings_error23-08-2019 01-03-07.png' width='10%' src='.\screenshots\weConnect_ProfileSettings_error23-08-2019 01-03-07.png' data-src='.\screenshots\weConnect_ProfileSettings_error23-08-2019 01-03-07.png'></li>
+							</ul>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='11'>
+					<div class='test-heading'>
+						<span class='test-name'>weConnect_CreateSupportRequest</span>
+						<span class='test-time'>Aug 23, 2019 01:03:23 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Aug 23, 2019 01:03:23 PM</span>
+	<span class='label end-time'>Aug 23, 2019 01:05:50 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 27s+450ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>weConnect_CreateSupportRequest</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***************  Properties ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>URL :=weconnect_mobile</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Data  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col A - Menu : BVN_User2</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col B - Username : weonlinetest6</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col C - Pwd : P03DevTestPass6666</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col D - additional customer parameters: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col E - additional usernames: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col F - external user name: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>col G - external user password: Null</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>*************** Test Execution log  ***************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>WeConnect App is launched</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=LandingScreen</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'LandingScreen' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Logged in</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>User Story : Create-New SupportRequest</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>************************ Navigating to Create Support request ************************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'></td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Create-New SupportRequest</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****************   Support -> New Support Request   ****************</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on HamburgerMenu loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on SupportRequests loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****Navigate between tabs****</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on StatusTab loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=TicketDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'TicketDetails' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>5==>Open Tickets is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on StatusTab loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=TicketDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'TicketDetails' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>4==>Monitoring Tickets is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on StatusTab loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=TicketDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := TicketDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'TicketDetails' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Resolved Tickets is Not Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on StatusTab loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=TicketDetails</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'TicketDetails' is identified successfully</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>5==>Closed Tickets is Available</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Clicked on Create-NewSupportRequests loaded in 0 seconds</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>****CREATE REQUEST - LOCATION/ACCOUNT****</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>LocationDropdown is clicked</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=Dropdown-List</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := Dropdown-List</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'Dropdown-List' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>AccountDropdown is clicked</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Searching for element :=Dropdown-List</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := Dropdown-List</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Web element = 'Dropdown-List' is not identified</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Timed out waiting for element := Nextbutton</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>weConnect_CreateSupportRequest ==> Test case Failed</td>
+				</tr>
+				<tr class='log' status='warning'>
+					<td class='status warning' title='warning' alt='warning'><i class='material-icons'>warning</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>***********  Test Case Failed *************</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:05:52 PM</td>
+					<td class='step-details'>Test failed # Error message :=this will make the test method fail expected [true] but found [false]
+and Stack trace:= java.lang.AssertionError: this will make the test method fail expected [true] but found [false]</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='.\screenshots\weConnect_CreateSupportRequest_error23-08-2019 01-05-50.png' width='10%' src='.\screenshots\weConnect_CreateSupportRequest_error23-08-2019 01-05-50.png' data-src='.\screenshots\weConnect_CreateSupportRequest_error23-08-2019 01-05-50.png'></li>
+							</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='27.273%'><span class='strong'>3</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='72.727%'>8</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='0.679%'><span class='strong'>3</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='1.81%'>8</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='97.511%'>431</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+</div>
+<!-- test view -->
+<!-- category view -->
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>11</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>442</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>Aug 23, 2019 12:40:17 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>Aug 23, 2019 01:05:52 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>1,535,642ms</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<div id='testrunner-logs-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>TestRunner Logs</h5>
+		
+		<div class='card-panel'>
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : VerifyDueAmount is same in Landing and Billing
+				                                                             
+				                         Billing -  VerifyDueAmount is same in Landing and Billing                                     
+				****************   Billing -  VerifyDueAmount is same in Landing and Billing   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=Billing-Title
+				Web element = 'Billing-Title' is identified successfully
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Get text for element CurrentBalanceDue := $11,208.74
+				TOTAL AMOUNT DUE IN BILLING SCREEN IS  ====> $11,208.74
+				Clicked on Account loaded in 0 seconds
+				TOTAL AMOUNT DUE IS IN PAYMENT SCREEN IS====> $11,208.74
+				Dueamount is same in Billing and in Payment Screen
+				Billing -  VerifyDueAmount is same in Landing and Billing Successfully executed
+				we_VerifyDueAmount ==> Test case passed
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : SchedulePayment
+				                                                             
+				                         Billing -  SchedulePayment                                     
+				****************   Billing -  SchedulePayment   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Searching for element :=AccountDetails
+				Web element = 'AccountDetails' is identified successfully
+				Clicked on Account loaded in 0 seconds
+				Clicked on PayNow-Button loaded in 0 seconds
+				Searching for element :=PaymentDate-DateSelection
+				Timed out waiting for element := PaymentDate-DateSelection
+				Web element = 'PaymentDate-DateSelection' is not identified
+				Schedule Payment options is not available
+				Billing -  SchedulePayment Successfully executed
+				we_SchedulePayment ==> Test case passed
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : Billing-MakePayment
+				                                                             
+				                         Billing-MakePayment                                     
+				****************   Billing-MakePayment   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Searching for element :=AccountDetails
+				Web element = 'AccountDetails' is identified successfully
+				Accounts available
+				TOTAL AMOUNT DUE IS ====> $11,208.74
+				Account Number to be selected is Account #4738745
+				Clicked on Account loaded in 0 seconds
+				Clicked on PayNow-Button loaded in 0 seconds
+				OtherAmount Radiobutton Selected 
+				1 entered in the CustomAmount field
+				Clicked on NextButton loaded in 3 seconds
+				Searching for element :=CardDetails
+				Timed out waiting for element := CardDetails
+				Web element = 'CardDetails' is not identified
+				No Cards Available. Adding Card...
+				Timed out waiting for element := Billing-Screen
+				we_MakePayment ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-44-30\we_MakePayment_error23-08-2019 12-44-30.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : ManageAutoPay - Enroll AutoPay
+				                                                             
+				                         ManageAutoPay - Enroll AutoPay                                     
+				****************   ManageAutoPay - Enroll AutoPay   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Clicked on Account loaded in 0 seconds
+				Clicked on Options loaded in 0 seconds
+				Searching for element :=ManagePaymentMethod
+				Web element = 'ManagePaymentMethod' is identified successfully
+				Searching for element :=ManageAutoPay
+				Web element = 'ManageAutoPay' is identified successfully
+				Clicked on ManageAutopay loaded in 0 seconds
+				Searching for element :=ManageAutoPay-Screen
+				Web element = 'ManageAutoPay-Screen' is identified successfully
+				Searching for element :=NotEnrolledInAutopay
+				Web element = 'NotEnrolledInAutopay' is identified successfully
+				You are not Enrolled in AutoPay
+				Clicked on TermsandConditions-Checkbox loaded in 0 seconds
+				Clicked on EnrollAutopay loaded in 0 seconds
+				PLEASE SELECT A PAYMENT METHOD
+				******ERROR PROMPT IS DISPLAYED TO SELECT PAYMENT METHOD******
+				Clicked on OK loaded in 3 seconds
+				Clicked on PaymentOption-Dropdown loaded in 0 seconds
+				Searching for element :=Cards
+				Web element = 'Cards' is identified successfully
+				Clicked on Card loaded in 0 seconds
+				Selected KEYSTONE  CO. ********4234 from Saved Payment Option
+				Clicked on DueDate-Dropdown loaded in 0 seconds
+				Timed out waiting for element := SelectDate
+				we_EnrollAutoPay ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-46-12\we_EnrollAutoPay_error23-08-2019 12-46-12.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : ManageAutoPay - De-Enroll AutoPay
+				                                                             
+				                         ManageAutoPay - De-Enroll AutoPay                                     
+				****************   ManageAutoPay - De-Enroll AutoPay   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Clicked on Account loaded in 0 seconds
+				Clicked on Options loaded in 0 seconds
+				Clicked on ManageAutopay loaded in 0 seconds
+				Searching for element :=ManageAutoPay-Screen
+				Web element = 'ManageAutoPay-Screen' is identified successfully
+				User is not Enrolled in Autopay
+				ManageAutoPay - De-Enroll AutoPay Successfully executed
+				we_DeenrollAutoPay ==> Test case passed
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : AddElectronicCheck
+				                                                             
+				                         ManagePaymentMethods - Add Electonic Check Functionality                                     
+				****************   ManagePaymentMethods - AddElectonicCheck Functionality   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Clicked on Account loaded in 0 seconds
+				Clicked on Options loaded in 0 seconds
+				Clicked on ManagePaymentmethod loaded in 0 seconds
+				Searching for element :=AddPaymentMethod
+				Web element = 'AddPaymentMethod' is identified successfully
+				Clicked on AddPaymentMethod loaded in 0 seconds
+				Searching for element :=PaymentType
+				Timed out waiting for element := PaymentType
+				Web element = 'PaymentType' is not identified
+				we_AddElectronicCheck ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-58-08\we_AddElectronicCheck_error23-08-2019 12-58-08.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : AddCredit_DebitCard
+				                                                             
+				                         ManagePaymentMethods - Add Credit/Debit Card                                     
+				****************   ManagePaymentMethods - Add Credit/Debit Card   ****************
+				Clicked on Billing-Screen loaded in 0 seconds
+				Searching for element :=No-BillingAccount
+				Timed out waiting for element := No-BillingAccount
+				Web element = 'No-BillingAccount' is not identified
+				Billing Account is Available
+				Clicked on Account loaded in 0 seconds
+				Clicked on Options loaded in 0 seconds
+				Clicked on ManagePaymentmethod loaded in 0 seconds
+				Searching for element :=AddPaymentMethod
+				Web element = 'AddPaymentMethod' is identified successfully
+				Clicked on AddPaymentMethod loaded in 0 seconds
+				Searching for element :=PaymentType
+				Timed out waiting for element := PaymentType
+				Web element = 'PaymentType' is not identified
+				we_AddCredit_DebitCard ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-59-39\we_AddCredit_DebitCard_error23-08-2019 12-59-39.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : BVN_User
+				col B - Username : weonlinetest6
+				col C - Pwd : P03DevTestPass666
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : NotificationSubscription
+				                                                             
+				                         NotificationSubscription                                     
+				****************   NotificationSubscription   ****************
+				Clicked on NotificationSubscription loaded in 0 seconds
+				***ADD PROFILE***
+				Clicked on AddNewProfile loaded in 0 seconds
+				Searching for element :=AddContact-Screen
+				Web element = 'AddContact-Screen' is identified successfully
+				We entered in the FirstName field
+				Last entered in the LastName field
+				testing@we.com entered in the Email field
+				PhoneNo : element not found
+				Timed out waiting for element := LinkNewAccount
+				we_Notification ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-00-59\we_Notification_error23-08-2019 01-00-59.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : BVN_User
+				col B - Username : weonlinetest6
+				col C - Pwd : P03DevTestPass666
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : NotificationSubscription
+				                                                             
+				                         CompanyContacts                                     
+				****************   CompanyContacts   ****************
+				Clicked on CompanyContacts loaded in 0 seconds
+				***ADD NEW CONTACT***
+				Clicked on AddNewContact loaded in 0 seconds
+				Searching for element :=AddContact-Screen
+				Web element = 'AddContact-Screen' is identified successfully
+				We entered in the FirstName field
+				Last entered in the LastName field
+				testing@we.com entered in the Email field
+				PhoneNo : element not found
+				Timed out waiting for element := LinkNewAccount
+				we_CompanyContacts ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-02-17\we_CompanyContacts_error23-08-2019 01-02-17.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : Automation
+				col B - Username : Ahillazar
+				col C - Pwd : P03DevTestPass1
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : OfficeSuiteSettings - SetPresenceStatus and CustomStatus
+				                                                             
+				                         OfficeSuiteSettings - SetPresenceStatus and CustomStatus                                     
+				****************   OfficeSuiteSettings - SetPresenceStatus and CustomStatus   ****************
+				Clicked on ProfileIcon loaded in 0 seconds
+				Timed out waiting for element := Status
+				weConnect_ProfileSettings ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-03-07\weConnect_ProfileSettings_error23-08-2019 01-03-07.png
+				***************  Properties ***************
+				URL :=weconnect_mobile
+				                                                   
+				*************** Data  ***************
+				col A - Menu : BVN_User2
+				col B - Username : weonlinetest6
+				col C - Pwd : P03DevTestPass6666
+				col D - additional customer parameters: Null
+				col E - additional usernames: Null
+				col F - external user name: Null
+				col G - external user password: Null
+				                                                   
+				*************** Test Execution log  ***************
+				WeConnect App is launched
+				Searching for element :=LandingScreen
+				Web element = 'LandingScreen' is identified successfully
+				Logged in
+				User Story : Create-New SupportRequest
+				************************ Navigating to Create Support request ************************
+				                                                             
+				                         Create-New SupportRequest                                     
+				****************   Support -> New Support Request   ****************
+				Clicked on HamburgerMenu loaded in 0 seconds
+				Clicked on SupportRequests loaded in 0 seconds
+				****Navigate between tabs****
+				Clicked on StatusTab loaded in 0 seconds
+				Searching for element :=TicketDetails
+				Web element = 'TicketDetails' is identified successfully
+				5==>Open Tickets is Available
+				Clicked on StatusTab loaded in 0 seconds
+				Searching for element :=TicketDetails
+				Web element = 'TicketDetails' is identified successfully
+				4==>Monitoring Tickets is Available
+				Clicked on StatusTab loaded in 0 seconds
+				Searching for element :=TicketDetails
+				Timed out waiting for element := TicketDetails
+				Web element = 'TicketDetails' is not identified
+				Resolved Tickets is Not Available
+				Clicked on StatusTab loaded in 0 seconds
+				Searching for element :=TicketDetails
+				Web element = 'TicketDetails' is identified successfully
+				5==>Closed Tickets is Available
+				Clicked on Create-NewSupportRequests loaded in 0 seconds
+				****CREATE REQUEST - LOCATION/ACCOUNT****
+				LocationDropdown is clicked
+				Searching for element :=Dropdown-List
+				Timed out waiting for element := Dropdown-List
+				Web element = 'Dropdown-List' is not identified
+				AccountDropdown is clicked
+				Searching for element :=Dropdown-List
+				Timed out waiting for element := Dropdown-List
+				Web element = 'Dropdown-List' is not identified
+				Timed out waiting for element := Nextbutton
+				weConnect_CreateSupportRequest ==> Test case Failed
+				D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-05-50\weConnect_CreateSupportRequest_error23-08-2019 01-05-50.png
+		</div>
+	</div>
+</div>
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 3,
+				failParent: 8,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 8,
+				
+				passChild: 3,
+				failChild: 8,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 8,
+				skipChild: 0,
+				infoChild: 423,
+				exceptionsChild: 16,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>

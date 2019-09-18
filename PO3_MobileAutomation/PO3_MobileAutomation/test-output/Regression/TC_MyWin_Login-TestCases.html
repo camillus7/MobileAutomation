@@ -1,0 +1,198 @@
+<html>
+<head>
+<title>TestNG:  TC_MyWin_Login-TestCases</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>TC_MyWin_Login-TestCases</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Jun 17 14:25:56 IST 2019</td>
+</tr>
+<tr><td>Total time:</td><td>105 seconds (105908 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.mobileautomation.tests.MyWin_LoginSuite.myWin_Appversion()'><b>myWin_Appversion</b><br>Test class: com.mobileautomation.tests.MyWin_LoginSuite<br/>
+<a href="#Output-1130489930" onClick='toggleBox("Output-1130489930", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1130489930" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1130489930">
+***************  Properties ***************<br/>
+URL :=my_mobile<br/>
+                                                   <br/>
+*************** Data  ***************<br/>
+col A - Menu : ConsumerOffers<br/>
+col B - Username : weonlinetest12<br/>
+col C - Pwd : P03DevTestPass13<br/>
+col D - additional customer parameters: <br/>
+col E - additional usernames: <br/>
+col F - external user name: <br/>
+col G - external user password: <br/>
+                                                   <br/>
+*************** Test Execution log  ***************<br/>
+Consumer App is launched<br/>
+Searching for element :=Homeicon<br/>
+Web element = 'Homeicon' is identified successfully<br/>
+Logged in<br/>
+User Story :Verify App version TestCases<br/>
+                                                             <br/>
+                         App Version                                     <br/>
+****************   App Version   ****************<br/>
+Clicked on More-Option loaded in 0 seconds<br/>
+Clicked on About loaded in 0 seconds<br/>
+Version 1.6.0.06132011U<br/>
+App Version Successfully executed<br/>
+                                                             <br/>
+^^^^^^^^^^^^^^^^^^^^^^    Execution Results    ^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>
+Total Test Count :=1<br/>
+Passed Test Count :=1<br/>
+Passed Test Description :=App Version|<br/>
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv<br/>
+</div>
+</td>
+<td></td>
+<td>4</td>
+<td>com.mobileautomation.tests.MyWin_LoginSuite@5e3a8624</td></tr>
+<tr>
+<td title='com.mobileautomation.tests.MyWin_LoginSuite.myWin_LoginScreenVerifications()'><b>myWin_LoginScreenVerifications</b><br>Test class: com.mobileautomation.tests.MyWin_LoginSuite<br/>
+<a href="#Output-100376575" onClick='toggleBox("Output-100376575", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-100376575" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-100376575">
+***************  Properties ***************<br/>
+URL :=my_mobile<br/>
+                                                   <br/>
+*************** Data  ***************<br/>
+col A - Menu : ConsumerOffers<br/>
+col B - Username : weonlinetest12<br/>
+col C - Pwd : P03DevTestPass13<br/>
+col D - additional customer parameters: <br/>
+col E - additional usernames: <br/>
+col F - external user name: <br/>
+col G - external user password: <br/>
+                                                   <br/>
+*************** Test Execution log  ***************<br/>
+Consumer App is launched<br/>
+Searching for element :=Homeicon<br/>
+Web element = 'Homeicon' is identified successfully<br/>
+Logged in<br/>
+User Story :LoginScreen-InvalidLogin_ForgotPassword_ForgotUsername TestCases<br/>
+                                                             <br/>
+                         Login - InvalidLogin-ForgotPassword-ForgotUsername                                     <br/>
+****************   Login - InvalidLogin-ForgotPassword-ForgotUsername   ****************<br/>
+Clicked on Moreoption loaded in 0 seconds<br/>
+Clicked on Signout loaded in 0 seconds<br/>
+Searching for element :=password<br/>
+Web element = 'password' is identified successfully<br/>
+Clicked on Forgotpassword loaded in 0 seconds<br/>
+Searching for element :=Forgotpw_username<br/>
+Web element = 'Forgotpw_username' is identified successfully<br/>
+Searching for element :=Forgotpw_backtosignon<br/>
+Web element = 'Forgotpw_backtosignon' is identified successfully<br/>
+Searching for element :=Forgotpw_Sendrequest<br/>
+Web element = 'Forgotpw_Sendrequest' is identified successfully<br/>
+Clicked on SendRequest loaded in 0 seconds<br/>
+Please enter a Username.<br/>
+weonlinetest entered in the Username field<br/>
+Clicked on SendRequest loaded in 0 seconds<br/>
+Thank you for your request. You should receive an email shortly.<br/>
+Clicked on Continue loaded in 0 seconds<br/>
+Searching for element :=password<br/>
+Web element = 'password' is identified successfully<br/>
+Searching for element :=Username<br/>
+Web element = 'Username' is identified successfully<br/>
+Clicked on Forgotusername loaded in 0 seconds<br/>
+Searching for element :=Email Address<br/>
+Web element = 'Email Address' is identified successfully<br/>
+Searching for element :=Forgotpw_backtosignon<br/>
+Web element = 'Forgotpw_backtosignon' is identified successfully<br/>
+Searching for element :=Forgotpw_Sendrequest<br/>
+Web element = 'Forgotpw_Sendrequest' is identified successfully<br/>
+Clicked on SendRequest loaded in 0 seconds<br/>
+Please enter an email address.<br/>
+ahil.l@windstream.com entered in the email field<br/>
+Clicked on SendRequest loaded in 0 seconds<br/>
+Thank you for your request. You should receive an email shortly.<br/>
+Searching for element :=Forgotpw_backtosignon<br/>
+Web element = 'Forgotpw_backtosignon' is identified successfully<br/>
+Clicked on Forgotpw_backtosignon loaded in 0 seconds<br/>
+Searching for element :=Username<br/>
+Web element = 'Username' is identified successfully<br/>
+Login - InvalidLogin-ForgotPassword-ForgotUsername Successfully executed<br/>
+                                                             <br/>
+^^^^^^^^^^^^^^^^^^^^^^    Execution Results    ^^^^^^^^^^^^^^^^^^^^^^^^^^<br/>
+Total Test Count :=1<br/>
+Passed Test Count :=1<br/>
+Passed Test Description :=Login - InvalidLogin-ForgotPassword-ForgotUsername|<br/>
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv<br/>
+</div>
+</td>
+<td></td>
+<td>70</td>
+<td>com.mobileautomation.tests.MyWin_LoginSuite@5e3a8624</td></tr>
+</table><p>
+</body>
+</html>

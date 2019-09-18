@@ -1,0 +1,70 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MostActiveCircuitsWidget {
+	final WebDriver driver;
+	
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MostActiveCircuitsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Most Active Data Circuits')]")
+	public WebElement MostActivecircuitsCheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Most Active Data Circuits']//a[@href='/Services/MonitoredRouter/NetworkUtilization']")
+	public WebElement ViewReport;
+
+	@FindBy(xpath = "//div[contains(.,'There is no active circuits data for the selected account or location.')]")
+	public WebElement noActivecircuitsMessage;
+
+	@FindBy(xpath = "//span[@class='circuit-label']")
+	public WebElement activeCircuits;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Most Active Data Circuits']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Most Active Data Circuits']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void navigationFunctionality() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Most Active Data Circuits"));
+		if (vc.getWebDriverUtils().elementAvailablity(noActivecircuitsMessage, "NoActivecircuitsMessage") == true) {
+			Reporter.log("There is no active circuits data for the selected account or location.", true);
+		} else if (vc.getWebDriverUtils().elementAvailablity(activeCircuits, "ActiveCircuits") == true) {
+			List<WebElement> circuitNames = driver.findElements(By.xpath("//span[@class='circuit-label']"));
+			System.out.println("Available Circuits are==> ");
+			for (WebElement names : circuitNames) {
+				System.out.println(names.getText());
+			}
+
+		}
+		vc.getWebDriverUtils().elementAvailablity(ViewReport, "Report");
+		vc.getWebDriverUtils().clickElement(ViewReport, "View Report");
+		Reporter.log("********** Verify Navigation ************", true);
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Network Utilization - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Network Utilization"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Most Active");
+
+	}
+
+}

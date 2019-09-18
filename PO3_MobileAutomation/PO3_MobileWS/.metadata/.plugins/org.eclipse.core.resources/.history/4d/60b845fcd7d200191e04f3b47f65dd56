@@ -1,0 +1,110 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_BillingSettingsWidget {
+
+	final WebDriver driver;
+	
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_BillingSettingsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Billing Settings')]")
+	public WebElement billingSettingsCheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Settings']//button[@data-id='BillingAccountId']")
+	public WebElement billingSettingDropdown;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Settings']//p[contains(@class,'default-value')]")
+	public WebElement forAccount;
+
+	@FindBy(xpath = "//div[@id='BillingSettingsContainer']//span[contains(.,'Payment Options')]")
+	public WebElement paymentOptionsButton;
+
+	@FindBy(xpath = "//p[contains(.,'There is no data available for the selected billing account.')]")
+	public WebElement noDataMessage;
+
+	@FindBy(xpath = "//div[@id='BillingSettingsContainer']//a[contains(.,'Enroll')]")
+	public WebElement enrollButton;
+
+	@FindBy(xpath = "//div[@id='BillingSettingsContainer']//a[contains(.,'Edit')]")
+	public WebElement editButton;
+
+	@FindBy(xpath = "//div[@id='BillingSettingsContainer']//div[@class='padtb14lr15 botBorder']")
+	public WebElement billingInfo;
+	
+	@FindBy(xpath="//input[@placeholder='Search']")
+	public WebElement searchField;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Settings']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Settings']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void billingSettingsWidgetFunctionality() throws InterruptedException {
+		if (vc.getWebDriverUtils().elementAvailablity(noDataMessage, "NoData") == true) {
+			Reporter.log("There is no data available for the selected billing account", true);
+			
+			
+			
+		} else {
+			List<WebElement> paymentDetails = driver.findElements(
+					By.xpath("//div[@id='BillingSettingsContainer']//div[@class='padtb14lr15 botBorder']"));
+			System.out.println("Billing Information==>");
+			for (WebElement autopayDetails : paymentDetails) {
+				System.out.println(autopayDetails.getText());
+
+			}
+			Reporter.log("********** Enroll Navigation ************", true);
+			if (vc.getWebDriverUtils().elementAvailablity(enrollButton, "Enroll-Button") == true) {
+				vc.getWebDriverUtils().clickElement(enrollButton, "Enroll-Button");
+				vc.getWebDriverUtils().titleVerification(driver.getTitle(),
+						"My Payment Options - Windstream Enterprise");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Payment"));
+				driver.navigate().back();
+				vc.getWebDriverUtils().checkPageIsReady();
+			} else {
+				Reporter.log("Enroll Button is not available", true);
+			}
+
+			Reporter.log("********** EditPaperlessBilling Navigation ************", true);
+			if (vc.getWebDriverUtils().elementAvailablity(editButton, "Edit-Button") == true) {
+				vc.getWebDriverUtils().clickElement(editButton, "Edit-Button");
+				vc.getWebDriverUtils().titleVerification(driver.getTitle(),
+						"Paperless Billing - Windstream Enterprise");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Paperless Billing"));
+				driver.navigate().back();
+				vc.getWebDriverUtils().checkPageIsReady();
+			} else {
+				Reporter.log("Edit Button is not available", true);
+			}
+
+			Reporter.log("********** PaymentOptions Navigation ************", true);
+			vc.getWebDriverUtils().elementAvailablity(paymentOptionsButton, "PaymentOptions-Button");
+			vc.getWebDriverUtils().clickElement(paymentOptionsButton, "PaymentOptions-Button");
+			vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Billing Settings- Windstream Enterprise");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+		
+		}
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Billing Settings");
+	}
+
+}

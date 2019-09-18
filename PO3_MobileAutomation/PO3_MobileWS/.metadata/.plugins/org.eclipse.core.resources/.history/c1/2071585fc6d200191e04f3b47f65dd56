@@ -1,0 +1,67 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_HDMeetingLicencesWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_HDMeetingLicencesWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'HD Meeting Licenses')]")
+	public WebElement hdMeetingCheckbox;
+		
+	@FindBy(xpath="//div[@data-widgettitle='HD Meeting Licenses']//div[@class='wgt-alert-num']")
+	public WebElement hdMeetingLicenceCount;
+
+	@FindBy(xpath="//div[@data-widgettitle='HD Meeting Licenses']//a[@href='/Account/HDMeetingSettings/HDMeetingLicense']")
+	public WebElement hdMeetingManage;
+	
+	@FindBy(xpath="//div[@data-widgettitle='HD Meeting Licenses']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='HD Meeting Licenses']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void hdMeetingLicenceWidget() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("HD Meeting Licenses"));
+		if (vc.getWebDriverUtils().elementAvailablity(hdMeetingLicenceCount, "LicenceCount") == true) {
+			String HdMeetingLicenceCount = hdMeetingLicenceCount.getText();
+			Reporter.log("Total HDmeetingLicence Counts are==>" + HdMeetingLicenceCount, true);
+		} else {
+			Reporter.log("HDMeetingLicences Not Available", true);
+		}
+
+		vc.getWebDriverUtils().elementAvailablity(hdMeetingManage, "Manage");
+		vc.getWebDriverUtils().clickElement(hdMeetingManage, "Manage");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "HD Meeting License - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("HD Meeting Licenses"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("HD Meeting Licenses");
+		
+
+	}
+}
+
+
+
+

@@ -1,0 +1,61 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
+
+public class SafariWebDriver implements ApplicationWebDriver {
+	
+    public WebDriver getWebDriver() {
+       
+    	WebDriver driver = new SafariDriver(getCapabilities());		
+
+		return driver;       
+    }
+    
+    public WebDriver getWebDriver(boolean isGrid, String hubUrl) {
+
+    	WebDriver driver = null;
+    	if (isGrid) {
+    		try {
+    			driver = new RemoteWebDriver(new URL(hubUrl), getCapabilities());
+    		} catch (MalformedURLException e) {				
+    			e.printStackTrace();
+    		}
+    	} else {
+    		driver = new SafariDriver(getCapabilities());
+    	}		
+
+    	return driver;		
+    }
+	
+	public DesiredCapabilities getCapabilities() {
+		
+	SafariOptions safariOptions = new SafariOptions();
+	safariOptions.setUseCleanSession(true);
+	
+	DesiredCapabilities capabilities = DesiredCapabilities.safari();
+		
+	capabilities.setCapability(SafariOptions.CAPABILITY, safariOptions);	
+	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	capabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT,true);
+	capabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS,true);
+	capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY,true);
+	
+	capabilities.setBrowserName("safari");	
+	return capabilities;
+	
+	}
+}
+
+    
+
+
+

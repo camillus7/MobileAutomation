@@ -1,0 +1,76 @@
+package com.webautomation.pageobject.empPortal_pages;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+
+public class EmpPortal_LoginPage {
+
+	final WebDriver driver;
+
+	@FindBy(id = "username")
+	public WebElement userName;
+	
+	@FindBy(id = "password")
+	public WebElement password;
+
+	@FindBy(xpath = "//a[@title='Log In']")
+	public WebElement logInInBtn;
+	
+	private Validator vc;
+
+	public EmpPortal_LoginPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	public void navigateTo_EmpPortalHome(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+	//	driver.navigate().to("https://my-uata.windstream.com/employees");
+	driver.get("https://my-uata.windstream.com/employees");
+			try {
+				driver.switchTo().alert();
+				driver.switchTo().alert().dismiss();
+				driver.switchTo().defaultContent();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+	
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Password"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Change Password"));
+		
+		
+		
+		vc.getWebDriverUtils().enterText(userName, "n99XXXXX", "Username");
+		vc.getWebDriverUtils().enterText(password, "XXXXXXX", "Password");
+		vc.getWebDriverUtils().clickElement(logInInBtn, "Log In Button");
+		
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		while (!driver.findElement(By.xpath("//a[contains(.,'Sign Out')]")).isDisplayed()) {
+			System.out.println("Waiting for Home Page  - Portal Search");
+			Thread.sleep(1000);
+		}
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Clients"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Non-Portal Clients"));
+		
+	}
+
+}

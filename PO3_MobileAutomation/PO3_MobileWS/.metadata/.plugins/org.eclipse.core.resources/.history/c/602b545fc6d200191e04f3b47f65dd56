@@ -1,0 +1,104 @@
+package com.webautomation.pageobject.empPortal_pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class EmpPortal_HomePage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public EmpPortal_HomePage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	@FindBy(linkText="Portal Search")
+	public WebElement portalSearchMenu;
+	
+	@FindBy(linkText="Reports")
+	public WebElement reportsMenu;
+	
+	@FindBy(linkText="Sales & Marketing")
+	public WebElement salesMarketingMenu;
+	
+	@FindBy(linkText="Developer & Support Tools")
+	public WebElement developerSupportToolsMenu;
+	
+	@FindBy(xpath="//a[@href='/Employees/Company'] ")
+	public WebElement portalSearchTab;
+	
+	/*@FindBy(linkText="My Clients List")
+	public WebElement myClientsListTab;
+	
+	@FindBy(linkText="Account Details")
+	public WebElement accountDetailsTab;
+	
+	@FindBy(linkText="Company Activity")
+	public WebElement companyActivityTab;
+	
+	@FindBy(linkText="View Audit Logs")
+	public WebElement viewAuditLogsTab;
+	
+	@FindBy(linkText="Notification History")
+	public WebElement notificationHistoryTab;
+	
+	@FindBy(linkText="Company Notes")
+	public WebElement companyNotesTab;
+	
+	@FindBy(linkText="Contacts")
+	public WebElement contactsTab;
+	
+	@FindBy(xpath="//label[1]/button")
+	public WebElement portalClientsRadio;
+	
+	@FindBy(xpath="//label[2]/button")
+	public WebElement nonPortalClientsRadio;
+	
+	@FindBy(xpath="//label[3]/button")
+	public WebElement iDontKnowRadio;
+	
+	@FindBy(xpath="//input[@id='CompanySearch_BillingAccountNumber']")
+	public WebElement accountNumber;
+	
+	@FindBy(xpath="//input[@id='CompanySearch_ClientName']")
+	public WebElement clientName;
+	
+	@FindBy(xpath="//input[@id='CompanySearch_Username']")
+	public WebElement username;
+	
+	@FindBy(xpath="//button[@data-id='CompanySearch_ProductFamilyIds']")
+	public WebElement productFamily;
+	
+	@FindBy(xpath="//button[@data-id='CompanySearch_BusinessUnit']")
+	public WebElement businessEntityType;
+	
+	@FindBy(xpath="//input[@value='Search']")
+	public WebElement searchBtn;
+	
+	@FindBy(xpath="//input[@value='Reset']")
+	public WebElement resetBtn;*/
+	
+	@FindBy(linkText="xxxxxxxxx")
+	public WebElement xxxxx;
+	
+	
+	@FindBy(xpath="//a[contains(.,'Sign Out')]")
+	public WebElement signOut;
+	
+
+}	
+
+
+
+
+

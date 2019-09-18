@@ -1,0 +1,282 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_VoiceLineAdminPage {
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_VoiceLineAdminPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	@FindBy(linkText="Voice Line Admin")
+	public WebElement voiceLineAdmin;
+	
+	@FindBy(linkText="Line Features")
+	public WebElement lineFeatures;
+	
+	@FindBy(linkText="Line Admin")
+	public WebElement lineAdmin;
+	
+	@FindBy(linkText="DID Reroute")
+	public WebElement didReroute;
+	
+	@FindBy(linkText="Change History")
+	public WebElement changeHistory;
+	
+	@FindBy(linkText="Set E911 Location")
+	public WebElement setE911Location;
+	
+    @FindBy(linkText="E911 Location")
+	public WebElement E911Location;
+	
+	@FindBy(linkText="Request History")
+	public WebElement requestHistory;
+	
+	@FindBy(linkText="Details")
+	public WebElement requestHistoryDetails;
+	
+	
+	@FindBy(id="tbphoneNumber")
+	public WebElement phoneNumber;
+	
+	@FindBy(xpath="//button[contains(@data-id,'ddlDIDAdmin')]")
+	public WebElement lineAdminPhoneNumber;
+	
+	@FindBy(xpath="//button[@data-id='ddlFriendlyName']")
+	public WebElement lineAdminUsers;
+	
+	@FindBy(id="saveButton")
+	public WebElement lineAdminSaveButton;
+	
+	@FindBy(id="txtDIDName")
+	public WebElement lineAdminEnterNewName;
+	
+	@FindBy(id="tbphoneNumber")
+	public WebElement didRerouteSearchPhoneNumber;
+	
+	@FindBy(id="Phone1")
+	public WebElement didReroutePhone1;
+	
+	@FindBy(id="Phone2")
+	public WebElement didReroutePhone2;
+	
+	@FindBy(id="Phone3")
+	public WebElement didReroutePhone3;
+	
+	@FindBy(id="bottonOuterWrap")
+	public WebElement didRerouteRemoverouting;
+	
+	@FindBy(id="bottonOuterWrap")
+	public WebElement didRerouteSaveChanges;
+	
+	@FindBy(linkText="Filters")
+	public WebElement changeHistoryFilters;
+	
+	@FindBy(xpath="//button[@title='All']")
+	public WebElement changeHistoryChangeDateAll;
+	
+	@FindBy(xpath="//button[@class='btn btnReset icon close']")
+	public WebElement changeHistoryClearFilters;
+	
+	@FindBy(xpath="//button[@class='btn btnFilter ws-icon-reset f16 icon primary filter']")
+	public WebElement changeHistoryApplyFilters;
+	
+	@FindBy(id="btnExport")
+	public WebElement changeHistoryExport;
+	
+	@FindBy(xpath="//button[@class='k-grid-excel  icon light']")
+	public WebElement changeHistoryExportToExcel;
+	
+	@FindBy(xpath="//button[@class='  k-grid-pdf icon light']")
+	public WebElement changeHistoryExportToPdf;
+	
+	@FindBy(id="SearchBox")
+	public WebElement E911LocationSearchBox;
+	
+	@FindBy(linkText="Tools")
+	public WebElement tools;
+	
+	@FindBy(xpath=".//*[@id='mCSB_1_container']/div[1]/span")
+	public WebElement E911Number;
+	
+	@FindBy(xpath=".//div[1]/div/div[5]/div[1]/label")
+	public WebElement E911NumberAddress;
+	
+	
+	@FindBy(id="btnMakeActive")
+	public WebElement E911MakeActive;
+	
+	@FindBy(id="btnDelete")
+	public WebElement E911Delete;
+	
+	@FindBy(id="btnNew")
+	public WebElement E911New;
+	
+	@FindBy(xpath="//div[@class='loc-close']")
+	public WebElement E911Close;
+	
+	@FindBy(xpath=".//ul/li[2]/a/span")
+	public WebElement accountCodesFirstElement;
+	
+	@FindBy(xpath="//button[@data-id='AccountNumber']")
+	public WebElement accountCodesDropDown;
+	
+	@FindBy(xpath="//button[@data-id='BillingAccounts']")
+	public WebElement addingLinesSelectAccount;
+	
+	
+	@FindBy(id="lnkAccountingCodes")
+	public WebElement accountCodes;
+	
+	@FindBy(linkText="Hunt Groups")
+	public WebElement huntGroups;
+	
+	@FindBy(linkText="Adding Lines (new & porting)")
+	public WebElement addingLines;
+	
+	@FindBy(xpath=".//div[1]/div/div[1]/label/span[1]")
+	public WebElement accountCodesAddNewRadio;
+	
+	@FindBy(xpath=".//*[@id='acctCodeAddNewContent']/div[1]/div[2]/label[1]/span")
+	public WebElement verifiedCode;
+	
+	
+	@FindBy(xpath=".//div[2]/label[2]/span")
+	public WebElement accountCodesNonVerifiedCode;
+	
+	@FindBy(xpath=".//div[2]/label[1]/span")
+	public WebElement accountCodesVerifiedCode;
+	
+	@FindBy(xpath="//span[@data-name='CodeToolTip']")
+	public WebElement accountCodesTypeToolTip;
+	
+	@FindBy(xpath="//span[@data-name='AccountCodeToolTip']")
+	public WebElement accountCodesNameToolTip;
+	
+	@FindBy(id="AccountingCode")
+	public WebElement newAccountCode;
+	
+	@FindBy(id="Name")
+	public WebElement newAccountCodeName;
+	
+	@FindBy(xpath="//a[contains(.,'Add All')]")
+	public WebElement accountCodeAddAll;
+	
+	@FindBy(xpath="//a[contains(.,'Remove All')]")
+	public WebElement accountCodeRemoveAll;
+	
+	@FindBy(xpath=".//*[@id='mCSB_2_container']/div/label[1]")
+	public WebElement accountCodesAvailableNumbers;
+	
+	@FindBy(xpath=".//*[@id='mCSB_2_container']/div/label[2]")
+	public WebElement accountCodesAvailableNumbersSecond;
+	
+	@FindBy(id="ContactInfo_Name")
+	public WebElement accountCodesPrimaryContactName;
+	
+	@FindBy(id="ContactInfo_Email")
+	public WebElement accountCodesPrimaryContactEmail;
+	
+	@FindBy(id="ContactInfo_Phone")
+	public WebElement accountCodesPrimaryContactPhone;
+	
+	@FindBy(xpath=".//div/div[4]/div[2]/label[1]/span")
+	public WebElement accountCodesPreferedContactEmail;
+	
+	@FindBy(xpath=".//div/div[4]/div[2]/label[2]/span")
+	public WebElement accountCodesPreferedContactPhone;
+	
+	@FindBy(xpath=".//div/div[4]/div[2]/label[3]/span")
+	public WebElement accountCodesPreferedContactPhoneEmail;
+	
+	@FindBy(xpath="//i[@class='icon-calendar']")
+	public WebElement accountCodesCalander;
+	
+	@FindBy(id="AdditionalContactName")
+	public WebElement accountCodesAdditionalContactName;
+	
+	@FindBy(id="AdditionalContactPhone")
+	public WebElement accountCodesAdditionalPhone;
+	
+	@FindBy(xpath="//button[@class='button submit icon primary light btn-confirm']")
+	public WebElement accountCodesSubmit;
+	
+	@FindBy(xpath="//button[@class='btn btn-confirm icon check light primary']")
+	public WebElement addingLinesSubmit;
+	
+	@FindBy(xpath="//button[@class='button close icon light']")
+	public WebElement accountCodesReset;
+	
+	@FindBy(id="accmYes")
+	public WebElement accountCodesYes;
+	
+	@FindBy(xpath=".//*[@id='AddLineRadioGroup']/div[1]/div/label/span")
+	public WebElement addNewHuntGroupsRadioButton;
+	
+	@FindBy(xpath="//a[@data-name='huntgrouptypeadd-bubble']")
+	public WebElement huntGroupsTypeToolTip;
+	
+	@FindBy(xpath=".//*[@id='addHuntGroup']/div[1]/div[2]/label/span")
+	public WebElement huntGroupsTypeSequential;
+	
+	@FindBy(xpath=".//*[@id='addHuntGroup']/div[1]/div[4]/label/span")
+	public WebElement huntGroupsTypeCircular;
+	
+	@FindBy(id="hgcmYes")
+	public WebElement huntGroupsYes;
+	
+	@FindBy(id="alcmYes")
+	public WebElement addNewLinesYes;
+	
+	
+	@FindBy(linkText="Close")
+	public WebElement huntGroupsClose;
+	
+	@FindBy(id="Address1")
+	public WebElement address1;
+	
+	@FindBy(id="Address2")
+	public WebElement address2;
+	
+	@FindBy(id="City")
+	public WebElement city;
+	
+	@FindBy(xpath="//button[@data-id='StateCode']")
+	public WebElement stateCode;
+	
+	@FindBy(id="PostalCode")
+	public WebElement postalCode;
+	
+	@FindBy(xpath=".//div[4]/div[2]/label/button")
+	public WebElement addingLinesFax;
+	
+	@FindBy(xpath=".//div[4]/div[3]/label/button")
+	public WebElement addingLinesModem;
+	
+	@FindBy(xpath=".//div[3]/div[1]/label/button")
+	public WebElement addingLinesCallingWaiting;
+	
+	@FindBy(xpath="//input[@data-val-requiredif-dependentproperty='CallForwardNoAnswer']")
+	public WebElement addingLinesCallingforwardNumber;
+	
+	
+	@FindBy(xpath=".//div[3]/div[2]/label/button")
+	public WebElement addingLinesCallReturn;
+	
+	@FindBy(xpath=".//div[4]/div[1]/label/button")
+	public WebElement addingLinesCallForward;
+	
+	@FindBy(id="CallForwardNoAnswerRingToNumber")
+	public WebElement addingLinesRingToNumber;
+	
+	
+}

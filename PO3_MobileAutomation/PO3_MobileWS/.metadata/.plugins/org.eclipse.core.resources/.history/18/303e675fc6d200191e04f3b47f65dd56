@@ -1,0 +1,113 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CommunityWidget {
+	
+	final WebDriver driver;
+			
+			String winHandleBefore = null;
+					
+			private Validator vc;
+			private WE_CommonWidgets cw;
+			
+
+			public WE_CommunityWidget(WebDriver driver) {
+				this.driver = driver;
+				this.vc = new Validator(driver);
+				this.cw = new WE_CommonWidgets(driver);
+			}
+
+			@FindBy(xpath = "//label[contains(.,'Kinetic Business Community')]")
+			public WebElement weCommunityCheckbox;
+			
+			@FindBy(xpath = "//div[@class='community-item']")
+			public WebElement communityList;
+			
+			@FindBy(xpath = "//div[@class='community-item']//div[contains(.,'OfficeSuite')]")
+			public WebElement officeSuite_Icon;
+					
+			@FindBy(xpath = "//div[@class='community-item']//div[contains(.,'SD-WAN')]")
+			public WebElement sdWAN_Icon;
+			
+			@FindBy(xpath = "//div[@class='community-item']//div[contains(.,'WE Connect')]")
+			public WebElement weConnect_Icon;
+			
+			@FindBy(xpath = "//div[@data-widgettitle='Kinetic Business Community']//a[contains(.,'Visit')]")
+			public WebElement visitLink;
+			
+			@FindBy(xpath = "//h1[contains(.,'Windstream Enterprise Community')]")
+			public WebElement visitPageTitle;
+			
+			//@FindBy(xpath="//div[@data-widgettitle='Kinetic Business Community']//button[@class='ws-icon settings ws-menu menu-down closed']")
+			@FindBy(xpath="//div[@data-widgettitle='Kinetic Business Community']/div[1]/button")
+			public WebElement settingsIcon;
+			
+			@FindBy(xpath="//div[@data-widgettitle='Kinetic Business Community']//a[contains(.,'Remove Widget')]")
+			public WebElement removeWidgetOption;
+
+			
+						
+			public void windowHandle(WebElement link,String titleName,String verificationText) throws InterruptedException{
+				String parentWindow = driver.getWindowHandle();
+				vc.getWebDriverUtils().clickElement(link, verificationText);
+				
+				for(String winHandle:driver.getWindowHandles()){
+					driver.switchTo().window(winHandle);
+					
+					Reporter.log(driver.switchTo().window(winHandle).getTitle(),true);
+					vc.getWebDriverUtils().titleVerification(driver.switchTo().window(winHandle).getTitle(), titleName);
+					//Assert.assertTrue(vc.waitUntilTextIsPresent(verificationText));
+					
+				}
+				driver.close();
+				driver.switchTo().window(parentWindow);
+			}
+			public void weCommunityWidget_Functionality() throws InterruptedException {
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Kinetic Business Community"));
+				winHandleBefore = driver.getWindowHandle();
+				List<WebElement> list = driver.findElements(By.xpath("//div[@class='community-item']"));
+				System.out.println("Available Communities are==>");
+				for(WebElement communityNames:list){
+					System.out.println(communityNames.getText());
+				}
+				
+				Reporter.log("**********  OfficeSuite-Navigation *********************",true);
+				vc.getWebDriverUtils().clickElement(officeSuite_Icon, "OfficeSuite");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "OfficeSuite UC® Services");
+				
+				Reporter.log("**********  SD-WAN-Navigation *********************",true);
+				vc.getWebDriverUtils().clickElement(sdWAN_Icon, "SD-WAN");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "SD-WAN Services");
+				
+				
+				Reporter.log("**********  WEConnect-Navigation *********************",true);
+				vc.getWebDriverUtils().clickElement(weConnect_Icon, "WEConnect");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "WE Connect Portal");
+				
+				Reporter.log("**********  VisitBlog-Navigation *********************",true);
+				vc.getWebDriverUtils().clickElement(visitLink, "VisitBlog");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Windstream Enterprise Community");
+				
+				Reporter.log("********** Remove Widget ************",true);
+				cw.removeAddedWidget("Community");
+				
+				
+				
+			}
+			
+			
+	
+
+}

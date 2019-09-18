@@ -1,0 +1,15 @@
+package WebDriver;
+
+
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public interface ApplicationWebDriver {
+    
+   
+    DesiredCapabilities getCapabilities();
+    AndroidDriver getAndroidDriver();
+    
+}
+
+

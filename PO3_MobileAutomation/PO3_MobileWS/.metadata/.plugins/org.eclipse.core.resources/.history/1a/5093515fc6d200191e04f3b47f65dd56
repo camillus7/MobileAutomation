@@ -1,0 +1,695 @@
+package com.webautomation.pageobject.myWin_pages;
+
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchFrameException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Reporter;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+import commonUtil.FileUtilities;
+import commonUtil.PropertiesUtil;
+
+public class MyWin_BillingPage {
+
+	final WebDriver driver;
+	private Validator vc;
+
+	public MyWin_BillingPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(id = "btnbillingPayNow")
+	public WebElement billingPayNow;
+
+	@FindBy(xpath = ".//div[2]/label/span[3]")
+	public WebElement balanceDue;
+
+	@FindBy(id = "txtOtherAmountDue")
+	public WebElement otherAmount;
+
+	@FindBy(xpath = "//a[contains(.,'CREDIT / DEBIT CARD')]")
+	public WebElement creditDebit;
+
+	@FindBy(xpath = "//label[contains(.,'Debit/Credit Card')]")
+	public WebElement creditDebitPayNow;
+
+	@FindBy(xpath = "//label[contains(.,'Electronic Check')]")
+	public WebElement electronicPayNow;
+
+	@FindBy(xpath = "//button[@data-id='DebitCreditCardType']")
+	public WebElement debitCreditType;
+
+	@FindBy(xpath = "//span[@class='billing-summ-acc-add-receipient']")
+	public WebElement addnewPaymentMethod;
+
+	@FindBy(xpath = ".//*[@id='terms_cond']/label/span")
+	public WebElement agreementCheckBox;
+
+	@FindBy(xpath = "//button[@class='btn btn-primary btn-icon']")
+	public WebElement payNowPaymentConfirmationOk;
+
+	@FindBy(xpath = "//button[@class='btn btn-primary']")
+	public WebElement messageOk;
+
+	@FindBy(id = "payment_edit_cancel")
+	public WebElement cancel;
+
+	@FindBy(id = "btnbillingPayNow")
+	public WebElement payNow;
+	
+	public boolean payNowEnable() throws InterruptedException {
+		
+		vc.scrollToView(payNow);
+		return payNow.isEnabled();
+	
+		
+	}
+
+	@FindBy(xpath = "//label[@class='view-bill padding-left-10 cursor-pointer']")
+	public WebElement viewBillDetails;
+
+	@FindBy(linkText = "Terms and Conditions")
+	public WebElement termsAndConditions;
+
+	@FindBy(css = ".accepance-container > a")
+	public WebElement termsAndConditionsAutoPay;
+
+	@FindBy(xpath = ".//*[@id='enrollautopay_myModal']/div/div/div[1]/button")
+	public WebElement termsAndConditionsClose;
+
+	@FindBy(xpath = ".//*[@id='paymentterms_myModal']/div/div/div[1]/button")
+	public WebElement termsAndConditionsPayBillClose;
+
+	@FindBy(id = "paynow-cancel")
+	public WebElement cancelContinue;
+
+	@FindBy(xpath = "//button[@class='btn-neg']")
+	public WebElement cancelNo;
+
+	@FindBy(xpath = "//span[contains(.,'Auto Pay')]")
+	public WebElement autoPay;
+
+	@FindBy(xpath = "//button[@class='btn btn-neg']")
+	public WebElement autoPayCancelNo;
+
+	@FindBy(id = "carddropdown")
+	public WebElement paymentOption;
+
+	@FindBy(id = "enroll-payment-edit-icon")
+	public WebElement autoPayEdit;
+	
+	@FindBy(id="enroll-payment-edit-icon")
+	public WebElement autoPayEditPencil;
+
+	@FindBy(xpath = "//a[contains(.,'Credit Card and Bank Account')]")
+	public WebElement creditBankAccount;
+
+	public void selectPaymentOption(String dtValue) throws InterruptedException {
+		paymentOption.click();
+		Reporter.log("Clicking Link: " + dtValue, true);
+		vc.getWebDriverUtils().checkPageIsReady();
+		String xpathValue = "//span[contains(.,'" + dtValue + "')]";
+		vc.getWebDriverUtils().clickLinkText(dtValue);
+		Thread.sleep(3000);
+	}
+
+	@FindBy(xpath = "//button[@class='btn dropdown-toggle btn-default btn-light']")
+	public WebElement draftDayDropDown;
+
+	public void selectDraftDayDropDown(String dtValue)
+			throws InterruptedException {
+		draftDayDropDown.click();
+		Reporter.log("Clicking Link: " + dtValue, true);
+		vc.getWebDriverUtils().checkPageIsReady();
+		String xpathValue = "//span[contains(.,'" + dtValue + "')]";
+		vc.getWebDriverUtils().clickLinkText(dtValue);
+		Thread.sleep(3000);
+	}
+
+	@FindBy(xpath = "//select[@id='DebitCreditCardType']")
+	public WebElement debitCreditDropDown;
+
+	public void selectDebitCreditDropDown(String dtValue)
+			throws InterruptedException {
+		debitCreditDropDown.click();
+		Reporter.log("Clicking Link: " + dtValue, true);
+		vc.getWebDriverUtils().checkPageIsReady();
+		String xpathValue = "//span[contains(.,'" + dtValue + "')]";
+		vc.getWebDriverUtils().clickLinkText(dtValue);
+		Thread.sleep(3000);
+	}
+
+	@FindBy(xpath = ".//*[@id='enroll-autopay']/div/form/div/div/div/div[1]")
+	public WebElement paymentOptionText;
+
+	@FindBy(xpath = "//button[@class='btn dropdown-toggle btn-default btn-light']")
+	public WebElement priorBillsDropDown;
+
+	public void selectpriorBillsDropDown(String dtValue)
+			throws InterruptedException {
+		draftDayDropDown.click();
+		Reporter.log("Clicking Link: " + dtValue, true);
+		vc.getWebDriverUtils().checkPageIsReady();
+		String xpathValue = "//span[contains(.,'" + dtValue + "')]";
+		vc.getWebDriverUtils().clickLinkText(dtValue);
+		Thread.sleep(3000);
+	}
+
+	@FindBy(xpath = "//img[@src='/consumer/images/notifsettings/Consumer-Billing-Video_1.jpg']")
+	public WebElement INeedHelpVideo;
+
+	@FindBy(xpath = "//div[@aria-haspopup='true']")
+	public WebElement paymentOptionDropDown;
+
+	@FindBy(xpath = "//button[@class='btn dropdown-toggle btn-default btn-light']")
+	public WebElement draftDay;
+
+	@FindBy(xpath = ".//div[1]/div/label/span[2]")
+	public WebElement draftLimitNoLimit;
+
+	@FindBy(xpath = ".//div[2]/div/label/span")
+	public WebElement draftLimitOtherAmount;
+
+	@FindBy(id = "txtAutoOtherAmountDue")
+	public WebElement otherAmountTextBox;
+
+	@FindBy(xpath = ".//div/div[5]/label/span[2]")
+	public WebElement suspectCBAutoPay;
+
+	@FindBy(xpath = "//button[@class='btn btn-primary']")
+	public WebElement suspectAutoPayOk;
+
+	@FindBy(id = "suspendAutoPayText")
+	public WebElement suspendAutoPayText;
+
+	@FindBy(linkText = "windstream.com.")
+	public WebElement windstreamLink;
+
+	@FindBy(xpath = ".//*[@id='selection']/div[2]/label")
+	public WebElement creditDebitOption;
+
+	@FindBy(xpath = "//label[contains(.,'Electronic Check')]")
+	public WebElement electronicCheck;
+
+	@FindBy(id = "ccNumber")
+	public WebElement creditCardNumber;
+
+	@FindBy(xpath = "//select[@id='expYear']")
+	public WebElement expirationYear;
+
+	@FindBy(xpath = "//button[@data-id='idCardExpirationYear']")
+	public WebElement editExpirationYear;
+
+	@FindBy(id = "idCardZip")
+	public WebElement editZipCode;
+
+	@FindBy(id = "idBankZip")
+	public WebElement editZipCodeElectronicCheck;
+
+	@FindBy(id = "Zip")
+	public WebElement zipCode;
+
+	@FindBy(id = "CVV2")
+	public WebElement cvv2;
+
+	@FindBy(id = "btnbillingPayNow")
+	public WebElement savecard;
+
+	@FindBy(id = "closepaymentiframe")
+	public WebElement closePaymentFrame;
+
+	@FindBy(id = "btnClose")
+	public WebElement sucessOk;
+
+	@FindBy(css = "#ShowConsentec > div.white_content > #btnClose")
+	public WebElement sucessOkEc;
+	// xpath=(//button[@id='btnClose'])[2]
+
+	@FindBy(xpath = "//button[@data-bb-handler='ok']")
+	public WebElement deleteOk;
+
+	@FindBy(xpath = ".//div[1]/div[1]/div[1]/label/span")
+	public WebElement PaymentRadioButton;
+
+	@FindBy(xpath = "//span[@class='payment-due-checkmark paymentCheckbox']")
+	public WebElement electronicCheckRadioButton;
+
+	@FindBy(xpath = "//a[@data-target='#enrollautopay_myModal']")
+	public WebElement autoPayTermsAndConditions;
+
+	@FindBy(xpath = "//span[@class='accepance-container-checkmark']")
+	public WebElement autoPayTermsAndConditionsCheckBox;
+
+	@FindBy(id = "payment_edit_cancel")
+	public WebElement autoPayCancel;
+
+	@FindBy(id = "btnUpdateEnrollAutoPay")
+	public WebElement autoPaySave;
+
+	@FindBy(xpath = "//button[@class='btn PaymentCancel btn-pos']")
+	public WebElement cancelAutoPayContinue;
+
+	@FindBy(xpath = "//button[@class='btn btn-neg']")
+	public WebElement cancelAutoPayNo;
+
+	@FindBy(xpath = "//button[contains(.,'×')]")
+	public WebElement confirmationClose;
+
+	@FindBy(xpath = ".//div/span/img")
+	public WebElement draftLimitToolTip;
+
+	@FindBy(xpath = ".//div/form/div/div/div/div[3]/div[1]/div/span/img")
+	public WebElement draftDayToolTip;
+
+	@FindBy(className = "tooltiptext")
+	public WebElement toolTipText;
+
+	@FindBy(xpath = ".//div[4]/div[1]/div/span/img")
+	public WebElement draftLimitAutoPayToolTip;
+
+	@FindBy(xpath = "//a[@class='d-inline-block viewbilldetails']")
+	public WebElement ViewBillDetails;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/report.png']")
+	public WebElement reports;
+
+	@FindBy(linkText = "Operator assisted calls")
+	public WebElement operatorAssistedCalls;
+
+	@FindBy(linkText = "Domestic calls")
+	public WebElement domesticCalls;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/Invoices.png']")
+	public WebElement papaerBills;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/payment_history.png']")
+	public WebElement paymentHistory;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/Icon2.png']")
+	public WebElement payBill;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/Icon1.png']")
+	public WebElement viewBill;
+
+	@FindBy(xpath = "//a[@class='d-inline-block viewbilldetails']")
+	public WebElement viewPaperBill;
+
+	@FindBy(xpath = ".//*[@id='c5ae3231-31ac-436b-b23e-1f9d23960ffc']/div/span/img")
+	public WebElement statusToolTip;
+
+	@FindBy(linkText = "View")
+	public WebElement viewInvoices;
+
+	@FindBy(xpath = ".//*[@id='headingTwo']/div/div[1]")
+	public WebElement billSummary;
+
+	@FindBy(xpath = ".//*[@id='headingThree']/div/div[1]")
+	public WebElement PreviousBill;
+
+	@FindBy(xpath = ".//*[@id='headingOne']/div/div[1]")
+	public WebElement currentCharges;
+
+	@FindBy(xpath = ".//*[@id='chargeTest6']/div/label")
+	public WebElement windstreamCollapse;
+
+	@FindBy(id = "lnkPrintPH")
+	public WebElement print;
+
+	@FindBy(xpath = "//a[contains(.,'Export')]")
+	public WebElement export;
+
+	@FindBy(xpath = ".//div[2]/div/div/div[2]/div/div/div[1]")
+	public WebElement noPaperBills;
+
+	@FindBy(xpath = "html/body/div[2]/div/div/div[1]/div")
+	public WebElement errorMessageText;
+
+	@FindBy(linkText = "click here.")
+	public WebElement clickHereGoPaperless;
+
+	@FindBy(xpath = "//a[@href='mailto:WindstreamCustomerSupport@windstream.com']")
+	public WebElement windstreamCustomerSupportEmail;
+
+	@FindBy(xpath = "//button[contains(.,'OK')]")
+	public WebElement okGopaperless;
+
+	@FindBy(id = "PayeeLastName")
+	public WebElement payeeLastNameEC;
+
+	@FindBy(id = "idBankLastName")
+	public WebElement lastNameECEdit;
+
+	@FindBy(id = "idBankFirstName")
+	public WebElement firstNameECEdit;
+
+	@FindBy(id = "PayeeFirstName")
+	public WebElement payeeFirstNameEC;
+
+	@FindBy(id = "BankRoutingNumber")
+	public WebElement routingNumberEC;
+
+	@FindBy(id = "BankAccountNumber")
+	public WebElement accountNumberEC;
+
+	public void searchForAccountNumberEC() throws Throwable {
+		accountNumberEC.clear();
+		int a = 0 + (int) (Math.random() * ((9999999 - 0) + 1));
+		String AccountNumberValue = String.valueOf(a);
+		accountNumberEC.sendKeys(AccountNumberValue);
+		Reporter.log("AccountNumber is " + AccountNumberValue, true);
+		Thread.sleep(500);
+	}
+
+	@FindBy(id = "EcZip")
+	public WebElement zipCodeEC;
+
+	@FindBy(id = "ecbtnbillingPayNow")
+	public WebElement saveCheck;
+
+	@FindBy(id = "internalCardSection")
+	public WebElement paymentTable;
+
+	@FindBy(xpath = ".//*[@id='internalCardSection']/div/div[2]/div[2]/div[1]/span[1]")
+	public WebElement editCard;
+
+	@FindBy(xpath = "//button[@class='btn btn-pos']")
+	public WebElement deleteContinue;
+
+	@FindBy(xpath = "//button[@class='btn btn-primary']")
+	public WebElement OkButton;
+
+	@FindBy(css = ".mCSB_container a.dropdown-item[data-val]:not([id])")
+	public List<WebElement> savedPaymentMethods;
+
+	@FindBy(id = "editPaymentBtn")
+	public WebElement editSave;
+
+	@FindBy(linkText = "BANK ACCOUNT")
+	public WebElement bankAccount;
+
+	@FindBy(xpath = ".//*[@id='onetimestorecard']/label/span[2]")
+	public WebElement oneTimePaymentCheckBox;
+
+	public boolean selectCreditCard(String ccValue) throws InterruptedException {
+		boolean searchFlag = false;
+		for (int i = 1; i < 20; i++) {
+			List<WebElement> childs = paymentTable.findElements(By
+					.xpath("//div/div"));
+			System.out.println("Size := " + childs.size());
+			for (WebElement e : childs) {
+				System.out.println(e.getAttribute("innerHTML"));
+				if (e.getAttribute("innerHTML").contains(ccValue)) {
+					Reporter.log("This is the card you are looking for", true);
+					Reporter.log("Successfully selected value :" + ccValue
+							+ " from table ", true);
+					// e.findElement(By.className("payment-due-checkmark paymentCheckbox")).click();
+					// e.findElement(By.className("editCard")).click();
+					// e.findElement(By.xpath(".//*[@id='internalCardSection']/div/div["+
+					// (i) + "]/div[2]/div[1]/span[1]")).click();
+					JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+					jsExecutor
+							.executeScript(
+									"arguments[0].click();",
+									e.findElement(By
+											.xpath(".//*[@id='internalCardSection']/div/div["
+													+ (i)
+													+ "]/div[2]/div[1]/span[2]")));
+					// (".//*[@id='internalCardSection']/div/div["+ (i) +
+					// "]/div[2]/div[1]/span[2]")).click();
+
+					searchFlag = true;
+					break;
+				}
+
+			}
+		}
+		return searchFlag;
+	}
+
+	public void DeleteCard(String ccValue) throws Throwable {
+
+		for (int i = 1; i < 20; i++) {
+
+			WebElement element = driver.findElement(By
+					.xpath(".//*[@id='internalCardSection']/div/div[" + (i)
+							+ "]/div[1]/span"));
+			boolean isClickable = false;
+			if (element != null) {
+				System.out.println("Checking element is clickable "
+						+ element.getText());
+
+				// if (firstName.contains((element).getText())) {
+				if (element.getText().contains(ccValue)) {
+					isClickable = true;
+					System.out.println("Element Clickable: = " + isClickable);
+					Reporter.log("This is the card you are looking for", true);
+					Reporter.log("Successfully selected value :" + ccValue
+							+ " from table ", true);
+					vc.getWebDriverUtils()
+							.clickHiddenElement(
+									driver.findElement(By
+											.xpath(".//*[@id='internalCardSection']/div/div["
+													+ (i)
+													+ "]/div[2]/div[1]/span[2]")),
+									"click on DeleteCard");
+
+					// JavascriptExecutor jsExecutor = (JavascriptExecutor)
+					// driver;
+					// jsExecutor.executeScript("arguments[0].click();",
+					// driver.findElement(By.xpath(".//*[@id='internalCardSection']/div/div["+
+					// (i) + "]/div[2]/div[1]/span[2]")));
+					Thread.sleep(2000);
+					break;
+				}
+			}
+		}
+		Reporter.log("Deleted card");
+	}
+
+	public void EditCardElectronic(String ccValue) throws Throwable {
+
+		for (int i = 1; i < 20; i++) {
+			WebElement element = driver.findElement(By
+					.xpath(".//*[@id='internalBankSection']/div[" + (i)
+							+ "]/div[1]/span"));
+
+			boolean isClickable = false;
+			if (element != null) {
+				System.out.println("Checking element is clickable "
+						+ element.getText());
+
+				if (element.getText().contains(ccValue)) {
+					isClickable = true;
+					System.out.println("Element Clickable: = " + isClickable);
+					Reporter.log("This is the card you are looking for", true);
+					Reporter.log("Successfully selected value :" + ccValue
+							+ " from table ", true);
+					vc.getWebDriverUtils()
+							.clickHiddenElement(
+									driver.findElement(By
+											.xpath(".//*[@id='internalBankSection']/div["
+													+ (i) + "]/div[2]/span[1]")),
+									"click on EditCard");
+
+					// JavascriptExecutor jsExecutor = (JavascriptExecutor)
+					// driver;
+					// jsExecutor.executeScript("arguments[0].click();",
+					// driver.findElement(By.xpath(".//*[@id='internalBankSection']/div["+
+					// (i) + "]/div[2]/span[1]")));
+					Thread.sleep(2000);
+					break;
+				}
+			}
+		}
+		Reporter.log("Edited card");
+	}
+
+	public void deleteCardElectronic(String ccValue) throws Throwable {
+
+		for (int i = 1; i < 20; i++) {
+			WebElement element = driver.findElement(By
+					.xpath(".//*[@id='internalBankSection']/div[" + (i)
+							+ "]/div[1]/span"));
+
+			boolean isClickable = false;
+			if (element != null) {
+				System.out.println("Checking element is clickable "
+						+ element.getText());
+
+				if (element.getText().contains(ccValue)) {
+					isClickable = true;
+					System.out.println("Element Clickable: = " + isClickable);
+					Reporter.log("This is the card you are looking for", true);
+					Reporter.log("Successfully selected value :" + ccValue
+							+ " from table ", true);
+					vc.getWebDriverUtils()
+							.clickHiddenElement(
+									driver.findElement(By
+											.xpath(".//*[@id='internalBankSection']/div["
+													+ (i) + "]/div[2]/span[2]")),
+									"click on deleteCard");
+
+					// JavascriptExecutor jsExecutor = (JavascriptExecutor)
+					// driver;
+					// jsExecutor.executeScript("arguments[0].click();",
+					// driver.findElement(By.xpath(".//*[@id='internalBankSection']/div["+
+					// (i) + "]/div[2]/span[2]")));
+					Thread.sleep(2000);
+					break;
+				}
+			}
+		}
+		Reporter.log("Edited card");
+	}
+
+	public void EditCard(String ccValue) throws Throwable {
+
+		for (int i = 1; i < 20; i++) {
+			WebElement element = driver.findElement(By
+					.xpath(".//*[@id='internalCardSection']/div/div[" + (i)
+							+ "]/div[1]/span"));
+			boolean isClickable = false;
+			if (element != null) {
+				System.out.println("Checking element is clickable "
+						+ element.getText());
+
+				if (element.getText().contains(ccValue)) {
+					isClickable = true;
+					System.out.println("Element Clickable: = " + isClickable);
+					Reporter.log("This is the card you are looking for", true);
+					Reporter.log("Successfully selected value :" + ccValue
+							+ " from table ", true);
+					vc.getWebDriverUtils()
+							.clickHiddenElement(
+									driver.findElement(By
+											.xpath(".//*[@id='internalCardSection']/div/div["
+													+ (i)
+													+ "]/div[2]/div[1]/span[1]")),
+									"click on editCard");
+
+					// JavascriptExecutor jsExecutor = (JavascriptExecutor)
+					// driver;
+					// jsExecutor.executeScript("arguments[0].click();",
+					// driver.findElement(By.xpath(".//*[@id='internalCardSection']/div/div["+
+					// (i) + "]/div[2]/div[1]/span[1]")));
+					Thread.sleep(2000);
+					break;
+				}
+			}
+		}
+		Reporter.log("Edited card");
+	}
+
+	/*
+	 * public void autoPayEditCard(String ccValue) throws Throwable { for (int i
+	 * = 1; i < 20; i++) { WebElement element =
+	 * driver.findElement(By.xpath(".//*[@id='mCSB_3_container']/a["+ (i) +
+	 * "]")); boolean isClickable = false; if (element != null) {
+	 * System.out.println("Checking element is clickable " + element.getText());
+	 * if(element.getText().contains(ccValue)) { isClickable=true;
+	 * System.out.println("Element Clickable: = "+ isClickable);
+	 * Reporter.log("This is the card you are looking for",true);
+	 * Reporter.log("Successfully selected value :"+ccValue+
+	 * " from table ",true); JavascriptExecutor jsExecutor =
+	 * (JavascriptExecutor) driver;
+	 * jsExecutor.executeScript("arguments[0].click();",
+	 * driver.findElement(By.xpath(".//*[@id='mCSB_3_container']/a["+ (i) +
+	 * "]/span[1]"))); Thread.sleep(2000); break; } } }
+	 * Reporter.log("Edited card"); }
+	 */
+
+	public void autoPayEditCard(String ccValue) throws Throwable {
+
+		for (WebElement element : savedPaymentMethods) {
+			if (element.getText().contains(ccValue)) {
+				System.out.println("Element Clickable: = " + true);
+				Reporter.log("This is the card you are looking for", true);
+				Reporter.log("Successfully selected value :" + ccValue
+						+ " from table ", true);
+				vc.getWebDriverUtils().clickHiddenElement(
+						element.findElement(By
+								.cssSelector(".mCSB_container .editCard")),
+						"click on editCard");
+
+				// JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+				// jsExecutor.executeScript("arguments[0].click();",
+				// element.findElement(By.cssSelector(".mCSB_container .editCard")));
+				break;
+			}
+		}
+
+		Reporter.log("Edited card");
+
+	}
+
+	public void autoPayDeleteCard(String ccValue) throws Throwable {
+
+		for (WebElement element : savedPaymentMethods) {
+			if (element.getText().contains(ccValue)) {
+				Reporter.log(element.getText(), true);
+				Reporter.log("This is the card you are looking for", true);
+				Reporter.log("Successfully selected value :" + ccValue
+						+ " from table ", true);
+				vc.getWebDriverUtils().clickHiddenElement(
+						element.findElement(By.cssSelector(".deleteCard")),
+						"click on DeleteCard");
+
+				// JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+				// jsExecutor.executeScript("arguments[0].click();",
+				// element.findElement(By.cssSelector(".deleteCard")));
+				break;
+			}
+		}
+
+		Reporter.log("Deleted card");
+
+	}
+
+	private void downLoadDeletePdfValidation(Validator vc, String CNumber)
+			throws ParseException, InterruptedException {
+		// User home directory property
+		String home = System.getProperty("user.home");
+		String pdfFile = home + "\\Downloads\\" + CNumber
+				+ "_PaymentHistory.pdf";
+		System.out.println("fileName = " + pdfFile);
+
+		try {
+			Assert.assertTrue(FileUtilities.doesFileExist(pdfFile, 6));
+		} catch (Exception e) {
+			System.out.println("PDF file did not download");
+			// vc.catchScreenshot_SignOut(e,
+			// "Invoices__Error PDF File did not download");
+		}
+
+		try {
+			Assert.assertTrue(FileUtilities.deleteFile(pdfFile));
+			System.out.println("pdfFile " + pdfFile + " is deleted");
+		} catch (Exception e) {
+			System.out.println("pdfFile " + pdfFile + " is not deleted");
+			// vc.catchScreenshot_SignOut(e,
+			// "PaymentHistory__Error Xls File did not delete");
+		}
+	}
+
+}

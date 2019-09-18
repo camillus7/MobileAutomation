@@ -1,0 +1,164 @@
+package com.webautomation.pageobject.myWin_pages;
+
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Reporter;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+
+public class MyWin_NotificationsPage {
+
+	final WebDriver driver;
+	private Validator vc;
+
+	public MyWin_NotificationsPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	
+	@FindBy(xpath =".//*[@id='NewBillAvailableOnline']/a/div/div[1]")
+	public WebElement newBillAvailableOnline;
+	
+	@FindBy(xpath =".//*[@id='NotificationSettingsMenuItem']/a/div/div[1]")
+	public WebElement notificationsSettings;
+	
+	@FindBy(xpath ="//label[contains(.,'Add Recipient')]")
+	public WebElement addRecipient;
+	
+	@FindBy(id="addInvoiceEmailAddress")
+	public WebElement addInvoiceEmailAddress;
+	
+	@FindBy(id="emailAddress")
+	public WebElement editEmailAddress;
+	
+	@FindBy(xpath="//button[contains(.,'Cancel')]")
+	public WebElement addRecipientCancel;
+	
+	@FindBy(id="Notifi-online-Add")
+	public WebElement addRecipientAddButton;
+	
+	@FindBy(id="Notifi-online-submit")
+	public WebElement editSubmit;
+	
+	@FindBy(css="[id^=edit_contact-details-submit")
+	public WebElement editSubmitContact;
+	
+	@FindBy(id="addcontacttag")
+	public WebElement addContact;
+	
+	@FindBy(id="firstname")
+	public WebElement firstName;
+	
+	@FindBy(id="lastname")
+	public WebElement lastName;
+	
+	@FindBy(xpath="//input[@placeholder='Lastname']")
+	public WebElement editLastName;
+	
+	@FindBy(id="emailaddress")
+	public WebElement emailAddress;
+	
+	@FindBy(xpath=".//div[3]/div/div/div/div[1]/span/img")
+	public WebElement emailToolTip;
+	
+	@FindBy(xpath=".//*[@id='phone1']/div[1]/div/div/div[1]/span/img")
+	public WebElement phoneNumberToolTip;
+	
+	@FindBy(id="save_phonenumber")
+	public WebElement phoneNumber;
+	
+	@FindBy(xpath="//button[@data-id='save_type']")
+	public WebElement phoneTypeDropDown;
+	
+	@FindBy(xpath="//label[@class='add-contact-tag-label padding-left-10 cursor-pointer']")
+	public WebElement addNumber;
+	
+	@FindBy(xpath="//img[@class='cursor-pointer']")
+	public WebElement deletePhoneNumber;
+	
+	@FindBy(id="contact-details-cancel")
+	public WebElement cancelAddContact;
+	
+	@FindBy(id="contact-details-submit")
+	public WebElement submitAddContact;
+	
+	@FindBy(xpath="//button[@class='btn btn-primary']")
+	public WebElement addContactOkButton;
+	
+	@FindBy(xpath="//img[@class='edit_personaldetails cursor-pointer']")
+	public WebElement contactEdit;
+	
+	@FindBy(xpath="//img[@class='padding-left-25 cursor-pointer']")
+	public WebElement contactDelete;
+	
+	@FindBy(xpath="//button[@class='btn btn-pos']")
+	public WebElement deleteContactYes;
+	
+	@FindBy(xpath="//button[@class='btn btn-neg']")
+	public WebElement deleteContactNo;
+	
+	@FindBy(xpath="//button[@class='btn btn-primary']")
+	public WebElement newBillOk;
+	
+	@FindBy(id="editNotifi")
+	public WebElement editIcon;
+	
+	@FindBy(id="deleteNotifi")
+	public WebElement deleteIcon;
+	
+	
+	
+	
+	
+	public void XpathForContactName(WebDriver driver, String firstName) throws Throwable {
+
+		for (int i = 1; i < 20; i++) {
+			
+
+			WebElement element  = driver.findElement(By.cssSelector("#heading"+ (i) + " > div.row > div.col-md-11.padding-left-15 > div.order-name"));
+			boolean isClickable = false;
+			if (element != null) {
+				System.out.println("Checking element is clickable "
+						+ element.getText());
+			
+		//	if (firstName.contains((element).getText())) {
+				if(element.getText().contains(firstName)) {
+				isClickable=true;	
+				System.out.println("Element Clickable: = "+ isClickable);
+				element.click();
+				//driver.findElement(By.xpath(".//*[@id='heading["+ (i) + "]']/div/div[2]")).click();		
+				Thread.sleep(2000);
+				
+				break;
+			}
+		}
+		}
+			Reporter.log("clicked on name");
+		}
+	
+}	
+
+
+
+
+

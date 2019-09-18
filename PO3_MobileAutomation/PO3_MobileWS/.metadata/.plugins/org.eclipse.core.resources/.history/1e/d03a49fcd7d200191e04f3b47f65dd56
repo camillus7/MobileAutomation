@@ -1,0 +1,50 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_IncomingCallRoutingWidget {
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_IncomingCallRoutingWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Incoming Call Routing')]")
+	public WebElement incomingCallRoutingCheckbox;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Incoming Call Routing']//a[contains(.,'Configure')]")
+	public WebElement configureButton;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Incoming Call Routing']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Incoming Call Routing']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void configureNavigation() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Incoming Call Routing"));
+		vc.getWebDriverUtils().elementAvailablity(configureButton, "Configure-Button");
+		vc.getWebDriverUtils().clickElement(configureButton, "Configure");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Incoming Call Routing - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Incoming Call Routing"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Incoming Call Routing");
+	}
+
+}

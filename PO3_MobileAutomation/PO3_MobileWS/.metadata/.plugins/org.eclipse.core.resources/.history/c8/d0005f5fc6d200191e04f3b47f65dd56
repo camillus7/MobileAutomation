@@ -1,0 +1,50 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_WinBotWidget {
+	
+	final WebDriver driver;
+			
+			private Validator vc;
+			private WE_CommonWidgets cw;
+
+			public WE_WinBotWidget(WebDriver driver) {
+				this.driver = driver;
+				this.vc = new Validator(driver);
+				this.cw = new WE_CommonWidgets(driver);
+			}
+			
+			@FindBy(xpath = "//label[contains(.,'WinBot (Beta)')]")
+			public WebElement winBotCheckbox;
+			
+			@FindBy(xpath = "//div[@class='welcome-header'][contains(.,'Hi, WinBot is here!')][1]")
+			public WebElement winBotWidget_Title;
+			
+			@FindBy(xpath="//div[@data-widgettitle='WinBot (Beta)']//div[@class='bot-content']")
+			public WebElement winbotMessage;
+			
+			@FindBy(xpath="//div[@data-widgettitle='WinBot (Beta)']/div[1]/button")
+			public WebElement settingsIcon;
+			
+			@FindBy(xpath="//div[@data-widgettitle='WinBot (Beta)']//a[contains(.,'Remove Widget')]")
+			public WebElement removeWidgetOption;
+			
+			public void winBotWidget() throws InterruptedException {
+				Assert.assertTrue(vc.waitUntilTextIsPresent("WinBot Insights"));
+				vc.getWebDriverUtils().titleVerification(winBotWidget_Title.getText(), "Hi, WinBot is here!");
+				
+				Reporter.log("********** Remove Widget ************",true);
+				cw.removeAddedWidget("WinBot");
+			}
+			
+				
+	
+
+}

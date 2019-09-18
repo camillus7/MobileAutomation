@@ -1,0 +1,88 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
+
+public class AndroidAppiumDriver implements ApplicationWebDriver {
+
+	protected WebDriver driver = null;
+	
+	public WebDriver getWebDriver() {
+
+		try {
+			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), getCapabilities());
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("android app launched");
+		return driver;
+	}
+	
+	
+	public WebDriver getWebDriver(boolean isGrid, String hubUrl) {
+
+		WebDriver driver = null;
+		if (isGrid) {
+			try {
+				driver = new RemoteWebDriver(new URL(hubUrl), getCapabilities());
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			driver = new RemoteWebDriver(getCapabilities());
+		}
+
+		return driver;
+	}
+
+	public AndroidDriver getAndroidDriver() {
+		String ip = "127.0.0.1";
+		String port = "4723";
+		io.appium.java_client.android.AndroidDriver<MobileElement> androidDriver = null;
+		try {
+			androidDriver = new AndroidDriver<>(new URL("http://" + ip + ":" + port + "/wd/hub"), getCapabilities());
+		}catch(Exception e){
+			Assert.fail("Android driver is null - "+e);
+		}
+		System.out.println("android app launched");
+		androidDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		return androidDriver;
+	}
+
+	public DesiredCapabilities getCapabilities() {
+
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+	
+		
+		capabilities.setCapability("deviceName", "galaxys8");
+		capabilities.setCapability("udid", "988e16314c4546414d");
+		
+		
+		capabilities.setCapability("platformName", "Android");
+		capabilities.setCapability("platformVersion", "7.1.1");
+
+		// enterprise
+		capabilities.setCapability("appPackage", "com.windstream.enterprise.we.dev");
+		capabilities.setCapability("appActivity", "com.windstream.po3.business.features.winauth.WinAuthActivity");
+
+		//consumer
+		/*capabilities.setCapability("appPackage", "com.windstream.residential.dev");
+		 capabilities.setCapability("appActivity","com.windstream.po3.residential.winauth.WinAuthActivity");*/
+
+		capabilities.setCapability("noReset", true);
+		
+		
+
+		return capabilities;
+
+	}
+}

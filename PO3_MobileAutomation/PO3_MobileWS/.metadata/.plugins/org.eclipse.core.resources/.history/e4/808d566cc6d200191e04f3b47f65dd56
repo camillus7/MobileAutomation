@@ -1,0 +1,60 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class InternetExplorerWebDriver implements ApplicationWebDriver {
+
+	public WebDriver getWebDriver() {
+		WebDriver driver = new InternetExplorerDriver(getCapabilities());
+		return driver;
+	}
+
+	public WebDriver getWebDriver(boolean isGrid, String hubUrl) {
+		WebDriver driver = null;
+		if (isGrid) {
+			try {
+				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setPlatform(Platform.ANY);
+				capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING,true);
+				capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);  
+				//System.setProperty("webdriver.ie.driver","IEDriverServer.exe");
+				capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+				//  capabilities.setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);  
+				   capabilities.setCapability(InternetExplorerDriver.IE_SWITCHES, "-private");
+				driver = new RemoteWebDriver(new URL(hubUrl), capabilities);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			driver = new InternetExplorerDriver(getCapabilities());
+		}
+
+		return driver;
+	}
+
+	public DesiredCapabilities getCapabilities() {
+		System.setProperty("webdriver.ie.driver",
+				".\\softwares\\IEDriverServer.exe");
+		DesiredCapabilities capabilities = DesiredCapabilities
+				.internetExplorer();
+		capabilities
+				.setCapability(
+						InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
+						true);
+		capabilities.setCapability(CapabilityType.BROWSER_NAME, "IE");
+		capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);	
+
+		return capabilities;
+	}
+
+
+	
+}

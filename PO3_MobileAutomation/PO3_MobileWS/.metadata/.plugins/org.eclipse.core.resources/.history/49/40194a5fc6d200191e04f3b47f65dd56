@@ -1,0 +1,612 @@
+package com.webautomation.pageobject.we_pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyProfilePage {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+
+	public WE_MyProfilePage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	// Template
+	@FindBy(xpath = "xxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxxx;
+	
+	@FindBy(xpath = "//a[contains(.,'Contact Information')]")
+	public WebElement contactInformation;
+	
+	@FindBy(xpath="//a[@href='/Account/UserPreferences/Edit']")
+	public WebElement preferences;
+	
+	@FindBy(xpath="//a[contains(.,'Activity Log')]")
+	public WebElement activityLog;
+	
+	@FindBy(xpath = "//a[@href='/Account/UserPreferences/ChangePassword']")
+	public WebElement changePassword;
+
+	//Change Password
+	
+			@FindBy(xpath = "//a[contains(.,'Password Requirements')]")
+			public WebElement passwordRequirements;
+			
+			@FindBy(xpath = "//input[@id='username']")
+			public WebElement username;
+			
+			@FindBy(xpath = "//input[@id='password']")
+			public WebElement currentPassword;
+			
+			@FindBy(xpath = "//input[@id='newPassword1']")
+			public WebElement newPassword;
+			
+			@FindBy(xpath = "//input[@placeholder='Confirm New Password']")
+			public WebElement confirmNewPassword;
+			
+			@FindBy(xpath = "//a[@title='Save']")
+			public WebElement saveChangePassword;
+	
+	@FindBy(xpath = "//a[@href='/Account/OfficeSuiteSettings']")
+	public WebElement officeSuiteSettings;
+	
+	//Contact Information
+		@FindBy(xpath = "//input[@id='name.givenName']")
+		public WebElement firstName;
+		
+		@FindBy(xpath = "//input[@id='name.familyName']")
+		public WebElement lastName;
+		
+		@FindBy(xpath = "//input[@id='email']")
+		public WebElement email;
+		
+		@FindBy(xpath = "//input[@id='phone']")
+		public WebElement phone;
+		
+		@FindBy(xpath = "//input[@id='moblie']")
+		public WebElement mobile;
+		
+		@FindBy(xpath = "//input[@type='submit']")
+		public WebElement saveContactInfo;
+		
+		@FindBy(xpath = "//input[@id='btnReset']")
+		public WebElement resetContactInfo;
+	
+	//Preferences
+		@FindBy(xpath = "//div[@class='icon-choose-image']")
+		public WebElement chooseImage;
+		
+		@FindBy(xpath = "//input[@class='inputFile']")
+		public WebElement uploadImage;
+		
+		@FindBy(xpath = "//div[@onclick='UserContact.removeProfilePhoto();']")
+		public WebElement removeImage;
+		
+		@FindBy(xpath = "//div[@onclick='UserContact.hideUploadOption();']")
+		public WebElement cancelImage;
+		
+		@FindBy(xpath = "//div[1]/div[1]/label")
+		public WebElement officeSuiteRadio;
+		
+		@FindBy(xpath = "//div[2]/div[1]/div[1]/label")
+		public WebElement overviewRadio;
+		
+		@FindBy(xpath = "//div[2]/div[2]/div[1]/label")
+		public WebElement billingRadio;
+		
+		@FindBy(xpath = "//div[2]/div[3]/div[1]/label")
+		public WebElement operationsRadio;
+		
+		@FindBy(xpath = "//div[2]/div[4]/div[1]/label")
+		public WebElement customRadio;
+		
+		@FindBy(xpath = "//div[5]/ul/li[1]/span/label")
+		public WebElement blackTheme;
+		
+		@FindBy(xpath = "//div[5]/ul/li[2]/span/label")
+		public WebElement whiteTheme;
+		
+		@FindBy(xpath = "//div[5]/ul/li[3]/span/label")
+		public WebElement greyTheme;
+		
+		@FindBy(xpath = "//div[@class='internal-content']")
+		public WebElement themeBackGround;
+		
+		@FindBy(id = "Hdnfield")
+		public WebElement getThemeBackGroundColor;
+		
+		@FindBy(xpath = "//input[@id='TicketStatus_TicketNumber']")
+		public WebElement ticketNumber;
+		
+		@FindBy(xpath = "//button[@data-id='TicketStatus_TroubleType']")
+		public WebElement ticketTypeSelect;
+		
+		@FindBy(xpath = "xxxxxxxxx")
+		public WebElement accountNumberSelect;
+		
+		@FindBy(xpath = "//button[@data-id='TicketStatus_AccessType']")
+		public WebElement accessTypeSelect;
+		
+		@FindBy(xpath = "//button[@data-id='TicketStatus_LocationId']")
+		public WebElement location_StoreNumSelect;
+		
+		@FindBy(xpath = "xxxxxxxxx")
+		public WebElement statusCodeSelect;
+		
+		@FindBy(xpath = "//button[@data-id='TicketStatus_OverallDate_range']")
+		public WebElement timePeriodSelect;
+		
+		@FindBy(xpath = "//button[@data-id='TicketStatus_ImpactLevel']")
+		public WebElement serviceImpact;
+		
+		@FindBy(xpath = ".//*[@id='TicketStatus_SearchTicketStatus']/div/div[1]/label/button")
+		public WebElement openCheckBox;
+		
+		@FindBy(xpath = ".//*[@id='TicketStatus_SearchTicketStatus']/div/div[2]/label/button")
+		public WebElement closedCheckBox;
+		
+		@FindBy(xpath = ".//*[@id='TicketStatus_SearchTicketStatus']/div/div[3]/label/button")
+		public WebElement cancelledCheckbox;
+		
+		@FindBy(xpath = ".//*[@id='TicketStatus_SearchTicketStatus']/div/div[4]/label/button")
+		public WebElement monitoringCheckBox;
+		
+		@FindBy(xpath = ".//*[@id='TicketStatus_SearchTicketStatus']/div/div[5]/label/button")
+		public WebElement resolvedCheckBox;
+		
+		@FindBy(xpath = "//input[@value='Reset Filter']")
+		public WebElement resetFilter;
+		
+		@FindBy(xpath = "//button[@value='Save Changes']")
+		public WebElement saveChanges;
+		
+		@FindBy(xpath = "//p[contains(.,'Your preferences have been saved successfully!')]")
+		public WebElement yourPreferencesSavedSuccessfully;
+	
+	//Activity Log
+		
+		
+		@FindBy(xpath="//a[contains(.,'Filters')]")
+		public WebElement filters;
+		
+		@FindBy(xpath="//a[@class='check light btnExpandCollapseFilters ws-icon ws-menu btn-down open']")
+		public WebElement filterDown;
+		
+		@FindBy(xpath="//a[@class='check light btnExpandCollapseFilters ws-icon ws-menu btn-up closed']")
+		public WebElement filterClose;
+		
+		@FindBy(xpath="//button[@data-id='ActivityLog_EventType']")
+		public WebElement activity;
+
+		
+		
+		@FindBy(xpath="//img[@src='/Images/details_loading_bar.gif']")
+		public WebElement loadingBar;
+		
+		
+		@FindBy(xpath="//input[@id='ActivityLog_Visit_start']")
+		public WebElement visitLogStartDate;
+		
+		@FindBy(xpath="//input[@id='ActivityLog_Visit_end']")
+		public WebElement visitLogEndDate;
+		
+		@FindBy(xpath="//input[contains(@id,'ActivityLog_DurationWithoutMins')]|//input[@id='ActivityLog_Duration']")
+		public WebElement durationInMinutes;
+		
+		@FindBy(xpath="//button[@value='Make these filters my default']")
+		public WebElement makeTheseFiltersMyDefault;
+		
+		@FindBy(xpath="//button[@value='Clear Filters']")
+		public WebElement clearFilters;
+		
+		@FindBy(xpath="//button[@value='Apply Filters']")
+		public WebElement applyFilters;
+		
+		@FindBy(xpath="//div[7]/div[1]/a[4]")
+		public WebElement allLogs;
+		
+		@FindBy(xpath="//a[@data-val='15']")
+		public WebElement logs15;
+		
+		@FindBy(xpath="//a[@data-val='40']")
+		public WebElement logs40;
+		
+		@FindBy(xpath="//a[@data-val='100']")
+		public WebElement logs100;
+		
+		@FindBy(xpath="//a[@id='termsConditions']")
+		public WebElement termsAndConditions;
+		
+		
+		@FindBy(xpath="//div[7]/div[2]/a[1]")
+		public WebElement firstPage;
+		
+		@FindBy(xpath="//div[7]/div[2]/a[2]")
+		public WebElement prevPage;
+		
+		@FindBy(xpath="//div[7]/div[2]/a[3]")
+		public WebElement nextPage;
+		
+		@FindBy(xpath="//div[7]/div[2]/a[4]")
+		public WebElement lastPage;
+		
+		@FindBy(xpath="//button[@id='activitylogExport']")
+		public WebElement exportActivityLog;
+		
+		@FindBy(xpath="//button[contains(.,'Refresh')]")
+		public WebElement refresh;
+		
+		@FindBy(xpath="//button[contains(.,'Export to Excel')]")
+		public WebElement exportToExcel;
+		
+		@FindBy(xpath="//button[contains(.,'Export to PDF')]")
+		public WebElement exportToPDF;
+		
+		@FindBy(xpath="//*[@id='tblActivityLog']/thead/tr/th[1]/div")
+		public WebElement visit;
+		
+		@FindBy(xpath="//*[@id='tblActivityLog']/thead/tr/th[2]/div")
+		public WebElement duration;
+		
+		@FindBy(xpath="//*[@id='tblActivityLog']/thead/tr/th[3]/div")
+		public WebElement events;
+		
+		
+		@FindBy(xpath="//*[@id='tblActivityLog']/tbody/tr[1]/td[4]/a")
+		public WebElement expandableDownActivityLog;
+		
+		@FindBy(xpath="//a[@class='expandable btn btn-up']")
+		public WebElement expandableUpActivityLog;
+	
+		
+		
+		public boolean activityLog(String userStoryDescription,WE_HomePage we_HomePage,WE_MyProfilePage we_MyProfilePage) throws InterruptedException {
+			Reporter.log("Test Case 109857:Check whether Activity Log option available in the menu", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Activity Log");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.activityLog, "Activity Log");
+			
+			Reporter.log("Test Case 109858:Check whether Activity Log page appears on clicking Activity Log", true);
+			if (vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.durationInMinutes,"Duration in Minutes")) {
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.filters, "Collapse Filters");
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Visit"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Duration"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Events"));
+			
+			Reporter.log("Test Case 109859: Validate the fields in Activity Log page", true);
+			
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.visit, "Visit Column");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.duration, "Duration Column");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.events, "Events Column");
+			
+			Reporter.log("Test Case 109861: Verify filtering functionality in Activity Log", true);
+				
+			if (!vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.durationInMinutes,"Duration in Minutes")) {
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.filters, "Expand Filters");
+			}
+			
+		/*	vc.getWebDriverUtils().getAttribute(we_MyProfilePage.visitLogStartDate, "value", "Visit Log Start Date");
+			vc.getWebDriverUtils().getAttribute(we_MyProfilePage.visitLogEndDate, "value", "Visit Log End Date");
+			//vc.getWebDriverUtils().selectSpanDropDownValue(we_MyProfilePage.visitLogListBox, "Visit List Box", "Custom");
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.visitLogStartDate, "01/01/2018", "Visit Log Start Date - Custom Value");
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.visitLogEndDate, "11/02/2018", "Visit Log End Date - Custom Value");*/
+		//	Assert.assertTrue(vc.waitUntilTextIsPresent("Duration in Minutes"));
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_MyProfilePage.activity, "Activity Drop Down", "Any");
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.durationInMinutes, "0", "Duration in Minutes");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.applyFilters, "Apply Filter");
+			int rowNum = driver.findElements(By.xpath("//*[@id='tblActivityLog']/tbody/tr")).size();
+		    for(int i=1; i<rowNum; i++){
+		        String sDurationInMinutes=driver.findElement(By.xpath("//*[@id='tblActivityLog']/tbody/tr["+ i +"]/td[2]")).getText().trim();
+		        System.out.println(sDurationInMinutes);
+					if (i!=rowNum && sDurationInMinutes.contentEquals("0 minute")){
+						Reporter.log("Duration in Minutes filter value not displaying as expected. Expected value:= 0 and Actual value displayed as "+sDurationInMinutes+ " in Row "+i, true);
+						Assert.assertTrue(false);
+					} else {
+						if (i==rowNum && sDurationInMinutes!="0 minute") {
+							Reporter.log("Duration in Minutes filter value not displaying as expected. Expected value:= 0 minute and Actual value displayed as "+sDurationInMinutes+ " in Row "+i, true);
+							Assert.assertTrue(false);
+						}
+						else {
+							Reporter.log("Duration in Minutes filter values displayed as expected",true);
+						}
+					}
+		        }
+		    
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_MyProfilePage.durationInMinutes, "value", "Duration in Minutes").trim().equalsIgnoreCase("0"),"Duration in Minutes - validating entered value before clearing filters");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.clearFilters, "Clear Filter");
+			Assert.assertTrue(!vc.getWebDriverUtils().getAttribute(we_MyProfilePage.durationInMinutes, "value", "Duration in Minutes").trim().equalsIgnoreCase("0"),"Duration in Minutes - validating whether value was reset to null after clearing filters");
+			
+			Reporter.log("Test Case 109864: Validate Export functionality", true);
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.exportActivityLog,"Export"));
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.exportActivityLog, "Export Activity log");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.exportToExcel,"Export to Excel"), "Export to Excel Validation");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.exportToPDF,"Export to PDF"), "Export to PDF Validation");
+	
+			
+			
+			Reporter.log("Test Case 122052: Verify Refresh functionality", true);
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.durationInMinutes, "12", "Duration in Minutes");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.refresh, "Refresh");
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.durationInMinutes, "value", "Duration in Minutes").equalsIgnoreCase("")) {
+				Reporter.log("Refresh functionality working as expected", true);
+			} else {
+				Reporter.log("Refresh functionality not working as expected", true);
+				Assert.assertFalse(true);
+			}
+			
+			Reporter.log("Test Case 109865: Verify pagination functionality", true);
+			
+			vc.getWebDriverUtils().mouseHoveronElement(we_MyProfilePage.termsAndConditions);
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.allLogs, "All logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs15, "15 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs40, "40 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs100, "100 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs15, "15 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.nextPage, "Next Page");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.prevPage, "Previous Page");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.lastPage, "Last Page");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.firstPage, "First Page");
+			
+			Reporter.log("Test Case 122170: Validate activity log grid data", true);
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.expandableDownActivityLog,"Event Log Down");
+			
+		/*	while (driver.findElement(By.xpath("//img[@src='/Images/details_loading_bar.gif']")).isDisplayed()) {
+				System.out.println("waiting for event log to load");
+				Thread.sleep(1000);
+			}*/
+			
+			while (vc.getWebDriverUtils().elementAvailablity(loadingBar, "Loading Bar")) {
+				System.out.println("waiting for event log to load");
+				Thread.sleep(1000);
+			}
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Event Log"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Time"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Area"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Message"));
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.expandableUpActivityLog,"Event Log Up");
+			return false;
+		}
+		
+		public boolean contactInformation(String userStoryDescription,WE_HomePage we_HomePage,WE_MyProfilePage we_MyProfilePage) throws InterruptedException {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Edit Contact Information");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().validatePageTitle("User Settings - Windstream Enterprise");
+			vc.getWebDriverUtils().clickElement(contactInformation, "Contact Information");
+			vc.getWebDriverUtils().validatePageTitle("EditContactInfo - Windstream Enterprise");
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("EditContactInfo - Windstream Enterprise"));
+			driver.switchTo().frame("WinauthIframe");
+
+			String getFirstName=vc.getWebDriverUtils().getAttribute(firstName, "value", "First name");
+			String getLastName=vc.getWebDriverUtils().getAttribute(lastName, "value", "Last name");
+			String getEmail=vc.getWebDriverUtils().getAttribute(email,  "value","Email");
+			String getPhone=vc.getWebDriverUtils().getAttribute(phone,  "value","Phone");
+			String getMobile=vc.getWebDriverUtils().getAttribute(mobile, "value", "Phone");
+			
+			vc.getWebDriverUtils().enterText(firstName, getFirstName+ " SQA", "Update First Name");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(firstName, "value", "First name").trim().equals(getFirstName+ " SQA"),"Validating the updated first name");
+			vc.getWebDriverUtils().enterText(lastName, getLastName+ " Test", "Update Last Name");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(lastName,  "value","Last name").trim().equals(getLastName+ " Test"),"Validating the updated last name");
+			vc.getWebDriverUtils().clickElement(resetContactInfo, "Reset Contact Info");
+			
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(firstName, "value", "First name").trim().equals(getFirstName),"Validating the first name after Reset if set to deafult");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(lastName, "value", "Last name").trim().equals(getLastName),"Validating the last name after Reset if set to deafult");
+			
+			vc.getWebDriverUtils().enterText(firstName, getFirstName+ " SQA", "Update First Name");
+			vc.getWebDriverUtils().enterText(lastName, getLastName+ " Test", "Update Last Name");
+			vc.getWebDriverUtils().enterText(email, getEmail, "Email");
+			vc.getWebDriverUtils().enterText(phone, getPhone, "Phone");
+			vc.getWebDriverUtils().enterText(mobile, getMobile, "Mobile");
+			vc.getWebDriverUtils().clickElement(saveContactInfo, "Save Contact Info");
+			driver.switchTo().defaultContent();
+			
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard - to set focus to a different tab before validating the saved information");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+		
+			vc.getWebDriverUtils().validatePageTitle("User Settings - Windstream Enterprise");
+			vc.getWebDriverUtils().clickElement(contactInformation, "Contact Information");
+			vc.getWebDriverUtils().validatePageTitle("EditContactInfo - Windstream Enterprise");
+			driver.switchTo().frame("WinauthIframe");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(firstName, "value", "First name").trim().equals(getFirstName+ " SQA"),"Validating the updated first name");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(lastName, "value", "Last name").trim().equals(getLastName+ " Test"),"Validating the updated last name");
+			Reporter.log("********** Resetting to default First name and Last Name *********", true);
+			vc.getWebDriverUtils().enterText(firstName, getFirstName, "Reset to deafult First Name");
+			vc.getWebDriverUtils().enterText(lastName, getLastName, "Reset to deafult Last Name");
+			vc.getWebDriverUtils().clickElement(saveContactInfo, "Save Contact Info");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(firstName, "value", "First name").trim().equals(getFirstName),"Validating the default first name");
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(lastName, "value", "Last name").trim().equals(getLastName),"Validating the default last name");
+			driver.switchTo().defaultContent();
+			return false;
+		}
+		
+		public boolean changePassword(String userStoryDescription,WE_HomePage we_HomePage,WE_MyProfilePage we_MyProfilePage) throws InterruptedException {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Edit Contact Information");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().validatePageTitle("User Settings - Windstream Enterprise");
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("EditContactInfo  - Windstream Enterprise"));
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.changePassword, "Change Password");
+			driver.switchTo().frame("WinauthIframe");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Change Password"));
+			
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(username, "Username"), "Element Availability validation for field Username");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(currentPassword, "Current Password"), "Element Availability validation for field Current Password");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(newPassword, "New Password "), "Element Availability validation for field New Password");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(confirmNewPassword, "Confirm New Password"), "Element Availability validation for field Confirm New Password");
+			
+			vc.getWebDriverUtils().clickElement(passwordRequirements, "Password Requirements");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Must be at least 8 characters long"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Cannot contain the words \"Windstream\", \"password\" or your Username"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Cannot re-use any of your last 10 passwords"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Must contain the following"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Note: Password is case sensitive"));
+			vc.getWebDriverUtils().clickElement(saveChangePassword, "Save - Change Password");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Username cannot be blank"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Current password cannot be blank"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("New password cannot be blank"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Current and new passwords must be different"));
+			driver.switchTo().defaultContent();
+			return false;
+		}
+		
+		public boolean themes(String userStoryDescription,WE_HomePage we_HomePage,WE_MyProfilePage we_MyProfilePage) throws InterruptedException {
+			Reporter.log("Test Case 119489:Check whether themes option available in My profile", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Themes");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+		
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Themes"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Black"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("White"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Grey"));
+			
+			vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.overviewRadio, "Overview - Radio");
+			vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.billingRadio, "Billing - Radio");
+			vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.operationsRadio, "Operations - Radio");
+			vc.getWebDriverUtils().elementAvailablity(we_MyProfilePage.customRadio, "Custom - Radio");
+			
+			Reporter.log("Test Case 119490:Verify Themes functionality", true);
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("black")) {
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.greyTheme, "Grey Theme");
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+				vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+				vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+				vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+
+				if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+					vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+				}
+			} 
+			
+			Reporter.log("************   Black Theme  ************ ", true);
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.blackTheme, "Black Theme");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			
+			vc.waitUntilTextIsPresent("UserPreferences changed successfully");
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("black")) {
+				Reporter.log("Theme Successfully set to Black", true);
+			} else {
+				Reporter.log("Theme didn't change as expected ", true);
+				Assert.assertTrue(false);
+			}
+			
+			Reporter.log("************   White Theme  ************ ", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.whiteTheme, "White Theme");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			
+			vc.waitUntilTextIsPresent("UserPreferences changed successfully");
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("white")) {
+				Reporter.log("Theme Successfully set to White", true);
+			} else {
+				Reporter.log("Theme didn't change as expected ", true);
+				Assert.assertTrue(false);
+			}
+			Reporter.log("************   Grey Theme  ************ ", true);
+			vc.getWebDriverUtils().pageRefresh();
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.greyTheme, "Grey Theme");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			
+			vc.waitUntilTextIsPresent("UserPreferences changed successfully");
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("grey")) {
+				Reporter.log("Theme Successfully set to Grey", true);
+			} else {
+				Reporter.log("Theme didn't change as expected ", true);
+				Assert.assertTrue(false);
+			}
+			
+			Reporter.log("************   Default Dashboard Settings  ************ ", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+		
+			Reporter.log("************   Overview  ************ ", true);
+			if (vc.waitUntilTextIsPresent("Viewing  Overview  Dashboard")) {
+				vc.getWebDriverUtils().pageRefresh();
+				Reporter.log("Default Dashboard already set to Overview, changing it to Billing",true);
+				vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+				vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+				if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+					vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+				}
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.billingRadio, "Billing - Radio");
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+				vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			} 
+			vc.getWebDriverUtils().pageRefresh();
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.overviewRadio, "Overview - Radio");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Viewing  Overview  Dashboard"));
+
+			
+			Reporter.log("************   Billing  ************ ", true);
+			vc.getWebDriverUtils().pageRefresh();
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.billingRadio, "Billing - Radio");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Viewing  Billing  Dashboard"));
+			
+			Reporter.log("************   Operations  ************ ", true);
+			vc.getWebDriverUtils().pageRefresh();
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.operationsRadio, "Operations - Radio");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Viewing  Operations  Dashboard"));
+			
+			Reporter.log("************   Custom  ************ ", true);
+			vc.getWebDriverUtils().pageRefresh();
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			if (!vc.getWebDriverUtils().elementAvailablity(overviewRadio, "Checking for Preferences Page")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_MyProfilePage.preferences, "Preferences");
+			}
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.customRadio, "Custom - Radio");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Viewing  Custom  Dashboard"));
+			return false;
+		}
+}

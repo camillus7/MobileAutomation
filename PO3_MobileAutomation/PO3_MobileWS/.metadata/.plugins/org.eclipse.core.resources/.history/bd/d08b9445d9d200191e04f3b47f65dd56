@@ -1,0 +1,81 @@
+package WebDriver;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+
+import commonUtil.PropertiesUtil;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+
+public final class WebDriverFactory {
+
+	
+	public final static String ANDROID = "android";
+	
+	
+	
+	public void launchDriver(String browser) {
+		if (browser.contains(ANDROID)) {
+			 AndroidDriver<AndroidElement> driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
+		} 
+	}
+	
+	/**
+	 * Return the appropriate WebDriver object based on configuration values found in config.properties file.
+	 * 
+	 * @return
+	 */
+	public static WebDriver getSeleniumWebDriver() {
+	    return getSeleniumWebDriver(PropertiesUtil.getValue(PropertiesUtil.BROWSER_PROPERTY), PropertiesUtil.isGridPlatform(), PropertiesUtil.getGridUrl());
+	}
+	
+	
+//	public static WebDriver getAndroidDriver() {
+//
+//		String deviceName = PropertiesUtil.getValue(PropertiesUtil.DEVICE_NAME);
+//		String appPackage = PropertiesUtil.getValue(PropertiesUtil.APP_PACKAGE);
+//		String appActivity = PropertiesUtil.getValue(PropertiesUtil.APP_ACTIVITY);
+//		String appiumIp = PropertiesUtil.getValue(PropertiesUtil.APPIUM_IP);
+//		String appiumPort = PropertiesUtil.getValue(PropertiesUtil.APPIUM_PORT);
+//		return getandroidDriver(deviceName,appPackage,appActivity,appiumIp,appiumPort);
+//
+//	}
+
+	/**
+	 * Return the appropriate WebDriver object based on indicated parameters.
+	 * @param browser - a String representing the browser type, e.g. 'chrome', 'firefox', or 'ie'.
+	 * @param isGridPlatform - a boolean that indicates whether or not driver is for the grid platform.
+	 * @param gridUrl - a String that represents the grid's URL.
+	 * @return WebDriver for the indicated environment and browser type.
+	 */
+	public static WebDriver getSeleniumWebDriver(String browser, boolean isGridPlatform, String gridUrl) {
+		WebDriver driver = null;
+		ApplicationWebDriver applicationWebDriver;		
+
+		if (browser.contains(ANDROID)) {
+			applicationWebDriver = new AndroidAppiumDriver();
+		} 
+		else {
+			applicationWebDriver = new InternetExplorerWebDriver();
+		}
+
+		driver = applicationWebDriver.getWebDriver(isGridPlatform, gridUrl);
+		
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		return driver;
+	}
+	
+	
+
+
+	public static AndroidDriver getAndroidDriver() {
+		ApplicationWebDriver applicationWebDriver;
+		AndroidDriver androidDriver;
+		applicationWebDriver = new AndroidAppiumDriver();
+		androidDriver = applicationWebDriver.getAndroidDriver();
+		androidDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		return androidDriver;
+	}
+
+}

@@ -1,0 +1,134 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_BillingAlertsAndInquiries {
+
+	WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_BillingAlertsAndInquiries(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//*[@id='excludeFooter']/header/nav/ul/li[1]/a")
+	public WebElement dashboard;
+
+	@FindBy(xpath = "//label[contains(.,'Billing Alerts & Inquiries')]")
+	public WebElement billingAlertsCheckbox;
+
+	@FindBy(xpath = "//div[@data-name='BillingAlerts']//a[@href='/Billing/Home/ViewBill']")
+	public WebElement alerts;
+
+	@FindBy(xpath = "//div[@data-name='BillingAlerts']//a[@href='/Billing/BillingInquiry/ViewList']")
+	public WebElement moreInquiries;
+
+	@FindBy(xpath = "//*[@id='divAlertsContainer']/div[1]/div[1]")
+	public WebElement inquiryNumber;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Alerts & Inquiries']//button[@data-id='BillingAlertsAccountId']")
+	public static WebElement billingAlertsDropdown;
+
+	@FindBy(xpath = "/html/body/div[39]/div/div[1]/input")
+	public WebElement enterAccountNumber;
+
+	@FindBy(xpath = "//*[@id='BillingAlert']//td[@class='billingDate']//a")
+	public WebElement chooseInqNo;
+
+	@FindBy(xpath = "//*[@id='modal-widget-header']")
+	public WebElement inquiryDetails;
+
+	@FindBy(xpath = "//*[@id='modal-widget']/div")
+	public WebElement inqDetails;
+
+	@FindBy(xpath = "//div[@class='close']")
+	public WebElement close;
+
+	@FindBy(xpath = "//*[@id='footertest']/a[1]/text()")
+	public WebElement alertText;
+
+	@FindBy(xpath = "//*[@id='excludeFooter']/div[3]/section/div[1]/h1")
+	public WebElement verifyAlertAage;
+
+	@FindBy(xpath = "//*[@id='BillingInquiryHistory_TicketNumberAndCreatedDate']")
+	public WebElement enterTicketID;
+
+	@FindBy(xpath = "//*[@id='filter-for-tblBillingInquiryHistory']/div[2]/div/div[2]/div/button")
+	public WebElement applyFilter;
+
+	@FindBy(xpath = "//*[@id='tblBillingInquiryHistory']/tbody/tr/td[13]/a")
+	public WebElement viewDetails;
+
+	@FindBy(xpath = "//*[@id='excludeFooter']/section/h1")
+	public WebElement ticketDetailsPage;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Alerts & Inquiries']//p[contains(@class,'default-value')]")
+	public static WebElement forAccount;
+	
+	@FindBy(xpath="//p[contains(.,'You currently have no billing inquiries.')]")
+	public WebElement noBillingInquiries;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Alerts & Inquiries']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Alerts & Inquiries']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void billingAlertAndInquiriesFunctionality() throws InterruptedException {
+		vc.getWebDriverUtils().elementAvailablity(alerts, "Alerts_Button");
+		vc.getWebDriverUtils().elementAvailablity(moreInquiries, "Moreinquiry");
+		if (vc.getWebDriverUtils().elementAvailablity(chooseInqNo, "Inquiry Details") == true) {
+			vc.getWebDriverUtils().clickElement(chooseInqNo, "ChooseInqNumb");
+			vc.waitUntilTextIsPresent("ACCOUNT NUMBER");
+			Reporter.log("Selected Enquiry No is ==>" + chooseInqNo.getText(), true);
+			String enquiryDetails = vc.getWebDriverUtils().getText(inqDetails, "INQDETAILS");
+			Reporter.log("********** Get Inquiry Details ************", true);
+			
+			Reporter.log("inq details ==" + enquiryDetails, true);
+			vc.getWebDriverUtils().clickHiddenElement(close, "Close");
+		} else if (vc.getWebDriverUtils().elementAvailablity(noBillingInquiries, "NoBillingInquiry") == true) {
+			Reporter.log("You currently have no billing inquiries.", true);
+		}
+
+		Reporter.log("********** Get Alerts and Verify Navigation ************", true);
+		Reporter.log("Number of Alerts ==" + alerts.getText(), true);
+		vc.getWebDriverUtils().sleep(2000);
+		vc.getWebDriverUtils().clickElement(alerts, "ALERTS");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "View & Pay Bill - Windstream Enterprise");	
+		driver.navigate().back();
+		vc.getWebDriverUtils().pageRefresh();
+		
+		for (int i = 0; i < 30; i++) {
+			if (!driver.findElement(By.cssSelector(".btn.ws-icon.billalt.ico-more.w60")).isDisplayed()) {
+				vc.getWebDriverUtils().sleep(4000);
+				Reporter.log("Waiting for Widget to load",true);
+			} else {
+				break;
+			}
+		}
+		
+		vc.getWebDriverUtils().clickElement(moreInquiries, "MoreInquiries");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Billing Support - Windstream Enterprise");
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Billing Alerts & Inquiries");
+	}
+
+}
+

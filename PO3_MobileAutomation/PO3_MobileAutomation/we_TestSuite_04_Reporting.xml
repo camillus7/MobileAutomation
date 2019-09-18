@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<!-- <test name="TC_WE_Reporting_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_BillingReports"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_InvoiceReports"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_Rates"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_004"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_AdvancedApplicationReport"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_LocalTelephoneNumbers"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_LookingGlassRouteQuery"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_007"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkHealth"/> </methods> </class> </classes> </test> 
+
+<test name="TC_WE_Reporting_008"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkLatency"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_009"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkSLA"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_010"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_ScheduledUtilizationReports"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_011"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_TollUsage"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_012"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_TrafficStudy"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_013"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Voice_VoiceCircuitUtilization"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Reporting_014"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Voice_VoiceUsage"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_Reporting_015"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Voice_VoiceUsage_WOL"/> </methods> </class> </classes> </test> 
+ -->
+<test name="TC_WE_Reporting_ScheduledUtilizationReport"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_ScheduledUtilizationReports"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_Reporting_QueuedReport"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_QueuedReports"/> </methods> </class> </classes> </test> 
+
+
+</suite>

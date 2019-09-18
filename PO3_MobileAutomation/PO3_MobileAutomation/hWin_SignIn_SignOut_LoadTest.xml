@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="60">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WL_Home_TC_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_004"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_007"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_008"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_009"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_010"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+
+<test name="TC_WL_Home_TC_011"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_012"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_013"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_014"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_015"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_016"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_017"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_018"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_019"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_020"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest2"/> </methods> </class> </classes> </test>
+
+<test name="TC_WL_Home_TC_021"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_022"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_023"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_024"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_025"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_026"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_027"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_028"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_029"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_030"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest3"/> </methods> </class> </classes> </test>
+
+<test name="TC_WL_Home_TC_031"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_032"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_033"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_034"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_035"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_036"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_037"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_038"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_039"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_040"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest4"/> </methods> </class> </classes> </test>
+
+<test name="TC_WL_Home_TC_041"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_042"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_043"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_044"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_045"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_046"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_047"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_048"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_049"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_050"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest5"/> </methods> </class> </classes> </test>
+
+<test name="TC_WL_Home_TC_051"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_052"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_053"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_054"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_055"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_056"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_057"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_058"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_059"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_060"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest6"/> </methods> </class> </classes> </test>
+
+
+</suite>

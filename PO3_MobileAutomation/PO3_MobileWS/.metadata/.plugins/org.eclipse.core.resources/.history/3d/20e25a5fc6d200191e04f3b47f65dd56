@@ -1,0 +1,47 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_NetworkHealthWidget {
+
+	final WebDriver driver;
+	
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_NetworkHealthWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Network Health')]")
+	public WebElement networkHealthCheckbox;
+	
+	@FindBy(xpath="//div[@data-name='NetworkHealth']//h3[@class='radar-notice-ok l hide pad-14']")
+	public WebElement networkCheckMessage;
+	
+	@FindBy(xpath="//div[@data-name='NetworkHealth']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-name='NetworkHealth']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+	
+	public void networkStatus() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Network Health"));
+		Reporter.log(networkCheckMessage.getText(),true);
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Network Health");
+		
+	}
+
+}

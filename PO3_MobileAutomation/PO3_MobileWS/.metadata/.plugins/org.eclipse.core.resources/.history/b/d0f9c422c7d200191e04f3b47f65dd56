@@ -1,0 +1,295 @@
+
+package com.webautomation.tests.seleniumGrid;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.we_pages.WE_AccountPage;
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_Account_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private	String firstName="testf"+ Math.random();
+	private	String lastName="testl"+ Math.random();
+	private	String email="g9953556@windstream.com";
+	// **************** Billing Inquiry Test Scripts Starts Here *****************//
+	
+	@Test 
+	public void Account_AccountHierarchy_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Account -> Account Hierarchy";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			
+			Reporter.log("Test Case 120280: ACCOUNT - Account Hierarchy - Check \"Account Hierarchy\" page view functionality",true);
+			
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.account, "Account");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.accountHierarchy, "Account Hierarchy");
+					
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AccountHierarchy  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Accounts in hierarchy"));	
+			
+			if (!vc.getWebDriverUtils().elementAvailablity(we_AccountPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_AccountPage.filters, "Filter Open");
+			}
+			
+			Reporter.log("Test Case 120283: ACCOUNT - Account Hierarchy - Check \"Apply Filter\" functionality of Account Hierarchy",true);
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_AccountPage.accountSelect,"Account Select Dropdown");
+			String accountSelected = vc.getWebDriverUtils().getAttribute(we_AccountPage.accountSelect, "title", "Get Account Name - current selection");
+			String[] accountArray= accountSelected.split("-");
+			String accountNumber= accountArray[0].trim();
+			String accountName= accountArray[1].trim();
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.applyFilters, "Apply Filters");
+			vc.getWebDriverUtils().getAttribute(we_AccountPage.accountSelect, "innerHTML", "Filter Validation");
+	
+			if (vc.getWebDriverUtils().getText(we_AccountPage.accountHierarchyTable, "Get Account Num from Hierarchy table").contains(accountNumber)) {
+				Assert.assertTrue(true);
+				Reporter.log("Apply Filters is working as expected",true);
+			} else {
+				Reporter.log("Apply Filters is not working as expected",true);
+				Assert.assertFalse(true);
+			}
+			Reporter.log("Test Case 120284: ACCOUNT - Account Hierarchy - Check \"Clear Filter\" functionality of Account Hierarchy",true);
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.clearFilters, "Clear Filters");
+			
+			if (vc.getWebDriverUtils().getAttribute(we_AccountPage.accountSelect, "title", "Get Account Name - current selection").equalsIgnoreCase("Select Account")) {
+				Assert.assertTrue(true);
+				Reporter.log("Clear Filters is working as expected",true);
+			} else {
+				Reporter.log("Clear Filters is not working as expected",true);
+				Assert.assertFalse(true);
+			}
+			
+			Reporter.log("Test Case 120282: ACCOUNT - Account Hierarchy - Check \"Sorting\" functionality of Account Hierarchy page",true);
+			
+			String beforeSort =  vc.getWebDriverUtils().getText(we_AccountPage.accountHierarchyTable, "Account Hierarchy table content before sort");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.accountIDSort, "Account ID Sort");
+			String afterSort =  vc.getWebDriverUtils().getText(we_AccountPage.accountHierarchyTable, "Account Hierarchy table content after sort");
+			
+			if (!(afterSort==beforeSort)) {
+				Assert.assertTrue(true);
+				Reporter.log("Sorting functionality of Account ID is working as expected",true);
+			} else {
+				Reporter.log("Sorting functionality of Account ID is not working as expected",true);
+				Assert.assertFalse(true);
+			}
+			
+			beforeSort =  vc.getWebDriverUtils().getText(we_AccountPage.accountHierarchyTable, "Account Hierarchy table content before sort");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.accountNameSort, "Account Name Sort");
+			afterSort =  vc.getWebDriverUtils().getText(we_AccountPage.accountHierarchyTable, "Account Hierarchy table content after sort");
+			
+			if (!(afterSort==beforeSort)) {
+				Assert.assertTrue(true);
+				Reporter.log("Sorting functionality of Account Name is working as expected",true);
+			} else {
+				Reporter.log("Sorting functionality of Account Name is not working as expected",true);
+				Assert.assertFalse(true);
+			}
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test 
+	public void Account_CompanyContacts_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Account -> CompanyContacts";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.account, "Account");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.companyContacts, "Company Contacts");
+					
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Company Contacts  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Create New Contact"));	
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));		
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));	
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.createNewContact, "Create New Contact");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Create New Contact  - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.saveContact, "Save Contact");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Enter first name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Enter last name"));		
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Enter email"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select primary phone"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please select an account and current roles"));	
+			
+		//	vc.getWebDriverUtils().clickElement(we_AccountPage.clearContact, "Clear Contact");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.warningCloseX, "Warning Close - X");
+			vc.getWebDriverUtils().enterText(we_AccountPage.firstNameTxt, firstName, "First Name");
+			vc.getWebDriverUtils().enterText(we_AccountPage.lastNameTxt, lastName, "Last Name");
+			vc.getWebDriverUtils().enterText(we_AccountPage.emailTxt, "4r34re34rt34rt", "Invalid email Address");
+			vc.getWebDriverUtils().enterText(we_AccountPage.mobilePhoneNumber, "", "Mobile Number");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Enter valid format"));	
+			vc.getWebDriverUtils().enterText(we_AccountPage.emailTxt, email, "Email Address");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.mobilePhoneRadioBtn, "Mobile Radio Button Select");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.saveContact, "Save Contact");
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Enter mobile phone"));	
+			vc.getWebDriverUtils().enterText(we_AccountPage.mobilePhoneNumber, "1234567890", "Mobile Number");
+			
+			//vc.getWebDriverUtils().clickHiddenElement(we_AccountPage.accountChechboxFirstRecord, "Account - Check box First Record");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_AccountPage.accountContacts,  "Account - First Account from DropDown");
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_AccountPage.contactRoles, "Contact Roles - After Hours", "After Hours");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_AccountPage.contactRoles, "Contact Roles - Assistant", "Assistant");
+			
+			
+			/*vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_AccountPage.contactRolesSelectFirstRecord, "Contact Roles - After Hours", "After Hours");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_AccountPage.contactRolesSelectFirstRecord, "Contact Roles - Assistant", "Assistant");
+			*/
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.saveContact, "Save Contact");
+			//vc.waitUntilTextIsPresent("Contact saved successfully");	
+			
+			if (!vc.getWebDriverUtils().elementAvailablity(we_AccountPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_AccountPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().enterText(we_AccountPage.firstNameFilter, firstName, "First Name - Filter");
+			vc.getWebDriverUtils().enterText(we_AccountPage.lastNameFilter, lastName, "Last Name - Filter");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.applyFilters, "Apply Filters");
+			
+			if (vc.waitUntilTextIsPresent(firstName) && vc.waitUntilTextIsPresent(lastName)) {
+				Reporter.log("Added Contact successfully displayed in search/filter criteria",true);
+			} else {
+				Reporter.log("Added Contact not displayed",true);
+				Assert.assertFalse(true);
+			}
+		
+			vc.getWebDriverUtils().clickElement(we_AccountPage.editContact, "Edit Contact");
+			String editFname="sqa"+Math.random();
+			String editLname="test"+Math.random();
+			vc.getWebDriverUtils().enterText(we_AccountPage.firstNameTxt, editFname, "Edit - First Name");
+			vc.getWebDriverUtils().enterText(we_AccountPage.lastNameTxt, editLname, "Edit - Last Name");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_AccountPage.contactRoles, "Contact Roles - Other", "Other");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.saveContact, "Save Contact");
+			vc.waitUntilTextIsPresent("Contact updated successfully");	
+			
+			if (!vc.getWebDriverUtils().elementAvailablity(we_AccountPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_AccountPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().enterText(we_AccountPage.firstNameFilter, editFname, "First Name - Filter");
+			vc.getWebDriverUtils().enterText(we_AccountPage.lastNameFilter, editLname, "Last Name - Filter");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.applyFilters, "Apply Filters");
+		
+			if (vc.waitUntilTextIsPresent(editFname) && vc.waitUntilTextIsPresent(editLname)) {
+				Reporter.log("Edited Contact successfully displayed in search/filter criteria",true);
+			} else {
+				Reporter.log("Edited Contact not displayed",true);
+				Assert.assertFalse(true);
+			}
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.deleteContact, "Delete Contact");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure to delete the contact?"));	
+			vc.getWebDriverUtils().clickElement(we_AccountPage.cancelDeleteContact, "Cancel Delete Contact");
+			
+			vc.getWebDriverUtils().clickElement(we_AccountPage.deleteContact, "Delete Contact");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure to delete the contact?"));	
+			vc.getWebDriverUtils().clickElement(we_AccountPage.OkDeleteContact, "OK - Delete Contact");
+			vc.waitUntilTextIsPresent("Delete contact successfully");
+			
+			if (!vc.getWebDriverUtils().elementAvailablity(we_AccountPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_AccountPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().enterText(we_AccountPage.firstNameFilter, editFname, "First Name - Filter");
+			vc.getWebDriverUtils().enterText(we_AccountPage.lastNameFilter, editLname, "Last Name - Filter");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.applyFilters, "Apply Filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("No items to display"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test 
+	public void Account_NotitificationCenter() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Account -> CompanyContacts";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.account, "Account");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.notificationCenter, "Notitification Center");
+					
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Center  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Add Rule"));
+			vc.getWebDriverUtils().clickElement(we_AccountPage.addRule, "Add Rule");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_AccountPage.selectRecipient, "Select Recipient", "test");
+			vc.getWebDriverUtils().clickElement(we_AccountPage.next, "Next");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Information"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mobile Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal User")); 
+			vc.getWebDriverUtils().clickElement(we_AccountPage.previous, "Previous");
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+}
+ 
+		

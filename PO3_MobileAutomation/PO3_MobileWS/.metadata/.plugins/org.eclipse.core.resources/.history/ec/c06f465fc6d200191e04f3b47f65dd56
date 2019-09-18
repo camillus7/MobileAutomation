@@ -1,0 +1,865 @@
+package com.webautomation.pageobject.we_pages;
+
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+
+
+public class WE_ReportingPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_ReportingPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath="xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+
+	
+	@FindBy(xpath="//button[@id='toggleFilters']")
+	public WebElement filters;
+
+	@FindBy(xpath="//a[@class='currency MenuReporting submenu']")
+	public WebElement billingSubMenu;
+	
+	@FindBy(xpath="//a[@class='network MenuReporting submenu']")
+	public WebElement networkSubMenu;
+	
+	//Billing 
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/SubRates']")
+	public WebElement rates;
+	
+	@FindBy(xpath="//button[@data-id='ddlConnectionNumber']")
+	public WebElement ratesConnectionNumberDropDown;
+
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/RecurringCharges']")
+	public WebElement recurringCharges;
+	
+	@FindBy(xpath="//div/div/span[1]/label/button")
+	public WebElement includeRecurringCharges;
+	
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/InvoiceReports']")
+	public WebElement invoiceReports;
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/']")
+	public WebElement billingReports;
+	
+	@FindBy(xpath="//*[@id='invoiceTrendChart']")
+	public WebElement invoiceTrendChart;
+	
+	@FindBy(xpath="//button[@data-id='ddlInvoiceReports']|//button[@data-id='ddlInvoiceReports_RC']")
+	public WebElement reportDropDown;
+	
+	
+	@FindBy(xpath="//button[@data-id='Month']")
+	public WebElement periodReportDropdwon;
+	
+	@FindBy(xpath="//input[@id='StartDate']")
+	public WebElement startDateTxt;
+	
+	@FindBy(xpath="//input[@id='EndDate']")
+	public WebElement endDateTxt;
+	
+	@FindBy(xpath="//select[@id='ReportViewerControl_ctl04_ctl03_txtValue']")
+	public WebElement subscriberTxtSelectReportFrame;
+	
+	@FindBy(xpath="//select[@id='ReportViewerControl_ctl04_ctl05_ddValue']")
+	public WebElement invoicePeriodSelectReportFrame;
+	
+	@FindBy(xpath="//select[@id='ReportViewerControl_ctl04_ctl07_ddValue']")
+	public WebElement typeSelectReportFrame;
+	
+	@FindBy(xpath="//input[@value='View Report']")
+	public WebElement viewReportBtnReportFrame;
+	
+	@FindBy(xpath="//img[@alt='Loading...']")
+	public WebElement loadingReportFrame;
+	
+	// Network 
+	
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/QueuedReports']")
+	public WebElement queuedReports;	
+	
+	@FindBy(xpath="//*[@id='DeleteQueuedReportModal']/div/div[1]/h3/span")
+	public WebElement deleteQueuedReportModalCloseX;	
+	
+	@FindBy(xpath="//*[@id='btnDeleteQueuedReport']")
+	public WebElement yesDeleteQueuedReport;	
+
+	@FindBy(xpath="//*[@id='DeleteQueuedReportModal']/div/div[3]/a[2]")
+	public WebElement noDeleteQueuedReport;	
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/ScheduledUtil']")
+	public WebElement scheduledUtilizationReports;	
+	
+		@FindBy(xpath="//a[contains(@href,'#ShowDetailedInfo')]")
+		public WebElement more;	
+		
+		@FindBy(xpath="//a[contains(.,'Less')]")
+		public WebElement less;	
+		
+		@FindBy(xpath="//a[@href='#AddNewReport']")
+		public WebElement addAnewScheduledReport;	
+		
+		@FindBy(xpath="//input[@id='ReportName']")
+		public WebElement reportName;	
+		
+		@FindBy(xpath="//img[@class='el-tip fl button icon light rel pad-14-top help c pointer']")
+		public WebElement reportNameToolTip;	
+		
+		@FindBy(xpath="//button[@data-id='ReportType']")
+		public WebElement reportTimeFrame;	
+		
+		@FindBy(xpath="//label[1]/button")
+		public WebElement runReportNow;	
+		
+		@FindBy(xpath="//label[2]/button")
+		public WebElement runReportRecurring;	
+		
+		@FindBy(id="tbEmailAddresses-tokenfield")
+		public WebElement additonalEmailRecipients;	
+		
+		@FindBy(css=".icon.light.check.btn-confirm-edit.primary")
+		public WebElement submitScheduledReport;	
+		
+		@FindBy(xpath="//a[@data-val='-1']")
+		public WebElement allRecords;	
+		
+		@FindBy(css=".icon.light.close.btn-cancel")
+		public WebElement cancelScheduledReport;
+		
+		@FindBy(xpath="//*[@id='tblScheduledUtilList']")
+		public WebElement scheduledReportsTable;
+		
+		@FindBy(xpath="//*[@id='tblQueuedReportsList']")
+		public WebElement queuedReportsTable;
+		
+		@FindBy(xpath="//*[@id='RunSchedReport']/div/div[3]/button[1]")
+		public WebElement runReportYes;
+		
+		@FindBy(xpath="//*[@id='RunSchedReport']/div/div[3]/button[2]")
+		public WebElement runReportNo;
+		
+		@FindBy(xpath="//*[@id='DeleteSchedReport']/div/div[3]/button[1]")
+		public WebElement deleteReportYes;
+		
+		@FindBy(xpath="//*[@id='DeleteSchedReport']/div/div[3]/button[2]")
+		public WebElement deleteReportNo;
+		
+		@FindBy(xpath="//*[@id='DeleteSchedReport']/div/div[2]/div/p")
+		public WebElement deleteReportWarningMessage;
+		
+		@FindBy(xpath="//button[contains(.,'View / Print Data ')]")
+		public WebElement viewPrintData;
+		
+		@FindBy(xpath="//button[contains(.,'Export to PDF')]")
+		public WebElement exportToPDF;
+		
+		@FindBy(xpath="xxxxx")
+		public WebElement xxxxxx;	
+		
+		
+		
+		//button[contains(.,'Submit')]
+		
+	@FindBy(xpath="//a[@href='/Reporting/Report/TrafficStudy']")
+	public WebElement trafficStudy;	
+		
+		@FindBy(xpath="//a[contains(.,'Busy Hour PBX (Sample) Report')]")
+		public WebElement busyHourPBXSampleReport;	
+		
+		@FindBy(xpath="//a[contains(.,'Busy Hour Trunk (Sample) Report')]")
+		public WebElement busyHourTrunkSampleReport;	
+		
+		@FindBy(xpath="//a[contains(.,'Hourly Detail Line (Sample) Report')]")
+		public WebElement hourlyDetailLineSampleReport;	
+		
+		@FindBy(xpath="//a[contains(.,'Hourly Detail Trunk Group (Sample) Report")
+		public WebElement hourlyDetailTrunkGroupSampleReport;	
+		
+	//Looking Glass Route Query
+	@FindBy(xpath="//a[@href='/Reporting/NetworkReport/LookingGlassRouteQuery']")
+	public WebElement lookingGlassRouteQuery;	
+	
+	
+	//Local Telephone Numbers
+	@FindBy(xpath="//a[@href='/Reporting/NetworkReport/InstalledTelephonenumbers']")
+	public WebElement localTelephoneNumbers;	
+	
+	//Advanced Application Report
+	@FindBy(xpath="//a[@href='/Reporting/Report/AdvancedApplicationReport']")
+	public WebElement advancedApplicationReport;	
+
+	@FindBy(xpath="//button[@data-id='ddlAccount']|//button[@data-id='ddlRecurringAccount']")
+	public WebElement selectAccountReport;
+	
+	@FindBy(xpath="//button[@data-id='BillingAccountId']")
+	public WebElement selectAccountInvoiceReport;
+	
+	@FindBy(xpath="//button[@id='btnViewReport']")
+	public WebElement viewReport;
+
+	
+	@FindBy(xpath="//button[@id='btnMinutesOfUsageDetails']")
+	public WebElement viewMinutesOfUsageDetails;
+	
+	@FindBy(xpath="//button[@id='btnMinutesOfUsageGraph']")
+	public WebElement viewMinutesOfUsageGraph;
+	
+	@FindBy(xpath="//button[@id='btnMinutesOfUsageCallTotals']")
+	public WebElement viewCallDetailsGraph;
+
+	@FindBy(xpath="//a[contains(.,'User Guide')]")
+	public WebElement userGuide;
+	
+	// Network SLA
+	@FindBy(xpath="//a[@href='/Reporting/NetworkReport/SLAReport']")
+	public WebElement networkSLA;	
+	
+	@FindBy(xpath="//button[@data-id='ddlAccount']")
+	public WebElement accountList;	
+	
+	@FindBy(xpath="//input[@class='input-block-level form-control']")
+	public WebElement accountInputSearch;		
+	
+	@FindBy(xpath="//button[@data-id='ddlGraph']")
+	public WebElement graphList;
+	
+	@FindBy(xpath="//a[contains(.,'Jitter')]")
+	public WebElement jitter;
+	
+	@FindBy(xpath="//span[contains(.,'Latency')]")
+	public WebElement latency;
+	
+	@FindBy(xpath="//span[contains(.,'Packet Delivery')]")
+	public WebElement packetDelivery;
+	
+	@FindBy(xpath="//span[contains(.,'Network Availability')]")
+	public WebElement networkAvailability;
+	
+	@FindBy(xpath = "//button[contains(.,'Apply Filters')]")
+	public WebElement applyFilters;
+
+	@FindBy(xpath="//img[@src='https://statsms.paetec.net/graphimg/3/362f10896374ff0e8077ab6f8d099019.png']")
+	public WebElement jitterRealTimeGraph;	
+	
+	//Network Health
+	@FindBy(xpath="//a[@href='/Reporting/NetworkReport/Health']")
+	public WebElement networkHealth;
+	
+	@FindBy(xpath="//button[@data-id='ddlZone']")
+	public WebElement timeZoneList;
+	
+	@FindBy(xpath="//span[contains(.,'Eastern Time')]")
+	public WebElement easternTime;
+	
+	@FindBy(xpath="//button[@data-id='ddlCircuit']")
+	public WebElement circuitList;
+	
+	@FindBy(xpath="//*[@id='mCSB_3_container']/ul/li[2]/a/span")
+	public WebElement networkHealthDefaultCircuit;
+
+	// Network Latency
+	@FindBy(xpath="//a[@href='/Reporting/NetworkReport/NetworkLatency']")
+	public WebElement networkLatency;	
+	
+	@FindBy(xpath="//h3[contains(.,'Loading.. Please wait')]")
+	public WebElement loadingPleaseWait;
+	
+	//Voice Submenu
+	@FindBy(xpath="//a[@class='analytics MenuReporting submenu']")
+	public WebElement voiceSubMenu;	
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/VoiceCircuitUtilizationReport']")
+	public WebElement voiceCircuitUtilizationReport;	
+		
+	@FindBy(xpath="//input[@data-val-number='The field NumberOfDays must be a number.']")
+	public WebElement numberOfDays;	
+	
+	@FindBy(xpath="//i[@class='icon-calendar']")
+	public WebElement startDateCalendarIcon;	
+	
+	@FindBy(xpath="//td[@class='day active']")
+	public WebElement dayActiveDefault;	
+	
+	@FindBy(xpath="//input[@name='StartDate']")
+	public WebElement startDateVCU;	
+
+	
+	// SIP Trunk Utilization
+	
+	
+	@FindBy(xpath="//a[@href='/Reporting/Report/SIPTrunkingUtilization']")
+	public WebElement sipTrunkingUtilization;	
+	
+	@FindBy(xpath="//a[contains(.,'Set Alert/Alarm thresholds')]")
+	public WebElement setAlertAlarmThresholds;	
+	
+	@FindBy(xpath="//button[@id='csvDownloadButton']")
+	public WebElement downloadCSV;	
+	
+	@FindBy(xpath="//button[@id='submitButton']")
+	public WebElement submitSIPTU;	
+	
+	@FindBy(xpath="//input[@id='startDate']")
+	public WebElement fromDate;	
+	
+	@FindBy(xpath="//input[@id='endDate']")
+	public WebElement toDate;	
+
+	@FindBy(xpath="//button[@data-id='TrunkId']")
+	public WebElement trunkTID;	
+	
+	@FindBy(xpath="//*[@id='sip-call-summary']")
+	public WebElement sessionummaryChart;	
+	
+	@FindBy(xpath="//*[@id='sip-call-type-percent']")
+	public WebElement incomingVersusOutgoingSessions;	
+	
+	@FindBy(xpath="//*[@id='sip-percent-utilization']")
+	public WebElement percentUtilizatioNChart;	
+	
+	@FindBy(xpath="//*[@id='sip-peak-call-count']")
+	public WebElement peakConcurrentSessionsChart;	
+	
+	@FindBy(xpath="//*[@id='sip-inbound-outbound-trunk']")
+	public WebElement inboundOutbounSessionChart;	
+	
+	@FindBy(xpath="//*[@id='sip-inbound-outbount-percent']")
+	public WebElement inboundOutboundPercentChart;	
+	
+	@FindBy(xpath="//span[contains(.,'Simple: All Locations Have Same Thresholds')]")
+	public WebElement simpleAllLocationsHaveSameThresholdsRadioBtn;	
+	
+	@FindBy(xpath = "(//div[contains(@class,'slider-handle lhs-handle round')])[1]")
+	public WebElement alertStartSimpleSlider;	
+	
+	@FindBy(xpath = "//input[@id='sldrAll--lower']")
+	public WebElement alertStartInputSimple;	
+	
+	@FindBy(xpath = "//input[@id='sldrAll--upper']")
+	public WebElement alarmStartInputSimple;
+	
+	@FindBy(xpath = "(//div[@class='slider-handle rhs-handle round'])[1]")
+	public WebElement alarmStartSimpleSlider;
+	
+	@FindBy(xpath="//span[contains(.,'Advanced: Manage By Location')]")
+	public WebElement advancedManageByLocationRadioBtn;	
+	
+	@FindBy(xpath="//button[@id='btnSaveSimple']")
+	public WebElement submitSimple;	
+	
+	@FindBy(xpath = "(//input[@class='grid-slider-range-tbx'])[1]")
+	public WebElement alertStartInputAdvanced;	
+	
+	@FindBy(xpath = "(//div[@class='slider-handle lhs-handle round'])[2]")
+	public WebElement alertStartAdvancedSlider;	
+	
+	@FindBy(xpath = "(//input[@class='grid-slider-range-tbx'])[2]")
+	public WebElement alarmStartInputAdvanced;
+	
+	@FindBy(xpath = "(//div[@class='slider-handle rhs-handle round'])[2]")
+	public WebElement alarmStartAdvancedSlider;				
+	
+	@FindBy(xpath="//a[@onclick='ThresholdManager.saveConfirmed();']")
+	public WebElement saveChangeThresholdManager;	
+	
+	@FindBy(xpath="//*[@id='ConfirmSavingModal']/div/div[1]/h3/div")
+	public WebElement pleaseConfirmCloseX;	
+	
+	@FindBy(xpath="//button[contains(@data-id,'LocationId')]")
+	public WebElement locationName;	
+	
+
+	@FindBy(xpath="//button[@value='Clear Filters']")
+	public WebElement clearFilters;	
+	
+	@FindBy(xpath="//button[@id='btnSaveAdvanced']")
+	public WebElement submitAdvanced;	
+	
+	
+	//Voice Usage
+	
+	@FindBy(xpath="//a[contains(.,'Voice Usage')]")
+	public WebElement voiceUsage;	
+	
+	@FindBy(xpath="//*[@id='content-tabs']/li[3]/a")
+	public WebElement queuedReportsContentTab;	
+	
+	@FindBy(xpath="//a[contains(.,'Voice Usage Report Guide')]")
+	public WebElement voiceUsageReportGuide;	
+	
+	@FindBy(xpath="//button[@data-id='ReportTypeId']")
+	public WebElement reportTypeDropDown;	
+	
+	@FindBy(xpath="//button[@data-id='LocationId']")
+	public WebElement locationDropDown;	
+	
+	@FindBy(xpath="//button[@data-id='MonthYear']")
+	public WebElement dateDropDown;	
+	
+	//TODO - Need to be updated back to table
+	//@FindBy(xpath="//*[@id='LatestQueuedReports']/table")
+	@FindBy(xpath="//*[@id='LatestQueuedReports']")
+	public WebElement recentQueuedReportsTable;	
+	
+	@FindBy(xpath="//span[contains(.,'More Queued Reports')]")
+	public WebElement moreQueuedReports;	
+	
+	@FindBy(xpath="//button[@id='btnRunReport']")
+	public WebElement runReport;	
+	
+	
+	public String loadingPleaseWaitPopup() {
+		String s = loadingPleaseWait.getText();
+		return s;
+	}
+	
+	@FindBy(xpath="//a[contains(.,'Network Latency')]")
+	public WebElement networkLatencyTitleValidation;
+	
+	public String networkLatencyTitleValidation() {
+		String s = networkLatencyTitleValidation.getText();
+		return s;
+	}
+	
+	@FindBy(id="networkAverage_ms")
+	public WebElement currentOverallAverage;
+	
+	public String currentOverallAverage() {
+		String s = currentOverallAverage.getText();
+		return s;
+	}
+	
+	@FindBy(xpath=".//*[@id='sla_heatmap_legend']")
+	public WebElement mapLegend;
+	
+	public String mapLegend() {
+		String s = mapLegend.getText();
+		return s;
+	}
+
+	
+	@FindBy(xpath=".//*[@id='network_heatmap_table']/tbody/tr[2]/td[2]/span")
+	private WebElement networkMapTableValidation;
+	
+	public void clickOnNetworkMapTableValidation() {
+		networkMapTableValidation.click();
+	}
+	
+	@FindBy(xpath=".//*[@id='sla_heatmap_menu']/div/div[1]/h3")
+	private WebElement latencyTableLegend;
+	
+	public String latencyTableLegend() {
+		String s = latencyTableLegend.getText();
+		return s;
+	}
+	
+	@FindBy(xpath=".//*[@id='sla_heatmap_panel_new']/div[1]/h3")
+	private WebElement autoRefreshTextValidation;
+	
+	public String autoRefreshTextValidation() {
+		String s = autoRefreshTextValidation.getText();
+		return s;
+	}
+	
+	// Toll Usage
+	@FindBy(xpath="//a[@href='/Reporting/NetworkReport/TollUsageReport']")
+	public WebElement tollUsage;
+
+	//All Calls
+	@FindBy(xpath="//a[@href='AlltelReportInputController?module=9&report_id=-1']")
+	public WebElement allCalls;
+	
+	
+	@FindBy(xpath="//select[@name='Account']")
+	public WebElement allAccountsList;
+	
+	@FindBy(xpath="//button[contains(.,' Add to Analysis')]")
+	public WebElement addToAnalysis;
+	
+	@FindBy(xpath="//input[@alt='Generate Report for Analysis']")
+	public WebElement startAnalysis;
+	
+	@FindBy(xpath="//input[@alt='Apply more filters to this report.']")
+	public WebElement additionalConstraints;
+	
+	@FindBy(xpath="(//a[contains(text(),'Modify Report')])[1]")
+	public WebElement modifyReport;
+	
+	@FindBy(name="cancel")
+	public WebElement cancel;
+	
+	@FindBy(xpath = "//button[@data-id='AccountName']")
+	public WebElement accountSelect;
+	
+	public void viewReport_ReportFrame() throws InterruptedException {
+		vc.getWebDriverUtils().clickElement(viewReportBtnReportFrame, "View Report - Report Frame");
+		vc.getWebDriverUtils().checkPageIsReady();
+		try {
+			while (loadingReportFrame.isDisplayed()) {
+				Thread.sleep(1000);
+				System.out.println("waiting for report to load");
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+	public boolean fusionChartElementClick(String elementName) throws InterruptedException {
+		int driverFlag = 0;
+		String winHandleBefore = driver.getWindowHandle();
+		//vc.getWebDriverUtils().mouseHoveronElement(element);
+		driver.switchTo().activeElement();
+		List<WebElement> childs = driver.findElements(By.xpath("//*"));
+		int counter=0;
+		for (WebElement elementItem : childs) {
+			try {
+				System.out.println(elementItem.getAttribute("id"));
+				if (elementItem.getAttribute("id").contains("raphael-paper-")) {
+			
+					System.out.println(elementItem.findElements(By.cssSelector("g > g > g > rect")).size());
+					List<WebElement> childs1 = elementItem.findElements(By.cssSelector("g > g > g > rect"));
+					
+					for (WebElement elementItem1 : childs1) {
+						try {
+							 // Your element
+							vc.getWebDriverUtils().mouseHoveronElement(elementItem1);
+								if (driver.getPageSource().contains(elementName)) {
+									driverFlag=1;
+									vc.getWebDriverUtils().clickElement(elementItem1, elementName);
+									Reporter.log("Clicked message : " + elementName
+											+ " successfully",true);
+									
+									break;
+								}
+			
+							counter=counter+1;	
+							if (driverFlag==1){ break;
+								
+							}
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+
+					}
+					break;
+				}
+			} catch (Exception e) {
+			}	
+		}
+		if (driverFlag==1){
+			driver.switchTo().window(winHandleBefore);
+		}	else {
+			Reporter.log("Validation Page not loaded/working as expected", true);
+			Assert.assertFalse(true);	
+		}
+		return false;
+	}
+	
+	public void networkSLAGraphCountValidation(String graphName,int expectedGraphCount) throws InterruptedException {
+		
+		try {
+			List<WebElement> graphs = driver.findElements(By.xpath("//img[contains(concat(' ', @src, ' '), 'https://statsms.paetec.net/graphimg')]"));
+			if (expectedGraphCount==graphs.size()) {
+				Reporter.log(graphName+" - Graphs displayed as expected, Expected := "+expectedGraphCount + " and Actual GraphCount := "+graphs.size(), true);
+				if (graphName=="Jitter" ) {
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(jitterHeaderText, "Jitter Header text"));
+					Reporter.log(graphName+  " "+jitterHeaderText.getText(),true);
+					
+			/*		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(realTimeText, "Real Time (last 3 months)"));
+					Reporter.log(realTimeText.getText(),true);
+					
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(missionCriticalText, "Mission Critical (last 3 months)"));
+					Reporter.log(missionCriticalText.getText(),true);
+					
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(businessCriticalText, "Business Critical (last 3 months)"));
+					Reporter.log(businessCriticalText.getText(),true);
+					
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(standardDataText, "Standard Data (last 3 months)"));
+					Reporter.log(standardDataText.getText(),true);*/
+					
+				}else if (graphName=="Latency") {
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(latencyHeaderText, "Latency Header text"));
+					Reporter.log(graphName+  " "+latencyHeaderText.getText(),true);
+			/*		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(realTimeText, "Real Time (last 3 months)"));
+					Reporter.log(realTimeText.getText(),true);
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(missionCriticalText, "Mission Critical (last 3 months)"));
+					Reporter.log(missionCriticalText.getText(),true);
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(businessCriticalText, "Business Critical (last 3 months)"));
+					Reporter.log(businessCriticalText.getText(),true);
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(standardDataText, "Standard Data (last 3 months)"));
+					Reporter.log(standardDataText.getText(),true);*/
+				}else if (graphName=="Packet Delivery") {
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(packetDeliveryHeaderText, "Packet Delivery text"));
+					Reporter.log(graphName+  " "+packetDeliveryHeaderText.getText(),true);
+					/*	Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(realTimeText, "Real Time (last 3 months)"));
+					Reporter.log(realTimeText.getText(),true);
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(missionCriticalText, "Mission Critical (last 3 months)"));
+					Reporter.log(missionCriticalText.getText(),true);
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(businessCriticalText, "Business Critical (last 3 months)"));
+					Reporter.log(businessCriticalText.getText(),true);
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(standardDataText, "Standard Data (last 3 months)"));
+					Reporter.log(standardDataText.getText(),true);*/
+				}else if (graphName=="Network Availability") {
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(networkAvailabilityHeaderText, "Network Availability text"));
+					Reporter.log(graphName+  " "+networkAvailabilityHeaderText.getText(),true);
+/*					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(standardDataText, "Standard Data (last 3 months)"));
+					Reporter.log(standardDataText.getText(),true);*/
+				}
+			} else {
+				Reporter.log(graphName+" - Graphs not displayed as expected, Expected := "+expectedGraphCount + " and Actual GraphCount :="+graphs.size(), true);
+				Assert.assertFalse(true);
+			}
+			
+		} catch (Exception e) {
+			Reporter.log(graphName+" - No Graphs found/ Graph text not displayed as expected", true);
+			Assert.assertFalse(true);
+		}
+	}
+	
+	//Graph Text Elements
+	
+	@FindBy(xpath = "//span[contains(.,' is defined as a measurement of the maximum expected arrival time between sequential packets.')]")
+	public WebElement jitterHeaderText;
+	
+	@FindBy(xpath = "//span[contains(.,' is the measurement of round trip delay from Point A to Point B on the network.')]")
+	public WebElement latencyHeaderText;
+	
+	@FindBy(xpath = "//span[contains(.,'is defined as the measurements of delivered packets across the Windstream backbone as a function of sent packets. The measurement will')]")
+	public WebElement packetDeliveryHeaderText;
+	
+	@FindBy(xpath = "//span[contains(.,'is the amount of time the network is available for the customer to pass traffic across the Windstream IP network.')]")
+	public WebElement networkAvailabilityHeaderText;
+	
+	@FindBy(xpath = "//p[contains(.,'Real Time Class of Service (CoS) delivers premium Quality of Service (QoS) to your site and is optimized for')]")
+	public WebElement realTimeText;
+	
+	@FindBy(xpath = "//p[contains(.,'Mission Critical Data CoS provides the highest priority treatment for data. This CoS is intended')]")
+	public WebElement missionCriticalText;
+	
+	@FindBy(xpath = "//p[contains(.,'Business Critical Data CoS provides priority treatment')]")
+	public WebElement businessCriticalText;
+	
+	@FindBy(xpath = "//p[contains(.,'Standard Data CoS enables you to share latency and jitter tolerant data')]")
+	public WebElement standardDataText;
+	
+	public boolean networkLatency(WE_HomePage we_HomePage,String userStoryDescription, String winHandleBefore) throws InterruptedException {
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Network Latency");
+		vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+		vc.getWebDriverUtils().clickElement(networkSubMenu, "Network");
+		vc.getWebDriverUtils().clickElement(networkLatency, "Network Latency");
+
+			driver.getWindowHandles();
+
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+
+					// Scenario-Validate "Loading..Please Wait"
+					if (loadingPleaseWaitPopup().contains(
+							"Loading")) {
+						Reporter.log("Successfully Validated the message : "
+								+ loadingPleaseWaitPopup(),true);
+					}
+					// Scenario-Validate Network Latency Header
+
+					if (networkLatencyTitleValidation()
+							.contains("Network Latency")) {
+						Reporter.log("Successfully Validated title message : "
+								+networkLatencyTitleValidation(),true);
+					} else {
+						Reporter.log("Failed - Expected Title not displayed - found text: "
+								+networkLatencyTitleValidation(),true);
+						Assert.assertTrue(networkLatencyTitleValidation()
+										.contains("Network Latency"),
+								"Failed due to expected Title not displayed - instead found : "
+										+ networkLatencyTitleValidation());
+					}
+
+					// Scenario- Validate Current Overall Average
+					Reporter.log("Successfully Validated Message for Current Overall Average:= "
+							+ currentOverallAverage(),true);
+
+					// Scenario-Validate Map Legend
+					Reporter.log("Successfully Validated Message : "
+							+ mapLegend(),true);
+	
+
+					Actions builder = new Actions(driver);
+					Thread.sleep(2000);
+					// Mouse hover to that text message and Extract text
+					builder.moveToElement(
+							driver.findElement(By
+									.xpath(".//*[@id='network_heatmap_table']/tbody/tr[2]/td[2]/span")))
+							.build().perform();
+					Thread.sleep(2000);
+
+					String openWindowHandle = driver.getTitle();
+					Set<String> allWindowHandles = driver
+							.getWindowHandles();
+					for (String currentWindowHandle : allWindowHandles) {
+						Thread.sleep(1000);
+						if (currentWindowHandle.equals(driver
+								.getWindowHandle())) {
+							driver.switchTo().window(currentWindowHandle);
+							Thread.sleep(1000);
+							if (driver.getPageSource().contains(
+									"Availability")) {
+								Reporter.log("Successfully Validated Pop up Message for Markets",true);
+							} else {
+								Reporter.log("Failed to Validate Pop up Message for Markets",true);
+								Assert.assertTrue(driver.getPageSource()
+										.contains("Availability"),
+										"Failed to Validate Pop up Message for Markets");
+							}
+						}
+					}
+					// Scenario- Validate Latency Table Legend
+					if (latencyTableLegend().contains(
+							"Latency Table Legend")) {
+						Reporter.log("Successfully Validated Message : "
+								+ latencyTableLegend(),true);
+					} else {
+						Reporter.log("Failed - Expected Title not displayed - found text: "
+								+ networkLatencyTitleValidation(),true);
+						Assert.assertTrue(
+								latencyTableLegend()
+										.contains("Latency Table Legend"),
+								"Failed due to expected Title not displayed - instead found : "
+										+ latencyTableLegend());
+					}
+
+					// Scenario -9 Validate Latency Auto Refresh message
+					if (autoRefreshTextValidation()
+							.contains("Auto data refresh every 5 minutes")) {
+						Reporter.log("Successfully Validated Message : "
+								+autoRefreshTextValidation(),true);
+					} else {
+						Reporter.log("Failed - Expected Title not displayed - found text: "
+								+ networkLatencyTitleValidation(),true);
+						Assert.assertTrue(autoRefreshTextValidation()
+										.contains(
+												"Auto data refresh every 5 minutes"),
+								"Failed due to expected Title not displayed - instead found : "
+										+ autoRefreshTextValidation());
+					}
+
+					driver.navigate().refresh();
+					int eflag = 0;
+					do {
+						driver.navigate().refresh();
+						if (loadingPleaseWaitPopup()
+								.contains("Loading")) {
+							Reporter.log("Successfully Validated the page refresh  message : "
+									+ 
+											loadingPleaseWaitPopup(),true);
+							eflag = 1;
+							break;
+						}
+					} while (eflag == 0);
+				}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			return false;
+	}
+	
+	public boolean queuedReportValidation(WE_HomePage we_HomePage,WE_ReportingPage we_ReportingPage,String reportName) throws InterruptedException {
+		Reporter.log("********  Queued Report validation  ********", true);
+		vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.queuedReports, "Queued Reports");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Queued Reports  - Windstream Enterprise"));
+		
+		if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		}
+		Assert.assertTrue(vc.waitUntilTextIsPresent(reportName), "Validating the Report under Queued Reports");
+		List<WebElement> trQueuedReports_collection = driver.findElements(By.xpath("//*[@id='tblQueuedReportsList']/tbody/tr"));
+		Reporter.log("Number Of Records in the Queued Reports Table = "+ trQueuedReports_collection.size(),true);
+		Boolean queuedReportSearchFlag=false;
+		 int rowQRNum=0;
+		for (WebElement trQRElement : trQueuedReports_collection) {	
+			rowQRNum=rowQRNum+1;
+			if (trQRElement.getText().equals(reportName)) {
+				Reporter.log("Found Executed report"+trQRElement.getText(),true);
+				queuedReportSearchFlag=true;
+				break;
+			}
+		}
+		
+		if (queuedReportSearchFlag=false) {
+			Reporter.log("Executed Report :"+reportName+"  not found under Queued Reports list" , true);
+			Assert.assertFalse(true);
+		} 
+		
+		Reporter.log("*********** Validate Download feature of Queued Report ***********", true);
+		WebElement tcQRDownloadElement=  driver.findElement(By.xpath("//tbody/tr["+rowQRNum+"]/td[6]/div/a[1]"));
+		Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDownloadElement, "title", "Download Element").trim().contains("Download"), "Validate title for Download under Queued Report");
+		Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDownloadElement, "href", "Download Element").trim().contains("/Reporting/Report/GetQueuedReportContent?queuedReportId"), "Validate href for Download under Queued Report");
+		
+		Reporter.log("*********** Delete Queued Report ***********", true);
+		WebElement tcQRDeleteElement=  driver.findElement(By.xpath("//tbody/tr["+rowQRNum+"]/td[6]/div/a[2]"));
+		Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDeleteElement, "title", "Delete Element").trim().contains("Delete"), "Validate title for Delete under Queued Report");
+		Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDeleteElement, "href", "Delete Element").trim().contains("/Reporting/Report/DeleteQueuedReport?queuedReportId"), "Validate href for Delete under Queued Report");
+		vc.getWebDriverUtils().clickElement(tcQRDeleteElement, "Delete Queued Report");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Queued Report"));
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.deleteQueuedReportModalCloseX, "Delete Queued Report - Close X");
+		
+		vc.getWebDriverUtils().clickElement(tcQRDeleteElement, "Delete Queued Report");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You are about to delete a queued report. Do you want to continue"));
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.noDeleteQueuedReport, "Delete Queued Report - No");
+		
+		vc.getWebDriverUtils().clickElement(tcQRDeleteElement, "Delete Queued Report");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You are about to delete a queued report. Do you want to continue"));
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.yesDeleteQueuedReport, "Delete Queued Report - Yes");
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Queued Report Deleted Successfully"));
+		
+		if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		}
+		
+		Assert.assertFalse(vc.waitUntilTextIsPresent(reportName), "Deleted Queued Report should not be available in the list");
+		
+		Reporter.log("********  Back to  Run Report 'Now' and Delete Created Scheduled Report ********", true);
+		vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+		vc.getWebDriverUtils().clickElement(we_ReportingPage.scheduledUtilizationReports, "Scheduled Utilization Reports");
+		if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		}
+		queuedReportSearchFlag=true;
+		return queuedReportSearchFlag; 
+	}
+}	
+
+
+
+
+

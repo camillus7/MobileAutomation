@@ -1,0 +1,436 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.util.Set;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import Base.BaseSteps_SelGrid;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+public class SMB_Automation_End2End_Suite extends BaseSteps_SelGrid{
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	
+	
+	@Test
+	public void smb_Services_Products_Conferencing() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Services -> Products -> Conferencing";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Services -> Products -> Conferencing");
+			vc.getWebDriverUtils().clickElement(we_HomePage.services, "Services");
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.productsSubMenu, "Products");
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.conferencing, "Conferencing");
+
+			driver.getWindowHandles();
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					System.out.println(driver.switchTo().window(currentHandle).getTitle());
+					String childWindow = driver.getWindowHandle();
+					vc.getWebDriverUtils().checkPageIsReady();
+					Assert.assertTrue(vc.waitUntilTextIsPresent(
+							"Facilitate efficient and cost-effective communication among your employees"));
+					// Join A Conference
+					vc.getWebDriverUtils().clickElement(we_ServicesPage.joinAConference, "Join A Conference");
+
+					Set<String> childHandles = driver.getWindowHandles();
+					for (String currentChildHandle : childHandles) {
+
+						if (!(currentChildHandle == winHandleBefore) && !(currentChildHandle == childWindow)) {
+							System.out.println(driver.getTitle());
+							Assert.assertTrue(vc.waitUntilTextIsPresent("Join a Conference"));
+							Assert.assertTrue(vc.waitUntilTextIsPresent("https://core.callinfo.com/interface/guest.jsp?host=paetec"));
+							break;
+							
+						}
+					}
+					break;
+				}
+			}
+			driver.switchTo().window(winHandleBefore);
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Windstream Communications, LLC. All rights reserved"));
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void smb_Services_Tools_ActiveServices() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Active Services";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Services-> Tools -> Active Services");
+			vc.getWebDriverUtils().clickElement(we_HomePage.services, "Services");
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.toolsSubMenu, "Tools");
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.activeServices, "Active Services");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View Active Services"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Filters"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Product Type"));
+
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ServicesPage.applyFilters, "Filter Options")) {
+				vc.getWebDriverUtils().clickElement(we_ServicesPage.filters, "Filters - Open");
+			}
+
+		//	vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ServicesPage.productFamily, "Product Family","All");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ServicesPage.productType, "Product Type",
+					"All");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ServicesPage.product, "Product", "All");
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.applyFilters, "Apply Filters");
+
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ServicesPage.activeServicesTable,
+					"Active Services Table Validation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Broadband"));
+
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.clearFilters, "Clear Filters");
+
+			if (vc.getWebDriverUtils().elementAvailablity(we_ServicesPage.applyFilters, "Filter Options")) {
+				vc.getWebDriverUtils().clickElement(we_ServicesPage.filters, "Filters - Close");
+			}
+
+			Assert.assertFalse(vc.getWebDriverUtils().elementAvailablity(we_ServicesPage.applyFilters,
+					"Apply Filters - shouldn't display when filter is closed"));
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void smb_Services_Tools_SpeedTest() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Speed Test";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Services-> Tools -> SpeedTest");
+			vc.getWebDriverUtils().clickElement(we_HomePage.services, "Services");
+			
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ServicesPage.toolsSubMenu, "Tools")) {
+				vc.getWebDriverUtils().clickElement(we_HomePage.services, "Services");
+			}
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.toolsSubMenu, "Tools");
+			vc.getWebDriverUtils().clickElement(we_ServicesPage.speedTest, "Speed Test");
+
+			driver.getWindowHandles();
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Windstream Speedtest"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("click here"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("FAQ's related to Speedtest results"));
+					driver.close();
+					driver.switchTo().window(winHandleBefore);
+				}
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Speed Test"));
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void smb_Reporting_Network_NetworkLatency() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Reporting-> Network -> Network Latency";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_ReportingPage.networkLatency(we_HomePage, userStoryDescription, winHandleBefore);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+
+	@Test
+	public void smb_Reporting_Network_NetworkSLA() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Reporting-> Network -> Network SLA";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Network SLA");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSLA, "Network SLA");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Graph Definitions"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Jitter is defined as a measurement of the maximum expected arrival time"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Latency is the measurement of round trip delay from Point A to Point B on the network"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Packet Delivery is defined as the measurements of delivered packets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Network Availability is the amount of time the network is available for the customer"));
+			
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Queue Definitions"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Real Time Class of Service (CoS) delivers premium Quality of Service (QoS) to your site and is optimized"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mission Critical Data CoS provides the highest priority treatment for data"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Critical Data CoS provides priority treatment for transactional and interactive data such as email"));
+
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Network SLA");
+
+			Reporter.log("*********** Jitter ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Jitter");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("defined as a measurement of the maximum expected arrival time between sequential packets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Real Time Class of Service (CoS) delivers premium Quality of Service (QoS) to your site and is optimized"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mission Critical (last 3 months)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mission Critical Data CoS provides the highest priority treatment for data"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Critical (last 3 months)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Critical Data CoS provides priority treatment"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Standard Data CoS enables you to share latency and jitter tolerant data"));
+			
+			we_ReportingPage.networkSLAGraphCountValidation("Jitter",4);
+			
+			Reporter.log("*********** Latency ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Latency");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			we_ReportingPage.networkSLAGraphCountValidation("Latency",4);
+			
+			
+			Reporter.log("*********** Packet Delivery ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Packet Delivery");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			we_ReportingPage.networkSLAGraphCountValidation("Packet Delivery",4);
+			
+			
+			Reporter.log("*********** Network Availability ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Network Availability");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			we_ReportingPage.networkSLAGraphCountValidation("Network Availability",1);
+			
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.viewPrintData, "View /Print Data"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.exportToPDF, "Export To PDF"));
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void smb_Reporting_Network_TollUsage() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Reporting-> Network -> Toll Usage";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Toll Usage");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.tollUsage, "Toll Usage");
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Toll Usage");
+
+			driver.switchTo().frame("paymentIframe");
+			Reporter.log("*************  How am I using my service plan? ************* ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("How am I using my service plan?"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All calls"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Operator assisted calls"));	
+			
+			Reporter.log("*************  Where am I calling? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Where am I calling?"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Domestic calls"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("International calls"));
+			
+			Reporter.log("*************  How long am I talking? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("How long am I talking?"));	 	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All called numbers, ordered by duration"));	
+			
+			Reporter.log("*************  Whom do I call most? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Whom do I call most?"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All calls, ordered by frequency"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Calls on specific dates, ordered by frequency"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Calls to specific area codes, ordered by frequency"));	 
+			
+			Reporter.log("*************  My reports? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("My reports?"));
+			
+			Reporter.log("***********  All Calls Report Validation *********** ",true);
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.allCalls, "All Calls");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Analyze Bill"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Accounts For Selection"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select an account or All Accounts from the drop-down menu"));
+				
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.allAccountsList, "041814607", "Account List");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.addToAnalysis, "Add To Analysis");
+
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Subscriber Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Begin Cycle Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("End Cycle Date"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.startAnalysis, "Start Analysis");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Operator assisted calls"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Selected Accounts for Analysis"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.modifyReport, "Modify Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.additionalConstraints, "Additional Constraints");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First filter"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Second filter"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Third filter"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select one of the Analysis fields from the Field droplist, then enter a threshold value"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.cancel, "Cancel");
+
+			driver.switchTo().defaultContent();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void smb_Support_NewSupportRequest() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToCreateSupportRequest(userStoryDescription, we_HomePage);
+			
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			String selectService = "Broadband - ADSL - VoiceLine";
+			String serviceType = "Broadband - ADSL";
+			String reportedProblem ="Change Request";
+			String specifcIssue = "Managed Router Configuration Request";
+			
+			we_SupportPage.createSupportRequest_IssueDetails(selectService, reportedProblem, specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(serviceType, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+		//	we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void smb_SupportRequests_NewSupportRequest_FlyOut() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Support -> New Support Request";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_SupportPage.navigateToSupportRequest_CreateSupportRequestFlyOut(userStoryDescription, we_HomePage);
+			String serviceAddress = we_SupportPage.createSupportRequest_SelectLocation();
+			String serviceAccount = we_SupportPage.createSupportRequest_SelectAccount();
+			
+			String selectService = "Access Line - VoiceLine";
+			String serviceType = "Access Line";
+			String reportedProblem ="Application Performance";
+			String specifcIssue = "Advanced Application Reporting Issue";
+			
+			we_SupportPage.createSupportRequest_IssueDetails(selectService,reportedProblem,specifcIssue);
+			we_SupportPage.createSupportRequest_Priority("Minor");
+			we_SupportPage.createSupportRequest_ContactDetails();
+			we_SupportPage.createSupportRequest_Authorization();
+			we_SupportPage.createSupportRequest_SubmitRequest();
+			we_SupportPage.exportSupportRequestValidation();
+			String getTicketID=we_SupportPage.createSupportRequest_ViewRequest(serviceType, reportedProblem, serviceAccount, serviceAddress);
+			we_SupportPage.createSupportRequest_AddNotes();
+			//we_SupportPage.createSupportRequest_EscalateTicket();
+			we_SupportPage.createSupportRequest_CloseTicketAsResolved(getTicketID);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void smb_Support_FrequentlyAskedQuestions() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.SMB_User);
+		userStoryDescription = "Support -> Frequently Asked Questions";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> FrequentlyAskedQuestions");
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.frequentlyAskedQuestionsMenu, "FrequentlyAskedQuestions");
+
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					vc.getWebDriverUtils().validatePageTitle("Support | Windstream Small Business");
+
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Residential"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Business"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Enterprise"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Live Chat"));
+				}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			
+			vc.getWebDriverUtils().clickElement(we_SupportPage.answersToEveryLastQuestionMenu, "Answers To Every Last Question Menu");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Kinetic by Windstream provides services to residential and business customers");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+}

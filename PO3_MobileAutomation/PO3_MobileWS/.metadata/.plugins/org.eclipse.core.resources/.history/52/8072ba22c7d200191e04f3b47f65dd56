@@ -1,0 +1,323 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkHomePage;
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class hWin_HomePageSuite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private String firstName = "test" + Math.random();
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void WindstreamTextAlert_114574() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : WindstreamTextAlert_114574", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			Reporter.log("User Stories being validated are : = " + "WindstreamTextAlert_114574", true);
+			userStoryDescription = "Windstream Text Alerts";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Windstream Text Alerts");
+
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.TextAlerts, "Windstream Text Alerts Link");
+			Reporter.log("Navigated to Notification settings screen", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Notifications"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Bill Reminders"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order Status updates"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service Notifications"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Add A Contact"));
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContact, "Add a Contact");
+			Reporter.log("Clicked on Add a Contact", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Preferences"));
+			vc.getWebDriverUtils().clickElement(notificationsPage.cancelAddContact, "Cancel");
+			Reporter.log("Clicked on Cancel");
+			vc.getWebDriverUtils().sleep(3000);
+			Reporter.log("Validating the Fields of Add contacts", true);
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContact, "Add a Contact");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact, "Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name should not be empty"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name should not be empty"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please enter a phone number"));
+			vc.getWebDriverUtils().sleep(3000);
+			vc.getWebDriverUtils().enterText(notificationsPage.firstName, firstName, "FirstName");
+			vc.getWebDriverUtils().enterText(notificationsPage.lastName, "data", "LastName");
+			vc.getWebDriverUtils().enterText(notificationsPage.emailAddress, "test", "Email");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact, "Submit");
+			vc.getWebDriverUtils().sleep(3000);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Enter valid email address"));
+			vc.getWebDriverUtils().enterText(notificationsPage.emailAddress, "test@windstream.com", "Email");
+			vc.getWebDriverUtils().enterText(notificationsPage.phoneNumber, "5234567896", "PhoneNumber");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact, "Submit");
+			vc.getWebDriverUtils().sleep(3000);
+			vc.waitUntilTextIsPresent("Congratulations! You have submitted new contact successfully.");
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContactOkButton, "OK Button");
+			Reporter.log("Windstream Text Alert test successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+	@Test
+	public void ConsumerOffers() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : Consumer Offers", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		/* Consumer Internet Plan */
+		try {
+			Reporter.log("User Stories being validated are : = " + "112104", true);
+			userStoryDescription = "Consumer Current Internet Plan";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Current Internet Plan");
+			winLinkHomePage.GetInternetText();
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.GetInternetSupport, "GetInternetSupport");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Internet Support");
+			Reporter.log("Verifying Internet plan test cases successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+
+		/* Consumer TV Plan */
+		try {
+			Reporter.log("User Stories being validated are : = " + "114006", true);
+			userStoryDescription = " Consumers TV Plan";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Consumer TV Plan");
+			winLinkHomePage.GetTVText();
+			String TV_Txt = winLinkHomePage.GetTVText();
+			Reporter.log("Checking for TV subscribe status", true);
+			if (TV_Txt.contains("Out With Cable, In With Savings")) {
+				Reporter.log("User not subscribed for TV", true);
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.AddTVNow, "AddTV Now");
+				winLinkHomePage.Validate_AddTVText();
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.AddTVNow_CloseButton, "AddTVNow_CloseButton");
+			} else {
+				Reporter.log("User Subscribed for TV", true);
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.LearnMoreTV, "LearnMoreTV");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "http://watch.windstream.net/");
+			}
+			Reporter.log("Verifying Consumer TV plan test cases successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+
+		/* Consumer Phone Plan */
+		try {
+			Reporter.log("User Stories being validated are : = " + "114008", true);
+			userStoryDescription = " Consumer Phone Plan";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Consumer Phone Plan");
+			winLinkHomePage.GetPhoneText();
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.GetPhoneSupport, "GetPhoneSupport");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Phone Support");
+			Reporter.log("Verifying consumer Phone plan test cases successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+	@Test
+	public void ThankYouRewards_114576() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : ThankYouRewards_114576", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		/* Home Page - Thank you Rewards */
+		try {
+			Reporter.log("User Stories being validated are : = " + "114576", true);
+			userStoryDescription = "ThankYouRewards";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "ThankYouRewards");
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.ThankYouRewards, "ThankYouRewards");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "https://thankyou.windstream.com/");
+			Reporter.log("Verifying Thank you rewards test cases successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+
+		/* Home Page-Contact Us */
+
+		try {
+			Reporter.log("User Stories being validated are : = " + "112405", true);
+			userStoryDescription = "Home Page-Contact Us";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Home Page-Contact Us");
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.contactUs, "Contact Us");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customer Care"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("800.347.1991"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("windstream.cares@windstream.com"));
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.contactUsCloseX, "Contact Us -  Close Button");
+			Reporter.log("Verifying Conatct Us test cases successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+	@Test
+	public void TermsConditions_PrivacyPolicy() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : Home Page-Terms & Conditions/Privacy Policy", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		/* Home Page_Terms & Conditions */
+		try {
+			Reporter.log("User Stories being validated are : = " + "112611", true);
+			userStoryDescription = "Home Page_Terms & Conditions";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Terms & Conditions");
+
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.termsAndConditions, "Terms & Conditions Link");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore,
+					"TERMS AND CONDITIONS FOR SERVICES AND/OR EQUIPMENT PROVIDED BY WINDSTREAM");
+			Reporter.log("Home Page_Terms & Conditions test case successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+
+		/* Home Page_Privacy Policy */
+		try {
+			Reporter.log("User Stories being validated are : = " + "112613", true);
+			userStoryDescription = "Home Page_Privacy Policy";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Privacy Policy");
+
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.privacyPolicy, "Privacy Policy Link");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore,
+					"This Privacy Statement describes how Windstream and its affiliates collects information");
+			Reporter.log("Home Page_Privacy Policy test case successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+	@Test
+	public void Consumer_Scrolling() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : Home Page-Verify Consumer Scrolling Advertisements", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+
+			Reporter.log("User Stories being validated are : = " + "113620", true);
+			userStoryDescription = "Verify Consumer Scrolling Advertisements";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+					"Home Page-Verify Consumer Scrolling Advertisements");
+			/* Direct TV Now Scrolling Bar */
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.circle_progressbar1, "Direct TV Scrolling Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(winLinkHomePage.GetDirectTVText()));
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.DirectTVShopNow_Button, "DirectTVShopNow_Button");
+			Reporter.log("Verifying the Direct TV Now Scrolling and its Text & Button", true);
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "https://www.directvnow.com/windstream");
+			Reporter.log("Validating the Direct TV Now URL", true);
+			Reporter.log("Validating the Direct TV Now Scrolling bar successfully executed", true);
+
+			/* Kinetic Scrolling Bar */
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.circle_progressbar2, "Kinetic Scrolling Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(winLinkHomePage.GetKineticText()));
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.Kinetic_Shop_Button,
+					"Kinetic Scrolling Ads_Shop Button");
+			Reporter.log("Verifying the Kinetic Scrolling and its Text & Button", true);
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Introducing Kinetic by Windstream");
+			Reporter.log("Validating the Kinetic screen text", true);
+			Reporter.log("Validating the Kinetic Scrolling bar successfully executed", true);
+
+			/* Security Packages Scrolling Bar */
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.circle_progressbar3,
+					"Security Packages Scrolling Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(winLinkHomePage.GetSecurityPackages_Text()));
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.SecurityPackage_LearnMore_Button,
+					"SecurityPackage_LearnMore_Button");
+			Reporter.log("Verifying the Security Packages Scrolling and its Text & Button", true);
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Windstream Shield Security");
+			Reporter.log("Validating the Security Packages screen text", true);
+			Reporter.log("Validating the Security Packages scrolling bar successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+
+		}
+
+		try {
+
+			Reporter.log("User Stories being validated are : = " + "113621", true);
+			userStoryDescription = "Security Packages-Scrolling Advertisements";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Home Page-Security Packages");
+
+			/* Security Packages Scrolling Bar */
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.circle_progressbar3,
+					"Security Packages Scrolling Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(winLinkHomePage.GetSecurityPackages_Text()));
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.SecurityPackage_LearnMore_Button,
+					"SecurityPackage_LearnMore_Button");
+			Reporter.log("Verifying the Security Packages Scrolling and its Text & Button", true);
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Windstream Shield Security");
+			Reporter.log("Validating the Security Packages screen text", true);
+			Reporter.log("Validating the Security Packages scrolling bar successfully executed", true);
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+}

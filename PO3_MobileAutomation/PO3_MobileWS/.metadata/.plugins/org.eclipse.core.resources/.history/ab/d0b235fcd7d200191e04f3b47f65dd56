@@ -1,0 +1,41 @@
+package com.webautomation.pageobject.myWin_pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class MyWin_RegistrationPage {
+	final WebDriver driver;
+	private Validator vc;
+
+	public MyWin_RegistrationPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(id="accountNo")
+	public WebElement accountNumber;
+	
+	@FindBy(id="lastName")
+	public WebElement lastName;
+	
+	@FindBy(id="emailAddress")
+	public WebElement EmailAddress;
+	
+	@FindBy(id="billingZipCode")
+	public WebElement zipCode;
+	
+	@FindBy(id="registerBtn")
+	public WebElement registerButton;
+	
+	@FindBy(xpath=".//div[1]/div/div[2]/div[1]/div[5]/div/span")
+	public WebElement emailAddressToolTip;
+	
+	@FindBy(linkText="Sign In")
+	public WebElement signIn;
+	
+	
+	
+}

@@ -1,0 +1,157 @@
+package com.webautomation.tests.seleniumGrid;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class hWin_SupportRequest_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private String firstName = "test" + Math.random();
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void SupportRequest_Page() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story :SupportRequest_Page", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+		try {
+
+			try {
+				userStoryDescription = "VerifyClosedSupportRequest";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support - VerifyClosedSupportRequest");
+
+				winLinkHomePage.clickonSupportMenu();
+
+				vc.getWebDriverUtils().clickElement(supportPage.supportRequests, "Support Requests");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("All")); //
+				Assert.assertTrue(vc.waitUntilTextIsPresent("support@windstream.com"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Closed"));
+				vc.getWebDriverUtils().clickElement(supportPage.ClosedRequest, "CloseRequest");
+				vc.getWebDriverUtils().clickElement(supportPage.RequestExpand, "RequestExpand");
+				Thread.sleep(3000);
+				System.out.println(supportPage.ServiceLocationTxt.getText());
+				System.out.println(supportPage.ContactName.getText());
+				System.out.println(supportPage.Mail.getText());
+
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+
+			} catch (Throwable e) {
+				e.printStackTrace();
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}			
+			
+			try {
+					userStoryDescription = "Quick Help";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+							"Support - Quick Help - Issues with Modem/Questions About My Bill/Slow Internet Speeds");
+
+					vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support Menu");
+					// menu"); winLinkHomePage.clickonSupportMenu();
+					vc.getWebDriverUtils().clickElement(supportPage.quickHelp, "Quick Help");
+					vc.getWebDriverUtils().clickElement(supportPage.issuesWithModem, "Issues With Modem");
+					vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Internet Support");
+
+					vc.getWebDriverUtils().clickElement(supportPage.quickHelp, "Quick Help");
+					vc.getWebDriverUtils().clickElement(supportPage.questionsAboutMyBill, "Questions About My Bill");
+					vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "My Account and Payments");
+
+					vc.getWebDriverUtils().clickElement(supportPage.quickHelp, "Quick Help");
+					vc.getWebDriverUtils().clickElement(supportPage.slowInternetSpeeds, "Slow Internet Speeds");
+					vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "How do I improve the speed");
+
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+
+				} catch (Throwable e) {
+					e.printStackTrace();
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+				}
+
+				try {
+					userStoryDescription = "Support Requests";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support - Support Requests");
+
+					winLinkHomePage.clickonSupportMenu();
+
+					vc.getWebDriverUtils().clickElement(supportPage.supportRequests, "Support Requests");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("All"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("support@windstream.com"));
+
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+				}
+
+				try {
+					userStoryDescription = "Speed Test";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support - Speed Test");
+
+					winLinkHomePage.clickonSupportMenu();
+
+					vc.getWebDriverUtils().clickElement(supportPage.speedTest, "Speed Test");
+					vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Windstream Speedtest");
+
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+				}
+
+				try {
+					userStoryDescription = "Optimize Your Wifi";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support - Speed Test");
+
+					winLinkHomePage.clickonSupportMenu();
+					vc.getWebDriverUtils().mouseHoveronElement(supportPage.optimizeyourwifi);
+					vc.getWebDriverUtils().clickElement(supportPage.optimizeyourwifi, "Optimize Your Wifi");
+					vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Proceed as Guest");
+
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+				}
+
+				try {
+					userStoryDescription = "FAQ";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support - Speed Test");
+
+					winLinkHomePage.clickonSupportMenu();
+
+					vc.getWebDriverUtils().clickElement(supportPage.faq, "FAQ");
+					vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "How Can We Help You");
+
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+				}
+
+			
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+}

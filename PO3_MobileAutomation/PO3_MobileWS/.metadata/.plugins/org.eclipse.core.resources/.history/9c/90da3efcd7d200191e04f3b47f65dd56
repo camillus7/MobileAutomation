@@ -1,0 +1,106 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_KineticBusinessSupportWidget {
+	
+	final WebDriver driver;
+			
+			String winHandleBefore = null;
+					
+			private Validator vc;
+			private WE_CommonWidgets cw;
+			
+
+			public WE_KineticBusinessSupportWidget(WebDriver driver) {
+				this.driver = driver;
+				this.vc = new Validator(driver);
+				this.cw = new WE_CommonWidgets(driver);
+			}
+
+			@FindBy(xpath = "//label[contains(.,'Kinetic Business Support')]")
+			public WebElement weKineticBusinessSupportCheckbox;
+			
+			@FindBy(xpath="//div[@data-widgettitle='Kinetic Business Support']/div[1]/button")
+			public WebElement settingsIcon;
+			
+			@FindBy(xpath="//div[@data-widgettitle='Kinetic Business Support']//a[contains(.,'Remove Widget')]")
+			public WebElement removeWidgetOption;
+
+			@FindBy(xpath="//div[@data-widgettitle='Kinetic Business Support']//a[contains(.,'Visit')]")
+			public WebElement visit;
+			
+			@FindBy(xpath = "//a[@class='ytp-title-link yt-uix-sessionlink'][contains(.,'High-bandwidth diversity and reduced network downtime with Fixed Wireless')]")
+			public WebElement highBandwidthVideo;
+			
+			@FindBy(xpath = "//a[@class='ytp-title-link yt-uix-sessionlink'][contains(.,'Wavelength Services')]")
+			public WebElement waveLengthVideo;
+			
+			@FindBy(xpath = "//a[@class='ytp-title-link yt-uix-sessionlink'][contains(.,'Windstream Enterprise Cloud Connect')]")
+			public WebElement weCloudConnectVideo;
+			
+			@FindBy(xpath = "//a[@class='ytp-title-link yt-uix-sessionlink'][contains(.,'Windstream Enterprise SD-WAN: See What It Can Do For You')]")
+			public WebElement weSDWANVideo;
+			
+			public void windowHandle(WebElement link,String titleName,String verificationText) throws InterruptedException{
+				String parentWindow = driver.getWindowHandle();
+				vc.getWebDriverUtils().clickElement(link, verificationText);
+				
+				for(String winHandle:driver.getWindowHandles()){
+					driver.switchTo().window(winHandle);
+					
+					Reporter.log(driver.switchTo().window(winHandle).getTitle(),true);
+					vc.getWebDriverUtils().titleVerification(driver.switchTo().window(winHandle).getTitle(), titleName);
+					//Assert.assertTrue(vc.waitUntilTextIsPresent(verificationText));
+					
+				}
+				driver.close();
+				driver.switchTo().window(parentWindow);
+			}
+			public void weKinteicBusinessSupportWidget_Functionality() throws InterruptedException {
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Kinetic Business Support"));
+
+				vc.getWebDriverUtils().checkPageIsReady();
+				vc.getWebDriverUtils().clickElement(visit, "Visit");
+				Set<String> allHandles = driver.getWindowHandles();
+				for (String currentHandle : allHandles) {
+					if (!currentHandle.equals(winHandleBefore)) {
+						driver.switchTo().window(currentHandle);
+						Assert.assertTrue(vc.waitUntilTextIsPresent("windstream small business support"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("We're here to help get you back to business"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Live Chat"));	 
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Need an answer fast"));
+						break;
+					}
+				}
+				
+				driver.close();
+				driver.switchTo().window(winHandleBefore);
+				int size = driver.findElements(By.tagName("iframe")).size();
+				System.out.println("IFrame Size:="+size);
+				vc.getWebDriverUtils().elementAvailablity(highBandwidthVideo, "High bandwidth Video");
+				vc.getWebDriverUtils().elementAvailablity(waveLengthVideo, "Wave Length Video");
+				vc.getWebDriverUtils().elementAvailablity(weCloudConnectVideo, "WE Cloud Connect Video");
+				vc.getWebDriverUtils().elementAvailablity(weSDWANVideo, "WE SDWAN Video");
+				
+				Reporter.log("********** Remove Widget ************",true);
+				cw.removeAddedWidget("WE Videos");
+				
+				
+			}
+			
+			
+	
+
+}

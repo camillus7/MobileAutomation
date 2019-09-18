@@ -1,0 +1,151 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyCallLogPage {
+	
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_MyCallLogPage (WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+
+	// My Call Log
+	
+	@FindBy(linkText = "My Call Log")
+	public WebElement myCallLogMenu;
+	
+	@FindBy(linkText = "Manage My Blocked Numbers")
+	public WebElement ManageMyBlockedNumbers;
+
+	@FindBy(xpath = "//h1[contains(.,'My Call Log')]")
+	public WebElement myCallLogHeader;
+	
+	@FindBy(xpath = "//button[@id='btnExport']")
+	public WebElement exportMyCallLog;
+	
+	@FindBy(xpath = "//button[@id='toggleFilters']")
+	public WebElement toggleFilters;
+	
+	@FindBy(xpath = "//button[@data-id='ddlDirection']")
+	public WebElement ddlDirection;
+	
+	@FindBy(xpath = "//button[@id='MyCallHistoryApplyFilter']")
+	public WebElement myCallHistoryApplyFilter;
+	
+	@FindBy(xpath = "//button[@id='MyCallHistoryClearFilter']")
+	public WebElement MyCallHistoryClearFilter;
+	
+	@FindBy(xpath ="//button[@id='yesButton']")
+	public WebElement yesButton;
+
+	@FindBy(xpath ="//*[@id='MyCallHistoryGrid']/div[2]/table/tbody/tr[1]/td[3]")
+	public WebElement gridDirection1;
+
+	@FindBy(xpath ="//*[@id='MyCallHistoryGrid']/div[2]/table/tbody/tr[2]/td[3]")
+	public WebElement gridDirection2;
+	
+	@FindBy(xpath ="//a[contains(.,'Direction')]")
+	public WebElement gridDirectionHeader;
+	
+	@FindBy(xpath ="//span[@class='k-icon k-i-arrow-e']")
+	public WebElement paginationForwardArrow;
+	
+	@FindBy(xpath ="//span[@class='k-icon k-i-arrow-w']")
+	public WebElement paginationBackwardArrow;
+
+	@FindBy(xpath ="//input[@id='txtBlockedNumber']")
+	public WebElement txtBlockedNumber;	
+	
+	@FindBy(xpath ="//button[@id='BlockApplyFilter']")
+	public WebElement blockApplyFilter;	
+	
+	@FindBy(xpath ="//button[@id='BlockClearFilter']")
+	public WebElement blockClearFilter;	
+	
+	@FindBy(xpath ="//*[@id='ManageBlockedPhoneNumbersGrid']/div[2]/table/tbody/tr[1]/td[1]")
+	public WebElement blockedFirstNumber;	
+	
+	@FindBy(xpath ="//button[contains(.,'Unblock')]")
+	public WebElement unblockBlockedPhoneNumber;	
+
+	@FindBy(xpath ="//button[@id='noButton']")
+	public WebElement noButton;	
+	
+	@FindBy(xpath ="//input[@id='PhoneNumber']")
+	public WebElement PhoneNumber;	
+	
+	@FindBy(xpath="//*[@id='MyCallHistoryGrid']/div[3]/ul/li[3]")
+	public WebElement secondPage;
+	
+	@FindBy(xpath="//*[@id='MyCallHistoryGrid']/div[3]/ul/li[2]")
+	public WebElement firstPage;
+	
+public void verifyPagination() throws InterruptedException{	    
+		
+		List<WebElement> pagination =driver.findElements(By.xpath("//*[@id='MyCallHistoryGrid']/div[3]/ul/li"));
+		// check if pagination link exists 
+		   if(pagination.size()>0)
+		   { 
+	       // click on pagination links 
+			System.out.println("Pagination exists");
+	     		for(int i=1; i<pagination.size(); i++)
+	     		{ 
+	     		Thread.sleep(2000);	    
+	            pagination = driver.findElements(By.xpath("//*[@id='MyCallHistoryGrid']/div[3]/ul/li"));
+	            pagination.get(i).click(); 
+	            Thread.sleep(2000);	
+	            }
+	      }	
+		 else {
+	        System.out.println("Pagination doesn't exists");
+	      }
+		} 
+
+	public void verifyforward() throws InterruptedException{	    
+		
+		List<WebElement> pagination =driver.findElements(By.xpath("//*[@id='MyCallHistoryGrid']/div[3]/ul/li")); 
+		// check if pagination link exists 
+		if (pagination.size()>1)
+		{   
+			// Click Next page icon
+	        Thread.sleep(1000);	    
+		    vc.getWebDriverUtils().clickElement(paginationForwardArrow,"Click Next icon"); 	
+			boolean result = secondPage.isEnabled();
+		    Assert.assertTrue(result, "false");
+
+		} 
+		else {
+	        System.out.println("There is only one page in the grid");
+		} } 	
+   
+	public void verifyBackward() throws InterruptedException{	    
+		
+		List<WebElement> pagination =driver.findElements(By.xpath("//*[@id='MyCallHistoryGrid']/div[3]/ul/li")); 
+		// check if pagination link exists 
+		if(pagination.size()>1)
+		{   
+		    // Click Previous page icon
+	        vc.getWebDriverUtils().clickElement(paginationBackwardArrow,"Click Previous icon");        
+	        boolean result = firstPage.isEnabled();
+		    Assert.assertTrue(result, "false");
+	     }	
+		else {
+	        System.out.println("There is only one page in the grid");
+	        }				
+		}  
+}

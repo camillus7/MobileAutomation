@@ -1,0 +1,392 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_General_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void MyProfile_ActivityLog() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "My profile -> Activity Log";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			Reporter.log("Test Case 109857:Check whether Activity Log option available in the menu", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Activity Log");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.activityLog, "Activity Log");
+			
+			Reporter.log("Test Case 109858:Check whether Activity Log page appears on clicking Activity Log", true);
+			if (vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.filterDown)) {
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.filterDown, "Open Filter");
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Visit"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Duration"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Events"));
+			
+			Reporter.log("Test Case 109859: Validate the fields in Activity Log page", true);
+			
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.visit, "Visit Column");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.duration, "Duration Column");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.events, "Events Column");
+			
+			Reporter.log("Test Case 109861: Verify filtering functionality in Activity Log", true);
+				
+			if (vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.filterDown)) {
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.filterDown, "Open Filter");
+			} 
+			
+		/*	vc.getWebDriverUtils().getAttribute(we_MyProfilePage.visitLogStartDate, "value", "Visit Log Start Date");
+			vc.getWebDriverUtils().getAttribute(we_MyProfilePage.visitLogEndDate, "value", "Visit Log End Date");
+			//vc.getWebDriverUtils().selectSpanDropDownValue(we_MyProfilePage.visitLogListBox, "Visit List Box", "Custom");
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.visitLogStartDate, "01/01/2018", "Visit Log Start Date - Custom Value");
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.visitLogEndDate, "11/02/2018", "Visit Log End Date - Custom Value");*/
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_MyProfilePage.activity, "Activity Drop Down", "Any");
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.durationInMinutes, "0", "Duration in Minutes");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.applyFilters, "Apply Filter");
+			int rowNum = driver.findElements(By.xpath("//*[@id='tblActivityLog']/tbody/tr")).size();
+		    for(int i=1; i<rowNum; i++){
+		        String sDurationInMinutes=driver.findElement(By.xpath("//*[@id='tblActivityLog']/tbody/tr["+ i +"]/td[2]")).getText().trim();
+		        System.out.println(sDurationInMinutes);
+					if (i!=rowNum && sDurationInMinutes.contentEquals("0 minute")){
+						Reporter.log("Duration in Minutes filter value not displaying as expected. Expected value:= 0 and Actual value displayed as "+sDurationInMinutes+ " in Row "+i, true);
+						Assert.assertTrue(false);
+					} else {
+						if (i==rowNum && sDurationInMinutes!="0 minute") {
+							Reporter.log("Duration in Minutes filter value not displaying as expected. Expected value:= 0 minute and Actual value displayed as "+sDurationInMinutes+ " in Row "+i, true);
+							Assert.assertTrue(false);
+						}
+						else {
+							Reporter.log("Duration in Minutes filter values displayed as expected",true);
+						}
+					}
+		        }
+			
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.makeTheseFiltersMyDefault, "Make these filters my default");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.clearFilters, "Clear Filter");
+		
+			
+			Reporter.log("Test Case 109864: Validate Export functionality", true);
+			Assert.assertTrue(vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.exportActivityLog));
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.exportActivityLog, "Export Activity log");
+			vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.exportToExcel);
+			vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.exportToPDF);
+			
+			
+			Reporter.log("Test Case 122052: Verify Refresh functionality", true);
+			vc.getWebDriverUtils().enterText(we_MyProfilePage.durationInMinutes, "12", "Duration in Minutes");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.refresh, "Refresh");
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.durationInMinutes, "value", "Duration in Minutes").equalsIgnoreCase("")) {
+				Reporter.log("Refresh functionality working as expected", true);
+			} else {
+				Reporter.log("Refresh functionality not working as expected", true);
+				Assert.assertFalse(true);
+			}
+			
+			Reporter.log("Test Case 109865: Verify pagination functionality", true);
+			
+			vc.getWebDriverUtils().mouseHoveronElement(we_MyProfilePage.termsAndConditions);
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.allLogs, "All logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs15, "15 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs40, "40 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs100, "100 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.logs15, "15 Logs");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.nextPage, "Next Page");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.prevPage, "Previous Page");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.lastPage, "Last Page");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.firstPage, "First Page");
+			
+			Reporter.log("Test Case 122170: Validate activity log grid data", true);
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.expandableDownActivityLog,"Event Log Down");
+			
+			while (driver.findElement(By.xpath("//img[@src='/Images/details_loading_bar.gif']")).isDisplayed()) {
+				System.out.println("waiting for event log to load");
+				Thread.sleep(1000);
+			}
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Event Log"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Time"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Area"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Message"));
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.expandableUpActivityLog,"Event Log Up");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_Themes() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "My profile -> Themes";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			Reporter.log("Test Case 119489:Check whether themes option available in My profile", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Activity Log");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.preferences, "Preferences");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Themes"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Black"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("White"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Grey"));
+			
+			Reporter.log("Test Case 119490:Verify Themes functionality", true);
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("black")) {
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.greyTheme, "Grey Theme");
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+				vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+				vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+				vc.getWebDriverUtils().clickElement(we_MyProfilePage.preferences, "Preferences");
+			} 
+			
+			Reporter.log("************   Black Theme  ************ ", true);
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.blackTheme, "Black Theme");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.yourPreferencesSavedSuccessfully);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Your preferences have been saved successfully"));
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("black")) {
+				Reporter.log("Theme Successfully set to Black", true);
+			} else {
+				Reporter.log("Theme didn't change as expected ", true);
+				Assert.assertTrue(false);
+			}
+			
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.preferences, "Preferences");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.whiteTheme, "White Theme");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.yourPreferencesSavedSuccessfully);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Your preferences have been saved successfully"));
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("white")) {
+				Reporter.log("Theme Successfully set to White", true);
+			} else {
+				Reporter.log("Theme didn't change as expected ", true);
+				Assert.assertTrue(false);
+			}
+			
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.preferences, "Preferences");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.greyTheme, "Grey Theme");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.saveChanges, "Save Changes");
+			vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_MyProfilePage.yourPreferencesSavedSuccessfully);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Your preferences have been saved successfully"));
+			if (vc.getWebDriverUtils().getAttribute(we_MyProfilePage.getThemeBackGroundColor, "value", "Theme Background").equalsIgnoreCase("grey")) {
+				Reporter.log("Theme Successfully set to Grey", true);
+			} else {
+				Reporter.log("Theme didn't change as expected ", true);
+				Assert.assertTrue(false);
+			}
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_ContactInformation_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "My profile -> Edit Contact Information";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.contactInformation(userStoryDescription, we_HomePage, we_MyProfilePage);		
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_ContactInformation_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "My profile -> Edit Contact Information";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.contactInformation(userStoryDescription, we_HomePage, we_MyProfilePage);		
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_ChangePassword_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "My profile -> Change Password";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.changePassword(userStoryDescription, we_HomePage, we_MyProfilePage);		
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_ChangePassword_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "My profile -> Change Password";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.changePassword(userStoryDescription, we_HomePage, we_MyProfilePage);		
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_ActivityLog_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "My profile -> Activity Log";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.activityLog(userStoryDescription, we_HomePage, we_MyProfilePage);		
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void MyProfile_ActivityLog_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "My profile -> Activity Log";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.activityLog(userStoryDescription, we_HomePage, we_MyProfilePage);		
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_Themes_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User2);
+		userStoryDescription = "My profile -> Themes";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.themes(userStoryDescription, we_HomePage, we_MyProfilePage);	
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	@Test
+	public void MyProfile_Themes_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "My profile -> Themes";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_MyProfilePage.themes(userStoryDescription, we_HomePage, we_MyProfilePage);	
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void MyProfile_ActivityLog_DropDownTest() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase2);
+		userStoryDescription = "My profile -> Activity Log";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			Reporter.log("Test Case 109857:Check whether Activity Log option available in the menu", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "My profile -> Activity Log");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userImageHomeScreen, "User Image");
+			vc.getWebDriverUtils().clickElement(we_HomePage.myProfile, "My profile");
+			vc.getWebDriverUtils().clickElement(we_MyProfilePage.activityLog, "Activity Log");
+			
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(we_MyProfilePage.activity,we_HomePage.dropDownInnserSelect, "Visit List Box", "Login");
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(we_MyProfilePage.activity,we_HomePage.dropDownInnserSelect, "Visit List Box", "User Permissions Updated");
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(we_MyProfilePage.activity,we_HomePage.dropDownInnserSelect, "Visit List Box", "Service Ticket Added");
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(we_MyProfilePage.activity,we_HomePage.dropDownInnserSelect, "Visit List Box", "Order Submitted");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+}

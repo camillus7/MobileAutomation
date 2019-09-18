@@ -1,0 +1,212 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+import com.webautomation.validation.Validator;
+
+public class WE_BusinessDetailsPage
+{
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_BusinessDetailsPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath="xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+	//Business details
+	
+			@FindBy(linkText="Business Details")
+			public WebElement businessDetails;
+			
+			@FindBy(xpath="//h2[contains(.,'Default Ringtones')]")
+			public WebElement defaultRingtones;
+			
+			@FindBy(xpath="//h2[contains(.,'Account Codes')]")
+			public WebElement accountCodes;
+			
+			@FindBy(xpath="//h2[contains(.,'Music On Hold')]")
+			public WebElement musicOnHold;
+			
+			@FindBy(xpath="//h2[contains(.,'Extension Range')]")
+			public WebElement extensionRange;
+			
+			@FindBy(xpath="//h2[contains(.,'Telephone User Directory Search')]")
+			public WebElement telephoneUserDirectorySearch;
+			
+			@FindBy(xpath="//h2[contains(.,'Park Location Method')]")
+			public WebElement parkLocationMethod;
+			
+			@FindBy(xpath="//h2[contains(.,'Emergency Contact Emails ')]")
+			public WebElement emergencyEmail;
+			
+			@FindBy(xpath="//h2[contains(.,'Business Hours')]")
+			public WebElement businessHrs;
+			
+			@FindBy(xpath="//button[@data-id='InternalCallDirectId']")
+			public WebElement internalCallDirectDropdown;
+			
+			@FindBy(xpath="//button[@data-id='ExternalCallDirectId']")
+			public WebElement externalCallDirectDropdown;
+			
+			@FindBy(xpath="//button[@data-id='InternalCallViaGroupId']")
+			public WebElement internalCallGroupDropdown;
+			
+			@FindBy(xpath="//button[@data-id='ExternalCallViaGroupId']")
+			public WebElement externalCallGroupDropdown;
+			
+			@FindBy(xpath="//button[@data-id='TelephoneUserDirectorySearch']")
+			public WebElement telephoneUserDirectory;
+			
+			@FindBy(xpath="//button[@data-id='ParkLocationSelectionMethod']")
+			public WebElement parkLocationSelection;
+						
+			public void internalCallDirectVerifyDropdownValues() {	
+				
+				String[] exp = {"Device Default", "Ring Tone 1", "Ring Tone 2", "Ring Tone 3", "Ring Tone 4", "Ring Tone 5", "Ring Tone 6", "Ring Tone 7", "Ring Tone 8", "Ring Tone 9", "Silent"};
+				WebElement dropdown = driver.findElement(By.id("InternalCallDirectId"));
+				
+				Select select = new Select(dropdown);
+				List<WebElement> options = select.getOptions();
+				for (int i = 0; i < options.size(); i++) {
+					options.get(i).getText().equals(exp[i]);
+				}
+
+			} 
+			
+	       public void externalCallDirectVerifyDropdownValues() {	
+				
+				String[] exp = {"Device Default", "Ring Tone 1", "Ring Tone 2", "Ring Tone 3", "Ring Tone 4", "Ring Tone 5", "Ring Tone 6", "Ring Tone 7", "Ring Tone 8", "Ring Tone 9", "Silent"};
+				WebElement dropdown = driver.findElement(By.id("ExternalCallDirectId"));
+				
+				Select select = new Select(dropdown);
+				List<WebElement> options = select.getOptions();
+
+				for (int i = 0; i < options.size(); i++) {
+					options.get(i).getText().equals(exp[i]); 
+				
+
+			} }
+	       
+	       public void internalCallGroupVerifyDropdownValues() {	
+				
+				String[] exp = {"Device Default", "Ring Tone 1", "Ring Tone 2", "Ring Tone 3", "Ring Tone 4", "Ring Tone 5", "Ring Tone 6", "Ring Tone 7", "Ring Tone 8", "Ring Tone 9", "Silent"};
+				WebElement dropdown = driver.findElement(By.id("InternalCallViaGroupId"));
+				
+				Select select = new Select(dropdown);
+				List<WebElement> options = select.getOptions();
+
+				for (int i = 0; i < options.size(); i++) {
+					options.get(i).getText().equals(exp[i]); 
+				}
+			} 
+			
+	       public void externalCallGroupVerifyDropdownValues() {	
+				
+				String[] exp = {"Device Default", "Ring Tone 1", "Ring Tone 2", "Ring Tone 3", "Ring Tone 4", "Ring Tone 5", "Ring Tone 6", "Ring Tone 7", "Ring Tone 8", "Ring Tone 9", "Silent"};
+				WebElement dropdown = driver.findElement(By.id("ExternalCallViaGroupId"));
+				
+				Select select = new Select(dropdown);
+				List<WebElement> options = select.getOptions();
+
+				for (int i = 0; i < options.size(); i++) {
+					options.get(i).getText().equals(exp[i]); 			
+
+			} }	
+	       
+			@FindBy(xpath="//button[@id='ringtoneSubmit']")
+			public WebElement ringtoneSubmit;
+
+		public void musicOnHoldVerifyDropdownValues() {	
+				
+				String[] exp = {"None", "Basic Hold Announcement", "System Default","Comfort Tone" };
+				WebElement dropdown = driver.findElement(By.id("ddlMusic"));
+				
+				Select select = new Select(dropdown);
+				List<WebElement> options = select.getOptions();
+				if (options.contains(exp))
+				{
+					System.out.println("Options present");
+				} }
+
+		
+		@FindBy(xpath="//a[@id='btnUploadMusic']")
+		public WebElement MOHUploadbutton;
+		
+		@FindBy(xpath="//input[@id='txtCustomMOH']")
+		public WebElement MOHSearch;
+		
+		@FindBy(xpath = "//span[contains(.,'Choose a file')]")
+		public WebElement MOHChooseFile;	
+		
+		@FindBy(xpath ="//button[@data-id='AccountCodeStatus']")
+		public WebElement accountCodesStatus;
+		 
+		 @FindBy(xpath ="//input[@id='MinAccountLength']")
+		 public WebElement minAccountLength;
+		 
+		 @FindBy(xpath ="//input[@id='MaxAccountLength']")
+		 public WebElement maxAccountLength;
+		 
+		 @FindBy(xpath ="//button[@id='accountcodeSubmit']")
+		 public WebElement accountCodeSubmit;
+
+		 @FindBy(xpath ="//button[contains(.,'Configure')]")
+		 public WebElement configureBusinessHours;
+		 
+		 public void verifyPageURL() {				
+			 String currentpageUrl = driver.getCurrentUrl();
+			 assertTrue(currentpageUrl.contains("https://we-uata.windstream.com/Settings/Settings/BusinessHours"));
+		        }
+		 
+		 
+		 @FindBy(xpath ="//button[@id='telephoneSubmit']")
+		 public WebElement telephoneSubmit;	
+		 
+		 @FindBy(xpath ="//button[@id='locationSubmit']")
+		 public WebElement locationSubmit;
+		 
+		 @FindBy(xpath ="//a[contains(.,'Add Email')]")
+		 public WebElement addEmail;
+		 
+		 @FindBy(xpath ="//input[@name='Email']")
+		 public WebElement email;
+		 
+		 @FindBy(xpath ="//span[@class='k-icon k-i-check']")
+		 public WebElement emailcheck;
+		 
+		 @FindBy(xpath="//*[@id='emergencyContactGrid']/table/tbody/tr[1]/td[1]")
+		 public WebElement emergencyContact;
+		 
+		 @FindBy(xpath="//a[@class='k-button k-button-icontext k-grid-del']")
+		 public WebElement emergencyContactDelete; 
+		 
+		 public void deleteEmail()
+		 {
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
+		     js.executeScript("arguments[0].scrollIntoView();", emergencyContactDelete);
+		     Actions actions = new Actions(driver);
+		     actions.moveToElement(emergencyContactDelete).click().perform();
+		 }
+
+		 @FindBy(xpath="//button[@id='yesButton']")
+		 public WebElement deleteConfirmation;
+		
+		 @FindBy(xpath="//*[@id=\"emergencyContactGrid\"]/table/tbody/tr[1]/td[2]/a[1]")
+		 public WebElement emergencyContactEdit;
+		 
+}

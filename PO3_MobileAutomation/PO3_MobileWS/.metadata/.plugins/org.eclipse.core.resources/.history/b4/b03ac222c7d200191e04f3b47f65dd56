@@ -1,0 +1,278 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.we_pages.WE_OrdersPage;
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_Orders_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	private String strTicketID = "";
+	private String strTicketStatus = "";
+	private String strTicketServiceType = "";
+	private String strTicketReportedProblem = "";
+	private String strTicketAccountOMS = "";
+	private String strTicketServiceNumber = "";
+	private String strTicketServiceAddress = "";
+
+	// **************** Test Scripts Starts Here *****************//
+
+	//*********Order Test Cases for WOL Users***********//
+	@Test
+	public void ordersTest_WOL_Users() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Orders";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		String AccountNumberOrders=null;	
+		String AccountNumberFlyout=null;
+		
+		try {
+			Reporter.log("Test Case: Orders UI & Columns", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders _UI");
+			vc.getWebDriverUtils().clickElement(we_HomePage.orders, "Orders");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order ID"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Description"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Details"));
+			AccountNumberOrders= we_OrdersPage.order_AccountNumber.getText();
+			System.out.println(AccountNumberOrders);
+			
+			}
+
+		catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("Test Case: Data Table Check", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Data Table Check");
+			we_OrdersPage.NoofRows();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("Test Case:Export To Excel", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Export to Excel");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.export_Orders, "Export Button");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.export_Excel, "ExportToExcel");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			}
+		
+
+		try {
+			Reporter.log("Test Case: Verify Filters Validation", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Verify Filters Validation");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.filter_Orders, "Filters Option");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.accountNumber_DropDown, "Account Number_DropDown");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.accountNumber_DropDown_Option, "AccountNumber_Option");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.applyFilter_Btn, "Apply Filters Button");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.filter_Orders, "Filters Option_back");
+			
+			
+			
+		}catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			
+		}
+		
+
+		try {
+			Reporter.log("Test Case: Verify Order Details in Flyout Wrapper", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Verify Order Details in Flyout Wrapper");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.clickForMoreDetailsArrow1, "DetailsArrow");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order ID "));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ORDER DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COMPLETION DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COORDINATOR"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COORDINATOR EMAIL"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COORDINATOR PHONE"));
+			AccountNumberFlyout= we_OrdersPage.flyout_AccountNumber.getText();
+			System.out.println(AccountNumberFlyout);
+			
+			if(AccountNumberFlyout.equals(AccountNumberOrders))
+			{
+				System.out.println("Account Number Matched");				
+			}
+			else
+			{
+				System.out.println("Account Number did not Matched");
+			}
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.flyOutWrapperCloseButton,"Flyout Wrapper Close Button");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			
+			}
+		
+		
+		try {
+			Reporter.log("Test Case: Verify Status Details in Flyout Wrapper", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Details Icon");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.Statuscolumn_Details, "Status details Columns click");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order ID "));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ORDER DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COMPLETION DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COORDINATOR"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COORDINATOR EMAIL"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COORDINATOR PHONE"));
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.flyOutWrapperCloseButton,"Flyout Wrapper Close Button");
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			
+		}
+
+	} 
+	
+	
+	//*********Order Test Cases for BVN Users***********//
+	
+	@Test
+	public void orders_BVN() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "Orders";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+			
+		try {
+			Reporter.log("Test Case: Orders UI & Columns", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders _UI");
+			vc.getWebDriverUtils().clickElement(we_HomePage.orders, "Orders");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order ID"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Description"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Details"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Info Needed"));
+			}
+
+		catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+
+			Reporter.log("Test Case: Data Table Check", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Data Table Check");
+			we_OrdersPage.NoofRows();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("Test Case:Export To Excel", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Export to Excel");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.export_Orders, "Export Button");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.export_Excel, "ExportToExcel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			
+		}
+
+		try {
+			Reporter.log("Test Case: Verify Order Details in Flyout Wrapper", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Verify Order Details in Flyout Wrapper");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.clickForMoreDetailsArrow1, "DetailsArrow");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ORDER TYPE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("BILLING NUMBER"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CUSTOMER ACCEPTED DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CUSTOMER SITE CONTACT"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SERVICE ADDRESS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("INSTALLATION PARTY"));
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.flyOutWrapperCloseButton,"Flyout Wrapper Close Button");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			
+		}
+		
+		try {
+			Reporter.log("Test Case: Verify Status Details in Flyout Wrapper", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Orders-> Details Icon");
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.Statuscolumn_Details, "Status details Columns click");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ORDER TYPE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("BILLING NUMBER"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CUSTOMER ACCEPTED DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CUSTOMER SITE CONTACT"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SERVICE ADDRESS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("INSTALLATION PARTY"));
+			vc.getWebDriverUtils().clickElement(we_OrdersPage.flyOutWrapperCloseButton,"Flyout Wrapper Close Button");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			
+		}
+
+	} 
+
+}

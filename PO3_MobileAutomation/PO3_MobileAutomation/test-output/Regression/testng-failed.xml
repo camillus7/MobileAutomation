@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" guice-stage="DEVELOPMENT" name="Failed suite [Regression]" parallel="tests">
+  <listeners>
+    <listener class-name="commonUtil.ExtentReporterNG_Mobile"/>
+  </listeners>
+  <test name="WE_MakePayment(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="we_MakePayment"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE_MakePayment(failed) -->
+  <test name="WE_EnrollAutopay(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="we_EnrollAutoPay"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE_EnrollAutopay(failed) -->
+  <test name="WE-Add ElectronicCheck(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="we_AddElectronicCheck"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE-Add ElectronicCheck(failed) -->
+  <test name="WE-Add CreditCard(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="we_AddCredit_DebitCard"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE-Add CreditCard(failed) -->
+  <test name="WE-Notification Subscription(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="we_Notification"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE-Notification Subscription(failed) -->
+  <test name="WE-CompanyContacts(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="we_CompanyContacts"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE-CompanyContacts(failed) -->
+  <test name="WE-ProfileSettings(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="weConnect_ProfileSettings"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE-ProfileSettings(failed) -->
+  <test name="WE-CreateSupportRequest(failed)" parallel="tests">
+    <classes>
+      <class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_ProfileSettingsSuite -->
+      <class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="weConnect_CreateSupportRequest"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_SupportRequestSuite -->
+      <class name="com.mobileautomation.tests.WE_CommonSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_CommonSuite -->
+      <class name="com.mobileautomation.tests.WE_BillingSuite">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.mobileautomation.tests.WE_BillingSuite -->
+    </classes>
+  </test> <!-- WE-CreateSupportRequest(failed) -->
+</suite> <!-- Failed suite [Regression] -->

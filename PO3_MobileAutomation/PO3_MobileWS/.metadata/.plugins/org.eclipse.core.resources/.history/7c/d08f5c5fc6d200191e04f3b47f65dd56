@@ -1,0 +1,75 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_ScheduledMaintananceWidget {
+
+	final WebDriver driver;
+	
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+
+	public WE_ScheduledMaintananceWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Scheduled Maintenance')]")
+	public WebElement scheduledMaintenance_Checkbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Scheduled Maintenance']//div[contains(@class,'lh-20')][1]")
+	public WebElement maintenanceData;
+
+	@FindBy(xpath = "//span[contains(@class,'bWord')]")
+	public WebElement Scheduled_Count;
+
+	@FindBy(xpath = "//span[contains(.,'More Info')]")
+	public WebElement moreInfo_Link;
+
+	@FindBy(xpath = "//h1[contains(.,'Scheduled Maintenance')]")
+	public WebElement scheduledMaintance_pageTitle;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Scheduled Maintenance']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Scheduled Maintenance']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void scheduledMaintenanceWidget() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Scheduled Maintenance"));
+		if (vc.getWebDriverUtils().elementAvailablity(maintenanceData, "MaintenanceData") == true) {
+			List<WebElement> details = driver.findElements(
+					By.xpath("//div[@data-widgettitle='Scheduled Maintenance']//div[contains(@class,'lh-20')]"));
+			for (WebElement scheduledMaintenance : details) {
+				System.out.println(scheduledMaintenance.getText());
+			}
+		}
+
+		Reporter.log("********** Navigation Check ************",true);
+		vc.getWebDriverUtils().clickElement(moreInfo_Link, "More Info Link");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Scheduled Maintenance - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Scheduled Maintenance"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Maintenance");
+	}
+
+}

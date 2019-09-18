@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+      <listener class-name="com.webautomation.validation.RetryListener" />  
+</listeners>
+
+<test name="we_DashboardPageWidgets_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_DashboardPageWidgets_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_BillingAlertAndInquiriesWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_BillingAlertAndInquiriesWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_BillingDetailsWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_BillingDetailsWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_BillingReportsWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_BillingReportsWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_BillingSettingsWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_BillingSettingsWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_CircuitUtilizationWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_CircuitUtilizationWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_CommunityWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_CommunityWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_CurrentUsersWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_CurrentUsersWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_MonitoredRouters_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_MonitoredRouters_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_MostActiveDataCircuitsWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_MostActiveDataCircuitsWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_NetworkHealth_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_NetworkHealth_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_Networkstatuswidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_Networkstatuswidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_NewBillingInquirywidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_NewBillingInquirywidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_OrdersWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_OrdersWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_ScheduledMaintenanceWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_ScheduledMaintenanceWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_SupportRequestWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_SupportRequestWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_TrunkUtilizationWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_TrunkUtilizationWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_WeatherAlertsWidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_WeatherAlertsWidget_ELNK"/> </methods> </class> </classes> </test>
+<test name="we_WinBotwidget_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_ELNK"> <methods> <include name="we_WinBotwidget_ELNK"/> </methods> </class> </classes> </test>
+
+
+</suite>
+

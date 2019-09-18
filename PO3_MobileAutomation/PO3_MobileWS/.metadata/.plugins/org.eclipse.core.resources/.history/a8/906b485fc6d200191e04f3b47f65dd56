@@ -1,0 +1,56 @@
+package com.webautomation.pageobject.we_pages;
+
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+
+public class WE_IncomingCallRoutingPage {
+	
+	final WebDriver driver;
+	
+	private Validator vc;
+
+	public WE_IncomingCallRoutingPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(id="btnopennewnumbernew")
+	public WebElement getNewNumber;
+	
+	@FindBy(id="btnopenexistnumber")
+	public WebElement transferExistingNumber;
+	
+	@FindBy(id="btnEnableAllOverrides")
+	public WebElement enableoAllOverrides;
+	
+	@FindBy(id="btnDisableAllOverrides")
+	public WebElement disableAllOverrides;
+	
+	@FindBy(id="btnExport")
+	public WebElement export;
+	
+	@FindBy(xpath="//BUTTON[@type='button'][text()='Export to Excel']/self::BUTTON")
+	public WebElement exportToExcel;
+	
+	@FindBy(xpath="//BUTTON[@type='button'][text()='Export to PDF']/self::BUTTON")
+	public WebElement exportToPDF;
+	
+	
+
+}

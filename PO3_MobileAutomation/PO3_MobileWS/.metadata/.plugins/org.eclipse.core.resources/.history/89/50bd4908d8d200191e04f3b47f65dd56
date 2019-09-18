@@ -1,0 +1,613 @@
+package com.webautomation.tests.seleniumGrid;
+
+import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class Po3_EmployeePortal_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	
+
+
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void EmployeePortal_CustomerSearch() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Customer Search";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchMenu, "Portal Search");
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.reportsMenu, "Reports");
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.salesMarketingMenu, "Sales  & Marketing");
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.developerSupportToolsMenu, "Developer & SupportTools");
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchTab, "Portal Search Tab");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Client Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Onboarded to Portal"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Type"));
+			
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.portalClientsRadio, "Portal Clients Radio Button");
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.nonPortalClientsRadio, "Non-Portal Clients Radio Button");
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.iDontKnowRadio, "I don't know Radio Button");
+			
+			//UserName Validation
+			Reporter.log("************ User Name Search Validation ************" , true);
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.portalClientsRadio, "Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.username, "weonlinetest9", "UserName");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			vc.getWebDriverUtils().getAttribute(empPortal_PortalSearchPage.username, "value", "UserName get value");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Keystone Steel"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("4738745"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetBtn, "Reset Button");
+			vc.getWebDriverUtils().getAttribute(empPortal_PortalSearchPage.username, "value", "UserName get value");
+			
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.nonPortalClientsRadio, "Non-Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.username, "weonlinetest9", "UserName");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Search for more results using the filter above"));
+			
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.iDontKnowRadio, "I don't know Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.username, "weonlinetest9", "UserName");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("4738745"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			
+			//Account Number Validation
+			Reporter.log("************ Account Number  Search Validation ************" , true);
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetBtn, "Reset Button");
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.portalClientsRadio, "Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.accountNumber, "4738745", "Account Number  Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Keystone Steel"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetBtn, "Reset Button");
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.nonPortalClientsRadio, "Non-Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.accountNumber, "091879980", "Account Number  Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ATHENA DORR"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			
+			//Client Name Search Validation
+			Reporter.log("************ Client Name Search Validation ************" , true);
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetBtn, "Reset Button");
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.portalClientsRadio, "Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.clientName, "Keystone Steel", "Client Name  Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("4738745"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetBtn, "Reset Button");
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.nonPortalClientsRadio, "Non-Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.clientName, "ATHENA DORR", "Client Name  Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("091879980"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetBtn, "Reset Button");
+			
+			//Impersonate WE Connect User
+			vc.getWebDriverUtils().selectRadioButton(empPortal_PortalSearchPage.portalClientsRadio, "Portal Clients Radio Button");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.username, "weonlinetest9", "UserName");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchBtn, "Search Button");
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.myClientsListTab, "My Client List Tab");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.accountDetailsTab, "Account Details tab");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.companyActivityTab, "Company Activity tab");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.viewAuditLogsTab, "View Audit Logs tab");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.notificationHistoryTab, "Notification History tab");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.companyNotesTab, "Company Notes tab");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.contactsTab, "Contacts tab");
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_SalesDemo() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Sales Demo";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.salesMarketingMenu,"Sales & Marketing");
+
+			vc.getWebDriverUtils().clickElement(empPortal_SalesMarketingPage.salesDemo,"Sales Demo");
+			
+			while (driver.findElement(By.xpath("//video[@autoplay='autoplay']")).isDisplayed()) {
+				System.out.println("Waiting for Home Page  - Video Auto Play");
+				Thread.sleep(1000);
+			}
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("For demonstration only. Changes will not be saved"));
+			
+			vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+			vc.getWebDriverUtils().clickElement(we_HomePage.services, "Services");
+			vc.getWebDriverUtils().clickElement(we_HomePage.orders, "Orders");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(empPortal_SalesMarketingPage.backToClientTools,"Back to Client Tools");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_MyClientList() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - My Client List";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.myClientsListTab, "My Client List Tab");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Save"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Client Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Onboarded to Portal"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Type"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("4738745"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("091879980"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Actions"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Keystone Steel"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ATHENA DORR"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.portalSearchTab, "Portal Search Tab");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchMenu, "Portal Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.companySubMenu, "Company Submenu");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.myClientsListSubMenu, "My Client List Sub Menu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("My Clients List - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("4738745"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("091879980"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_NotificationSearch() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Portal Search -> Company -> Notification Search";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchMenu, "Portal Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.companySubMenu, "Company Submenu");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.notificationSearchSubMenu, "Notification Search Sub Menu");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Search - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Template"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Subject"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchNotifications, "Search");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification DateTime"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Event"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("To Address"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.goDownLoadAs, "Download as - Go");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please select an export format"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetNotifications, "Reset");
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(empPortal_PortalSearchPage.notificationDate, "Notification Date Dropdown", "Custom");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.notificationEmailAddress, "test1@wol.com", "Notification Email Address");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchNotifications, "Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.viewEmail1, "View Email - First Record");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This is an internally generated test notification"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.viewEmail1, "View Email - First Record");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetNotifications, "Reset");
+			
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.notificationDateStart, "", "Notification Start Date");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.notificationEmailSubject, "MLA-UAT - Your scheduled report is ready", "Notification Email Subject");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchNotifications, "Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.viewEmail1, "View Email - First Record");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This is an internally generated test notification"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetNotifications, "Reset");
+			
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.notificationDateStart, "", "Notification Start Date");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(empPortal_PortalSearchPage.notificationStatus, "Notification Status Dropdown", "Cancelled");
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(empPortal_PortalSearchPage.notificationEvent, "Notification Event Dropdown", "scheduled report generated with attached results");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchNotifications, "Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.viewEmail1, "View Email - First Record");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This is an internally generated test notification"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.resetNotifications, "Reset");
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_CustomerAdvocates() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Portal Search -> Company ->Customer Advocates";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchMenu, "Portal Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.companySubMenu, "Company Submenu");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.customerAdvocatesSubMenu, "Customer Advocates Sub Menu");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customer Advocate Search - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select some filter data to retieve the specific Customer Advocate(s) you are looking for"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Title"));
+			
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.firstName_CustomerAdvocates, "Andrew", "First Name");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.lastName_CustomerAdvocates, "Abarca", "Last Name");
+		
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.filter, "Filter");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.clients1, "Clients - First Record");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Client Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Onboarded"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Type"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.reset, "Reset");
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.nextCustomerAdvocates,"Next");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.prevCustomerAdvocates,"Previous");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.results40perPageCustomerAdvocates,"40");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.results15perPageCustomerAdvocates,"15");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.results100perPageCustomerAdvocates,"100");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.results100perPageCustomerAdvocates,"All");
+			
+			if (vc.getWebDriverUtils().getAttribute(empPortal_PortalSearchPage.allCustomerAdvocatesCount, "innerHTML","ALL Count").contains("All")) {
+				
+			} else {
+				Reporter.log("All count option not displayed", true);
+				Assert.assertFalse(true);
+			}
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.reset, "Reset");
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_ClearCache() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Clear Cache";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.developerSupportToolsMenu,"Developer & Support Tools");
+
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.clearCacheSubMenu,"Clear Cache Submenu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Click the Button to Clear the Cache!!!"));	
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.clearCacheBtn,"Clear Cache Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The cache has been cleared"));	
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_ErrorLogs() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Clear Cache";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.developerSupportToolsMenu,"Developer & Support Tools");
+
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.errorLogsSubMenu,"Error Logs Submenu");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View Error Detail"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Transaction or Log ID"));	
+			vc.getWebDriverUtils().enterText(empPortal_DeveloperSupportToolsPage.transactionOrLogID, "16834-41626", "Transaction or Log ID");
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.lookUpError,"Look Up Error Button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Date"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Machine"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User ID"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Session ID"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Logger"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Thread"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Application"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Method"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Message"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Source file"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Stack trace"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_FortiNetAdmin() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Developer & Support Tools -> FortiNet Admin";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.developerSupportToolsMenu,"Developer & Support Tools");
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.fortiNetAdminSubMenu,"FortiNet Admin Submenu");
+		
+			Assert.assertTrue(vc.waitUntilTextIsPresent("FortiNet Server Administration"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Servers"));	
+		
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Product"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Role"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Version"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Default"));	
+			
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.addAccount, "Add Account");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Product"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ADOM"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("New ADOM"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("New VDOM"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("BillingAccountNumber"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Old VDOM"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.addServerAddAccount, "Add Server");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please correct the following errors"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All fields are required"));
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.cancelServerAddAccount, "Cancel Server Modal Dialog");
+
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.addAccount, "Add Account");
+			vc.getWebDriverUtils().clickElement(empPortal_DeveloperSupportToolsPage.closeServerAddAccountModal, "Close Server Modal Dialog");
+
+
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_UserSearch() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Portal Search -> User -> Search";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchMenu, "Portal Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.userSubMenu, "User Submenu");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.searchUsersSubMenu, "Search Users Sub Menu");
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.closeFilters, "Close Filters");
+			if (vc.getWebDriverUtils().elementAvailablity(empPortal_PortalSearchPage.firstNameUserSearch, "First Name")) {
+				Reporter.log("Close Filters - not working as expected, First Name filed is visible after clicking Close filters", true);
+				Assert.assertFalse(true);
+			} else {
+				Reporter.log("Close Filters - working as expected, First Name filed not visible after clicking Close filters", true);
+			}
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.filterYourResults, "Filter your results");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Created"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Clients"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Search for more results using the filter above"));	
+
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.firstNameUserSearch, "", "First Name");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.emailAddressUserSearch, "", "Email Address");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.lastNameUserSearch, "", "Last Name");
+			vc.getWebDriverUtils().enterText(empPortal_PortalSearchPage.userNameUserSearch, "weonlinetest16", "User Name");
+			
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.filter, "Filter");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.detailsUserSearch, "Details");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Client Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Type"));	
+	
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(empPortal_PortalSearchPage.actionsUserSearch, empPortal_PortalSearchPage.actionsDropDownListUserSearch, "Action Drop Down List", "Manage User");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This page allows you to manage a user"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Edit User's Permissions"));	
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.showMore, "Show More");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(" Empowers this user to full feature AND Administrator capabilities"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have granular control to Portal features"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.showLess, "Show Less");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.saveChanges, "Save Changes");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Success!"));	
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Changes to user have been saved successfully"));	
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.filter, "Reset");
+			
+			if (vc.waitUntilTextIsPresent("weonlintest16")) {
+				Reporter.log("Reset functionality not working as expected, user still visible after clicking reset", true);
+				Assert.assertFalse(true);
+			} else {
+				Reporter.log("Reset functionality  working as expected, user not visible after clicking reset", true);
+			}
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void EmployeePortal_User_MyUsersList() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		userStoryDescription = "EmployeePortal - Portal Search -> User -> My Users List";
+		empPortal_LoginPage.navigateTo_EmpPortalHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			driver.getWindowHandles();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal Search"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the type of search to perform (Portal Clients, Non-Portal Clients, or Unknown). Then provide at least one client identifier, and select search"));
+			
+			vc.getWebDriverUtils().clickElement(empPortal_HomePage.portalSearchMenu, "Portal Search");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.userSubMenu, "User Submenu");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.myUsersListSubMenu, "My Users List Sub Menu");
+				
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Created"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Clients"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Save"));	
+
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.detailsUserSearch, "Details");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Client Name"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Type"));	
+	
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(empPortal_PortalSearchPage.actionsUserSearch, empPortal_PortalSearchPage.actionsDropDownListUserSearch, "Action Drop Down List - Clear Cache", "Clear User Cache");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You are about to purge the cached information for this User"));	
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.cancelWarningUserSearchClearCache, "Warning - Cancel");
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(empPortal_PortalSearchPage.actionsUserSearch, empPortal_PortalSearchPage.actionsDropDownListUserSearch, "Action Drop Down List - Clear Cache", "Clear User Cache");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.yesWarningUserSearchClearCache, "Warning - Yes");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Successfully purged the user's cache"));	
+			
+			vc.getWebDriverUtils().dropDownInnerSelectPicker(empPortal_PortalSearchPage.actionsUserSearch, empPortal_PortalSearchPage.actionsDropDownListUserSearch, "Action Drop Down List", "Manage User");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This page allows you to manage a user"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Edit User's Permissions"));	
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.showMore, "Show More");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(" Empowers this user to full feature AND Administrator capabilities"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have granular control to Portal features"));
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.showLess, "Show Less");
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.saveChanges, "Save Changes");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Success!"));	
+			vc.waitUntilTextIsPresent("Changes to user have been saved successfully");	
+			vc.getWebDriverUtils().clickElement(empPortal_PortalSearchPage.filter, "Reset");
+			
+			if (vc.waitUntilTextIsPresent("weonlintest16")) {
+				Reporter.log("Reset functionality not working as expected, user still visible after clicking reset", true);
+				Assert.assertFalse(true);
+			} else {
+				Reporter.log("Reset functionality  working as expected, user not visible after clicking reset", true);
+			}
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		vc.getWebDriverUtils().clickElement(empPortal_HomePage.signOut,"Sign Out");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+}

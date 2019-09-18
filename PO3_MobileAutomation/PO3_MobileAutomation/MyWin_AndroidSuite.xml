@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG_Mobile" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="MyWin_GetAppVersion">
+	<classes>
+		<class name="com.mobileautomation.tests.MyWin_LoginSuite">
+			<methods>
+				<include name="myWin_Appversion" />
+			</methods>
+		</class>
+	</classes>
+</test>
+	<test name="MyWin_VerifyDueAmount">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_VerifyDueAmount" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<!-- <test name="MyWin_AddDebit/Creditcard">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_AddCredit_DebitCard" />
+				</methods>
+			</class>
+		</classes>
+	</test> -->
+	<test name="MyWin_MakePayment">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_MakePayment" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="MyWin_AddDeleeDebit/Creditcard">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_AddDeleteCredit_DebitCard" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="MyWin_AddDeleteElectroniCheck">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_AddDeleteElectronicCheck" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="MyWin_SchedulePayment">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_SchedulePayment" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="MyWin_EnrollAutopay">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_EnrollAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="MyWin_SuspendAutopay">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_SuspendAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="MyWin_DeEnrollAutopay">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite">
+				<methods>
+					<include name="myWin_DerollAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="MyWin_SetStartPage">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_OnScreenBoardingSuite">
+				<methods>
+					<include name="myWin_SetStartPage_Billing" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
+

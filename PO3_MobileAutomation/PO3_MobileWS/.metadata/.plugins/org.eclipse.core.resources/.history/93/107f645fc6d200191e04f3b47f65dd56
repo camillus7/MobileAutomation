@@ -1,0 +1,57 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_LocationUpdateWidget {
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_LocationUpdateWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Location Update')]")
+	public WebElement locationUpdateCheckbox;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Location Update']//a[contains(.,'Update')]")
+	public WebElement updateButton;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Location Update']//span[@class='f64 color-on-light ff-CL']")
+	public WebElement locationCount;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Location Update']//div[@class='secondaryAutoWFont']")
+	public WebElement locationText;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Location Update']//button[@class='ws-icon settings ws-menu menu-down closed']")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Location Update']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void updateNavigation() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Location Update"));
+		vc.getWebDriverUtils().elementAvailablity(updateButton, "Update-Button");
+		Reporter.log("You Recently added " + locationCount.getText() + locationText.getText(),true);
+		vc.getWebDriverUtils().clickElement(updateButton, "Configure");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Company Settings - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Company Settings / Location Management"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Location Update");
+	}
+
+}

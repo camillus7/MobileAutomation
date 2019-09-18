@@ -1,0 +1,99 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+
+
+public class WE_MyDirectoryRecordingWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyDirectoryRecordingWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath="//p[contains(.,'Extension will be called shortly.')]")
+	public WebElement recordMessage;
+	
+	@FindBy(xpath = "//label[contains(.,'My Directory Recording')]")
+	public WebElement myDirectoryRecordingCheckbox;
+	
+	@FindBy(xpath="//div[@data-name='MyDirectoryRecording']//button[@data-id='SelectedExt']")
+	public static WebElement directoryDropdown;
+	
+	@FindBy(xpath="//button[@data-id='SelectedExtRecord']")
+	public WebElement callExtensionDropdown;
+	
+	@FindBy(xpath="//p[contains(.,'When you click or tap Record, the extension above will be called, and you will be asked to say your name after the tone. Your response will be recorded and saved in your phone system.')]")
+	public WebElement messageNote;
+	
+	@FindBy(xpath="//a[@id='saveDirectoryRecording']")
+	public WebElement recordButton;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Directory Recording']//p[contains(@class,'default-value')]")
+	public WebElement forAccount;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Directory Recording']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Directory Recording']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+	public void recordFunctionality() throws InterruptedException {
+		vc.getWebDriverUtils().elementAvailablity(callExtensionDropdown, "CallExtension-Dropdown");
+		vc.getWebDriverUtils().elementAvailablity(messageNote, "Noteabout-Directory Recording");
+		vc.getWebDriverUtils().elementAvailablity(recordButton, "RecordButton");
+		vc.getWebDriverUtils().genericDropDownSelectFirstItem(callExtensionDropdown, "MyDirectory-Dropdown");
+		vc.getWebDriverUtils().clickElement(recordButton, "RecordOption");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Extension will be called shortly."));
+		/*try {
+			Reporter.log(recordMessage.getText(),true);
+			Assert.assertEquals(recordMessage.getText(), "Extension will be called shortly.");
+		}catch(Exception e) {
+			e.getMessage();
+		}*/
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("My Directory Recording");
+		
+		
+	}
+	
+	public void directoryrecordingDropdownSelect(String dropDownValue) throws InterruptedException {
+
+		vc.getWebDriverUtils().clickElement(callExtensionDropdown, "CallExtension-Dropdown");
+		List<WebElement> forExtensionDropdown = driver
+				.findElements(By.xpath("//div[@class='btn-group bootstrap-select open']/div/div/div/div/ul/li/a/span"));
+		Reporter.log("Total Number of Dropdown values are ==" + forExtensionDropdown.size(),true);
+		for (int i = 0; i < forExtensionDropdown.size(); i++) {
+
+			if (forExtensionDropdown.get(i).getText().equalsIgnoreCase(dropDownValue)) {
+				forExtensionDropdown.get(i).click();
+				Reporter.log("Selected ==" + dropDownValue + " from For Extension Dropdown ",true);
+				break;
+			}
+
+		}
+
+	}
+
+
+
+}

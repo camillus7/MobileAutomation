@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WE_UserManager_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_UI_BVN"/></methods> </class> </classes> </test>
+<test name="TC_WE_UserManager_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_Inviteuser_BVN"/></methods> </class> </classes> </test>
+<test name="TC_WE_UserManager_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_UI_ELNK"/></methods> </class> </classes> </test>
+<test name="TC_WE_UserManager_004"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_Inviteuser_ELNK"/></methods> </class> </classes> </test>
+<test name="TC_WE_UserManager_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_UI_WOL"/></methods> </class> </classes> </test>
+<test name="TC_WE_UserManager_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_Inviteuser_WOL"/></methods> </class> </classes> </test>
+
+</suite>

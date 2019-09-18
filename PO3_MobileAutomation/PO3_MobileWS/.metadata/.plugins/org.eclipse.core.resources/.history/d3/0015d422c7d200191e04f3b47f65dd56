@@ -1,0 +1,1885 @@
+
+package com.webautomation.tests.seleniumGrid;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_Usermanager_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	// **************** User Manager Test Scripts Starts Here *****************//
+	// ********* Broadview User ********** //
+
+	@Test
+	public void Usermanager_UI_BVN() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "User Manager";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("123145 Verify User Manager UI", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "User Manager");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Login Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite"));		
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.inviteUser, "Invite user"),
+					"Check Invite user field existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		try {
+			Reporter.log("123150 Verify 'Invite User' UI ", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Verify Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mobile Phone Number"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.globalAccount, "Global account"),
+					"Check Global account field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.mirrorUser, "Mirror user"),
+					"Check mirror user field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.accessByAccount, "Access by account"),
+					"Check access by account field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.stdOSPermission, "Std OS Permission"),
+					"Check Std OS Permission field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.individualSet, "individual Set"),
+					"Check individual set field existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.individualSet,
+					"Click individual select features/accounts/locations radio button");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.noAccess, "No access"),
+					"Check 'No access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.fullAccess, "Full access"),
+					"Check 'Full access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.admin, "Admin access"),
+					"Check 'Admin access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.customize, "Customize"),
+					"Check 'Customize' radio button existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125793 Verify 'Show more' functionality in Invite user ", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.showMore, "Click 'showmore'");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("No Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Full Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customize"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("None"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Advanced"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"This is the default setting. Users will have no access to your account information until you define what you would like them to access."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Provides you user with full permissions to all the features below. It will not give them Administrator capabilities."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Empowers this user to full feature AND Administrator capabilities. Please be cautious when making users Administrators as some features work best with fewer users making changes."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Choose which features, accounts, or locations this user can view and/or manage. Each section provides drill down areas for even further permission definition."));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("User will not have access to Portal features until access is defined."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have view access to Portal features."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have manage access to Portal features."));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("User will have granular control to Portal features (edited)."));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125792 Verify 'Users' functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.btnUser, "User button"),
+					"Check user dropdown button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.btnUser, "Click users drop-down button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All Users"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Active User"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Inactive Users"));	
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.activeUser, "Click Active user in the users dropdown");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			We_UserManagerPage.gridUserStatusVerification("Active");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.btnUser, "Click users drop-down button");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inactiveUser, "Click Inactive user in the users dropdown");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			We_UserManagerPage.gridUserStatusVerification("Inactive");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void Usermanager_Inviteuser_BVN() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "User Manager";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			Reporter.log("123153 Create a new user with 'Global Account Administrator' Permission", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.globalAccount,
+					"Select global account administrator");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+             // TODO Below line need to be removed after issue fix Bug-127933
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("Yes"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"123155 Create a new user with 'Individually select the features/accounts/locations/etc' Permission",
+					true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.individualSet,
+					"Select invidually select the features/accounts/locations");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");	
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123156 Create a new user with 'Mirror existing user' Permission", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.mirrorUser, "Select Mirror existing user");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		    
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123159 Create a new user with 'Grant Standard OfficeSuite User Permissions' Permission",
+					true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.stdOSPermission,
+					"Grant Standard OfficeSuite User Permissions");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		    
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123158 Create a new user with 'Provide Access by Account' Permission", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.accessByAccount, "Provide Access by Account");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+
+			Reporter.log("123147 Verify the 'Apply Filter' functionality", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			
+		    vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123162 Verify the functionality of 'Resend Invite' ", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridResendEmail, "Click resend email button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite sent successfully"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123160 Verify the Provide New User's Contact Info with invalid details", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is required"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, "sindu", "Enter User Name");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name must be between 8 and 50 characters long"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "test", "Enter email address");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is invalid or must be at most 100 characters"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemailaddress@windstream.com",
+					"Confirm email address ");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation Email Address does not match"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125521 Verify duplicate user creation functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			String duplicateuser = vc.getWebDriverUtils().getText(We_UserManagerPage.getAvailableUserName, "User name");
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, duplicateuser, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("UserName already exists"));
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.floatWarningClose, "Click close icon in warning window");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123163 Verify the filter functionality with invalid details.", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, "Testuser#1467", "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"There are no users associated with this account. You can invite users by clicking on Invite User button."));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123152 Verify the 'Clear Filter' functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125595 Verify upload image functionality in user manager grid", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridUploadPicture, "Click upload picture");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.uploadImageHeader, "Upload picture"),
+					"Check for upload picture header");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.uploadImageSelect,
+					"Upload picture Select button"), "Check for upload picture select button");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userImageRemove,
+					"Upload picture remove button"), "Check for upload picture remove");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userImageCancel,
+					"Upload picture cancel button"), "Check for upload picture cancel");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.userImageCancel, "Click cancel button");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125754 Verify the functionality of 'My Profile'", true);
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.viewUser, "Click View User");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editContactInformationHeader,
+					"Edit ContactInformation Header"), "Check Edit ContactInformation Header");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editContactInformation,
+					"Edit Contact Information"), "Check for Contact Information existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editPreferences, "Edit Preferences"),
+					"Check for Preferences existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editActivityLog, "Edit ActivityLog"),
+					"Check for Activity Log existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editChangePassword,
+					"Edit Change Password"), "Check for Change Password existance");
+			vc.switchToFrame("WinauthIframe");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editName, "Edit Name"),
+					"Check for Edit name field existance");
+			vc.switchtoDefaultFrame();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125609 Verify pagination functionality in user manager", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(2000);
+			We_UserManagerPage.verifyPagination();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125608 Verify edit user functionality in user manager", true);
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridEdit, "Click edit button");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editUserInformation, "Edit user information tab"),
+					"Check for user information in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editUserPermissions, "Edit user permissions tab"),
+					"Check for user permissions in edit");
+			vc.switchToFrame("WinauthIframe");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel1, "First name"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel2, "Last name"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel3, "Email"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel4, "Phone"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel5, "Mobile"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Active"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Allow Access to User Manager (Typically Restricted to Administrators Only)"));
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editUserPermissions, "Click user permissions");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Users may access Portal features once you define their permissions. You can provide them no access to certain areas, view only, full management, or customize to even more granular levels. You can update these permissions at any time."));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.noAccess, "No access"),
+					"Check 'No access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.fullAccess, "Full access"),
+					"Check 'Full access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.admin, "Admin access"),
+					"Check 'Admin access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.customize, "Customize"),
+					"Check 'Customize' radio button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editBack,
+					"Click 'Back' button in governed permissions");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	// **************** User Manager Test Scripts Starts Here *****************//
+
+	// ********* Earthlink User ********** //
+
+	@Test
+	public void Usermanager_UI_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "User Manager";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("123145 Verify User Manager UI", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "User Manager");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Login Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite"));		
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.inviteUser, "Invite user"),
+					"Check Invite user field existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("123150 Verify 'Invite User' UI ", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Verify Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mobile Phone Number"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.globalAccount, "Global account"),
+					"Check Global account field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.mirrorUser, "Mirror user"),
+					"Check mirror user field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.accessByAccount, "Access by account"),
+					"Check access by account field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.individualSet, "individual Set"),
+					"Check individual set field existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.individualSet,
+					"Click individual select features/accounts/locations radio button");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.noAccess, "No access"),
+					"Check 'No access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.fullAccess, "Full access"),
+					"Check 'Full access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.admin, "Admin access"),
+					"Check 'Admin access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.customize, "Customize"),
+					"Check 'Customize' radio button existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125793 Verify 'Show more' functionality in Invite user ", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.showMore, "Click 'showmore'");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("No Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Full Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customize"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("None"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Advanced"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"This is the default setting. Users will have no access to your account information until you define what you would like them to access."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Provides you user with full permissions to all the features below. It will not give them Administrator capabilities."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Empowers this user to full feature AND Administrator capabilities. Please be cautious when making users Administrators as some features work best with fewer users making changes."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Choose which features, accounts, or locations this user can view and/or manage. Each section provides drill down areas for even further permission definition."));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("User will not have access to Portal features until access is defined."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have view access to Portal features."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have manage access to Portal features."));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("User will have granular control to Portal features (edited)."));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125792 Verify 'Users' functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.btnUser, "User button"),
+					"Check user dropdown button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.btnUser, "Click users drop-down button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All Users"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Active User"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Inactive Users"));	
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.activeUser, "Click Active user in the users dropdown");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			We_UserManagerPage.gridUserStatusVerification("Active");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.btnUser, "Click users drop-down button");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inactiveUser, "Click Inactive user in the users dropdown");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			We_UserManagerPage.gridUserStatusVerification("Inactive");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void Usermanager_Inviteuser_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "User Manager";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("123153 Create a new user with 'Global Account Administrator' Permission", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.globalAccount,
+					"Select global account administrator");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+             // TODO Below line need to be removed after issue fix Bug-127933
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("Yes"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true); 
+
+		try {
+			Reporter.log(
+					"123155 Create a new user with 'Individually select the features/accounts/locations/etc' Permission",
+					true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.individualSet,
+					"Select invidually select the features/accounts/locations");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Thread.sleep(12000);
+			vc.waitUntilTextIsPresent("Resend Invite");
+			vc.waitUntilTextIsPresent("Last Login Date");
+			vc.waitUntilTextIsPresent("Username");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");	
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123156 Create a new user with 'Mirror existing user' Permission", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.mirrorUser, "Select Mirror existing user");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		    
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123158 Create a new user with 'Provide Access by Account' Permission", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.accessByAccount, "Provide Access by Account");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+
+			Reporter.log("123147 Verify the 'Apply Filter' functionality", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickHiddenElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			
+		    vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123162 Verify the functionality of 'Resend Invite' ", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridResendEmail, "Click resend email button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite sent successfully"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123160 Verify the Provide New User's Contact Info with invalid details", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is required"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, "sindu", "Enter User Name");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name must be between 8 and 50 characters long"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "test", "Enter email address");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is invalid or must be at most 100 characters"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemailaddress@windstream.com",
+					"Confirm email address ");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation Email Address does not match"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125521 Verify duplicate user creation functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			String duplicateuser = vc.getWebDriverUtils().getText(We_UserManagerPage.getAvailableUserName, "User name");
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, duplicateuser, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("UserName already exists"));
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.floatWarningClose, "Click close icon in warning window");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123163 Verify the filter functionality with invalid details.", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, "Testuser#1467", "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"There are no users associated with this account. You can invite users by clicking on Invite User button."));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123152 Verify the 'Clear Filter' functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125595 Verify upload image functionality in user manager grid", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridUploadPicture, "Click upload picture");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.uploadImageHeader, "Upload picture"),
+					"Check for upload picture header");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.uploadImageSelect,
+					"Upload picture Select button"), "Check for upload picture select button");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userImageRemove,
+					"Upload picture remove button"), "Check for upload picture remove");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userImageCancel,
+					"Upload picture cancel button"), "Check for upload picture cancel");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.userImageCancel, "Click cancel button");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125754 Verify the functionality of 'My Profile'", true);
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.viewUser, "Click View User");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editContactInformationHeader,
+					"Edit ContactInformation Header"), "Check Edit ContactInformation Header");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editContactInformation,
+					"Edit Contact Information"), "Check for Contact Information existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editPreferences, "Edit Preferences"),
+					"Check for Preferences existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editActivityLog, "Edit ActivityLog"),
+					"Check for Activity Log existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editChangePassword,
+					"Edit Change Password"), "Check for Change Password existance");
+			vc.switchToFrame("WinauthIframe");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editName, "Edit Name"),
+					"Check for Edit name field existance");
+			vc.switchtoDefaultFrame();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125609 Verify pagination functionality in user manager", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User List"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Login Date"));
+			//Thread.sleep(2000);
+			We_UserManagerPage.verifyPagination();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125608 Verify edit user functionality in user manager", true);
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridEdit, "Click edit button");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editUserInformation, "Edit user information tab"),
+					"Check for user information in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editUserPermissions, "Edit user permissions tab"),
+					"Check for user permissions in edit");
+			vc.switchToFrame("WinauthIframe");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel1, "First name"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel2, "Last name"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel3, "Email"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel4, "Phone"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel5, "Mobile"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Active"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Allow Access to User Manager (Typically Restricted to Administrators Only)"));
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editUserPermissions, "Click user permissions");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Users may access Portal features once you define their permissions. You can provide them no access to certain areas, view only, full management, or customize to even more granular levels. You can update these permissions at any time."));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.noAccess, "No access"),
+					"Check 'No access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.fullAccess, "Full access"),
+					"Check 'Full access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.admin, "Admin access"),
+					"Check 'Admin access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.customize, "Customize"),
+					"Check 'Customize' radio button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editBack,
+					"Click 'Back' button in governed permissions");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User List"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+	}
+
+	// **************** User Manager Test Scripts Starts Here *****************//
+
+	// ********* Windstream User ********** //
+
+	 @Test
+	public void Usermanager_UI_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "User Manager";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("123145 Verify User Manager UI", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "User Manager");
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Login Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite"));		
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.inviteUser, "Invite user"),
+					"Check Invite user field existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("123150 Verify 'Invite User' UI ", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Verify Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mobile Phone Number"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.globalAccount, "Global account"),
+					"Check Global account field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.mirrorUser, "Mirror user"),
+					"Check mirror user field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.accessByAccount, "Access by account"),
+					"Check access by account field existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.individualSet, "individual Set"),
+					"Check individual set field existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.individualSet,
+					"Click individual select features/accounts/locations radio button");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.noAccess, "No access"),
+					"Check 'No access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.fullAccess, "Full access"),
+					"Check 'Full access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.admin, "Admin access"),
+					"Check 'Admin access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.customize, "Customize"),
+					"Check 'Customize' radio button existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125793 Verify 'Show more' functionality in Invite user ", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.showMore, "Click 'showmore'");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("No Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Full Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin Access"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customize"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("None"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Advanced"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"This is the default setting. Users will have no access to your account information until you define what you would like them to access."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Provides you user with full permissions to all the features below. It will not give them Administrator capabilities."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Empowers this user to full feature AND Administrator capabilities. Please be cautious when making users Administrators as some features work best with fewer users making changes."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Choose which features, accounts, or locations this user can view and/or manage. Each section provides drill down areas for even further permission definition."));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("User will not have access to Portal features until access is defined."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have view access to Portal features."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User will have manage access to Portal features."));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("User will have granular control to Portal features (edited)."));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125792 Verify 'Users' functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.btnUser, "User button"),
+					"Check user dropdown button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.btnUser, "Click users drop-down button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All Users"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Active User"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Inactive Users"));	
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.activeUser, "Click Active user in the users dropdown");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			We_UserManagerPage.gridUserStatusVerification("Active");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.btnUser, "Click users drop-down button");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inactiveUser, "Click Inactive user in the users dropdown");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			We_UserManagerPage.gridUserStatusVerification("Inactive");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void Usermanager_Inviteuser_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "User Manager";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("123153 Create a new user with 'Global Account Administrator' Permission", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.globalAccount,
+					"Select global account administrator");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+             // TODO Below line need to be removed after issue fix Bug-127933
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("Yes"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"123155 Create a new user with 'Individually select the features/accounts/locations/etc' Permission",
+					true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.individualSet,
+					"Select invidually select the features/accounts/locations");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");	
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123156 Create a new user with 'Mirror existing user' Permission", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.mirrorUser, "Select Mirror existing user");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+		    
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123158 Create a new user with 'Provide Access by Account' Permission", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			String userName = "test" + Math.random();
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, userName, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.phoneNumber, "0124567521", "Enter phone number");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.mobilePhoneNumber, "1234567801", "Enter mobile number");
+			vc.getWebDriverUtils().selectRadioButton(We_UserManagerPage.accessByAccount, "Provide Access by Account");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Created Successfully"));
+
+			Reporter.log("123147 Verify the 'Apply Filter' functionality", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			
+			// TODO Below line need to be removed after issue fix Bug-127933
+		    vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			
+		    vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, userName, "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUserName(userName), "Username"),
+					"Check for username existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridName(), "Name"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridEmail(), "Email"),
+					"Check for name existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridAdminStatus("No"), "Admin Status"),
+					"Check for Admin status existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123162 Verify the functionality of 'Resend Invite' ", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridResendEmail, "Click resend email button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite sent successfully"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123160 Verify the Provide New User's Contact Info with invalid details", true);
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name is required"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is required"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, "sindu", "Enter User Name");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Name must be between 8 and 50 characters long"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "test", "Enter email address");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is invalid or must be at most 100 characters"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemailaddress@windstream.com",
+					"Confirm email address ");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation Email Address does not match"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125521 Verify duplicate user creation functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			String duplicateuser = vc.getWebDriverUtils().getText(We_UserManagerPage.getAvailableUserName, "User name");
+			vc.getWebDriverUtils().mouseHoveronElement(We_UserManagerPage.inviteUser);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.inviteUser, "Click invite user button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Admin / Invite User"));
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.firstName, "Test", "Enter First name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.lastName, "User", "Enter Last Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userName, duplicateuser, "Enter User Name");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.email, "testemail@windstream.com",
+					"Enter email address");
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.verifyEmail, "testemail@windstream.com",
+					"Confirm email address ");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.submitNewUser, "Click submit button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("UserName already exists"));
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.floatWarningClose, "Click close icon in warning window");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123163 Verify the filter functionality with invalid details.", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.previous, "Click previous button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			if (vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userManagerFilters,
+					"Usermanager filters")) {
+				vc.getWebDriverUtils().clickElement(We_UserManagerPage.userManagerFilters,
+						"Click user manager filters");
+			}
+			vc.getWebDriverUtils().enterText(We_UserManagerPage.userNameFilter, "Testuser#1467", "Enter username");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.applyFilterSubmit, "Click submit in apply filters");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"There are no users associated with this account. You can invite users by clicking on Invite User button."));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("123152 Verify the 'Clear Filter' functionality", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.clearFilterSubmit, "Click clear filter button");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridUploadPicture, "Upload picture"),
+					"Check for upload picture existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.gridResendEmail, "Resend Email"),
+					"Check for resend email existance");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125595 Verify upload image functionality in user manager grid", true);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridUploadPicture, "Click upload picture");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.uploadImageHeader, "Upload picture"),
+					"Check for upload picture header");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.uploadImageSelect,
+					"Upload picture Select button"), "Check for upload picture select button");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userImageRemove,
+					"Upload picture remove button"), "Check for upload picture remove");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userImageCancel,
+					"Upload picture cancel button"), "Check for upload picture cancel");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.userImageCancel, "Click cancel button");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125754 Verify the functionality of 'My Profile'", true);
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.viewUser, "Click View User");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editContactInformationHeader,
+					"Edit ContactInformation Header"), "Check Edit ContactInformation Header");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editContactInformation,
+					"Edit Contact Information"), "Check for Contact Information existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editPreferences, "Edit Preferences"),
+					"Check for Preferences existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editActivityLog, "Edit ActivityLog"),
+					"Check for Activity Log existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editChangePassword,
+					"Edit Change Password"), "Check for Change Password existance");
+			vc.switchToFrame("WinauthIframe");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editName, "Edit Name"),
+					"Check for Edit name field existance");
+			vc.switchtoDefaultFrame();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125609 Verify pagination functionality in user manager", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "UserManager");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(2000);
+			We_UserManagerPage.verifyPagination();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("125608 Verify edit user functionality in user manager", true);
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+			//Thread.sleep(12000);
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.gridEdit, "Click edit button");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editUserInformation, "Edit page"),
+					"Check for user information in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editUserPermissions, "Edit page"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.editGovernedPermissions, "Edit page"),
+					"Check for Governed permissions in edit");
+			vc.switchToFrame("WinauthIframe");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel1, "First name"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel2, "Last name"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel3, "Email"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel4, "Phone"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.userInformationLabel5, "Mobile"),
+					"Check for user permissions in edit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Active"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Allow Access to User Manager (Typically Restricted to Administrators Only)"));
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editUserPermissions, "Click user permissions");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Users may access Portal features once you define their permissions. You can provide them no access to certain areas, view only, full management, or customize to even more granular levels. You can update these permissions at any time."));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.noAccess, "No access"),
+					"Check 'No access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.fullAccess, "Full access"),
+					"Check 'Full access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.admin, "Admin access"),
+					"Check 'Admin access' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.customize, "Customize"),
+					"Check 'Customize' radio button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editGovernedPermissions,
+					"Click Governed permissions");
+			vc.switchToFrame("IframeMFAGovernerPermissionURL");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"The permissions below are subject to Multi-factor Authentication policies and may require the user to authenticate via Windstream's PingID Authenticator app."));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.modifyFullConfigure,
+					"Modify Full Configure"), "Check 'Modify Full Configure' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.modifyLimitedConfigure,
+					"View Configure"), "Check 'View Configure' radio button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.viewConfigure,
+					"Modify Full Configure"), "Check 'Modify Full Configure' radio button existance");
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.viewMonitoring, "View monitoring"),
+					"Check 'View monitoring' radio button existance");
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.modifyLimitedConfigureRadio,
+					"Click Modify Limited Configure Radiobutton");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.governedPermissionsSubmit,
+					"Governed Permissions Submit"), "Check 'Governed Permissions' Submit button existance");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(We_UserManagerPage.governedPermissionsReset,
+					"Governed Permissions Reset"), "Check 'Governed Permissions' Reset button existance");
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(We_UserManagerPage.editBack,
+					"Click 'Back' button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	} }

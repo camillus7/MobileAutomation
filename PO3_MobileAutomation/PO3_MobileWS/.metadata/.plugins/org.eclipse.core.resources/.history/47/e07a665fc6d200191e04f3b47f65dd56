@@ -1,0 +1,118 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyPhonesWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyPhonesWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'My Phones')]")
+	public WebElement myPhonesCheckbox;
+
+	@FindBy(xpath = "//button[@data-id='DNDStatus']")
+	public WebElement myPhonesDropdown;
+
+	@FindBy(xpath = "//a[@id='savePhones']")
+	public WebElement saveButton;
+
+	@FindBy(xpath = "//a[@id='PhonesWidgetConfigure']")
+	public WebElement configureButton;
+
+	@FindBy(xpath = "//h3[contains(.,'Program Phone Keys')]")
+	public WebElement configureNavigationWindow;
+
+	@FindBy(xpath = "//div[@data-dismiss='modal']")
+	public WebElement closeIcon;
+
+	@FindBy(xpath = "//p[contains(.,'New settings applied successfully.')]")
+	public static WebElement saveSettingsMessage;
+
+	@FindBy(xpath = "//span[@class='k-switch-handle']")
+	public WebElement toggleButton;
+	
+	@FindBy(id="IsDNDSelected")
+	public WebElement toggleStatus;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Phones']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Phones']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	@FindBy(xpath = "//p[contains(.,'New settings applied successfully.')]")
+	public WebElement saveSettings;
+	
+	@FindBy(xpath="//div[@class='alert alert-error']")
+	public WebElement errorMessage;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Phones']//p[contains(@class,'default-value')]")
+	public WebElement forAccount;
+	
+	
+
+	public void myPhonesWidgetFunctionality() throws InterruptedException {
+		Reporter.log("********** Verify MyPhonesWidget-UI ************", true);
+		vc.getWebDriverUtils().elementAvailablity(myPhonesDropdown, "ForExtension-Dropdown");
+		vc.getWebDriverUtils().elementAvailablity(toggleButton, "Do-Not-Disturb ToggleButton");
+		vc.getWebDriverUtils().elementAvailablity(saveButton, "Save button");
+		vc.getWebDriverUtils().elementAvailablity(configureButton, "Configure button");
+
+		Reporter.log("********** Verify DND Functionality ************", true);
+		WebElement toggle = driver.findElement(By.cssSelector("span[class='k-switch-handle']"));
+		if (!toggle.isSelected()) {
+			vc.getWebDriverUtils().clickElement(toggle, "ToggleButton");
+			vc.getWebDriverUtils().clickElement(saveButton, "SaveSettings");
+
+			if (vc.getWebDriverUtils().elementAvailablity(saveSettings, "Success-Message") == true) {
+				Reporter.log(saveSettings.getText(), true);
+				Reporter.log("DND is Successfully Enabled", true);
+
+			} else if (vc.getWebDriverUtils().elementAvailablity(errorMessage, "ServerError-Message") == true) {
+				Reporter.log("Unable to apply the settings.", true);
+				Assert.assertFalse(true);
+			} else {
+				Reporter.log("Something Went Wrong", true);
+			}
+
+		} else {
+			Reporter.log("DND is already Enabled", true);
+		}
+
+		Reporter.log("********** Verify Navigation ************",true);
+		vc.getWebDriverUtils().clickElement(configureButton, "Configure");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("My Phones"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************", true);
+		cw.removeAddedWidget("My Phones");
+	}
+
+	
+	
+	public void enableDND2() throws InterruptedException {
+
+		boolean tcCheckIsDisplayed = toggleStatus.isDisplayed();
+
+        System.out.println("toggle checkbox displayed: "+tcCheckIsDisplayed);
+	}
+
+	
+}

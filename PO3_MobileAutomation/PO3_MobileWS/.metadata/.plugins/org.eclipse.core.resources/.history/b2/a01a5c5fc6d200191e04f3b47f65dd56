@@ -1,0 +1,80 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_OfficeSuiteLicencesWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+	
+	public String totalExtension,allocatedExtension;
+	
+
+	public WE_OfficeSuiteLicencesWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+		
+	@FindBy(xpath = "//label[contains(.,'OfficeSuite Licenses')]")
+	public WebElement officeSuiteLicenseCheckbox;
+
+	@FindBy(xpath = "//div[@data-name='OfficeSuiteLicenses']//a[@href='/Services/PhoneSystem/ExtManagerNew']")
+	public WebElement osManage;
+	
+	@FindBy(xpath="//h2[contains(.,'Voicemail')]")
+	public WebElement widgetName;
+	
+	@FindBy(xpath="//div[@data-widgettitle='OfficeSuite Licenses']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='OfficeSuite Licenses']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+	
+	public void osLicencesWidgetNavigation() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("OfficeSuite Licenses"));
+		extensionCount();
+		vc.getWebDriverUtils().elementAvailablity(osManage, "Manage Button");
+		vc.getWebDriverUtils().clickElement(osManage, "Manage");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Extension Manager - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Extension Manager"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("OfficeSuite Licenses");
+		
+		
+		
+	}
+	
+	public void extensionCount() {
+		
+		WebElement ext = driver.findElement(By.id("extensionGauge"));
+		
+		List<WebElement> values = ext.findElements(By.tagName("tspan"));
+		for(int i=0;i<values.size();i++) {
+			totalExtension = values.get(4).getText();
+			allocatedExtension = values.get(1).getText();
+			
+		}
+		System.out.println("Total Number of Extension available are ==> " + totalExtension + " Allocated Extension are ==> " + allocatedExtension);
+	}
+
+
+}

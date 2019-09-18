@@ -1,0 +1,605 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.Set;
+
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class hWin_BillingSuite extends BaseSteps_SelGrid{
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private	String firstName="test"+ Math.random();
+	// **************** Test Scripts Starts Here *****************//
+	
+	@Test
+	public void PayNow_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.PayNow);
+		Reporter.log("User Story 116797: Pay Now menu Validation", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			try {
+				Reporter.log("User Stories being validated are : = " + "116797", true);
+				userStoryDescription = "Verify Pay Bill Details";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"PayBill - Verify: Pay Bill Details");
+
+				
+				vc.getWebDriverUtils().clickElement(billingPage.payNow,"payNow");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("MAKE A PAYMENT"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter3()));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter4()));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter5()));
+			//	Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter6()));
+			//	Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter7()));
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Due by September 13, 2018"));
+				vc.scrollToView(billingPage.termsAndConditions);
+				vc.getWebDriverUtils().clickElement(billingPage.termsAndConditions,"Terms and Conditions");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("TERMS &amp; CONDITIONS"));
+				vc.getWebDriverUtils().clickElement(billingPage.termsAndConditionsPayBillClose,"close");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.cancel,"Cancel");
+				vc.getWebDriverUtils().clickElement(billingPage.cancelNo,"CancelNo");
+				//vc.getWebDriverUtils().waitUntilLoadingWheelExists();
+				Thread.sleep(1000);
+				vc.getWebDriverUtils().clickElement(billingPage.cancel,"Cancel");
+				vc.getWebDriverUtils().clickElement(billingPage.cancelContinue,"CancelContinue");
+				Reporter.log("Clicked on Cancel,returned to Home page");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Billing"));
+					vc.getWebDriverUtils().clickElement(billingPage.payNow,"payNow");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("MAKE A PAYMENT"));
+					vc.scrollToView(billingPage.addnewPaymentMethod);
+					vc.getWebDriverUtils().clickElement(billingPage.addnewPaymentMethod,"Add New payment Method");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Methods"));
+					vc.switchToFrame("paymentIframe");
+					vc.getWebDriverUtils().clickElement(billingPage.creditDebitPayNow,"Credit/Debit");
+					vc.getWebDriverUtils().selectSpanDropDownValue(billingPage.debitCreditType, "DebitCardType", "MasterCard Debit/Credit");
+					vc.getWebDriverUtils().enterText(billingPage.creditCardNumber, "5466160066832260", "creditCardNumber");
+					vc.getWebDriverUtils().selectSpanDropDownValue(billingPage.expirationYear, "Year", "2021");
+					vc.getWebDriverUtils().enterText(billingPage.zipCode, "75034", "ZipCode");
+					vc.getWebDriverUtils().enterText(billingPage.cvv2, "123", "cvv");
+					vc.getWebDriverUtils().clickElement(billingPage.savecard,"SaveCard");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Success!"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Card Added Successfully!"));
+					vc.getWebDriverUtils().clickElement(billingPage.sucessOk,"SucessOkButton");
+					vc.switchtoDefaultFrame();
+					vc.getWebDriverUtils().clickElement(billingPage.closePaymentFrame,"closePaymentFrame");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Master Card ************2260"));
+					vc.getWebDriverUtils().enterText(billingPage.otherAmount, "0.01", "OtherAmount");
+					vc.getWebDriverUtils().clickElement(billingPage.PaymentRadioButton, "Payment RadioButton");
+					vc.scrollToView(billingPage.agreementCheckBox);
+					vc.getWebDriverUtils().clickElement(billingPage.agreementCheckBox, "Terms&ConditionsCheckBox");
+					vc.getWebDriverUtils().clickElement(billingPage.payNow, "Pay Now");
+					
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Confirmation"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter3()));
+					Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter4()));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("$0.01"));
+					vc.getWebDriverUtils().clickElement(billingPage.payNowPaymentConfirmationOk, "PaymentConfirmationOk");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("MAKE A PAYMENT"));
+					
+					vc.scrollToView(winLinkHomePage.home);
+					
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reports_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Billing);
+		Reporter.log("User Story 116798:Reports ", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			
+			try {
+				Reporter.log("User Stories being validated are : = " + "116798", true);
+				userStoryDescription = "Verify reports";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"Reports-Verify Reports");
+
+				// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.billing,
+						"billing");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.reports,
+						"Reports");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("ANALYZE INVOICE REPORTS"));
+				vc.switchToFrame("Invoicesiframe");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("How am I using my service plan?"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Where am I calling?"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("How long am I talking?"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Whom do I call most?"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("My reports?"));
+				vc.switchtoDefaultFrame();
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Due by September 13, 2018"));
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.home,"HomePage");
+				
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			
+		
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void PaymentHistory_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.PaymentHistory);
+		Reporter.log("User Story 113877:PaymentHistory", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			
+			try {
+				Reporter.log("User Stories being validated are : = " + "113877", true);
+				userStoryDescription = "Verify PaymentHistory";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"PaymentHistory-Verify PaymentHistory");
+
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.billing,
+						"billing");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.paymentHistory,
+						"PaymentHistory");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT HISTORY"));
+				vc.switchToFrame("Invoicesiframe");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation Code"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Settlement Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Amount Paid"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Convenience Fee"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Type"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Transaction Type"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Bill Cycle Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Action"));
+				Reporter.log("Validated all table headings");
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter3()));
+				//vc.getWebDriverUtils().validateToolTipText(billingPage.draftLimitToolTip,"none", "A-Authorized<br/>A1–Authorized $1<br/>B-Sent for Bill<br/>BSN-Billed Not Settled<br/>F-Failed Settlement<br/>FR-Failed refund<br/>S-Settled<br/>V-Voided");
+				Actions builder = new Actions(driver);
+				builder.moveToElement(billingPage.draftLimitToolTip).build().perform(); 
+				vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(billingPage.toolTipText);
+				Assert.assertTrue(vc.waitUntilTextIsPresent("A-Authorized"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(billingPage.print,"PrintIcon"));
+				//Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(billingPage.export,"Export"));
+				
+				vc.switchtoDefaultFrame();
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Due by September 13, 2018"));
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.home,"HomePage");
+				
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void paperBills_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.PaperBills);
+		Reporter.log("User Story :PaperBills", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			
+			try {
+				Reporter.log("User Stories being validated are : = " + "114567", true);
+				userStoryDescription = "Verify PaperBills";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"PaperBills-Verify PaperBills");
+
+				// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.billing,
+						"billing");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.papaerBills,
+						"PaperBills");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("VIEW PAPER BILLS"));
+				vc.switchToFrame("Invoicesiframe");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Document Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Address"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Action"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter3()));
+				Thread.sleep(2000);
+			//	vc.getWebDriverUtils().clickElement(billingPage.viewInvoices,"view");
+				vc.switchtoDefaultFrame();
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Due by September 13, 2018"));
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.home,"HomePage");
+				
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void viewBills_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ViewBills);
+		Reporter.log("User Story :viewBills", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			
+			try {
+				Reporter.log("User Stories being validated are : = " + "112585", true);
+				userStoryDescription = "Verify viewBills";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"viewBills-View Bills");
+
+				// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.billing,
+						"billing");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.viewBill,
+						"view Bill");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("CURRENT BILL"));
+				vc.switchToFrame("Invoicesiframe");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account No."));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing/Telephone Number"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter3()));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter4()));
+				try{
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Activity"));
+				} catch (Throwable e) {
+				vc.getWebDriverUtils().clickElement(billingPage.billSummary,"billSummary");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Activity"));
+				}
+				vc.getWebDriverUtils().clickElement(billingPage.billSummary,"billSummary");
+				Reporter.log("clicked on collapse");
+				vc.getWebDriverUtils().clickElement(billingPage.billSummary,"billSummary");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Activity"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Current Charges Due"));
+				Reporter.log("clicked on Expand");
+				try{
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Previous Bill"));
+					} catch (Throwable e) {
+						vc.scrollToView(billingPage.PreviousBill);	
+					vc.getWebDriverUtils().clickElement(billingPage.PreviousBill,"previousBill");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Previous Bill"));
+					}
+				vc.scrollToView(billingPage.PreviousBill);
+				vc.getWebDriverUtils().clickElement(billingPage.PreviousBill,"previousBill");
+					Reporter.log("clicked on collapse");
+					vc.getWebDriverUtils().clickElement(billingPage.PreviousBill,"previousBill");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Previous Bill"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Payments and Adjustments - Thank You"));
+					Reporter.log("clicked on Expand");
+					
+					try{
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Current Charges"));
+						} catch (Throwable e) {
+						vc.getWebDriverUtils().clickElement(billingPage.currentCharges,"Current Charges");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Current Charges"));
+						}
+					vc.getWebDriverUtils().clickElement(billingPage.currentCharges,"Current Charges");
+						/*Reporter.log("clicked on collapse");
+						vc.getWebDriverUtils().clickElement(billingPage.currentCharges,"Current Charges");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Current Charges"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("WINDSTREAM"));
+						Reporter.log("clicked on Expand");*/
+						//vc.getWebDriverUtils().clickElement(billingPage.windstreamCollapse,"Windstream Expand");
+						//Assert.assertTrue(vc.waitUntilTextIsPresent("Total WINDSTREAM COMMUNICATIONS Charges"));
+						
+				vc.switchtoDefaultFrame();
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Due by September 13, 2018"));
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.home,"HomePage");
+				
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void autoPay_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.AutoPay);
+		Reporter.log("User Story 112545:validating AutoPay", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			
+			try {
+				Reporter.log("User Stories being validated are : = " + "112545", true);
+				userStoryDescription = "Verify AutoPay";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"AutoPay-Verify AutoPay");
+
+				
+			
+	
+				vc.getWebDriverUtils().clickElement(billingPage.autoPay,
+						"autopay");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Cancel Auto Pay?"));
+				Thread.sleep(1000);
+				vc.getWebDriverUtils().clickElement(billingPage.cancelAutoPayNo,
+						"CancelAutoPay No");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT OPTION"));
+				Thread.sleep(1000);
+				
+				vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(billingPage.termsAndConditionsAutoPay);
+				vc.scrollToView(billingPage.otherAmountTextBox);
+				System.out.println("Element scrolled to Terms and conditions");
+				Thread.sleep(1000);
+				
+				vc.getWebDriverUtils().clickElement(billingPage.termsAndConditionsAutoPay,"TermsAndConditions");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Enroll in Auto Pay"));	
+				vc.getWebDriverUtils().clickElement(billingPage.termsAndConditionsClose,"TermsAndConditionsClose");
+				//vc.scrollToView(billingPage.autoPayEdit);
+				Actions builderTool = new Actions(driver);
+				builderTool.moveToElement(billingPage.draftLimitAutoPayToolTip).build().perform(); 
+				vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(billingPage.draftLimitAutoPayToolTip);
+			//	Assert.assertTrue(vc.waitUntilTextIsPresent("This option will be available to set draft limit in Auto Pay. The amount saved in draft limit will be debited automatically on auto payment. Please make sure the amount is not less than the due amount to avoid the late fee. "));	
+				vc.scrollToView(billingPage.otherAmountTextBox);
+				Actions builder = new Actions(driver);
+				builder.moveToElement(billingPage.draftDayToolTip).build().perform();
+				vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(billingPage.draftDayToolTip);
+				Assert.assertTrue(vc.waitUntilTextIsPresent("The day your Windstream payment will be drafted each month. If you choose Draft Date, then the payment will be drafted on the Due Date of your bill (this day may vary each month)."));	
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT OPTION"));
+			//	billingPage.selectPaymentOption("Credit Card and Bank Account");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.suspectCBAutoPay,
+						"SuspectAutoPayCheckBox");
+				
+				
+				try{
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Your have succesfully un-suspended autopay."));
+				}catch(Throwable e) {
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Your have succesfully suspended autopay."));
+						
+				}
+				
+				
+				vc.getWebDriverUtils().clickElement(billingPage.suspectAutoPayOk,
+						"SuspectAutoPayOk");
+				
+				/*vc.getWebDriverUtils().clickElement(billingPage.windstreamLink,
+						"Terms and Conditions");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore,
+						"Windstream Information");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Pay Confirmation"));*/
+				Assert.assertTrue(vc.waitUntilTextIsPresent("DRAFT DAY"));
+				 
+				//vc.scrollToView(billingPage.otherAmountTextBox);
+				
+				Reporter.log("Completed AutoPay existing payment options",true);
+			//---------------------New Payment Methods------------------	
+				Reporter.log("Starting New payment option",true);
+				Thread.sleep(3000);
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.home, "Home");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.autoPay,
+						"autopay");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Cancel Auto Pay?"));
+				Thread.sleep(1000);
+				vc.getWebDriverUtils().clickElement(billingPage.cancelAutoPayNo,
+						"CancelAutoPay No");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT OPTION"));
+				
+				billingPage.selectPaymentOption("Credit Card and Bank Account");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Methods"));
+				vc.switchToFrame("paymentIframe");
+				vc.getWebDriverUtils().clickElement(billingPage.creditDebitOption,
+						"Credit/DebitOption");
+				billingPage.selectDebitCreditDropDown("Discover");
+				vc.getWebDriverUtils().enterText(billingPage.creditCardNumber, "6011004548117429", "creditCardNumber");
+				vc.getWebDriverUtils().selectSpanDropDownValue(billingPage.expirationYear, "Year", "2021");
+				
+				vc.getWebDriverUtils().enterText(billingPage.zipCode, "75034", "ZipCode");
+				
+				vc.getWebDriverUtils().enterText(billingPage.cvv2, "123", "CVV");
+				
+				vc.getWebDriverUtils().clickElement(billingPage.savecard, "SaveCard");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Success!"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Card Added Successfully!"));
+				vc.getWebDriverUtils().clickElement(billingPage.sucessOk,"SucessOkButton");
+				vc.switchtoDefaultFrame();
+				vc.getWebDriverUtils().clickElement(billingPage.closePaymentFrame,"closePaymentFrame");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT OPTION"));
+				Reporter.log("Added new Discover card" , true);
+				
+				/*	Reporter.log("Starting EDit AutoPay" , true);
+			//	vc.getWebDriverUtils().clickElement(billingPage.autoPayEdit,"autopay Edit");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT OPTION"));
+				vc.getWebDriverUtils().enterText(billingPage.otherAmountTextBox, "0.01", "otherAmount");
+				vc.scrollToView(billingPage.agreementCheckBox);
+				vc.getWebDriverUtils().clickElement(billingPage.agreementCheckBox, "Agreement CheckBox");
+				vc.getWebDriverUtils().clickElement(billingPage.autoPaySave,"save");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Pay Confirmation"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getParameter3()));
+				vc.getWebDriverUtils().clickElement(billingPage.confirmationClose,
+						"close");
+				
+				Reporter.log("Completed Edit AutoPay", true);*/
+				
+				
+			//Assert.assertTrue(vc.waitUntilTextIsPresent("Due by September 13, 2018"));
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.home,"HomePage");
+				
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log("completed AutoPay validation", true);
+	}
+	
+	@Test
+	public void GoPaperlessMenu_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Gopaperless);
+		Reporter.log("User Story 113914,113916: Verify Go Paperless", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			try {
+				Reporter.log("User Stories being validated are : = " + "113914", true);
+				userStoryDescription = "Verify Go Paperless ON";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"GoPaperless - Verify Go Paperless ON");
+
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.goPaperless,
+						"goPaperless");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Thank You!"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Your request has been received"));
+				
+				
+				if ((billingPage.noPaperBills.getText().contains("You are no longer enrolled in Paperless Billing.")) ) {
+					
+					Reporter.log("***********  Go paperless is off **************",true);
+					Reporter.log(billingPage.noPaperBills.getText(),true);
+				//	Reporter.log(" *********** datasource - Downstream ************ "+sdWANMonitoringPage.transportDownstreamChart.getAttribute("datasource"),true);
+					
+				} else {
+				//	Assert.assertTrue(vc.waitUntilTextIsPresent("You are enrolled in Paperless Billing."));
+					Reporter.log("***********  Go paperless is ON **************",true);
+					Reporter.log(billingPage.noPaperBills.getText(),true);
+					//((billingPage.noPaperBills.getText().contains("You are enrolled in Paperless Billing.")));
+					}
+				vc.getWebDriverUtils().clickElement(billingPage.okGopaperless,
+						"goPaperlessOK");
+			
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				Reporter.log("User Stories being validated are : = " + "113916", true);
+				userStoryDescription = "Verify Go Paperless OFF";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+								"GoPaperless - Verify Go Paperless OFF");
+
+				// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.goPaperless,
+						"goPaperless");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Thank You!"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Your request has been received"));
+				
+				if ((billingPage.noPaperBills.getText().equals("You are enrolled in Paperless Billing.")) ) {
+					Reporter.log("***********  Go paperless is oN **************",true);
+					Reporter.log(billingPage.noPaperBills.getText(),true);
+				//	Reporter.log(" *********** datasource - Downstream ************ "+sdWANMonitoringPage.transportDownstreamChart.getAttribute("datasource"),true);
+					
+				} else {
+					//Assert.assertTrue(vc.waitUntilTextIsPresent("You are enrolled in Paperless Billing."));
+					Reporter.log("***********  Go paperless is Off **************",true);
+					Reporter.log(billingPage.noPaperBills.getText(),true);
+					
+					}
+				vc.getWebDriverUtils().clickElement(billingPage.okGopaperless,
+						"goPaperlessOK");
+			
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+							userStoryDescription, successMsgDesc);	
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+		}
+	
+}
+

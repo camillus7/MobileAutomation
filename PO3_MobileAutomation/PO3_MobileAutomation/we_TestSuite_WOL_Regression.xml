@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+      <listener class-name="com.webautomation.validation.RetryListener" />  
+</listeners>
+
+
+<test name="TC_WE_WOL_General_Themes"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_Themes_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Support_CreateSupportRequest_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_NewSupportRequest_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Support_SupportRequests"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="SupportRequests_NewSupportRequest_FlyOut_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_DashboardPage"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_DashboardPageWidgets_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_BillingDetails"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_BillingDetailsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_BillingSettings"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_BillingSettingsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_CircuitUtilization"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_CircuitUtilizationWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_CurrentUsers"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_CurrentUsersWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_Community"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_CommunityWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Products_Conferencing"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_Conferencing"/> </methods> </class> </classes> </test>  
+<test name="TC_WE_WOL_Services_Products_SDWAN_MFASG"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_SDWAN_MFASetupGuide"/> </methods> </class> </classes> </test>  
+<test name="TC_WE_WOL_Services_Products_TollFree_ChangeHistory"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_TollFree_ChangeHistory"/> </methods> </class> </classes> </test>  
+<test name="TC_WE_WOL_Services_Products_TollFree_RoutingReport"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_TollFree_RoutingReport"/> </methods> </class> </classes> </test>  
+<test name="TC_WE_WOL_Services_Products_TollFree_GetANewNumber"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_TollFree_GetANewNumber"/> </methods> </class> </classes> </test>  
+<test name="TC_WE_WOL_Services_Products_TollFree_RepointTollFreeNumber_SinglePoint"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_TollFree_RepointTollFreeNumber_SinglePoint"/> </methods> </class> </classes> </test>  
+<test name="TC_WE_WOL_Services_Tools_ActiveServices"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_ActiveServices_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Tools_Locations"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_Locations_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Tools_SpeedTest"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_SpeedTest_WOL"/> </methods> </class> </classes> </test>
+
+<test name="TC_WE_WOL_Services_Products_Voip_AccessManagement"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_VoipAccessManagement_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Products_Voip_ManageServices"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Voip_ManageServices_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Products_Voip_DownloadUserGuides"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Voip_DownloadUserGuides_WOL"/> </methods> </class> </classes> </test>
+
+
+
+<test name="TC_WE_WOL_Reporting_Billing_Rates"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_Rates_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_Billing_RecurringCharges"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_RecurringCharges_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_Billing_InvoiceReports"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_InvoiceReports_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_Network_LocalTelephoneNo"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_LocalTelephoneNumbers_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_NetworkHealth"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkHealth_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_NetworkLatency"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkLatency_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_NetworkSLA"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkSLA_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_VoiceCircuitUtilization"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Voice_VoiceCircuitUtilization_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_VoiceUsage"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Voice_VoiceUsage_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Reporting_TollUsage"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_TollUsage_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_MonitoredRouters"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_MonitoredRouters_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_MostActiveCircuitsL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_MostActiveDataCircuitsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_NetworkHealth"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_NetworkHealth_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_NetworkStatus"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_Networkstatuswidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_Orders"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_OrdersWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_SupportRequest"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_SupportRequestWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_WeatherAlerts"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_WeatherAlertsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Widgets_WinBot"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_WinBotwidget_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Billing_FTPBillingInvoice"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_FTPBillingInvoice_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Support_Community"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_Community_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Support_ContactUs"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_ContactUs_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Support_GetHelp"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_GetHelp_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Account_AccountHierarchy"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Account_Suite"> <methods> <include name="Account_AccountHierarchy_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Account_CompanyContacts"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Account_Suite"> <methods> <include name="Account_CompanyContacts_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_UserManager_UI"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_UI_WOL"/></methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Usermanager_Inviteuser"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_Inviteuser_WOL"/></methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Downloads"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Downloads_Suite"> <methods> <include name="WE_Downloads_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_General_ActivityLog"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ActivityLog_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_General_ContactInfo"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ContactInformation_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_General_ChangePassword"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ChangePassword_WOL"/> </methods> </class> </classes> </test>
+
+<!-- <test name="TC_WE_WOL_Services_Products_SDWAN_AccessControl"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_SDWAN_SDWANAccessControl"/> </methods> </class> </classes> </test>  
+ -->
+ 
+</suite>

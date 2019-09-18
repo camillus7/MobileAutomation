@@ -1,0 +1,421 @@
+<h2>Reporter output</h2><table><tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : VerifyDueAmount is same in Landing and Billing</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         Billing -  VerifyDueAmount is same in Landing and Billing                                     </td></tr>
+<tr><td>****************   Billing -  VerifyDueAmount is same in Landing and Billing   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=Billing-Title</td></tr>
+<tr><td>Web element = 'Billing-Title' is identified successfully</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Get text for element CurrentBalanceDue := $11,208.74</td></tr>
+<tr><td>TOTAL AMOUNT DUE IN BILLING SCREEN IS  ====> $11,208.74</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>TOTAL AMOUNT DUE IS IN PAYMENT SCREEN IS====> $11,208.74</td></tr>
+<tr><td>Dueamount is same in Billing and in Payment Screen</td></tr>
+<tr><td>Billing -  VerifyDueAmount is same in Landing and Billing Successfully executed</td></tr>
+<tr><td>we_VerifyDueAmount ==> Test case passed</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : SchedulePayment</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         Billing -  SchedulePayment                                     </td></tr>
+<tr><td>****************   Billing -  SchedulePayment   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Searching for element :=AccountDetails</td></tr>
+<tr><td>Web element = 'AccountDetails' is identified successfully</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>Clicked on PayNow-Button loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=PaymentDate-DateSelection</td></tr>
+<tr><td>Timed out waiting for element := PaymentDate-DateSelection</td></tr>
+<tr><td>Web element = 'PaymentDate-DateSelection' is not identified</td></tr>
+<tr><td>Schedule Payment options is not available</td></tr>
+<tr><td>Billing -  SchedulePayment Successfully executed</td></tr>
+<tr><td>we_SchedulePayment ==> Test case passed</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : Billing-MakePayment</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         Billing-MakePayment                                     </td></tr>
+<tr><td>****************   Billing-MakePayment   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Searching for element :=AccountDetails</td></tr>
+<tr><td>Web element = 'AccountDetails' is identified successfully</td></tr>
+<tr><td>Accounts available</td></tr>
+<tr><td>TOTAL AMOUNT DUE IS ====> $11,208.74</td></tr>
+<tr><td>Account Number to be selected is Account #4738745</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>Clicked on PayNow-Button loaded in 0 seconds</td></tr>
+<tr><td>OtherAmount Radiobutton Selected </td></tr>
+<tr><td>1 entered in the CustomAmount field</td></tr>
+<tr><td>Clicked on NextButton loaded in 3 seconds</td></tr>
+<tr><td>Searching for element :=CardDetails</td></tr>
+<tr><td>Timed out waiting for element := CardDetails</td></tr>
+<tr><td>Web element = 'CardDetails' is not identified</td></tr>
+<tr><td>No Cards Available. Adding Card...</td></tr>
+<tr><td>Timed out waiting for element := Billing-Screen</td></tr>
+<tr><td>we_MakePayment ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-44-30\we_MakePayment_error23-08-2019 12-44-30.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : ManageAutoPay - Enroll AutoPay</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         ManageAutoPay - Enroll AutoPay                                     </td></tr>
+<tr><td>****************   ManageAutoPay - Enroll AutoPay   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>Clicked on Options loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=ManagePaymentMethod</td></tr>
+<tr><td>Web element = 'ManagePaymentMethod' is identified successfully</td></tr>
+<tr><td>Searching for element :=ManageAutoPay</td></tr>
+<tr><td>Web element = 'ManageAutoPay' is identified successfully</td></tr>
+<tr><td>Clicked on ManageAutopay loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=ManageAutoPay-Screen</td></tr>
+<tr><td>Web element = 'ManageAutoPay-Screen' is identified successfully</td></tr>
+<tr><td>Searching for element :=NotEnrolledInAutopay</td></tr>
+<tr><td>Web element = 'NotEnrolledInAutopay' is identified successfully</td></tr>
+<tr><td>You are not Enrolled in AutoPay</td></tr>
+<tr><td>Clicked on TermsandConditions-Checkbox loaded in 0 seconds</td></tr>
+<tr><td>Clicked on EnrollAutopay loaded in 0 seconds</td></tr>
+<tr><td>PLEASE SELECT A PAYMENT METHOD</td></tr>
+<tr><td>******ERROR PROMPT IS DISPLAYED TO SELECT PAYMENT METHOD******</td></tr>
+<tr><td>Clicked on OK loaded in 3 seconds</td></tr>
+<tr><td>Clicked on PaymentOption-Dropdown loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=Cards</td></tr>
+<tr><td>Web element = 'Cards' is identified successfully</td></tr>
+<tr><td>Clicked on Card loaded in 0 seconds</td></tr>
+<tr><td>Selected KEYSTONE  CO. ********4234 from Saved Payment Option</td></tr>
+<tr><td>Clicked on DueDate-Dropdown loaded in 0 seconds</td></tr>
+<tr><td>Timed out waiting for element := SelectDate</td></tr>
+<tr><td>we_EnrollAutoPay ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-46-12\we_EnrollAutoPay_error23-08-2019 12-46-12.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : ManageAutoPay - De-Enroll AutoPay</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         ManageAutoPay - De-Enroll AutoPay                                     </td></tr>
+<tr><td>****************   ManageAutoPay - De-Enroll AutoPay   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>Clicked on Options loaded in 0 seconds</td></tr>
+<tr><td>Clicked on ManageAutopay loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=ManageAutoPay-Screen</td></tr>
+<tr><td>Web element = 'ManageAutoPay-Screen' is identified successfully</td></tr>
+<tr><td>User is not Enrolled in Autopay</td></tr>
+<tr><td>ManageAutoPay - De-Enroll AutoPay Successfully executed</td></tr>
+<tr><td>we_DeenrollAutoPay ==> Test case passed</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : AddElectronicCheck</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         ManagePaymentMethods - Add Electonic Check Functionality                                     </td></tr>
+<tr><td>****************   ManagePaymentMethods - AddElectonicCheck Functionality   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>Clicked on Options loaded in 0 seconds</td></tr>
+<tr><td>Clicked on ManagePaymentmethod loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=AddPaymentMethod</td></tr>
+<tr><td>Web element = 'AddPaymentMethod' is identified successfully</td></tr>
+<tr><td>Clicked on AddPaymentMethod loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=PaymentType</td></tr>
+<tr><td>Timed out waiting for element := PaymentType</td></tr>
+<tr><td>Web element = 'PaymentType' is not identified</td></tr>
+<tr><td>we_AddElectronicCheck ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-58-08\we_AddElectronicCheck_error23-08-2019 12-58-08.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : AddCredit_DebitCard</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         ManagePaymentMethods - Add Credit/Debit Card                                     </td></tr>
+<tr><td>****************   ManagePaymentMethods - Add Credit/Debit Card   ****************</td></tr>
+<tr><td>Clicked on Billing-Screen loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=No-BillingAccount</td></tr>
+<tr><td>Timed out waiting for element := No-BillingAccount</td></tr>
+<tr><td>Web element = 'No-BillingAccount' is not identified</td></tr>
+<tr><td>Billing Account is Available</td></tr>
+<tr><td>Clicked on Account loaded in 0 seconds</td></tr>
+<tr><td>Clicked on Options loaded in 0 seconds</td></tr>
+<tr><td>Clicked on ManagePaymentmethod loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=AddPaymentMethod</td></tr>
+<tr><td>Web element = 'AddPaymentMethod' is identified successfully</td></tr>
+<tr><td>Clicked on AddPaymentMethod loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=PaymentType</td></tr>
+<tr><td>Timed out waiting for element := PaymentType</td></tr>
+<tr><td>Web element = 'PaymentType' is not identified</td></tr>
+<tr><td>we_AddCredit_DebitCard ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 12-59-39\we_AddCredit_DebitCard_error23-08-2019 12-59-39.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : BVN_User</td></tr>
+<tr><td>col B - Username : weonlinetest6</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass666</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : NotificationSubscription</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         NotificationSubscription                                     </td></tr>
+<tr><td>****************   NotificationSubscription   ****************</td></tr>
+<tr><td>Clicked on NotificationSubscription loaded in 0 seconds</td></tr>
+<tr><td>***ADD PROFILE***</td></tr>
+<tr><td>Clicked on AddNewProfile loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=AddContact-Screen</td></tr>
+<tr><td>Web element = 'AddContact-Screen' is identified successfully</td></tr>
+<tr><td>We entered in the FirstName field</td></tr>
+<tr><td>Last entered in the LastName field</td></tr>
+<tr><td>testing@we.com entered in the Email field</td></tr>
+<tr><td>PhoneNo : element not found</td></tr>
+<tr><td>Timed out waiting for element := LinkNewAccount</td></tr>
+<tr><td>we_Notification ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-00-59\we_Notification_error23-08-2019 01-00-59.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : BVN_User</td></tr>
+<tr><td>col B - Username : weonlinetest6</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass666</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : NotificationSubscription</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         CompanyContacts                                     </td></tr>
+<tr><td>****************   CompanyContacts   ****************</td></tr>
+<tr><td>Clicked on CompanyContacts loaded in 0 seconds</td></tr>
+<tr><td>***ADD NEW CONTACT***</td></tr>
+<tr><td>Clicked on AddNewContact loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=AddContact-Screen</td></tr>
+<tr><td>Web element = 'AddContact-Screen' is identified successfully</td></tr>
+<tr><td>We entered in the FirstName field</td></tr>
+<tr><td>Last entered in the LastName field</td></tr>
+<tr><td>testing@we.com entered in the Email field</td></tr>
+<tr><td>PhoneNo : element not found</td></tr>
+<tr><td>Timed out waiting for element := LinkNewAccount</td></tr>
+<tr><td>we_CompanyContacts ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-02-17\we_CompanyContacts_error23-08-2019 01-02-17.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : Automation</td></tr>
+<tr><td>col B - Username : Ahillazar</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass1</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : OfficeSuiteSettings - SetPresenceStatus and CustomStatus</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         OfficeSuiteSettings - SetPresenceStatus and CustomStatus                                     </td></tr>
+<tr><td>****************   OfficeSuiteSettings - SetPresenceStatus and CustomStatus   ****************</td></tr>
+<tr><td>Clicked on ProfileIcon loaded in 0 seconds</td></tr>
+<tr><td>Timed out waiting for element := Status</td></tr>
+<tr><td>weConnect_ProfileSettings ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-03-07\weConnect_ProfileSettings_error23-08-2019 01-03-07.png</td></tr>
+<tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : BVN_User2</td></tr>
+<tr><td>col B - Username : weonlinetest6</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass6666</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is identified successfully</td></tr>
+<tr><td>Logged in</td></tr>
+<tr><td>User Story : Create-New SupportRequest</td></tr>
+<tr><td>************************ Navigating to Create Support request ************************</td></tr>
+<tr><td>                                                             </td></tr>
+<tr><td>                         Create-New SupportRequest                                     </td></tr>
+<tr><td>****************   Support -> New Support Request   ****************</td></tr>
+<tr><td>Clicked on HamburgerMenu loaded in 0 seconds</td></tr>
+<tr><td>Clicked on SupportRequests loaded in 0 seconds</td></tr>
+<tr><td>****Navigate between tabs****</td></tr>
+<tr><td>Clicked on StatusTab loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=TicketDetails</td></tr>
+<tr><td>Web element = 'TicketDetails' is identified successfully</td></tr>
+<tr><td>5==>Open Tickets is Available</td></tr>
+<tr><td>Clicked on StatusTab loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=TicketDetails</td></tr>
+<tr><td>Web element = 'TicketDetails' is identified successfully</td></tr>
+<tr><td>4==>Monitoring Tickets is Available</td></tr>
+<tr><td>Clicked on StatusTab loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=TicketDetails</td></tr>
+<tr><td>Timed out waiting for element := TicketDetails</td></tr>
+<tr><td>Web element = 'TicketDetails' is not identified</td></tr>
+<tr><td>Resolved Tickets is Not Available</td></tr>
+<tr><td>Clicked on StatusTab loaded in 0 seconds</td></tr>
+<tr><td>Searching for element :=TicketDetails</td></tr>
+<tr><td>Web element = 'TicketDetails' is identified successfully</td></tr>
+<tr><td>5==>Closed Tickets is Available</td></tr>
+<tr><td>Clicked on Create-NewSupportRequests loaded in 0 seconds</td></tr>
+<tr><td>****CREATE REQUEST - LOCATION/ACCOUNT****</td></tr>
+<tr><td>LocationDropdown is clicked</td></tr>
+<tr><td>Searching for element :=Dropdown-List</td></tr>
+<tr><td>Timed out waiting for element := Dropdown-List</td></tr>
+<tr><td>Web element = 'Dropdown-List' is not identified</td></tr>
+<tr><td>AccountDropdown is clicked</td></tr>
+<tr><td>Searching for element :=Dropdown-List</td></tr>
+<tr><td>Timed out waiting for element := Dropdown-List</td></tr>
+<tr><td>Web element = 'Dropdown-List' is not identified</td></tr>
+<tr><td>Timed out waiting for element := Nextbutton</td></tr>
+<tr><td>weConnect_CreateSupportRequest ==> Test case Failed</td></tr>
+<tr><td>D:\D drive\PO3-Automation\QA\Po3WinLinkPortalAutomation\.\ScreenShots\23-08-2019 01-05-50\weConnect_CreateSupportRequest_error23-08-2019 01-05-50.png</td></tr>
+</table>

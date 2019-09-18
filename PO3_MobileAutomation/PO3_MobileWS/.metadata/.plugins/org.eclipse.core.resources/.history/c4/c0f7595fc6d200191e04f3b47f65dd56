@@ -1,0 +1,113 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+import java.util.List;
+
+import com.webautomation.validation.Validator;
+
+public class WE_PhoneKeyProfilesWidget {
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_PhoneKeyProfilesWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//*h2[contains(.,'Phone Key Profiles')]")
+	public WebElement widgetName;
+
+	@FindBy(xpath = "//label[contains(.,'Phone Key Profiles')]")
+	public WebElement phoneKeyProfilesCheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Phone Key Profiles']//a[contains(.,'Configure')]")
+	public WebElement configureButton;
+
+	@FindBy(xpath = "//input[@type='button' and @name='Add']")
+	public WebElement addButton;
+
+	@FindBy(xpath = "//table[@id='dispTable']")
+	public WebElement records;
+
+	@FindBy(xpath = "//table[@id='dispTable']//input[@type='checkbox']")
+	public WebElement recordsCheckbox;
+
+	@FindBy(name = "profile.description")
+	public WebElement profileNameField;
+
+	@FindBy(xpath = "//input[@type='submit' and @name='save']")
+	public WebElement saveButton;
+
+	@FindBy(xpath = "//*[@id='phone-key-profiles-modal']/div/div[2]/iframe")
+	public WebElement iFrame;
+
+	@FindBy(xpath = "//input[@name='searchFor']")
+	public WebElement searchForField;
+
+	@FindBy(xpath = "//div[@id='phone-key-profiles-modal']//div[@class='close']")
+	public WebElement closeIcon;
+
+	public void configureNavigation() throws InterruptedException {
+
+		vc.getWebDriverUtils().elementAvailablity(configureButton, "Configure-Button");
+		vc.getWebDriverUtils().clickElement(configureButton, "Configure");
+		vc.getWebDriverUtils().waitUntilLoadingWheelExists();
+		driver.switchTo().frame(iFrame);
+		vc.getWebDriverUtils().elementAvailablity(searchForField, "SearchField");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Key Profiles"));
+		vc.getWebDriverUtils().elementAvailablity(addButton, "Add-Button");
+		selectRecord("Record1");
+		driver.switchTo().defaultContent();
+		vc.getWebDriverUtils().clickElement(closeIcon, "Close-Icon");
+
+		Reporter.log("********** Remove Widget ************", true);
+		cw.removeAddedWidget("Phone Key Profiles");
+
+	}
+
+	public boolean getAddedProfile(String profileName) {
+
+		boolean profile = false;
+
+		List<WebElement> records = driver.findElements(By.id("dispTable"));
+		Reporter.log("Searching for " + profileName + " Profile ", true);
+		for (int i = 0; i < records.size(); i++) {
+			String list = records.get(i).getText();
+			if (list.contains(profileName)) {
+				profile = true;
+			}
+		}
+		return profile;
+	}
+
+	public void selectRecord(String profileName) throws InterruptedException {
+		if (vc.getWebDriverUtils().elementAvailablity(records, "items")) {
+			vc.getWebDriverUtils().clickElement(recordsCheckbox, "Item-Checkbox");
+			vc.getWebDriverUtils().clickElement(addButton, "Add");
+			vc.getWebDriverUtils().elementAvailablity(profileNameField, "ProfileName");
+			vc.getWebDriverUtils().enterText(profileNameField, profileName, "AddPhoneKeyProfile");
+			vc.getWebDriverUtils().clickElement(saveButton, "SaveButton");
+			vc.getWebDriverUtils().elementAvailablity(searchForField, "Searchafter");
+			if (getAddedProfile(profileName)) {
+				Reporter.log(profileName + " is Added", true);
+			} else {
+				Reporter.log(profileName + " is not Added", true);
+			}
+
+		} else {
+			Reporter.log("No Items available", true);
+		}
+
+	}
+
+}

@@ -1,0 +1,183 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyCallForwardingWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyCallForwardingWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//div[@data-name='CallForwarding']//button[@data-id='SelectedCFExt']")
+	public static WebElement mycallForwardingDropdown;
+
+	@FindBy(xpath = "//button[@data-id='SelectedRings']")
+	public WebElement mycallForwaringRingsDropdown;
+
+	@FindBy(xpath = "//button[@data-id='callForwardType']")
+	public WebElement mycallForwardingForwardToDropdown;
+
+	@FindBy(xpath = "//a[@id='saveCallForwarding']")
+	public WebElement mycallForwardingSaveBtn;
+
+	@FindBy(xpath="//div[@data-name='CallForwarding']//button[@data-id='SelectedAAExt']")
+	public WebElement autoAttendantDropdown;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='My Call Forwarding']//a[@href='/Officesuite/CallHandling/ViewCallHandling']")
+	public WebElement mycallForwardingMoreBtn;
+
+	@FindBy(xpath = "//label[contains(.,'My Call Forwarding')]")
+	public WebElement myCallForwardingCheckbox;
+
+	@FindBy(xpath = "//p[contains(.,'New settings applied successfully.')]")
+	public WebElement saveSettings;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Forwarding']//p[contains(@class,'default-value')]")
+	public static WebElement forAccount;
+	
+	@FindBy(xpath="//div[@class='alert alert-error']")
+	public WebElement errorMessage;
+	
+	@FindBy(xpath="//div[@data-name='CallForwarding']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-name='CallForwarding']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void myCallForwardingWidget() throws InterruptedException {
+		
+		//vc.getWebDriverUtils().genericDropDownSelectFirstItem(mycallForwardingDropdown, "For Extension");
+		//vc.getWebDriverUtils().genericDropDownSelectFirstItem(mycallForwaringRingsDropdown, "No of Rings");
+		//vc.getWebDriverUtils().genericDropDownSelectFirstItem(mycallForwardingForwardToDropdown, "ForwardTo");
+		//vc.getWebDriverUtils().genericDropDownSelectSpecificValue(mycallForwardingForwardToDropdown, "Auto Attendant", "ForwardTo-Dropdown");
+		//vc.getWebDriverUtils().genericDropDownSelectFirstItem(autoAttendantDropdown, "AutoAttendant-Dropdown");
+		vc.getWebDriverUtils().clickElement(mycallForwardingSaveBtn, "Save");
+		
+		
+		if(vc.getWebDriverUtils().elementAvailablity(saveSettings, "Success-Message")==true){
+			Reporter.log(saveSettings.getText(),true);
+			
+		}else if (vc.getWebDriverUtils().elementAvailablity(errorMessage, "ServerError-Message")==true) {
+			Reporter.log("Unable to apply the settings.",true);
+			Assert.assertFalse(true);
+		}else{
+			Reporter.log("Something Went Wrong",true);
+		}
+		
+	}
+	
+	public void moreNavigation() throws InterruptedException{
+		Reporter.log("********** Verify Navigation ************",true);
+		vc.getWebDriverUtils().elementAvailablity(mycallForwardingMoreBtn, "More-Button");
+		vc.getWebDriverUtils().clickElement(mycallForwardingMoreBtn, "ViewReports");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "ViewCallHandling - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent(" My Call Handling"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("My Call Forwarding");
+	}
+
+	public void ringsDropdownSelect(String ringsDropdown) throws InterruptedException {
+
+		vc.getWebDriverUtils().clickElement(mycallForwaringRingsDropdown, "No Of Rings - Dropdown");
+		List<WebElement> noOFRingsDropdown = driver.findElements(
+				By.xpath("//div[@class='btn-group bootstrap-select open']/div/div/div/div/ul/li/a/span"));
+
+		for (int i = 0; i < noOFRingsDropdown.size(); i++) {
+
+			if (noOFRingsDropdown.get(i).getText().equalsIgnoreCase(ringsDropdown)) {
+				noOFRingsDropdown.get(i).click();
+				Reporter.log("Selected ==" + ringsDropdown + "from Rings Dropdown", true);
+				break;
+			}
+
+		}
+
+	}
+
+	public void forwardToDropdownSelect(String forwardDropdown) throws InterruptedException {
+
+		vc.getWebDriverUtils().clickElement(mycallForwardingForwardToDropdown, "Forward To - Dropdown");
+
+		List<WebElement> forwardToDropdown = driver.findElements(By.xpath(
+				"//div[@class='btn-group bootstrap-select forward-dropdown dropup open']/div/div/div/div/ul/li/a/span"));
+		for (int i = 0; i < forwardToDropdown.size(); i++) {
+
+			if (forwardToDropdown.get(i).getText().equalsIgnoreCase(forwardDropdown)) {
+				forwardToDropdown.get(i).click();
+				Reporter.log("Selected ==" + forwardDropdown + "from Forward To Dropdown", true);
+				break;
+			}
+
+		}
+
+	}
+	
+	public boolean verifyVoicemailOption(String voicemail) throws InterruptedException {
+		boolean voicemailavailable = false;
+		vc.getWebDriverUtils().clickElement(mycallForwardingForwardToDropdown, "Forward To-Dropdown");
+		List<WebElement> data  = driver
+				.findElements(By.xpath("//div[@class='btn-group bootstrap-select forward-dropdown dropup open']/div/div/div/div/ul/li/a/span"));
+				
+		for (int i = 0; i < data.size(); i++) {
+			System.out.println(data.get(i).getAttribute("innerHTML"));
+			if(data.get(i).getText().contains(voicemail)) {	
+				voicemailavailable=true;
+				Reporter.log(data.get(i).getText() + "is available in Forward to Dropdown",true);
+			}else {
+				voicemailavailable=false;
+			}
+			
+		}
+		return voicemailavailable;
+	}
+	
+	public boolean getDropdownList(String elementName)
+			throws InterruptedException {
+		vc.getWebDriverUtils().checkPageIsReady();
+		vc.getWebDriverUtils().elementAvailablity(mycallForwardingForwardToDropdown, "ForwardTo-Dropdown");
+//		vc.getWebDriverUtils().clickElement(mycallForwardingForwardToDropdown, "AutoAttendant");
+		boolean searchFlag = false;
+		List<WebElement> childDropDowns;
+			childDropDowns = driver.findElements(By.xpath(
+					"//button[@data-id='callForwardType']//ul[contains(concat(' ', @class, ' '), 'dropdown-menu inner selectpicker ddown-active')]"));
+		int childDDCount = 0;
+		for (WebElement e : childDropDowns) {
+			childDDCount = childDDCount + 1;
+			if (e.isDisplayed()) {
+				List<WebElement> childItems = e.findElements(By.tagName("li"));
+				System.out.println("No of items in the " + elementName + " drop down := " + childItems.size());
+				int itemCount = 0;
+				for (WebElement f : childItems) {
+					itemCount = itemCount + 1;
+					System.out.println("Item " + itemCount + ":= " + f.getText());
+					
+				}
+			}
+			if (searchFlag) {
+				break;
+			}
+		}
+		return searchFlag;
+	}
+
+}

@@ -1,0 +1,63 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_FaxAccountsWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_FaxAccountsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'Fax Accounts')]")
+	public WebElement faxAccountCheckbox;
+	
+	@FindBy(xpath="//div[@class='wgt-alert-num']")
+	public WebElement faxAccountfaxCount1;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Fax Accounts']//div[@class='wgt-alert-num']")
+	public WebElement faxAccountfaxCount;
+
+	@FindBy(xpath="//div[@data-widgettitle='Fax Accounts']//a[@href='/services/onlinefaxnumbers']")
+	public WebElement faxManageOption;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Fax Accounts']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Fax Accounts']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void faxAccountWidget() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Fax Accounts"));
+		if(vc.getWebDriverUtils().elementAvailablity(faxAccountfaxCount, "FaxCount")) {
+			String faxCount = faxAccountfaxCount.getText();
+			Reporter.log("Total FaxCount are==>" + faxCount,true);
+		}else {
+			Reporter.log("No Fax Accounts Available",true);
+		}
+		vc.getWebDriverUtils().elementAvailablity(faxManageOption, "Manage");
+		vc.getWebDriverUtils().clickElement(faxManageOption, "Manage");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "OfficeSuite Fax - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("OfficeSuite Fax"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Fax Accounts");
+	}
+
+}

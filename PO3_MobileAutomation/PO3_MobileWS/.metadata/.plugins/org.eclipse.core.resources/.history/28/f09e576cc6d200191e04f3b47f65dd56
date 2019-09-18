@@ -1,0 +1,90 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Set;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import commonUtil.PropertiesUtil;
+
+public class GeckoWebDriver implements ApplicationWebDriver {
+
+	public WebDriver getWebDriver() {
+		WebDriver driver = (WebDriver) new GeckoWebDriver();
+		return driver;
+	}
+
+	public WebDriver getWebDriver(boolean isGrid, String hubUrl) {
+		String winHandleBefore = null;
+		WebDriver driver = null;
+		if (isGrid) {
+			try {
+				driver = new RemoteWebDriver(new URL(hubUrl), getCapabilities());
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			driver = (WebDriver) new GeckoWebDriver();
+		}
+
+		/*if (PropertiesUtil.getValue(PropertiesUtil.BROWSER_PROPERTY)
+				.toLowerCase().contains("private")) {
+			winHandleBefore = driver.getWindowHandle();
+			GeckoWebDriver.pressShortcut(driver);
+			driver.getWindowHandles();
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+
+				if (currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle).close();
+				} else {
+					driver.switchTo().window(currentHandle);
+				}
+			}
+		}*/
+		
+		return driver;
+	}
+
+	public static void pressShortcut(WebDriver driver) {
+		Actions actions = new Actions(driver);
+		actions.keyDown(Keys.CONTROL).keyDown(Keys.SHIFT).sendKeys("p")
+		.keyUp(Keys.SHIFT).keyUp(Keys.CONTROL).perform();
+	}
+
+
+	private static final String geckoDriver = "geckoDriver.exe";
+	
+	public DesiredCapabilities getCapabilities() {
+		FirefoxProfile profile = new FirefoxProfile();
+		profile.setPreference("webdriver.gecko.driver", ".\\softwares\\"+geckoDriver);		
+		profile.setPreference("browser.helperapps.neverAsk.saveToDisk",
+				"application/octet-stream;application/pdf");
+		profile.setPreference("browser.helperApps.alwaysAsk.force", false);
+		profile.setPreference("browser.download.manager.showWhenStarting",
+				false);
+		profile.setPreference("browser.download.folderList", 2);
+		profile.setPreference("browser.download.dir", "C:\\downloadfile");
+		
+		if (PropertiesUtil.getValue(PropertiesUtil.BROWSER_PROPERTY)
+				.toLowerCase().contains("private")) {
+			profile.setPreference("browser.privatebrowsing.autostart", true);
+		}
+		
+		profile.setPreference("browser.download.dir", ".\\softwares\\");
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setBrowserName("firefox");
+		capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
+		return capabilities;
+	}
+}

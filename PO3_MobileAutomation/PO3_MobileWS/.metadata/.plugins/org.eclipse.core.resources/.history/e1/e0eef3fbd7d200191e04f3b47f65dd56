@@ -1,0 +1,51 @@
+package com.webautomation.pageobject.webpages;
+
+import java.util.List;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class hWin_MyProfilePage {
+	final WebDriver driver;
+	private Validator vc;
+	
+	public hWin_MyProfilePage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "//IMG[@id='user_info_edit']/self::IMG")
+	public WebElement EditContactIcon;
+	
+	@FindBy(id="name.givenName")
+	public WebElement Firstname;
+	
+	@FindBy(id="name.familyName")
+	public WebElement LastName;
+	
+	@FindBy (id="email")
+	public WebElement Email;
+	
+	@FindBy (id="phone")
+	public WebElement Phone;
+	
+	@FindBy (id="moblie")
+	public WebElement Moblie;
+	
+	@FindBy (id="btnSubmit")
+	public WebElement Save;
+	
+	@FindBy (id="btnReset")
+	public WebElement Reset;
+	
+	public void SwitchtoFrame() throws InterruptedException {
+		driver.switchTo().frame("editUserInfo");
+		}
+
+}

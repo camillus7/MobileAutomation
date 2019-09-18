@@ -1,0 +1,142 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_TollFreeServiceWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_TollFreeServiceWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'Toll-Free Service')]")
+	public WebElement tollFreeServiceCheckbox;
+	
+	@FindBy(xpath="//button[@data-id='ddltollfreenum']")
+	public WebElement tollFreeServiceDropdown;
+	
+	@FindBy(id="mCSB_1_container")
+	public WebElement tollFreeDropdownlist; 
+	
+	@FindBy(xpath="//a[@href='/services/TollFreeServices/TollFreeServices?service=buy']")
+	public WebElement tollFreeServiceBuyBtn;
+	
+	@FindBy(xpath="//div[@data-name='TollFreeService']//a[@href='/services/TollFreeServices/TollFreeServices']")
+	public WebElement tollFreeServiceDetailsBtn;
+	
+	@FindBy(xpath="//a[@id='btnRepoint']")
+	public WebElement tollfreeServicesRepoint;
+	
+	@FindBy(xpath="//input[@id='txtpointNumber']")
+	public WebElement tollfreeNumberField;
+	
+	@FindBy(xpath="//a[@id='savePointToNum']")
+	public WebElement tollfreeSaveButton;
+	
+	@FindBy(xpath="//span[@id='lblPointToNumber']")
+	public WebElement tollfreeRepointNumber;
+	
+	@FindBy(xpath="//p[contains(.,'Unable to apply settings.')]")
+	public WebElement serverErrorMessage;
+	
+	@FindBy(xpath = "//p[contains(.,'New settings applied successfully.')]")
+	public WebElement saveSettings;
+	
+	@FindBy(xpath="//p[contains(.,'Buy Toll-Free Number')]")
+	public WebElement buyPageTitle;
+	
+	@FindBy(xpath="//h2[contains(.,'Toll-Free Service')]")
+	public WebElement widgetName;
+	
+	@FindBy(xpath="//span[@class='floatwarningclose']")
+	public WebElement warningCloseIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Toll-Free Service']//p[contains(@class,'default-value')]")
+	public WebElement defaultTollFreeNumber;	
+	
+	@FindBy(xpath="//div[@data-widgettitle='Toll-Free Service']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Toll-Free Service']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	
+	
+	
+	
+	
+	public void tollFreeServiceFunctionality() throws InterruptedException {
+		Reporter.log("********** Verify MYVoicemailWidget-UI  ************",true);
+		vc.getWebDriverUtils().elementAvailablity(tollFreeServiceDropdown, "TollFreeNumbersDropdown");
+		vc.getWebDriverUtils().elementAvailablity(tollFreeServiceBuyBtn, "TollFreeBuy-Button");
+		vc.getWebDriverUtils().elementAvailablity(tollFreeServiceDetailsBtn, "TollFreeDetails-Button");
+		vc.getWebDriverUtils().elementAvailablity(tollfreeServicesRepoint, "TollfreeServicesRepoint-Button");
+		
+		Reporter.log("********** Repoint TollFreeNumber ************",true);
+		Reporter.log("Toll Free Number ==" + tollFreeServiceDropdown.getText(),true);
+		Reporter.log("Repoint Number for the selected Tollfree Number is " + tollfreeRepointNumber.getText(),true);
+		vc.getWebDriverUtils().clickElement(tollfreeServicesRepoint, "RepointOption");
+		vc.getWebDriverUtils().enterText(tollfreeNumberField, "343.343.5434", "TollFreeNumber");
+		vc.getWebDriverUtils().clickElement(tollfreeSaveButton, "SaveButton");
+		if(vc.getWebDriverUtils().elementAvailablity(saveSettings, "Success-Message")==true){
+			Reporter.log(saveSettings.getText(),true);	
+		}else if (vc.getWebDriverUtils().elementAvailablity(serverErrorMessage, "ServerError-Message")==true) {
+			Reporter.log("Unable to apply the settings.",true);
+			vc.getWebDriverUtils().clickHiddenElement(warningCloseIcon, "Closeicon");
+			Assert.assertFalse(true);
+		}else{
+			Reporter.log("Something Went Wrong",true);
+		}
+		
+		Reporter.log("********** Verify Navigation ************",true);
+		vc.getWebDriverUtils().clickElement(tollFreeServiceDetailsBtn, "DetailsPagenavigation");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Toll Free - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Toll Free (UC)"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		vc.getWebDriverUtils().clickElement(tollFreeServiceBuyBtn, "BuyPageNavigation");
+		Assert.assertEquals(buyPageTitle.getText(), "Buy Toll-Free Number");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Buy Toll-Free Number"));
+		
+		
+		
+		
+	}
+	
+	public void tollFreeServiceNavigation() throws InterruptedException {
+		Reporter.log("********** Verify Navigation ************",true);
+		vc.getWebDriverUtils().clickElement(tollFreeServiceDetailsBtn, "DetailsPagenavigation");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Toll Free - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Toll Free (UC)"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		vc.getWebDriverUtils().clickElement(tollFreeServiceBuyBtn, "BuyPageNavigation");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Toll Free - Windstream Enterprise");	
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Buy Toll-Free Number"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Toll-Free Service");
+		
+	}
+	
+
+
+
+
+}

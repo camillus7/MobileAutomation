@@ -1,0 +1,68 @@
+package com.webautomation.pageobject.empPortal_pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class EmpPortal_DeveloperSupportToolsPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public EmpPortal_DeveloperSupportToolsPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	
+	
+	
+	@FindBy(xpath="//a[contains(.,'Clear Cache')]")
+	public WebElement clearCacheSubMenu;
+	
+	@FindBy(xpath="//input[@value='Clear Cache']")
+	public WebElement clearCacheBtn;
+	
+	@FindBy(xpath="//a[contains(.,'Error Logs')]")
+	public WebElement errorLogsSubMenu;
+	
+	@FindBy(xpath="//a[contains(.,'FortiNet Admin')]")
+	public WebElement fortiNetAdminSubMenu;
+	
+	@FindBy(xpath="//input[@value='Add Account']")
+	public WebElement addAccount;
+	
+	@FindBy(xpath="//*[@id='AddServerModal']/div/div[3]/input[1]")
+	public WebElement cancelServerAddAccount;
+	
+	@FindBy(xpath="//*[@id='AddServerModal']/div/div[3]/input[2]")
+	public WebElement addServerAddAccount;
+	
+	@FindBy(xpath="//*[@id='AddServerModal']/div/div[1]/div")
+	public WebElement closeServerAddAccountModal;
+
+	
+	@FindBy(xpath="//input[@placeholder='Transaction or Log ID']")
+	public WebElement transactionOrLogID;
+	
+	@FindBy(xpath="//button[contains(.,'Lookup Error')]")
+	public WebElement lookUpError;
+	
+	
+	
+	@FindBy(xpath="xxxxxxxxx")
+	public WebElement xxxxx;
+
+}	
+
+
+
+
+

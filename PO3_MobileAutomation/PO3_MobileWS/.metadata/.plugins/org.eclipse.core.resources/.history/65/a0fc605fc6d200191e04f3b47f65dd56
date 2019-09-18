@@ -1,0 +1,175 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_SupportRequestWidget {
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+	
+
+	public WE_SupportRequestWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Support Request')]")
+	public WebElement supportRequestCheckbox;
+
+	@FindBy(xpath = "//span[contains(.,'Create New Support Request')]")
+	public WebElement createNewSupportRequest;
+
+	@FindBy(xpath = "//div[@data-name='SupportRequests']//span[contains(.,'More')]")
+	public WebElement moreButton;
+
+	@FindBy(id = "mCSB_2_container")
+	public WebElement tableValues;
+
+	@FindBy(xpath = "//span[@class='ticket-number f32 white ff-CL']")
+	public WebElement ticketNumber;
+	
+	@FindBy(xpath="//h2[contains(.,'Support Request')]")
+	public WebElement widgetName;
+	
+	@FindBy(xpath="//div[@data-name='SupportRequests']//table[@id='SupportRequest']")
+	public WebElement tableRecords;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='Support Requests']/div[1]/button")
+	public static WebElement settingIcon;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='Support Requests']//a[@class='ws-icon ico-settings wgt-settings']")
+	public static WebElement widgetSettings;
+	
+	@FindBy(xpath="//button[@data-id='SavedLocationIds']")
+	public WebElement locationDropdown;
+	
+	@FindBy(xpath="//button[@data-id='SavedStatuses']")
+	public WebElement statusDropdown;
+	
+	@FindBy(xpath="//button[@data-id='SavedSortBy']")
+	public WebElement listAscendingDropdown;
+	
+	@FindBy(xpath="//button[@type='submit']")
+	public WebElement saveButton;
+	
+	@FindBy(xpath="//div[@class='black supportStatus']")
+	public WebElement ticketStatus;
+	
+	//@FindBy(xpath="//div[@data-widgettitle='Support Requests']//button[@class='ws-icon settings ws-menu menu-down closed']")
+	
+	@FindBy(xpath="//div[@data-widgettitle='Support Requests']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Support Requests']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+
+	public void supportRequestFunctionality(String widgetName) throws InterruptedException {
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Support Request"));
+		vc.getWebDriverUtils().elementAvailablity(createNewSupportRequest, "CreateNewSupportRequest-Button");
+		vc.getWebDriverUtils().elementAvailablity(moreButton, "More-Button");
+		
+		String settingsXpath="//div[contains(@data-widgettitle,'"+widgetName+"')]/div[1]/button";
+		WebElement settingsElement = driver.findElement(By.xpath(settingsXpath));
+		vc.getWebDriverUtils().clickElement(settingsElement, "SettingsIcon");
+		
+		String widgetSettingsXpath="//div[contains(@data-widgettitle,'"+widgetName+"')]//a[contains(.,'Widget Settings')]";
+		WebElement widgetSettingsElement = driver.findElement(By.xpath(widgetSettingsXpath));
+		vc.getWebDriverUtils().clickElement(widgetSettingsElement, "WidgetSettings");
+		
+		Reporter.log("********** SupportRequestSettingUI ************",true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Support Requests Settings"));
+		vc.getWebDriverUtils().elementAvailablity(locationDropdown, "LocationDropdown");
+		vc.getWebDriverUtils().elementAvailablity(statusDropdown, "StatusDropdown");
+		vc.getWebDriverUtils().elementAvailablity(listAscendingDropdown, "ListAscendingDropdown");
+		vc.getWebDriverUtils().elementAvailablity(saveButton, "SaveButton");
+		vc.getWebDriverUtils().clickElement(saveButton, "SaveButton");
+		if(vc.getWebDriverUtils().elementAvailablity(tableRecords, "SupportRequest-Table")==true) {
+			vc.getWebDriverUtils().waitUntilNoWheelSpins(".lds-double-ring>div");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			List<WebElement> data = tableRecords.findElements(By.tagName("tr"));
+			data.get(1).click();
+			vc.getWebDriverUtils().elementAvailablity(ticketNumber, "TicketNumber");
+			Reporter.log("Navigated to " + driver.getTitle(), true);
+			Reporter.log("Opened Support Request Number " + ticketNumber.getText(), true);
+			driver.navigate().back();
+			vc.getWebDriverUtils().pageRefresh();
+		} else {
+			Reporter.log("Support Request is not available", true);
+		}
+		Reporter.log("********** Navigation Check ************",true);
+		vc.getWebDriverUtils().clickElement(createNewSupportRequest, "Create new Support Requset");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "New Support Request - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Create Support Request"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().pageRefresh();
+		vc.getWebDriverUtils().clickElement(moreButton, "More-SupportRequest");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Support Request Status - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Support Requests"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().pageRefresh();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Support Requests");
+		
+		
+	}
+		
+	
+
+	
+	
+public void supportRequestCheck() throws InterruptedException {
+		
+		vc.getWebDriverUtils().elementAvailablity(createNewSupportRequest, "CreateNewSupportRequest-Button");
+		vc.getWebDriverUtils().elementAvailablity(moreButton, "More-Button");
+		vc.getWebDriverUtils().clickElement(settingIcon, "SettingsIcon");
+		vc.getWebDriverUtils().clickElement(widgetSettings, "WidgetSettings");
+		
+		Reporter.log("********** SupportRequestSettingUI ************",true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Support Requests Settings"));
+		vc.getWebDriverUtils().elementAvailablity(locationDropdown, "LocationDropdown");
+		vc.getWebDriverUtils().elementAvailablity(statusDropdown, "StatusDropdown");
+		vc.getWebDriverUtils().elementAvailablity(listAscendingDropdown, "ListAscendingDropdown");
+		vc.getWebDriverUtils().elementAvailablity(saveButton, "SaveButton");
+		
+		
+		//vc.getWebDriverUtils().clickElement(statusDropdown, "StatusDropdown");	
+		//vc.getWebDriverUtils().selectByVisibleText(statusDropdown, "Open", "OpenTickets");
+		//vc.getWebDriverUtils().clickElement(statusDropdown, "Dropdown");
+		vc.getWebDriverUtils().clickElement(saveButton, "SaveButton");
+		if (vc.getWebDriverUtils().elementAvailablity(tableRecords, "SupportRequest-Table") == true) {
+			List<WebElement> status = driver.findElements(By.xpath("//div[@class='black supportStatus']"));
+			for (WebElement statusName : status) {
+				if (statusName.getText().contains("Open")) {
+					Reporter.log("Open tickets are Available", true);
+					statusName.click();
+					vc.getWebDriverUtils().elementAvailablity(ticketNumber, "TicketNumber");
+					Reporter.log("Navigated to " + driver.getTitle(), true);
+					Reporter.log("Opened Support Request Number " + ticketNumber.getText(), true);
+					driver.navigate().back();
+
+				}
+			}
+
+		}else{
+			Reporter.log("Support Request is not available", true);
+		}
+
+	}
+
+}

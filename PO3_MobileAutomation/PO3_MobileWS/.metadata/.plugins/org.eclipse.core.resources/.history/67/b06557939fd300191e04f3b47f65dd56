@@ -1,0 +1,438 @@
+package com.mobile.MyWin.pageobject;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.mobile.WeConnect.pageobject.WeConnect_LandingPage;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+import io.appium.java_client.android.AndroidDriver;
+
+public class MyWinMobile_LoginPage {
+
+	@SuppressWarnings("rawtypes")
+	final AndroidDriver driver;
+	private Validator vc;
+	
+
+	public MyWinMobile_LoginPage(@SuppressWarnings("rawtypes") AndroidDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(id = "skip")
+	public static WebElement Skipoption;
+
+	@FindBy(id = "username")
+	public static WebElement userName;
+
+	@FindBy(id = "password")
+	public static WebElement password;
+	
+	@FindBy(xpath = "//android.view.View[@text=' Sign In']")
+	public static WebElement signInBtn;
+	
+	@FindBy(id="welcome_user")
+	public WebElement loggedusername;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='More']")
+	public WebElement More;
+
+	@FindBy(id = "com.windstream.residential.dev:id/sign_out")
+	public static WebElement Signout;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Home']")
+	public static WebElement Homeicon;
+	
+	@FindBy(xpath = "//android.view.View[@text='We didn't recognize the username or password you entered. Please try again.']")											
+	public WebElement invalidLoginerrormsg;
+											
+	//Forgot Password
+	/*@FindBy(xpath = "//android.view.View[@text='Forgot Password?']")
+	public WebElement Forgotpassword;*/
+
+	@FindBy(id = "username")
+	public WebElement ForgotpwusernameField;
+
+	@FindBy(xpath = "//android.view.View[@text=' Send Request']")
+	public WebElement ForgotpwSendRequest;
+
+	@FindBy(xpath = "//android.view.View[@text='Back to sign-on']")
+	public WebElement ForgotpwBacktoSignon;
+
+	@FindBy(xpath = "//android.view.View[@text=' Continue']")
+	public WebElement Forgotpwcontinue;
+	
+	@FindBy(xpath = "//android.view.View[@text='Please enter a Username.']")
+	public WebElement emptyUsername;
+	
+	@FindBy(xpath = "//android.view.View[@text='Thank you for your request. You should receive an email shortly.']")
+	public WebElement forgotPasswordMessage;
+	
+	 @FindBy(xpath = "//android.view.View[@text='(Forgot Username?)']")
+     public WebElement Forgotusername;
+
+     @FindBy(xpath = "//android.view.View[@text='(Forgot Password?)']")
+     public WebElement Forgotpassword;
+
+     @FindBy(xpath = "//android.view.View[@text='Having trouble signing in?']")
+     public WebElement TroubleSignin;
+    
+     @FindBy(xpath = "//android.view.View[@text='Email Address']")
+     public WebElement EmailAddr;
+    
+     @FindBy(id = "email")
+     public WebElement Enteremail;
+    
+     @FindBy(xpath = "//android.view.View[@text='Please enter an email address.']")
+     public WebElement EmailValidationMsg;
+     
+     @FindBy(xpath = "//android.view.View[@text='Back to sign-on']")
+     public WebElement BacktoSignon;
+
+     @FindBy(xpath = "//android.view.View[@text=' Back to sign-on']")
+     public WebElement ForgotpwdBacktoSignon;
+    
+     @FindBy(xpath = "//android.view.View[@text='Thank you for your request. You should receive an email shortly.']")
+     public WebElement forgotUsernameMessage;
+	
+	//CHROMEBROWSER
+	@FindBy(xpath = "//android.widget.Button[@text='Continue using browser']")
+	public WebElement continueusingBrowser;
+	
+	//Start Here - Registration
+	
+    @FindBy(xpath = "//android.view.View[@text='Start Here']")
+    public static WebElement StartHere;
+
+    @FindBy(id = "accountNo")
+    public static WebElement AccountNo;
+
+    @FindBy(id = "lastName")
+    public static WebElement LastName;  
+
+    @FindBy(id = "lastName_val")
+    public static WebElement LastNameVal;
+
+    @FindBy(id = "emailAddress")
+    public static WebElement EmailAddress;   
+
+    @FindBy(id = "emailAddress_val")
+    public static WebElement EmailAddressVal;
+
+    @FindBy(id = "billingZipCode")
+    public static WebElement BillingZipCode;
+   
+    @FindBy(id = "billingZipCode_val")
+    public static WebElement BillingZipCodeVal;
+
+    @FindBy(id = "registerBtn")
+    public static WebElement Register;
+    
+    @FindBy(id = "welcome_user")
+    public WebElement welcomeUserMessage;
+
+    @FindBy(id = "reg1_val")
+    public static WebElement Registererror;
+    
+    @FindBy(xpath = "//android.view.View[@text='First Name']")
+    public static WebElement firstName;
+    
+    @FindBy(id = "firstName")
+    public static WebElement regFirstName;
+    
+    @FindBy(xpath = "//android.view.View[@text='Username']")
+    public static WebElement regUserName;
+    
+    @FindBy(id="userName")
+    public static WebElement EntUserName;
+    
+    @FindBy(id="submitBtn")
+    public static WebElement submitBtn;
+    
+    @FindBy(xpath = "//android.view.View[@text='You should receive an email shortly with instructions to complete the registration process.']")
+    public static WebElement regSuccess;
+    
+	
+	
+	
+	
+
+	public boolean verifyLoginScreen() {
+		return (vc.getMobileDriverUtils().elementAvailablity(userName, "Username")
+				&& vc.getMobileDriverUtils().elementAvailablity(password, "Password")
+				&& vc.getMobileDriverUtils().elementAvailablity(signInBtn, "SigninButton"));
+
+	}
+	
+	public void Signout() throws InterruptedException {
+		if(vc.getWebDriverUtils().elementAvailablity(userName, "Username")) {
+			Reporter.log("Not logged in",true);
+		}else {
+			Reporter.log("Signing Off",true);
+			vc.getMobileDriverUtils().clickMobileElement(More, "Moreoption");
+			vc.getMobileDriverUtils().clickMobileElement(Signout, "Signout");
+
+		}
+		
+	}
+	
+	public void login() {
+		vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+		vc.getMobileDriverUtils().mobile_EnterText(userName, "ahiltest", "username");
+		vc.getMobileDriverUtils().mobile_EnterText(password, "P03DevTestPass22", "password");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().sleep(2000);
+		vc.getMobileDriverUtils().clickMobileElement(signInBtn, "signinbtn");
+	}
+	
+	public void verifyvalidLogin(String username, String passWord) throws InterruptedException {
+
+		if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon")) {
+			Reporter.log("User already Logged in", true);
+			//Signout();
+
+		} else {
+			Reporter.log("Logging in", true);
+
+		}
+
+		vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+		vc.getMobileDriverUtils().mobile_EnterText(userName, username, "Username");
+		vc.getMobileDriverUtils().mobile_EnterText(password, passWord, "Password");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().sleep(2000);
+		vc.getMobileDriverUtils().clickMobileElement(signInBtn, "signinbtn");
+
+		if (vc.getMobileDriverUtils().elementAvailablity(Skipoption, "Skip") == true) {
+			vc.getMobileDriverUtils().clickMobileElement(Skipoption, "Skip");
+			vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Home");
+		} else if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon") == true) {
+			Reporter.log("Successfully Logged in", true);
+		} else {
+			Reporter.log("Welcome Screen Not Displayed", true);
+		}
+
+	}
+
+	public void verifyInvalidLogin() throws InterruptedException {
+		Signout();
+		vc.getMobileDriverUtils().elementAvailablity(userName, "username");
+		vc.getMobileDriverUtils().mobile_EnterText(userName, "weonlinetest", "username");
+		vc.getMobileDriverUtils().mobile_EnterText(password, "Po3DevTestPass", "password");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().clickMobileElement(signInBtn, "signinbtn");
+		vc.getMobileDriverUtils().sleep(5000);
+		WebElement invalidMessage = driver.findElement(By.xpath("//*[@text='We didn't recognize the username or password you entered. Please try again.']"));
+		System.out.println(invalidMessage.getText());
+		
+	//	Assert.assertTrue(vc.getMobileDriverUtils().mobile_waituntillText(invalidLoginerrormsg, "We didn't recognize the username or password you entered. Please try again."));
+		if(vc.getMobileDriverUtils().elementAvailablity(invalidLoginerrormsg, "InvalidLogin-Message")==true){
+			Reporter.log("Login is not successfull",true);
+		}else {
+			Reporter.log("Invalid Validation Message is not Captured",true);
+			Assert.assertFalse(true);
+		}
+		
+		
+	}
+	
+	 public void verifyForgotUsernameScreen() throws InterruptedException {
+         vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+         vc.getMobileDriverUtils().clickMobileElement(Forgotusername, "Forgotusername");
+         vc.getMobileDriverUtils().elementAvailablity(EmailAddr, "Email Address");
+         vc.getMobileDriverUtils().elementAvailablity(BacktoSignon, "Forgotpw_backtosignon");
+         vc.getMobileDriverUtils().elementAvailablity(ForgotpwSendRequest, "Forgotpw_Sendrequest");
+         vc.getMobileDriverUtils().clickMobileElement(ForgotpwSendRequest, "SendRequest");
+         vc.getMobileDriverUtils().mobile_waituntillText(EmailValidationMsg, "Please enter an email address.");
+         vc.getMobileDriverUtils().mobile_EnterText(Enteremail, "ahil.l@windstream.com", "email");
+         driver.navigate().back();
+         vc.getMobileDriverUtils().clickMobileElement(ForgotpwSendRequest, "SendRequest");
+         vc.getMobileDriverUtils().mobile_waituntillText(forgotUsernameMessage, "Thank you for your request. You should receive an email shortly.");
+         vc.getMobileDriverUtils().elementAvailablity(ForgotpwdBacktoSignon, "Forgotpw_backtosignon");
+         vc.getMobileDriverUtils().clickMobileElement(ForgotpwdBacktoSignon, "Forgotpw_backtosignon");
+         vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+  }
+
+ 
+
+  public void verifyForgotPasswordScreen() throws InterruptedException {
+	  	 Signout();
+         vc.getMobileDriverUtils().elementAvailablity(password, "password");
+         vc.getMobileDriverUtils().clickMobileElement(Forgotpassword, "Forgotpassword");
+         vc.getMobileDriverUtils().elementAvailablity(ForgotpwusernameField, "Forgotpw_username");
+         vc.getMobileDriverUtils().elementAvailablity(BacktoSignon, "Forgotpw_backtosignon");
+         vc.getMobileDriverUtils().elementAvailablity(ForgotpwSendRequest, "Forgotpw_Sendrequest");
+         userName.clear();
+         driver.navigate().back();
+         vc.getMobileDriverUtils().clickMobileElement(ForgotpwSendRequest, "SendRequest");
+         vc.getMobileDriverUtils().mobile_waituntillText(emptyUsername, "Please enter a Username.");
+         vc.getMobileDriverUtils().mobile_EnterText(userName, "weonlinetest", "Username");
+         driver.navigate().back();
+         vc.getMobileDriverUtils().clickMobileElement(ForgotpwSendRequest, "SendRequest");
+         vc.getMobileDriverUtils().mobile_waituntillText(forgotPasswordMessage, "Thank you for your request. You should receive an email shortly.");
+         vc.getMobileDriverUtils().clickMobileElement(Forgotpwcontinue, "Continue");
+         vc.getMobileDriverUtils().elementAvailablity(password, "password");
+
+  }
+	
+	
+	public void navigateTo_MywinHome(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		if (PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY).contains("WeConnect_Mobile")) {
+			Reporter.log("WeConnect App is launched", true);
+		} else if (PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY).contains("SMB")) {
+			Reporter.log("SMB App is launched", true);
+		} else if (PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY).contains("MyWin_Mobile")) {
+			Reporter.log("Consumer App is launched", true);
+		}
+		
+		if(vc.getMobileDriverUtils().elementAvailablity(WeConnect_LandingPage.HamburgerMenu, "LandingScreen")) {
+			Reporter.log("Logged in", true);
+		}else {
+			vc.getMobileDriverUtils().elementAvailablity(userName, "userName");
+			vc.getMobileDriverUtils().mobile_EnterText(userName, menu.getUsername(), "Username");
+			vc.getMobileDriverUtils().mobile_EnterText(password, menu.getPassword(), "Password");
+			driver.navigate().back();
+			vc.getMobileDriverUtils().clickMobileElement(signInBtn, "Sign In Button");
+		
+			if (vc.getMobileDriverUtils().elementAvailablity(Skipoption, "Skip")) {
+				Reporter.log(welcomeUserMessage.getText(),true);
+				vc.getMobileDriverUtils().clickMobileElement(Skipoption, "Skip");
+			} else if (vc.getMobileDriverUtils().elementAvailablity(WeConnect_LandingPage.HamburgerMenu, "Landing Screen")) {
+				Reporter.log("Successfully Logged in", true);
+			} else {
+				Reporter.log("Welcome Screen Not Displayed", true);
+			}
+
+		}
+	}
+	
+	
+
+	public  void navigateTo_MywinHome2(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		if (PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY).contains("WeConnect_Mobile")) {
+			Reporter.log("WeConnect App is launched",true);
+			
+			if(vc.getMobileDriverUtils().elementAvailablity(WeConnect_LandingPage.HamburgerMenu, "LandingScreen")) {
+				Reporter.log("Logged in", true);
+			}else {
+				vc.getMobileDriverUtils().elementAvailablity(userName, "userName");
+				vc.getMobileDriverUtils().mobile_EnterText(userName, menu.getUsername(), "Username");
+				vc.getMobileDriverUtils().mobile_EnterText(password, menu.getPassword(), "Password");
+				driver.navigate().back();
+				vc.getMobileDriverUtils().clickMobileElement(signInBtn, "Sign In Button");
+			
+				if (vc.getMobileDriverUtils().elementAvailablity(Skipoption, "Skip")) {
+					Reporter.log(welcomeUserMessage.getText(),true);
+					vc.getMobileDriverUtils().clickMobileElement(Skipoption, "Skip");
+				} else if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon")) {
+					Reporter.log("Successfully Logged in", true);
+				} else {
+					Reporter.log("Welcome Screen Not Displayed", true);
+				}
+
+			}
+		}
+		if (PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY).contains("MyWin_Mobile")) {
+			Reporter.log("Consumer App is launched", true);
+
+			if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon")) {
+				Reporter.log("Logged in", true);
+
+			} else {
+
+				vc.getMobileDriverUtils().mobile_EnterText(userName, menu.getUsername(), "Username");
+				vc.getMobileDriverUtils().mobile_EnterText(password, menu.getPassword(), "Password");
+				driver.navigate().back();
+				vc.getMobileDriverUtils().clickMobileElement(signInBtn, "Sign In Button");
+
+				if (vc.getMobileDriverUtils().elementAvailablity(Skipoption, "Skip")) {
+					Reporter.log(welcomeUserMessage.getText(), true);
+					vc.getMobileDriverUtils().clickMobileElement(Skipoption, "Skip");
+				} else if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon")) {
+					Reporter.log("Successfully Logged in", true);
+				} else {
+					Reporter.log("Welcome Screen Not Displayed", true);
+				}
+
+			}
+		}
+	}
+	public  void navigateTo_MywinBrowserHome(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon") == true) {
+			Reporter.log("Logged in", true);
+
+		} else {
+
+			vc.getMobileDriverUtils().mobile_EnterText(userName, menu.getUsername(), "Username");
+			vc.getMobileDriverUtils().mobile_EnterText(password, menu.getPassword(), "Password");
+			vc.getMobileDriverUtils().elementAvailablity(signInBtn, "SigninBtn");
+			vc.getMobileDriverUtils().clickMobileElement(signInBtn, "Sign In Button");
+			
+			vc.getMobileDriverUtils().clickMobileElement(continueusingBrowser, "ContinueusingBrowser");
+
+			if (vc.getMobileDriverUtils().elementAvailablity(Skipoption, "Skip") == true) {
+				vc.getMobileDriverUtils().clickMobileElement(Skipoption, "Skip");
+			} else if (vc.getMobileDriverUtils().elementAvailablity(Homeicon, "Homeicon") == true) {
+				Reporter.log("Successfully Logged in", true);
+			} else {
+				Reporter.log("Welcome Screen Not Displayed", true);
+			}
+
+		}
+		}
+
+		public void registrationScreenUI() throws InterruptedException {
+			Signout();
+            vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+            vc.getMobileDriverUtils().clickMobileElement(StartHere, "Start Here");
+            vc.getMobileDriverUtils().elementAvailablity(AccountNo, "Account Number(optional)");
+            vc.getMobileDriverUtils().elementAvailablity(LastName, "LastName");
+            vc.getMobileDriverUtils().elementAvailablity(EmailAddress, "Email Address");
+            vc.getMobileDriverUtils().elementAvailablity(BillingZipCode, "Billing Zip Code");
+            vc.getMobileDriverUtils().elementAvailablity(Register, "Register Button");          
+     }
+
+     public void registrationInvalid() throws InterruptedException {
+     vc.getMobileDriverUtils().clickMobileElement(Register, "Register Button");
+     vc.getMobileDriverUtils().mobile_waituntillText(LastNameVal,"Last Name is required");
+     vc.getMobileDriverUtils().mobile_waituntillText(EmailAddressVal,"Email Address is required");
+     vc.getMobileDriverUtils().mobile_waituntillText(BillingZipCodeVal,"Billing Zip Code is required");
+
+}
+
+     public void registrationValid() throws InterruptedException {       
+            vc.getMobileDriverUtils().mobile_EnterText(AccountNo, "001098519", "Account Number");
+            vc.getMobileDriverUtils().mobile_EnterText(LastName, "Deaver", "Last Name");
+            vc.getMobileDriverUtils().mobile_EnterText(EmailAddress, "deaver4@osu.edu", "Email Address");
+            driver.navigate().back();
+            vc.getMobileDriverUtils().mobile_EnterText(BillingZipCode, "43055", "Billing Zip Code");
+            vc.getMobileDriverUtils().clickMobileElement(Register, "Register Button");
+            if(vc.getMobileDriverUtils().elementAvailablity(firstName, "FirstNmae Label")){
+            Reporter.log(regFirstName.getText(),true);
+            vc.getMobileDriverUtils().mobile_EnterText(EntUserName, "smb.2506", "Username");
+            vc.getMobileDriverUtils().clickMobileElement(submitBtn, "Submit");
+            Assert.assertEquals(regSuccess.getText(), "You should receive an email shortly with instructions to complete the registration process."); 
+            Reporter.log(regSuccess.getText(),true);
+            
+            }
+
+            else
+            {
+            	
+            	Reporter.log( Registererror +"Registration Error", true);
+            }
+	}
+}

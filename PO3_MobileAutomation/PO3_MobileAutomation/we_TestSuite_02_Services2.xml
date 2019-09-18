@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WE_ELNK_Services_Tools_E911Location"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_E911Location_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Services_Tools_VoiceLineAdmin"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_VoiceLineAdmin_ELNK"/> </methods> </class> </classes> </test>
+
+<test name="TC_WE_WOL_Services_Products_Voip_AccessManagement"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_VoipAccessManagement_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Products_Voip_ManageServices"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Voip_ManageServices_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Products_Voip_DownloadUserGuides"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Voip_DownloadUserGuides_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_WOL_Services_Tools_VoiceLineAdmin"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_VoiceLineAdmin_WOL"/> </methods> </class> </classes> </test>
+
+
+
+<!-- <test name="SampleTest"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_BusinessHours"/> </methods> </class> </classes> </test>
+  -->
+
+
+<!-- <test name="TC_WE_Services_MyServices_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_MyServices_MyCallLog"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_MyServices_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_MyServices_MyCallGroups"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_MyServices_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_MyServices_MyPhones"/> </methods> </class> </classes> </test>
+ -->
+<!-- <test name="TC_WE_Services_Tools_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_Locations"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Tools_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_SpeedTest"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Tools_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_ActiveServices"/> </methods> </class> </classes> </test>
+ <test name="TC_WE_Services_Products_OnlineFax"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OnlineFax"/> </methods> </class> </classes> </test>  -->
+ 
+<!-- <test name="TC_WE_Services_Products_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_Conferencing"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_SDWAN_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_SDWAN_SDWANAccessControl"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_SDWAN_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_SDWAN_MFASetupGuide"/> </methods> </class> </classes> </test>
+  -->
+<!--
+<test name="TC_WE_Services_Products_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_CCSExtension"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_PhoneKeyProfiles"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_Conferencing"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_004"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_AutoAttendants"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_ManageDepartments"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_WiFiAdmin"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_007"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_BusinessHours"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_008"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_Businessdetails"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_009"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OfficeSuite_CallPermissionProfile"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_010"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_MyCallHandling"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Services_Products_011"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_ExtensionManager"/> </methods> </class> </classes> </test>
+-->
+
+</suite>

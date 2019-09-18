@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_MyWin_Mobile_RWD"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_RWD_ConsumerPortal_MobileSuite"> <methods> <include name="ConsumerEnd2End_RWD"/> </methods> </class> </classes> </test>
+
+
+<!-- 
+<test name="TC_WL_Home_TC_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWin_ConsumerPortalSuite"> <methods> <include name="hWin_SignIn_SignOut_LoadTest1"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Support_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWinConsumer_Suite"> <methods> <include name="SupportMenu_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_ContactUs_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWinConsumer_Suite"> <methods> <include name="ContactUs_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_PP_SO_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWinConsumer_Suite"> <methods> <include name="HomePage_AllLinks_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_MyProfile_004"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWinConsumer_Suite"> <methods> <include name="MyProfile_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Shop_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWinConsumer_Suite"> <methods> <include name="Blog_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Blog_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.hWinConsumer_Suite"> <methods> <include name="Shop_End2End"/> </methods> </class> </classes> </test>
+ -->
+</suite>

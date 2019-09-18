@@ -1,0 +1,137 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.hWin_MyProfilePage;
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class hWin_MyProfileSuite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private String firstName = "test" + Math.random();
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void MyProfile_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : My Profile Validation", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			try {
+				userStoryDescription = "Verify My Profile details_113214";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Verify My Profile details");
+
+				winLinkHomePage.clickOnMyProfile();
+				vc.getWebDriverUtils().waitUntilNoWheelSpins(".lds-double-ring>div");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("USER INFORMATION"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("About User"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("USERNAME"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getUsername()));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("FULL NAME"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("EMAIL"));
+				System.out.println("Testing for GIT");
+				System.out.println("Testing For GIT2");
+
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				e.printStackTrace();
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+
+			try {
+				userStoryDescription = "Verify My Profile User Migration_113216";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Verify My Profile User Migration");
+
+				winLinkHomePage.clickOnMyProfile();
+				vc.getWebDriverUtils().waitUntilNoWheelSpins(".lds-double-ring>div");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("USER INFORMATION"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("About User"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("USERNAME"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getUsername()));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("FULL NAME"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("EMAIL"));
+
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				e.printStackTrace();
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+			try {
+				userStoryDescription = "Verify Edit My Profile_111324";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Verify Edit My Profile");
+
+				winLinkHomePage.clickOnMyProfile();
+				vc.getWebDriverUtils().waitUntilNoWheelSpins(".lds-double-ring>div");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("USER INFORMATION"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("About User"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("USERNAME"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(menu.getUsername()));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("FULL NAME"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("EMAIL"));
+				vc.getWebDriverUtils().clickElement(myProfilePage.EditContactIcon, "EditContactIcon");
+
+				vc.getWebDriverUtils().waitUntilNoWheelSpins(".lds-double-ring>div");
+				myProfilePage.SwitchtoFrame();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("First Name:"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name:"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Phone"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Mobile"));
+				
+				vc.getWebDriverUtils().enterText(myProfilePage.Firstname, "Test123", "FirstName");
+				vc.getWebDriverUtils().enterText(myProfilePage.LastName, "Hello", "LastName");
+				vc.getWebDriverUtils().enterText(myProfilePage.Moblie, "9987564789", "Moblie");
+				vc.getWebDriverUtils().clickElement(myProfilePage.Save, "SaveButton");
+
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				e.printStackTrace();
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+	}
+
+}

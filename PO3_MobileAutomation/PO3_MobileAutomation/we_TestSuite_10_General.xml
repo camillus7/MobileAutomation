@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WE_ELNK_General_ActivityLog"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ActivityLog_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_General_Themes"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_Themes_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_General_ContactInfo"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ContactInformation_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_General_ChangePassword"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ChangePassword_ELNK"/> </methods> </class> </classes> </test>
+
+</suite>

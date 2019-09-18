@@ -1,0 +1,671 @@
+package com.webautomation.pageobject.we_pages;
+
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+
+public class WE_BillingPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_BillingPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+
+	// Billing Inquiry
+
+	@FindBy(xpath = "//h4[contains(.,'Billing Inquiries')]")
+	public WebElement billingInquiries;
+
+	@FindBy(linkText = "Open a New Billing Inquiry")
+	public WebElement newBillingInquiry;
+
+	@FindBy(xpath = "//input[@id='Name']")
+	public WebElement billingInquiryName;
+
+	@FindBy(xpath = "//form[@id='submitBillingInquiry']/div/div[3]/div[2]/div/span/div/span/i")
+	public WebElement calendericon;
+
+	@FindBy(xpath = "//html/body/div[26]/div/div[1]/table/tbody/tr[1]/td[5]")
+	public WebElement date;
+
+	@FindBy(xpath = "//input[@id='Email']")
+	public WebElement emailAddress;
+
+	@FindBy(xpath = "//input[@id='PhoneNumber']")
+	public WebElement phoneNumber;
+
+	@FindBy(xpath = "//button[@data-id='UrgencyLevel']")
+	public WebElement urgency;
+
+	@FindBy(xpath = "//textarea[@id='Comments']")
+	public WebElement comments;
+
+	@FindBy(xpath = "//button[@id='submitForm']")
+	public WebElement submit;
+
+	@FindBy(xpath = "//*[@id='submitBillingInquiry']/div/div[8]/div[2]/span/a")
+	public WebElement cancelButton;
+
+	@FindBy(xpath = "//button[@data-id='BillingAccountId']")
+	public WebElement billingAccountID;
+
+	@FindBy(xpath = "//a[contains(.,'Filters')]")
+	public WebElement filters;
+
+	@FindBy(xpath = "//input[@id='BillingInquiryHistory_PhoneNumberAndEmail']")
+	public WebElement filtersPhonenumber;
+
+	@FindBy(xpath = "//button[@value='Apply Filters']")
+	public WebElement filtersSubmit;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/tbody/tr[1]/td[11]/span[1]")
+	public WebElement inquiryGridPhonenumber;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/tbody/tr[1]/td[11]/span[2]")
+	public WebElement inquiryGridEmailaddress;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/tbody/tr[1]/td[12]/span")
+	public WebElement inquiryGridStatus;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[9]/div/span[2]")
+	public WebElement supportRequestNo;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[9]/div/span[3]")
+	public WebElement creationDate;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[10]/div/span[2]")
+	public WebElement billingAddress;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[10]/div/span[3]")
+	public WebElement accountNo;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[11]/div/span[2]")
+	public WebElement phone;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[11]/div/span[3]")
+	public WebElement email;
+
+	@FindBy(xpath = "//*[@id=\"tblBillingInquiryHistory\"]/thead/tr/th[12]/div/span[2]")
+	public WebElement status;
+
+	@FindBy(xpath = "//*[@id=\'tblBillingInquiryHistory\']/tbody/tr[1]/td[13]/a")
+	public WebElement detailsicon;
+
+	@FindBy(xpath = "//*[@id=\'excludeFooter\']/div[3]/div[2]/div/a/span")
+	public WebElement backToInquiry;
+
+	// Billing History
+	
+	@FindBy(xpath = "//h4[contains(.,'Billing History')]")
+	public WebElement billingHistory;
+
+	@FindBy(xpath = "//*[@id='tblInvoiceHistory_wrapper']/div[7]/div[2]/a[2]")
+	public WebElement previousPageiconInvoice;
+
+	@FindBy(xpath = "//*[@id='tblInvoiceHistory_wrapper']/div[7]/div[2]/a[3]")
+	public WebElement nextPageiconInvoice;
+
+	@FindBy(xpath = "//*[@id='tblPaymentHistory_wrapper']/div[7]/div[2]/a[2]")
+	public WebElement previousPageiconPayment;
+
+	@FindBy(xpath = "//*[@id='tblPaymentHistory_wrapper']/div[7]/div[2]/a[3]")
+	public WebElement nextPageiconPayment;
+
+	@FindBy(xpath = "//*[@id=\"tblInvoiceHistory_wrapper\"]/div[7]/div[2]/span[4]/a[2]")
+	public WebElement invoiceGridSecondLinkInvoice;
+
+	@FindBy(xpath = "//*[@id=\"tblPaymentHistory_wrapper\"]/div[7]/div[2]/span[4]/a[2]")
+	public WebElement invoiceGridSecondLinkPayment;
+
+	public void verifyPaginationInvoice() throws InterruptedException {
+		WebElement a = driver.findElement(By.xpath("//a[@data-val='-1']"));
+		String str = a.getText();
+		String[] part = str.split("(?<=\\D)(?=\\d)");
+		String Count = part[1];
+		int finalcount = Integer.parseInt(Count);
+		if (finalcount > 15) {
+			System.out.println("Pagination exists");
+			// Verifying each page link
+			vc.getWebDriverUtils().clickElement(invoiceGridSecondLinkInvoice, "Click second page link");
+			vc.getWebDriverUtils().sleep(2000);
+			String pageUrl = driver.getCurrentUrl();
+			assertTrue(pageUrl.contains("History-Page=2"));
+			// Verifying Previous link functionality
+			vc.getWebDriverUtils().clickElement(previousPageiconInvoice, "Click Previous icon");
+			Thread.sleep(1000);
+			String pageUrl1 = driver.getCurrentUrl();
+			assertTrue(pageUrl1.contains("ViewList#"));
+			// Verifying next link functionality
+			vc.getWebDriverUtils().clickElement(nextPageiconInvoice, "Click Next icon");
+			Thread.sleep(1000);
+			String pageUrl2 = driver.getCurrentUrl();
+			assertTrue(pageUrl2.contains("History-Page=2"));
+		} else {
+			System.out.println("Pagination doesn't exists");
+		}
+	}
+
+	public void verifyPaginationPayment() throws InterruptedException {
+		WebElement a = driver.findElement(By.xpath("//a[@data-val='-1']"));
+		String str = a.getText();
+		String[] part = str.split("(?<=\\D)(?=\\d)");
+		String Count = part[1];
+		int finalcount = Integer.parseInt(Count);
+		if (finalcount > 15) {
+			System.out.println("Pagination exists");
+			// Verifying each page link
+			vc.getWebDriverUtils().clickElement(invoiceGridSecondLinkPayment, "Click second page link");
+			vc.getWebDriverUtils().sleep(2000);
+			String pageUrl = driver.getCurrentUrl();
+			assertTrue(pageUrl.contains("History-Page=2"));
+			// Verifying Previous link functionality
+			vc.getWebDriverUtils().clickElement(previousPageiconPayment, "Click Previous icon");
+			Thread.sleep(1000);
+			String pageUrl1 = driver.getCurrentUrl();
+			assertTrue(pageUrl1.contains("ViewList#"));
+			// Verifying next link functionality
+			vc.getWebDriverUtils().clickElement(nextPageiconPayment, "Click Next icon");
+			Thread.sleep(2000);
+			String pageUrl4 = driver.getCurrentUrl();
+			assertTrue(pageUrl4.contains("PaymentHistory-Page=2"));
+		} else {
+			System.out.println("Pagination doesn't exists");
+		}
+	}
+
+	@FindBy(linkText = "Payment History")
+	public WebElement paymentHistoryTab;
+
+	@FindBy(xpath = "//button[@id='btnExport']")
+	public WebElement export;
+
+	@FindBy(xpath = "//button[contains(.,'Export to Excel')]")
+	public WebElement exportToExcel;
+
+	@FindBy(xpath = "//button[contains(.,'Export to PDF')]")
+	public WebElement exportToPDF;
+
+	public void rowCountInvoice() {
+		WebElement table = driver.findElement(By.xpath("//*[@id='tblInvoiceHistory']"));
+		List<WebElement> listOfRows = table.findElements(By.tagName("tr"));
+		int rowcount = listOfRows.size();
+		if (rowcount == 0) {
+			Assert.assertTrue(vc.waitUntilTextIsPresent("There are no previous bills to display"));
+		} else {
+			System.out.println("There are data in the table, so text will not be available");
+		}
+	}
+
+	public void rowCountPayment() {
+		WebElement table = driver.findElement(By.xpath("//*[@id='tblPaymentHistory']"));
+		List<WebElement> listOfRows = table.findElements(By.tagName("tr"));
+		int rowcount = listOfRows.size();
+		if (rowcount == 0) {
+			Assert.assertTrue(vc.waitUntilTextIsPresent("There are no previous bills to display"));
+		} else {
+			System.out.println("There are data in the table, so text will not be available");
+		}
+	}
+
+	@FindBy(xpath = "//*[@id=\'excludeFooter\']/div[3]/div[2]/div[2]/a")
+	public WebElement filter;
+
+	// Billing Reports
+
+	@FindBy(xpath = "//a[@class='currency MenuReporting submenu']")
+	public WebElement BillingSubMenu;
+
+	@FindBy(xpath = "//a[@href='/Reporting/Report/']")
+	public WebElement BillingReports;
+
+	@FindBy(xpath = ".//*[@id='invoiceTrendChartContainer']")
+	public WebElement graph;
+
+	// View & pay bill
+	
+	@FindBy(xpath = "//button[@data-id='BillingAccountId']")
+	public WebElement billingAccountId;
+	
+	@FindBy(xpath = "//div[@class='bootstrap-select-searchbox']")
+	public WebElement accountSearch;
+	
+	@FindBy(xpath ="//input[@class='input-block-level form-control']")
+	public WebElement accountSearchBillingsettings;
+	
+	@FindBy(xpath = "//*[@id='mCSB_2_container']/ul/li[1]/a")
+	public WebElement accountSelect;
+
+	@FindBy(xpath = "//h4[contains(.,'View & Pay Bill')]")
+	public WebElement viewAndPayBill;
+
+	@FindBy(xpath = "//*[@id=\"currentBill\"]/div[1]/div/form/div/h2")
+	public WebElement currentBill;
+
+	@FindBy(xpath = "//*[@id=\"account\"]/div[1]/h2")
+	public WebElement account;
+
+	@FindBy(xpath = "//*[@id=\"autopay\"]/div/h3/span")
+	public WebElement autoPay;
+
+	@FindBy(xpath = "//*[@id=\"paperless\"]/div/h3/span")
+	public WebElement paperLess;
+
+	@FindBy(xpath = "//*[@id=\"paymentHistory\"]/div/h3/span")
+	public WebElement paymentHistory;
+
+	@FindBy(xpath = "//button[@title='Select Invoice']")
+	public WebElement selectInvoice;
+
+	@FindBy(xpath = "//span[contains(.,'Current Balance')]")
+	public WebElement textCurrentBalance;
+	
+	@FindBy(xpath ="//*[@data-id='InvoiceId']")
+	public WebElement invoiceId;
+
+	@FindBy(xpath ="//*[@id='btnDownloadCallDetail']")
+	public WebElement btnDownloadCallDetail;
+
+	@FindBy(xpath = "//h1[contains(.,'Billing')]")
+	public WebElement headerAutoPay;
+
+	@FindBy(xpath = "//h2[contains(.,'Auto Payment')]")
+	public WebElement header2AutoPay;
+
+	@FindBy(xpath = "//h2[contains(.,'Account & Bill Info')]")
+	public WebElement header3AutoPay;
+
+	@FindBy(xpath = "//*[@id='paymentOptionsCredit']")
+	public WebElement paymentCredit;
+
+	@FindBy(xpath = "//h2[contains(.,'Account & Bill Info')]")
+	public WebElement autoPayBankAccount;
+
+	@FindBy(xpath = "//*[@id='btnAddNew']")
+	public WebElement addCreditCard;
+
+	@FindBy(xpath = "//h3[contains(.,'New Payment Method')]")
+	public WebElement headeraddCreditCard;
+
+	@FindBy(xpath = "//input[@id='PaymentMethodName']")
+	public WebElement paymentMethodName;
+
+	@FindBy(xpath = "//button[@id='btnAddPMNext']")
+	public WebElement next;
+
+	@FindBy(xpath = "//*[@id='paymentConfig']/div[2]/div[2]/div[2]/label/button")
+	public WebElement defaultPayment;
+
+	@FindBy(xpath = "//input[@id='name']")
+	public WebElement nameOnCard;
+
+	@FindBy(xpath = "//input[@id='address']")
+	public WebElement address;
+
+	@FindBy(xpath = "//input[@id='city']")
+	public WebElement city;
+
+	@FindBy(id = "state")
+	public WebElement state;
+
+	@FindBy(id = "zip")
+	public WebElement zip;
+
+	@FindBy(id = "ccNumber")
+	public WebElement cCNumber;
+
+	@FindBy(id = "CVV2")
+	public WebElement cCV;
+
+	@FindBy(xpath = "//button[@id='completeButton']")
+	public WebElement buttonComplete;
+
+	@FindBy(xpath = "//select[@id='expMonth']")
+	public WebElement expMonth;
+
+	@FindBy(xpath = "//select[@id='expYear']")
+	public WebElement expYear;
+
+	@FindBy(xpath = "//*[@id='PaymentButtonSection']/div[1]/span[1]/label/button")
+	public WebElement agreeTermsAndCondition;
+
+	@FindBy(xpath = "//a[@id='TermsandConditions']")
+	public WebElement termsAndCondition;
+
+	@FindBy(xpath = "//*[@id='PaymentButtonSection']/div[1]/span[1]/label/button")
+	public WebElement applyTermsAndCondition;
+	
+	@FindBy(xpath ="//*[@id='SaveAutoPaymentMethodTermsAndConditionsModal']/div/div[3]/div/a")
+	public WebElement acceptTermsAndCondition;
+
+	@FindBy(xpath = "//button[@id='btnSetAutoPay']")
+	public WebElement setAutoPayment;
+	
+	@FindBy(xpath = "//input[@id='AccountHolderName']")
+	public WebElement accountHolderName;
+		
+	@FindBy(xpath = "//button[contains(.,'Save Changes')]")
+	public WebElement saveChanges;
+	
+	@FindBy(xpath = "//*[@id=\"PaymentButtonSection\"]/div[2]/span[2]/a")
+	public WebElement cancelAutoPayment;
+	
+	@FindBy(xpath = "//a[@onclick='PaymentMethodViewList.SubmitForm();']")
+	public WebElement deleteYesButton;
+			
+	Random rand = new Random();
+	public String name = "test" + rand.nextInt(1000);
+	
+	public void selectCard() {		
+		WebElement element = driver.findElement(By.xpath("//p[contains(., '"+ name +"')]"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();
+		}
+	
+	Random random = new Random();
+	public String accountname = "test" + random.nextInt(1000);
+	
+	public void selectBankAccount() {		
+		WebElement element = driver.findElement(By.xpath("//p[contains(., '"+ accountname +"')]"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();
+		}
+	
+	public void moreIconEdit() {			
+		Actions action = new Actions(driver);
+		action.moveToElement(driver.findElement(By.xpath("//p[contains(., '"+ name +"')]/parent::div/preceding-sibling::span[@id='moreIcon']")));
+		action.click();
+		action.perform();	
+		List<WebElement> element = driver.findElements(By.xpath("//*[contains(@id,'btnEdit')]"));
+		int count = element.size();
+		for (int i = 1 ; i< count ; i++)
+		{
+			if (element.get(i).isDisplayed()== true)
+			{
+				element.get(i).click();
+			}
+	} }
+	
+	public void moreIconEditBankAccount() {			
+		Actions action = new Actions(driver);
+		action.moveToElement(driver.findElement(By.xpath("//p[contains(., '"+ accountname +"')]/parent::div/preceding-sibling::span[@id='moreIcon']")));
+		action.click();
+		action.perform();	
+		List<WebElement> element = driver.findElements(By.xpath("//*[contains(@id,'btnEdit')]"));
+		int count = element.size();
+		for (int i = 1 ; i< count ; i++)
+		{
+			if (element.get(i).isDisplayed()== true)
+			{
+				element.get(i).click();
+			}
+	} }
+	
+	public void moreIconDelete() {	
+		Actions actions = new Actions(driver);
+		actions.moveToElement(driver.findElement(By.xpath("//p[contains(., '"+ name +"')]/parent::div/preceding-sibling::span[@id='moreIcon']")));
+		actions.click();
+		actions.perform();
+		List<WebElement> element = driver.findElements(By.xpath("//*[contains(@id,'btnDelete')]"));
+		int count = element.size();
+		for (int i = 1 ; i< count ; i++)
+		{
+			if (element.get(i).isDisplayed()== true)
+			{
+				element.get(i).click();
+			}
+	} }
+	
+	public void moreIconDeleteBankAccount() {	
+		Actions actions = new Actions(driver);
+		actions.moveToElement(driver.findElement(By.xpath("//p[contains(., '"+ accountname +"')]/parent::div/preceding-sibling::span[@id='moreIcon']")));
+		actions.click();
+		actions.perform();
+		List<WebElement> element = driver.findElements(By.xpath("//*[contains(@id,'btnDelete')]"));
+		int count = element.size();
+		for (int i = 0 ; i< count ; i++)
+		{
+			if (element.get(i).isDisplayed()== true)
+			{
+				element.get(i).click();
+			}
+	} }
+	
+	@FindBy(xpath = "//h4[contains(.,'Billing Settings')]")
+	public WebElement billingSettings;
+
+	@FindBy(xpath = "//a[@data-id='tblAutoPaymentList']")
+	public WebElement filterOpen;
+
+	@FindBy(xpath = "//*[@id='AutoPaymentList_Status']/div/label[1]/button")
+	public WebElement selectEnrolled;
+
+	@FindBy(xpath = "//*[@id='filter-for-tblAutoPaymentList']/div[2]/div/div[2]/div/button")
+	public WebElement applyFilters;
+
+	@FindBy(xpath = "//a[contains(.,'Stop Auto Pay')]")
+	public WebElement stopAutoPay;
+
+	@FindBy(xpath = "//a[@class='button light icon edit']")
+	public WebElement editAutopay;
+
+	@FindBy(xpath = "//*[@id='DeleteAutoPaymentConfirmationModal']/div/div[3]/a[2]")
+	public WebElement deleteCancel;
+
+	@FindBy(xpath = "//*[@id='DeleteAutoPaymentConfirmationModal']/div/div[3]/a[1]")
+	public WebElement autoPaymentRemove;
+
+	@FindBy(xpath = "//a[contains(.,'Enroll in AutoPay')]")
+	public WebElement enrollAutoPay;
+
+	@FindBy(xpath = "//a[contains(.,'Pay Now')]")
+	public WebElement payNow;
+
+	@FindBy(xpath = "//*[@id='pay']/div[1]/div/div[2]")
+	public WebElement amount;
+
+	public void amountvalue() throws InterruptedException {
+		String fetchedamount = amount.getText();
+		String amountwithoutdollar = fetchedamount.substring(1);
+		String mainChapterNumber = amountwithoutdollar.split("\\.", 2)[0];
+		String amountwithoutcomma = mainChapterNumber.replaceAll(",", "");
+		int finalamount = Integer.parseInt(amountwithoutcomma);
+		if (finalamount > 2) {
+			vc.getWebDriverUtils().clickElement(invoiceFileID, "Click Select Invoice");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select Invoice"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Consolidated Invoice - pdf"));
+		}
+	}
+
+	@FindBy(xpath = "//*[@id='ddlInvoiceFileList']/div/button/span[1]")
+	public WebElement invoiceFileID;
+
+	@FindBy(xpath = "//button[@id='btnViewSummary']")
+	public WebElement viewSummary;
+
+	@FindBy(xpath = "//*[@id='BillingAlertsClose']")
+	public WebElement billingAlertsClose;
+
+	@FindBy(xpath = "//a[contains(.,'Schedule Payment')]")
+	public WebElement schedulePayment;
+
+	@FindBy(xpath = "//input[@id='OtherAmount']")
+	public WebElement otherAmount;
+
+	@FindBy(xpath = "//*[@id='PaymentButtonSection']/div[1]/span[1]/label/button")
+	public WebElement payTermsAndCondition;
+
+	@FindBy(xpath = "//button[@id='trigger']")
+	public WebElement schedulePaymentSubmit;
+
+	@FindBy(xpath = "//*[@id='mddtp-date__ok']")
+	public WebElement schedulePaymentOk;
+
+	@FindBy(xpath = "//a[contains(.,'View Billing History')]")
+	public WebElement viewBillingHistory;
+
+	@FindBy(xpath = "//button[@id='btnNext']")
+	public WebElement sendPayment;
+
+	@FindBy(xpath = "//*[@id='internalCardSection']/div[1]")
+	public WebElement firstAvailableCardSelection;
+	
+	@FindBy(xpath = "//*[@id='internalBankSection']/div[1]")
+	public WebElement firstAvailableBankAccountSelection;
+
+	@FindBy(xpath ="//button[@id='autopayPrint']")
+	public WebElement autopayPrint;
+	
+	@FindBy(xpath ="//button[@class='bootbox-close-button close']")
+	public WebElement autopayClose;
+	
+	@FindBy(xpath ="//*[@id='billpaymentModal']/div[3]/div[1]/div[2]")
+	public WebElement accountNumberAutopay;
+	
+	@FindBy(xpath ="//h2[contains(.,'Account')]")
+	public WebElement accountHeader;
+	
+	@FindBy(xpath ="//button[@title='Toggle fullscreen view']")
+	public WebElement toogleView;
+	
+	@FindBy(xpath ="//div[@title='Drag Pegman onto the map to open Street View']")
+	public WebElement streetView;
+	
+	@FindBy(xpath ="//button[@title='Zoom in']")
+	public WebElement zoomIn;
+	
+	@FindBy(xpath ="//button[@title='Zoom out']")
+	public WebElement zoomOut;
+	
+	//@FindBy(xpath ="//*[@id='gmimap0']/area")
+	@FindBy(xpath ="//*[@src= 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png']")
+	public WebElement gmCurrentLocation;
+
+	
+	@FindBy(xpath ="//div[@id='btnAddNewBank']")
+	public WebElement btnAddNewBank;
+
+	// Billing settings
+	@FindBy(xpath = "//button[@id='btnAddNew']")
+	public WebElement addPaymentMethodButton;
+
+	@FindBy(xpath = "//*[@id='cancelButton']")
+	public WebElement addPaymentCancel;
+
+	@FindBy(xpath = "//*[@id='AddPaymentMethodModal']/div/div[1]/div")
+	public WebElement addPaymentCloseIcon;
+	
+	@FindBy(xpath = "//*[@id='AutoPayEnrollmentMessageModal']/div/div[1]/div")
+	public WebElement autoPayEnrollmentMsgCloseIcon;
+	
+	@FindBy(xpath = "//label[@for='paytype1']")
+	public WebElement addPaymentScreen1Credit;
+
+	@FindBy(xpath = "//label[@for='paytype2']")
+	public WebElement addPaymentScreen1BankAccount;
+
+	@FindBy(xpath = "//input[@id='routing_number']")
+	public WebElement routingNumber;
+
+	@FindBy(xpath = "//input[@id='account_number']")
+	public WebElement accountNumber;
+
+	@FindBy(xpath = "//input[@id='bank_name']")
+	public WebElement bankName;
+
+	@FindBy(xpath = "//div[@class='paymentCard selected_card']")
+	public WebElement cardSelectionStatus;
+
+	
+	public void methodtypecreditselected() {
+		boolean methodtype = addPaymentScreen1Credit.isEnabled();
+		Assert.assertTrue(methodtype, "true");
+	}
+
+	public void methodtypebankselected() {
+		boolean methodtype = addPaymentScreen1BankAccount.isEnabled();
+		Assert.assertTrue(methodtype, "true");
+	}
+
+	@FindBy(xpath = "//h2[contains(.,'Paperless Billing')]")
+	public WebElement paperlessBilling;
+
+	@FindBy(xpath = "//a[@id='btnSaveChanges']")
+	public WebElement paperlessBillingSave;
+	
+	@FindBy(xpath = "//div[@class='checkboxButton checkOn check-disabled']")
+	public WebElement paperlessBillingStatus;
+
+	@FindBy(xpath = "//*[@id='tblPaperlessBilling']/thead/tr/th[4]")
+	public WebElement paperlessBillingHeader;
+
+	@FindBy(xpath = "//*[@id='tblPaperlessBilling']/tbody/tr[1]/td[4]")
+	public WebElement paperlessBillingEnable;
+	
+	@FindBy(xpath ="//h2[contains(.,'Auto Pay')]")
+	public WebElement autoPayHeader;
+	
+	@FindBy(xpath ="//a[@class='button light icon submit']")
+	public WebElement autoPayEnroll;
+
+	// FTP Billing Invoice
+
+	@FindBy(xpath = "//h4[contains(.,'FTP Billing Invoice')]")
+	public WebElement ftpBillingInvoice;
+
+	@FindBy(xpath = "//p[contains(.,'Setup secure FTP invoice delivery')]")
+	public WebElement setupSecureFTPInvoiceDelivery;
+
+	@FindBy(xpath = "//div/p[6]/span[1]")
+	public WebElement fileFormatsToolTip1;
+
+	@FindBy(xpath = "//div/p[6]/span[2]")
+	public WebElement fileFormatsToolTip2;
+
+	@FindBy(xpath = "//div/p[7]/span[1]")
+	public WebElement localUsageToolTip;
+
+	@FindBy(xpath = "//div/p[8]/span[1]")
+	public WebElement monthlyNonUsageToolTip;
+	
+	@FindBy(xpath = "//a[@id='btnYesProcessingAutoFee']")
+	public WebElement convenienceFeeAccept;
+	
+	@FindBy(xpath = "//a[@id='AutoPaymentOK']")
+	public WebElement convenienceFeeConfirmationOk;
+	
+	@FindBy(xpath ="//span[contains(.,'Edit Autopay')]")
+	public WebElement editAutoPay;
+	
+	@FindBy(xpath ="//a[contains(.,'Edit AutoPay Enrollment')]")
+	public WebElement editAutoPayEnrollment;
+	
+	@FindBy(xpath ="//img[@src='/images/viewPayment/amex.png']")
+	public WebElement defaultPaymentImage;
+	
+	@FindBy(xpath ="//span[@id='holderName']")
+	public WebElement defaultPaymentHolderName;
+
+}

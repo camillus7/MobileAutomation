@@ -1,0 +1,82 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_ExtensionManagerPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_ExtensionManagerPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath="xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+	//Extension Manager
+	
+	@FindBy(xpath="//a[@id='btnAssignExtension']")
+	public WebElement assignExtensions;
+	
+	@FindBy(xpath="//a[@ng-click='addExtOrCreateFromFileClick(true)']")
+	public WebElement extensionCreate;
+	
+	@FindBy(xpath="//button[contains(.,'Export')]")
+	public WebElement extensionExport;
+	
+	@FindBy(xpath="//button[@data-id='Extension']")
+	public WebElement extensionDropdown;
+	
+	@FindBy(xpath="//input[@id='DirectoryFirstName']")
+	public WebElement directoryFirstName;
+	
+	@FindBy(xpath="//input[@id='DirectoryLastName']")
+	public WebElement directoryLastName;
+
+	@FindBy(xpath="//button[@data-id='ddlMYofficeSuiteUserName']")
+	public WebElement ddlMYofficeSuiteUserName;
+	
+	@FindBy(xpath="//button[@data-id='ddlIncomingPhoneNumber']")
+	public WebElement ddlIncomingPhoneNumber;
+	
+	@FindBy(xpath="//button[@data-id='ddlExetesionTypeId']")
+	public WebElement ddlExtensionTypeId;
+	
+	@FindBy(xpath="//a[@id='btnAddExtension']")
+	public WebElement btnAddExtension;
+	
+	@FindBy(xpath="//a[@class='submit primary light mL14 close icon light removebr_btn addrightmarg_btn']")
+	public WebElement extensionCancel;
+	
+	@FindBy(xpath="//button[contains(.,'Save')]")
+	public WebElement assignExtensionsSave;
+	
+	@FindBy(xpath="//button[@ng-click='CloseAllocationWnd()']")
+	public WebElement assignExtensionsCancel;
+
+	@FindBy(xpath="//input[@ng-model='searchUnassigned']")
+	public WebElement searchUnassigned;
+	
+	@FindBy(xpath="//input[@ng-model='searchAssigned']")
+	public WebElement searchAssigned;
+	
+	@FindBy(xpath="//button[@data-id='ddlOutgoingCallerId']")
+	public WebElement ddlOutgoingCallerId;
+	
+	@FindBy(xpath="//label[@for='chkVoicemail']")
+	public WebElement chkVoicemail;
+	
+	@FindBy(xpath="//input[@ng-model='searchText']")
+	public WebElement searchText;
+	
+	@FindBy(xpath="//*[@id='mCSB_2_container]/label[1]")
+	public WebElement extensionSelect;
+
+
+}

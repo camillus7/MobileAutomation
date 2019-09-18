@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG_Mobile" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+
+	<test name="WE-VerifyDueAmount">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_VerifyDueAmount" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE-SchedulePayment">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_SchedulePayment" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE_MakePayment">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_MakePayment" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE_EnrollAutopay">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_EnrollAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE-DeEnroll Autopay">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_DeenrollAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-Add ElectronicCheck">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_AddElectronicCheck" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-Add CreditCard">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_BillingSuite">
+				<methods>
+					<include name="smb_AddCredit_DebitCard" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-Notification Subscription">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_CommonSuite">
+				<methods>
+					<include name="smb_Notification" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-CompanyContacts">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_CommonSuite">
+				<methods>
+					<include name="smb_CompanyContacts" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-ProfileSettings">
+		<classes>
+			<class name="com.mobileautomation.tests.SMB_ProfileSettingsSuite">
+				<methods>
+					<include name="smb_ProfileSettings" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	
+	
+</suite>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<!-- <test name="TC_WE_Home_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_PortalSuite"> <methods> <include name="WE_HomePageMenuValidation"/> </methods> </class> </classes> </test> -->
+<test name="TC_WE_Home_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_WidgetsSuite"> <methods> <include name="WE_DashboardPageWidgets"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Home_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_WidgetsSuite"> <methods> <include name="WE_MOHWidget"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Home_004"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_WidgetsSuite"> <methods> <include name="WE_CallGroupsWidget"/> </methods> </class> </classes> </test>
+</suite>

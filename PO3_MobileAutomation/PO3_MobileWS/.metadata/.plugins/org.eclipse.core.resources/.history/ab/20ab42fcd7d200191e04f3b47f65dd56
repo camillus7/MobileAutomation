@@ -1,0 +1,55 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_AutoAttendantsWidget {
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_AutoAttendantsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//*h2[contains(.,'Auto Attendants')]")
+	public WebElement widgetName;
+	
+	@FindBy(xpath = "//label[contains(.,'Auto Attendants')]")
+	public WebElement autoAttendantsCheckbox;
+	
+	@FindBy(xpath="//div[@data-name='AutoAttendants']//a[contains(.,'Configure')]")
+	public WebElement configureButton;
+	
+	@FindBy(xpath="//div[@data-name='AutoAttendants']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-name='AutoAttendants']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+	public void configureNavigation() throws InterruptedException {
+		
+		vc.getWebDriverUtils().elementAvailablity(configureButton, "Configure-Button");
+		vc.getWebDriverUtils().clickElement(configureButton, "Configure");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Auto Attendants - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Attendants"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Auto Attendants");
+		
+	}
+
+}

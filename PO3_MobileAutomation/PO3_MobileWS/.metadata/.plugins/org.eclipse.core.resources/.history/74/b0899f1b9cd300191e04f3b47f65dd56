@@ -1,0 +1,115 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import commonUtil.PropertiesUtil;
+
+public class ChromeWebDriver implements ApplicationWebDriver {	
+	
+	// driver 2.20 does NOT work with chrome version 54.	
+	private static final String chromeDriver_2_20 = "chromedriver.exe";
+	
+	// driver 2.24 works with chrome version 54.	
+	private static final String chromeDriver_2_24 = "chromedriver-2-24.exe";
+	
+	// driver 2.29 works with chrome version 56-58.	
+	private static final String chromeDriver_2_29 = "chromedriver-2-29.exe";
+	
+	// driver 2.30 works with chrome version 58-60.	
+	private static final String chromeDriver_2_30 = "chromedriver-2-30.exe";
+
+	// driver 2.31 works with chrome version 58-60.	
+	private static final String chromeDriver_2_31 = "chromedriver-2-31.exe";
+	
+	// driver 2.32 works with chrome version 59-61.	
+	private static final String chromeDriver_2_32 = "chromedriver-2-32.exe";
+	
+	
+	// driver 2.33 works with chrome version 60-62.	
+	private static final String chromeDriver_2_33 = "chromedriver-2-33.exe";
+	
+	// driver 2.34 works with chrome version 61-63.	
+	private static final String chromeDriver_2_36 = "chromedriver-2-36.exe";
+	
+	public WebDriver getWebDriver() {
+		WebDriver driver = new ChromeDriver(getCapabilities());	
+		return driver;
+	}
+
+	public WebDriver getWebDriver(boolean isGrid, String hubUrl) {
+		
+		WebDriver driver = null;
+		if (isGrid) {
+			try {
+				driver = new RemoteWebDriver(new URL(hubUrl), getCapabilities());
+			} catch (MalformedURLException e) {				
+				e.printStackTrace();
+			}
+		} else {
+			driver = new ChromeDriver(getCapabilities());
+		}		
+
+		return driver;		
+	}
+	
+	public DesiredCapabilities getCapabilities() {
+		System.setProperty("webdriver.chrome.driver", ".\\softwares\\"+chromeDriver_2_36);				
+
+		ChromeOptions chromeOptions = new ChromeOptions();
+
+		chromeOptions.addArguments("start-maximized", "disable-extensions",
+		"test-type", "disable-infobars","no-default-browser-check", "ignore-certificate-errors");
+	//	chromeOptions.addArguments("--headless");
+	/*	chromeOptions.addArguments("--ignore-certifcate-errors");
+		chromeOptions.addArguments("--test-type");		
+		chromeOptions.addArguments("--disable-extensions");	
+		chromeOptions.addArguments("disable-infobars");
+		chromeOptions.addArguments("--disable-infobars");*/
+		if (PropertiesUtil.getValue(PropertiesUtil.BROWSER_PROPERTY).toLowerCase().contains("incognito")){
+			chromeOptions.addArguments("incognito");
+		}
+		
+		/*chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));*/
+		
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		
+		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);		
+		capabilities.setBrowserName("chrome");
+				
+		return capabilities;
+	}
+	
+	/*public DesiredCapabilities getCapabilities() {
+		System.setProperty("webdriver.chrome.driver", ".\\softwares\\"+chromeDriver_2_36);						
+
+	
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		
+		ChromeOptions chromeOptions= new ChromeOptions();
+
+		chromeOptions.addArguments("start-maximized", "disable-extensions",
+		"test-type", "disable-infobars","no-default-browser-check", "ignore-certificate-errors");
+
+		Map<String, String> mobileEmulation = new HashMap<String, String>();
+		String deviceName;
+		deviceName="Galaxy S5";
+		deviceName="iPhone 6/7/8";
+		mobileEmulation.put("deviceName", deviceName);
+		
+
+		chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
+    	capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		       
+		return capabilities;
+	}*/
+}

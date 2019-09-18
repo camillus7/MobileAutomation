@@ -1,0 +1,293 @@
+package com.webautomation.tests.seleniumGrid;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import Base.BaseSteps_SelGrid;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+public class hWin_NotificationsSuite extends BaseSteps_SelGrid{
+	
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private	String firstName="test"+ Math.random();
+	
+	public void addInvoiceAvailableOnline()throws Throwable{
+	
+	Assert.assertTrue(vc.waitUntilTextIsPresent("Add Recipient"));
+	vc.getWebDriverUtils().clickElement(notificationsPage.addRecipient,"AddRecipient");
+	Assert.assertTrue(vc.waitUntilTextIsPresent("E-MAIL ADDRESS"));
+	vc.getWebDriverUtils().clickElement(notificationsPage.addRecipientCancel,"cancel");
+	Thread.sleep(1000);
+	vc.getWebDriverUtils().clickElement(notificationsPage.addRecipient,"AddRecipient");
+	Thread.sleep(1000);
+	vc.getWebDriverUtils().enterText(notificationsPage.addInvoiceEmailAddress, "test", "Email");
+	vc.getWebDriverUtils().clickElement(notificationsPage.addRecipientAddButton,"AddButton");
+	Assert.assertTrue(vc.waitUntilTextIsPresent("Please enter a valid email"));
+	vc.getWebDriverUtils().enterText(notificationsPage.addInvoiceEmailAddress, "test@windstream.com", "Email");
+	vc.getWebDriverUtils().clickElement(notificationsPage.addRecipientAddButton,"AddButton");
+	Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully subscribed to email notifications"));
+	vc.getWebDriverUtils().clickElement(notificationsPage.newBillOk,"OkButton");
+	Assert.assertTrue(vc.waitUntilTextIsPresent("E-mail account notification"));
+	Assert.assertTrue(vc.waitUntilTextIsPresent("test@windstream.com"));
+	Reporter.log("added Email");
+	
+	}
+	@Test
+	public void HomePage_AllLinks_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : Home Page - Terms & Conditions/Privacy Policy/Sign Out", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			try {
+				userStoryDescription = "Terms & Conditions";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Terms & Conditions");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.termsAndConditions, "Terms & Conditions");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "TERMS AND CONDITIONS FOR SERVICES AND/OR EQUIPMENT PROVIDED BY WINDSTREAM");
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+				Reporter.log("validated Terms and Conditions", true);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Privacy Policy";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Privacy Policy");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.privacyPolicy, "Privacy Policy");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "This Privacy Statement describes how Windstream and its affiliates collects information");
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+				Reporter.log("validated Privacy policy" , true);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Sign Out";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"SignOut");
+				winLinkHomePage.clickOnSignout();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Change Password"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Forgot Password"));
+						 
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+				
+				Reporter.log("Validated Sinout Button",  true);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	//Notifications
+		@Test
+		public void notificationsMenu_End2End() throws Throwable {
+			Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+			Reporter.log("User Story 112460, 114054 , 112463,112459: Notifications  menu Validation", true);
+			winLinkLoginPage.navigateToWinLinkHome(menu);
+			successMsgDesc = "";
+			failMsgDesc = "";
+			winHandleBefore = driver.getWindowHandle();
+
+			try {
+				try {
+					Reporter.log("User Stories being validated are : = " + "112460", true);
+					userStoryDescription = "Verify Consumer Notifications Landing Page";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+									"Notifications - Verify Consumer Notifications Landing Page");
+
+					// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+					
+					vc.getWebDriverUtils().clickElement(winLinkHomePage.notifications,
+							"notifications");
+				
+					vc.getWebDriverUtils().clickElement(notificationsPage.notificationsSettings,"notificationsSettings");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Account Notifications"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Bill Reminders"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Order Status updates"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Service Notifications"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Add A Contact"));
+						successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+								userStoryDescription, successMsgDesc);	
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+							userStoryDescription, failMsgDesc);
+				}
+				
+				
+				
+				try {
+					Reporter.log("User Stories being validated are : = " + "114054", true);
+					userStoryDescription = "Verify Invoice Available Onine";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+									"Notifications - Verify Invoice Available Onine");
+
+					// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+					
+					vc.getWebDriverUtils().clickElement(winLinkHomePage.notifications,
+							"notifications");
+					vc.getWebDriverUtils().clickElement(notificationsPage.newBillAvailableOnline,"newBillAvailableOnline");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("E-mail account notification"));
+					addInvoiceAvailableOnline();
+					
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+								userStoryDescription, successMsgDesc);	
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+							userStoryDescription, failMsgDesc);
+				}
+			
+		
+				try {
+					Reporter.log("User Stories being validated are : = " + "112463", true);
+					userStoryDescription = "Consumer Edit Invoice Available Online Notification Settings";
+					vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+									"Notifications - Consumer Edit Invoice Available Online Notification Settings");
+
+					// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+					
+					vc.getWebDriverUtils().clickElement(winLinkHomePage.notifications,
+							"notifications");
+					vc.getWebDriverUtils().clickElement(notificationsPage.newBillAvailableOnline,"newBillAvailableOnline");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("E-mail account notification"));
+					try {
+						vc.getWebDriverUtils().clickElement(notificationsPage.editIcon,"EditPencil");
+					} catch(Throwable e){
+						addInvoiceAvailableOnline();
+					}
+					Thread.sleep(1000);
+					vc.getWebDriverUtils().enterText(notificationsPage.editEmailAddress, "testedit@windstream.com", "Emailedit");
+					vc.getWebDriverUtils().clickElement(notificationsPage.editSubmit,"EditSubmit");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Congratulations!"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully updated email address"));
+					vc.getWebDriverUtils().clickElement(notificationsPage.newBillOk,"OkButton");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("testedit@windstream.com"));
+					Reporter.log("edited Invoice Available online");
+					successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+								userStoryDescription, successMsgDesc);	
+				} catch (Throwable e) {
+					failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+							userStoryDescription, failMsgDesc);
+				}
+			
+		
+		
+	/*	try {
+		Reporter.log("User Stories being validated are : = " + "112459", true);
+		userStoryDescription = "Verify Consumer Notifications Add New Contact Required Fields";
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Notifications - Verify Consumer Notifications Add New Contact Required Fields");
+
+		// vc.getWebDriverUtils().clickElement(winLinkHomePage.supportMenu,"Support menu");
+		
+		vc.getWebDriverUtils().clickElement(winLinkHomePage.notifications,
+				"notifications");
+	//	vc.getWebDriverUtils().clickElement(notificationsPage.newBillAvailableOnline,"newBillAvailableOnline");
+	//	Assert.assertTrue(vc.waitUntilTextIsPresent("E-mail account notification"));
+		vc.getWebDriverUtils().clickElement(notificationsPage.notificationsSettings,"notificationsSettings");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Notifications"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Bill Reminders"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Order Status updates"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service Notifications"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Add A Contact"));
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContact,"Add a Contact");
+			Reporter.log("Clicked on Add a Contact");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Preferences"));
+			vc.getWebDriverUtils().clickElement(notificationsPage.cancelAddContact,"Cancel");
+			Reporter.log("Clicked on Cancel");
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContact,"Add a Contact");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact,"Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First Name should not be empty"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name should not be empty"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please enter a phone number"));
+			vc.getWebDriverUtils().enterText(notificationsPage.firstName, firstName, "FirstName");
+			vc.getWebDriverUtils().enterText(notificationsPage.lastName, "data", "LastName");
+			vc.getWebDriverUtils().enterText(notificationsPage.emailAddress, "test", "Email");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact,"Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Enter valid email address"));
+			vc.getWebDriverUtils().enterText(notificationsPage.emailAddress, "test@windstream.com", "Email");
+			vc.getWebDriverUtils().enterText(notificationsPage.phoneNumber, "523456789", "PhoneNumber");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact,"Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone number format is not valid"));
+			vc.getWebDriverUtils().enterText(notificationsPage.phoneNumber, "5234567896", "PhoneNumber");
+			vc.getWebDriverUtils().clickElement(notificationsPage.addNumber,"AddaNumber");
+			
+			if (vc.getWebDriverUtils().elementAvailablity(notificationsPage.deletePhoneNumber, "Delete Addtional Phone Number Validation")) {
+				System.out.println("Add a Number is working as expected");	
+			} else {
+				vc.getWebDriverUtils().clickElement(notificationsPage.addNumber,"AddaNumber");
+			
+			
+			vc.getWebDriverUtils().clickElement(notificationsPage.deletePhoneNumber,"DeleteNumber");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact,"Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Congratulations!"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You have submitted new contact successfully."));
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContactOkButton,"ok Button");
+			
+			//--------------Edit contact---------------
+			vc.scrollDown();
+			notificationsPage.XpathForContactName(driver,firstName);
+				String strUserName = firstName +" "+"data";
+			System.out.println("strUserName");
+			vc.getWebDriverUtils().clickLinkText(strUserName);
+			vc.getWebDriverUtils().clickElement(notificationsPage.contactEdit,"Edit Contact");
+			vc.getWebDriverUtils().enterText(notificationsPage.lastName, "dataedit", "LastName");
+			vc.getWebDriverUtils().clickElement(notificationsPage.submitAddContact,"Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully updated contact details."));
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContactOkButton,"ok Button");
+			//------------------Delete Contact-----------------
+			notificationsPage.XpathForContactName(driver,firstName);
+			vc.getWebDriverUtils().clickElement(notificationsPage.contactDelete,"Delete Contact");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete this contact?"));
+			vc.getWebDriverUtils().clickElement(notificationsPage.deleteContactNo,"Delete contactNo");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			vc.getWebDriverUtils().clickElement(notificationsPage.deleteContactYes,"Delete contactYes");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully deleted contact."));
+			vc.getWebDriverUtils().clickElement(notificationsPage.addContactOkButton,"ok Button");
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+					userStoryDescription, successMsgDesc);	
+	} catch (Throwable e) {
+		failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+				userStoryDescription, failMsgDesc);
+	}*/
+			} catch (Throwable e) {
+				vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+						failMsgDesc);
+			}
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+}
+}

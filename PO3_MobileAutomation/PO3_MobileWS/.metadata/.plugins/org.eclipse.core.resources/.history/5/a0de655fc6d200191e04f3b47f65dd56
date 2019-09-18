@@ -1,0 +1,98 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyOnlineFaxWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyOnlineFaxWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath="//button[@data-id='ddlfaxNumber']")
+	public static WebElement myOnlineFaxDropdown;
+	
+	@FindBy(xpath="//a[contains(.,'Check Faxes')]")
+	public WebElement checkFaxOption;
+	
+	@FindBy(xpath="//a[contains(.,'Send A Fax')]")
+	public WebElement sendaFaxOption;
+	
+	@FindBy(xpath="//span[@id='faxCount']")
+	public WebElement faxCount;
+	
+	@FindBy(xpath = "//label[contains(.,'My Online Fax')]")
+	public WebElement myOnlineFaxCheckbox;
+	
+	@FindBy(id="btnrefreshFax")
+	public WebElement myonlinefaxrefresh;
+	
+	@FindBy(xpath = "//a[contains(.,'Check Faxes')]")
+	public WebElement CheckFaxOption;
+
+	@FindBy(xpath = "//a[contains(.,'Send A Fax')]")
+	public WebElement SendaFaxOption;
+	
+	@FindBy(id="mCSB_2")
+	public WebElement dropDownList;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Online Fax']//p[contains(@class,'default-value')]")
+	public WebElement forAccount;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Online Fax']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Online Fax']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void myOnlineFaxFunctionality() throws InterruptedException {
+		Reporter.log("********** Verify MyOnlineFaxWidget-UI ************",true);
+		vc.getWebDriverUtils().elementAvailablity(myOnlineFaxDropdown, "onlineFax Dropdown");
+		vc.getWebDriverUtils().elementAvailablity(checkFaxOption, "CheckFaxes Option");
+		vc.getWebDriverUtils().elementAvailablity(sendaFaxOption, "SendAFax Option");
+		String Faxcount = vc.getWebDriverUtils().getText(faxCount, "Fax Count");
+		vc.getWebDriverUtils().clickElement(myonlinefaxrefresh, "RefreshButton");
+		String FaxcountafterRefresh = vc.getWebDriverUtils().getText(faxCount, "Fax Count");
+		Reporter.log("Total number of Fax Messages are==>" + Faxcount + "After Refresh fax count is" + FaxcountafterRefresh,true);
+		Reporter.log("********** CheckFax-Navigation ************",true);
+		vc.getWebDriverUtils().clickElement(CheckFaxOption, "CheckFaxes");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "FAX - Windstream Enterprise");
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		Reporter.log("********** SendFax-Navigation ************",true);
+		vc.getWebDriverUtils().clickElement(sendaFaxOption, "SendFax");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "FAX - Windstream Enterprise");	
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("My Online Fax");
+		
+	}
+	
+	public void selectInboundFaxNumber() throws InterruptedException {
+		String Faxcount = vc.getWebDriverUtils().getText(faxCount, "Fax Count");
+		vc.getWebDriverUtils().dropDownInnerSelectPicker(myOnlineFaxDropdown, dropDownList, "Myonlinefaxdropdown", "111.112.2222");
+		vc.getWebDriverUtils().clickElement(myonlinefaxrefresh, "RefreshButton");
+		String FaxcountafterRefresh = vc.getWebDriverUtils().getText(faxCount, "Fax Count");
+		System.out.println("Total number of Unread Messages are==>" + Faxcount + "After Refresh Unread count is" + FaxcountafterRefresh);
+	}
+	
+	
+}

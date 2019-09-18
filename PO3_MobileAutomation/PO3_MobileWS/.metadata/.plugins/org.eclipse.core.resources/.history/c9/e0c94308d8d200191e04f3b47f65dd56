@@ -1,0 +1,361 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class hWin_HomeSuite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private	String firstName="test"+ Math.random();
+	// **************** Test Scripts Starts Here *****************//
+
+	
+	@Test
+	public void ContactUs_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("Test Case 112405: validating “Contact Us” Menu", true);
+		
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			try {
+				
+				userStoryDescription = "Contact Us";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Contact Us");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.contactUs, "Contact Us");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Customer Care"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("800.347.1991"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("windstream.cares@windstream.com"));
+				if (vc.getWebDriverUtils().getAttribute(winLinkHomePage.emailLink, "href",
+								"customer care Email link")
+						.equals("mailto:windstream.cares@windstream.com")) {
+					Reporter.log(
+							"customer care Email link",true);
+				} else {
+					Reporter.log(
+							"customer care Email link not pointing to expected email Address",
+							true);
+					Assert.assertTrue(false);
+				}
+				//vc.getWebDriverUtils().clickElement(winLinkHomePage.emailLink, "Email");
+				
+				
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.contactUsCloseX, "Contact Us -  Close X");
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+				
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+			Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+	}
+	
+	
+	
+	@Test
+	public void Blog_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("Test Case :Check “Blog” available in the Menu", true);
+		
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+			try {
+				
+				userStoryDescription = "Blog";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Blog");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.blog, "Blog");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Be the Best Internet Host During the Holidays with These Tips");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	@Test
+	public void Shop_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("Test Case :Check “Shop” available in the Menu", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		
+		try {
+			
+			userStoryDescription = "Shop";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+					"Shop");
+
+			vc.getWebDriverUtils().clickElement(winLinkHomePage.shop, "Shop");
+			driver.getWindowHandles();
+
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					System.out.println(driver.switchTo().window(currentHandle)
+							.getTitle());
+					
+					Assert.assertTrue (vc.waitUntilTextIsPresent("Discover the Services We Can Bring to You"));
+					Assert.assertTrue (vc.waitUntilTextIsPresent("Existing customer"));
+					Assert.assertTrue (vc.waitUntilTextIsPresent("New to Windstream?"));
+					Assert.assertTrue (vc.waitUntilTextIsPresent("Sign in to use your current address"));
+					Assert.assertTrue (vc.waitUntilTextIsPresent("Enter your address to see everything we have to offer you"));
+			//	vc.getWebDriverUtils().clickElement(winLinkHomePage.closeX, "Close X on Modal Dialog");
+					Thread.sleep(2000);
+					
+					driver.close();
+					driver.switchTo().window(winHandleBefore);
+				}
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+					userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+					userStoryDescription, failMsgDesc);
+		}
+
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void intenet_TV_Phone() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("Test Case 113617,113618,113619 :Verify Internet Special Offers,Verify TV Special Offers,Verify Phone Special Offers", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			try {
+				userStoryDescription = "113617";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Verify Internet Special Offers");
+				
+					Assert.assertTrue (vc.waitUntilTextIsPresent("You are a current subscriber"));
+				Reporter.log("already a Internet Subscriber");
+
+					
+				
+				vc.scrollToView(winLinkHomePage.internetSupport);
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.internetSupport,"internetSupport");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Internet Support");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Internet"));
+				Reporter.log("validated Internet subscriber", true);	
+					
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "113618";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Verify TV Special Offers");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.addTvNow,"TV");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("DIRECTV for Windstream"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("WINDSTREAM BUNDLE DISCOUNT"));
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.directTv,"close");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("TV"));
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+				Reporter.log("validated TV spectials", true);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "113619";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Verify Phone Special Offers");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.getPhoneSupport,"Phone");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Discover the Services We Can Bring to You");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Phone"));
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+				Reporter.log("verified Phone special offers", true);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void referFriends_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story 114576 : referFriends", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+				userStoryDescription = "114576";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"ReferFriends");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.referFriends,"ReferFriends");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Register for Refer-A-Friend and Start Earning Rewards");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Internet"));
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Email_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : Email", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			try {
+				userStoryDescription = "Email";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Email");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.email,"Email");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Login using a Windstream email address.");
+			
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Internet"));
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void News_End2End() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("User Story : News", true);
+		winLinkLoginPage.navigateToWinLinkHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			try {
+				userStoryDescription = "News";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"News");
+
+				vc.getWebDriverUtils().clickElement(winLinkHomePage.News,"News");
+				
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "Home");
+				
+				Assert.assertTrue(vc.waitUntilTextIsPresent("News"));
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+}

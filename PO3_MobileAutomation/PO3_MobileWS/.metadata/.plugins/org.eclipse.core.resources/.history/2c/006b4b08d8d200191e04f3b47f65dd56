@@ -1,0 +1,1369 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_Reporting_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	// **************** Test Scripts Starts Here *****************//
+
+
+	@Test
+	public void Reporting_Network_NetworkSLA_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Network SLA";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Network SLA");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSLA, "Network SLA");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Graph Definitions"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Jitter is defined as a measurement of the maximum expected arrival time"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Latency is the measurement of round trip delay from Point A to Point B on the network"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Packet Delivery is defined as the measurements of delivered packets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Network Availability is the amount of time the network is available for the customer"));
+			
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Queue Definitions"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Real Time Class of Service (CoS) delivers premium Quality of Service (QoS) to your site and is optimized"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mission Critical Data CoS provides the highest priority treatment for data"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Critical Data CoS provides priority treatment for transactional and interactive data such as email"));
+
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Network SLA");
+
+			Reporter.log("*********** Jitter ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Jitter");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("defined as a measurement of the maximum expected arrival time between sequential packets"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Real Time Class of Service (CoS) delivers premium Quality of Service (QoS) to your site and is optimized"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mission Critical (last 3 months)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mission Critical Data CoS provides the highest priority treatment for data"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Critical (last 3 months)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Business Critical Data CoS provides priority treatment"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Standard Data CoS enables you to share latency and jitter tolerant data"));
+			
+			we_ReportingPage.networkSLAGraphCountValidation("Jitter",4);
+			
+			Reporter.log("*********** Latency ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Latency");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			we_ReportingPage.networkSLAGraphCountValidation("Latency",4);
+			
+			
+			Reporter.log("*********** Packet Delivery ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Packet Delivery");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			we_ReportingPage.networkSLAGraphCountValidation("Packet Delivery",4);
+			
+			
+			Reporter.log("*********** Network Availability ********************",true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.graphList, "Graph - List", "Network Availability");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			we_ReportingPage.networkSLAGraphCountValidation("Network Availability",1);
+			
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.viewPrintData, "View /Print Data"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.exportToPDF, "Export To PDF"));
+			//	Assert.assertTrue(vc.waitUntilTextIsPresent("XXXXXXXXXXXXXXXX"));
+
+			 
+			 
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_NetworkHealth_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Network Health";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Network Health");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkHealth, "Network Health");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Network Health  - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Network Health");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.timeZoneList, "Time Zone", "Eastern Time");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.circuitList, "Circuit");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");		
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This report does not always display maximum allowable bandwidth, it is scaled to only display actual usage"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Graph Legend"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("<span class=\"color-on-light\">Bits in:</span> the rate of traffic inbound to the interface measured in bits"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("<span class=\"color-on-light\">Bits out:</span> the rate of traffic outbound from the interface measured in bits"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("<span class=\"color-on-light\">Peak bits in:</span> the highest 5 minute average rate inbound to the interface, measured in bits"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("<span class=\"color-on-light\">Peak bits out:</span> the highest 5 minute average rate outbound to the interface, measured in bits"));
+			we_ReportingPage.networkSLAGraphCountValidation("Graph Count Validation",4);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Daily Graph: <span>5-Minutes Interval</span>"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Weekly Graph: <span>Hourly Interval</span>"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Monthly Graph: <span>Hourly Interval</span>"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Yearly Graph: <span>Daily Interval</span>"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View / Print Data Circuit Utilization"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to PDF"));	 
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Billing_Rates_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Billing -> Rates";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.billingSubMenu, "Billing");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.rates, "Rates");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SubRates  - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Rates");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This report allows you to view subscriber rates associated with a specific connection number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select a specific connection number to view or select \"All\" to see all connection numbers and associated rate information"));
+		
+			Reporter.log("************* All Connection Numbers", true);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.ratesConnectionNumberDropDown, "Select Specific Connection Number - Default First Number", "All");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewReport, "View Report");
+			driver.switchTo().frame("ivframe");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Subscriber"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Connection Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Feature"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Rate Plan"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("State/Country Code"));
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SubRates  - Windstream Enterprise"));
+			
+			Reporter.log("************* Specific Connection Number", true);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.ratesConnectionNumberDropDown, "Select Specific Connection Number - Default First Number");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewReport, "View Report");
+			driver.switchTo().frame("ivframe");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Subscriber"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Connection Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Feature"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Rate Plan"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("State/Country Code"));
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SubRates  - Windstream Enterprise"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Billing_RecurringCharges_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Billing -> Recurring Charges";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.billingSubMenu, "Billing");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.recurringCharges, "Recurring Charges");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recurring Charges  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This report allows you to view recurring charges for the selected customer and any associated child accounts"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Include recurring charges for child accounts of the selected customer"));
+			
+			if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.selectAccountReport, "Select Account - Recurring Charges")) {
+				vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Recurring Charges");
+			}
+			
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.viewReport, "View Report");
+			driver.switchTo().frame("ivframe");
+			//vc.waitUntilTextIsPresent("ReportServer/Pages/ReportViewer.aspx");
+			/*driver.getWindowHandles();
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);*/
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recurring Charges"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Subscriber"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Feature"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Description"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Date Installed"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Quantity"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Cost Per Unit"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Cost"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+					driver.switchTo().defaultContent();
+			/*	}
+			}
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);*/
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recurring Charges  - Windstream Enterprise"));
+			
+			Reporter.log("************** Include recurring charges for child accounts of the selected customer **************",true);
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.includeRecurringCharges, "Select Checkbox -  Include recurring charges for child accounts of the selected customer");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.viewReport, "View Report");
+			driver.switchTo().frame("ivframe");
+		/*	vc.waitUntilTextIsPresent("ReportServer/Pages/ReportViewer.aspx");
+			driver.getWindowHandles();
+			Set<String> allWindowHandles = driver.getWindowHandles();
+			for (String currentHandle : allWindowHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);*/
+			
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recurring Charges (includes child accounts)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Subscriber"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Service"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Feature"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Description"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Date Installed"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Quantity"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Cost Per Unit"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Cost"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+			driver.switchTo().defaultContent();
+		/*		}
+			}
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);*/
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recurring Charges  - Windstream Enterprise"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Billing_InvoiceReports_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Billing -> Invoice Reports";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.billingSubMenu, "Billing");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.invoiceReports, "Invoice Reports");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+			
+			//Invoice Reports - Account Code Summary
+			String reportNameStr = "Account Code Summary";
+			Reporter.log("****  Invoice Reports - "+ reportNameStr + " validation starts here   ****");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Invoice Reports");
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportDropDown, "Select Account - Invoice Reports - "+reportNameStr,reportNameStr);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.periodReportDropdwon, "Select Period - Default Latest Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			driver.switchTo().frame("ivframe");
+		//	vc.getWebDriverUtils().selectByIndexValue(we_ReportingPage.invoicePeriodSelectReportFrame, 1, "Invoice Period - Report Frame");
+			//we_ReportingPage.viewReport_ReportFrame();
+			Reporter.log("Validating Report Content for - "+reportNameStr, true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent(reportNameStr));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("REGION"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DEPARTMENT"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ACCOUNT CODE NAME"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ORIGINATING NUMBER"));
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+			
+			//Invoice Reports - BTN Summary
+			reportNameStr = "BTN Summary";
+			Reporter.log("****  Invoice Reports - "+ reportNameStr + " validation starts here   ****");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Invoice Reports");
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportDropDown, "Select Account - Invoice Reports - "+reportNameStr,reportNameStr);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.periodReportDropdwon, "Select Period - Default Latest Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			driver.switchTo().frame("ivframe");
+/*			vc.getWebDriverUtils().selectByIndexValue(we_ReportingPage.invoicePeriodSelectReportFrame, 1, "Invoice Period - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame();*/
+			Reporter.log("Validating Report Content for - "+reportNameStr, true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent(reportNameStr));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DESCRIPTION"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CALLS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("MINUTES"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AMOUNT"));
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+			
+			//Invoice Reports - Area Code Inbound
+			reportNameStr = "Area Code Inbound";
+			Reporter.log("****  Invoice Reports - "+ reportNameStr + " validation starts here   ****");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Invoice Reports");
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportDropDown, "Select Account - Invoice Reports - "+reportNameStr,reportNameStr);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.periodReportDropdwon, "Select Period - Default Latest Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			driver.switchTo().frame("ivframe");
+/*			vc.getWebDriverUtils().selectByIndexValue(we_ReportingPage.invoicePeriodSelectReportFrame, 1, "Invoice Period - Report Frame");
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "All", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame(); */
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - ALL", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AREA CODE SUMMARY"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("STATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CALLS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("MINUTES"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AMOUNT"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Area Code Inbound"));
+	/*		vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "Inbound", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame();*/
+		/*	Reporter.log("Validating Report Content for - "+reportNameStr+ " - Inbound", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent(reportNameStr));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AREA CODE SUMMARY"));*/
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+			
+			
+			//Invoice Reports - Area Code Outbound
+			reportNameStr = "Area Code Outbound";
+			Reporter.log("****  Invoice Reports - "+ reportNameStr + " validation starts here   ****");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Invoice Reports");
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportDropDown, "Select Account - Invoice Reports - "+reportNameStr,reportNameStr);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.periodReportDropdwon, "Select Period - Default Latest Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			driver.switchTo().frame("ivframe");
+		/*	vc.getWebDriverUtils().selectByIndexValue(we_ReportingPage.invoicePeriodSelectReportFrame, 1, "Invoice Period - Report Frame");
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "All", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame(); */
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - ALL", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AREA CODE SUMMARY"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("STATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CALLS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("MINUTES"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AMOUNT"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Area Code Outbound"));
+			/*
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "Outbound", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame();
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - Inbound", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent(reportNameStr));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AREA CODE SUMMARY"));*/
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+			
+			
+			//Invoice Reports - Day of Month Inbound
+			reportNameStr = "Day of Month Inbound";
+			Reporter.log("****  Invoice Reports - "+ reportNameStr + " validation starts here   ****");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Invoice Reports");
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportDropDown, "Select Account - Invoice Reports - "+reportNameStr,reportNameStr);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.periodReportDropdwon, "Select Period - Default Latest Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			driver.switchTo().frame("ivframe");
+			/*vc.getWebDriverUtils().selectByIndexValue(we_ReportingPage.invoicePeriodSelectReportFrame, 1, "Invoice Period - Report Frame");
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "All", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame(); */
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - ALL", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Inbound - Day of Month"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Day of Month Usage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DAY OF WEEK USAGE SUMMARY"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CALLS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("MINUTES"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AMOUNT"));
+			
+			/*vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "Inbound", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame();
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - Inbound", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Inbound - Day of Month"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice"));*/
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+	
+			
+			//Invoice Reports - Day of Month Outbound 
+			reportNameStr = "Day of Month Outbound";
+			Reporter.log("****  Invoice Reports - "+ reportNameStr + " validation starts here   ****");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Invoice Reports");
+			if (!vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.applyFilters, "Filter - Apply Filters")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.filters, "Filter Open");
+			}
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportDropDown, "Select Account - Invoice Reports - "+reportNameStr,reportNameStr);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.periodReportDropdwon, "Select Period - Default Latest Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			driver.switchTo().frame("ivframe");
+			/*vc.getWebDriverUtils().selectByIndexValue(we_ReportingPage.invoicePeriodSelectReportFrame, 1, "Invoice Period - Report Frame");
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "All", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame(); */
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - ALL", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Outbound - Day of Month"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Day of Month Usage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DAY OF WEEK USAGE SUMMARY"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CALLS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("MINUTES"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("AMOUNT"));
+			/*
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.typeSelectReportFrame, "Outbound", "Type - Report Frame");
+			we_ReportingPage.viewReport_ReportFrame();
+			Reporter.log("Validating Report Content for - "+reportNameStr+ " - Inbound", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Outbound - Day of Month"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice"));*/
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports  - Windstream Enterprise"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Billing_BillingReports() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Billing -> Billing Reports";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.billingSubMenu, "Billing");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.billingReports, "Billing Reports");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Reports  - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Select Account - Billing Reports");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Monthly Invoice Trend Report"));
+			
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Monthly Services"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Taxes &amp; Fees"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Usage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Past Due"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Jan"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Feb"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Mar"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Apr"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("May"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Jun"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Jul"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Aug"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Sep"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Oct"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Nov"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Dec"));
+			
+			String strBefore=vc.getWebDriverUtils().getText(we_ReportingPage.invoiceTrendChart, "Invoice Trend Chart - Content");
+
+			we_ReportingPage.fusionChartElementClick("Monthly Services");
+			/*we_ReportingPage.fusionChartElementClick("Taxes &amp; Fees");
+			we_ReportingPage.fusionChartElementClick("Usage");
+			we_ReportingPage.fusionChartElementClick("Past Due");*/
+			
+			String strAfter=vc.getWebDriverUtils().getText(we_ReportingPage.invoiceTrendChart, "Invoice Trend Chart - Content");
+			
+			if (strBefore==strAfter) {
+				Reporter.log("Chart Content is same",true);
+			} else {
+				Reporter.log("Chart Content is not same as expected",true);
+			}
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_AdvancedApplicationReport() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Advanced Application Report";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.advancedApplicationReport, "Advanced Application Report");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Advanced Application Report - Windstream Enterprise"));
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Advanced ApplicatioN Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewReport, "View Report");
+			vc.waitUntilTextIsPresent("default.aspx");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			driver.getWindowHandles();
+			
+			Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Windstream Advanced Application Reporting"));	 
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Circuit Utilization Details"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Dynamic Views - Utilization"));	 
+				}
+			}
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("User Guide"));	 
+			
+			if (vc.getWebDriverUtils().getAttribute(we_ReportingPage.userGuide, "href", "User Guide - Validation").contains("PAETEC-advanced-application-reporting-user-guide.pdf")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.userGuide, "User Guide");
+				Reporter.log("User guide link navigating to expected PDF file",true);
+			} else {
+				Reporter.log("User guide link not working as expected",true);
+				Assert.assertFalse(true);
+			}
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_LookingGlassRouteQuery() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Looking Glass Route Query";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.lookingGlassRouteQuery, "Looking Glass Route Query");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("LookingGlassRouteQuery - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Looking Glass allows a user to execute one of three different queries on one of Windstream's routers"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Possible Queries"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Trace"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This option allows the user to perform a traceroute from a router to a particular destination"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Ping"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This option allows the user to perform a ping from a router to a particular destination"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("BGP"));	 
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This option allows the user to view BGP routes on a particular router"));	 
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_NetworkLatency() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Network -> Network Latency";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_ReportingPage.networkLatency(we_HomePage, userStoryDescription, winHandleBefore);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_NetworkLatency_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Network Latency";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_ReportingPage.networkLatency(we_HomePage, userStoryDescription, winHandleBefore);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+	@Test
+	public void Reporting_Network_NetworkLatency_BVN() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		userStoryDescription = "Reporting-> Network -> Network Latency";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			we_ReportingPage.networkLatency(we_HomePage, userStoryDescription, winHandleBefore);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_LocalTelephoneNumbers_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Local Telephone Numbers";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.localTelephoneNumbers, "Local Telephone Numbers");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Local Telephone Numbers  - Windstream Enterprise"));
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Local TelephoneNumbers");
+
+			driver.switchTo().frame("ivframe");
+	//		we_ReportingPage.viewReport_ReportFrame();
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Installed Telephone Numbers"));
+			if (vc.waitUntilTextIsPresent("SERVICE")) {
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Customer"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("RANGE"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("DNIS"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("IN RANGE"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("TRUNK GROUP"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+			}else if (vc.waitUntilTextIsPresent("No Installed Telephone Numbers Found For This Customer")) {
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Page 1 of 1"));
+			}else {
+				Reporter.log("Local telephone numbers report not loaded as expected",true);
+				Assert.assertTrue(false);
+			}
+			
+		
+			driver.switchTo().defaultContent();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Local Telephone Numbers  - Windstream Enterprise"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_TollUsage_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Network -> Toll Usage";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Toll Usage");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.tollUsage, "Toll Usage");
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountReport, "Select Account - Toll Usage");
+
+			driver.switchTo().frame("paymentIframe");
+			Reporter.log("*************  How am I using my service plan? ************* ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("How am I using my service plan?"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All calls"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Operator assisted calls"));	
+			
+			Reporter.log("*************  Where am I calling? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Where am I calling?"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Domestic calls"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("International calls"));
+			
+			Reporter.log("*************  How long am I talking? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("How long am I talking?"));	 	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All called numbers, ordered by duration"));	
+			
+			Reporter.log("*************  Whom do I call most? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Whom do I call most?"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All calls, ordered by frequency"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Calls on specific dates, ordered by frequency"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Calls to specific area codes, ordered by frequency"));	 
+			
+			Reporter.log("*************  My reports? *************  ",true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("My reports?"));
+			
+			Reporter.log("***********  All Calls Report Validation *********** ",true);
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.allCalls, "All Calls");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Analyze Bill"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Accounts For Selection"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select an account or All Accounts from the drop-down menu"));
+				
+			vc.getWebDriverUtils().selectByVisibleText(we_ReportingPage.allAccountsList, "011488550", "Account List");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.addToAnalysis, "Add To Analysis");
+
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Subscriber Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Begin Cycle Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("End Cycle Date"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.startAnalysis, "Start Analysis");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Operator assisted calls"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Selected Accounts for Analysis"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.modifyReport, "Modify Report");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.additionalConstraints, "Additional Constraints");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("First filter"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Second filter"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Third filter"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select one of the Analysis fields from the Field droplist, then enter a threshold value"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.cancel, "Cancel");
+
+			driver.switchTo().defaultContent();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_ScheduledUtilizationReports() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Network -> Scheduled Utilization Reports";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Scheduled Utilization Reports");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.scheduledUtilizationReports, "Scheduled Utilization Reports");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Scheduled Utilization Reports  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The data that makes up scheduled reports is gathered directly from our customer"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Report Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Schedule"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email Recipients"));
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.more, "Show More Detailed Info");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The scheduled reports are made up of calculated values including"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Inbound/Outbound average"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Usage"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Portal URL"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.less, "Show Less Detailed Info");
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.addAnewScheduledReport, "Add a New Scheduled Report");
+			String reportNameNow= "sqaTestNow"+Math.random();
+			vc.getWebDriverUtils().enterText(we_ReportingPage.reportName,reportNameNow , "Report Name");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportTimeFrame, "Report Time Frame", "7 day report");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.runReportNow,"Run Report - Now");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.additonalEmailRecipients, "sqaTest@windstream.com", "Additional Email Recipients");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.cancelScheduledReport, "Cancel");
+			
+			Reporter.log("********  Run Report 'Now' - Create Report ********", true);
+			vc.getWebDriverUtils().checkPageIsReady();
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.addAnewScheduledReport, "Add a New Scheduled Report");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.reportName, reportNameNow, "Report Name");
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportTimeFrame, "Report Time Frame", "7 day report");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.runReportNow,"Run Report - Now");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.additonalEmailRecipients, "sqaTest@windstream.com", "Additional Email Recipients");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.reportName, reportNameNow, "Report Name");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.submitScheduledReport, "Submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Report created successfully"));	
+			
+	        if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+				vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			}
+	        
+	        Assert.assertTrue(vc.waitUntilTextIsPresent(reportNameNow), "Validating the Created Report in the list");
+			Assert.assertTrue(we_ReportingPage.queuedReportValidation(we_HomePage,we_ReportingPage, reportNameNow),"*********** Validate "+reportNameNow + " under Queued Reports ***************");
+	       
+	    	List<WebElement> tr_collection = we_ReportingPage.scheduledReportsTable.findElements(By.xpath(".//tbody[1]/tr"));
+			Reporter.log("Number Of Records in this Scheduled Reports Table = "+ tr_collection.size(),true);
+			 if (tr_collection.size() == 0) {
+			        throw new InterruptedException();
+			   }
+			 Boolean reportSearchFlag=false;
+			 int rowNum=0;
+				for (WebElement trElement : tr_collection) {	
+					rowNum=rowNum+1;
+					if (trElement.getText().contains(reportNameNow)) {
+						Reporter.log(trElement.getText(),true);	
+						reportSearchFlag=true;
+						Reporter.log("Added Scheduled report found in the table", true);
+						Reporter.log("********  Run Report 'Now' - Edit Report ********", true);
+						//WebElement tcElementActions=  driver.findElement(By.xpath("//*[@id='tblScheduledUtilList']/tbody/tr["+rowNum+"]/td[4]/div/button"));
+						WebElement tcElementActions=  driver.findElement(By.xpath("//tbody/tr["+rowNum+"]/td[4]/div/button"));
+						vc.getWebDriverUtils().clickHiddenElement(tcElementActions, "Actions");
+						WebElement tcElementEdit= driver.findElement(By.xpath("//*[@id='tblScheduledUtilList']/tbody/tr["+rowNum+"]/td[4]/div/ul/li[1]/a"));	
+						vc.getWebDriverUtils().mouseHoveronElement(tcElementEdit);
+						vc.getWebDriverUtils().clickHiddenElement(tcElementEdit, "Edit Report");
+						String editReportRecurring= "sqaRecurring"+Math.random();
+						vc.getWebDriverUtils().enterText(we_ReportingPage.reportName, editReportRecurring, "Report Name");
+						vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportTimeFrame, "Report Time Frame", "1 month report");
+						vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.runReportRecurring,"Run Report - Recurring");
+						vc.waitUntilTextIsPresent("sqaTest@windstream.com");
+						vc.getWebDriverUtils().mouseHoveronElement(we_ReportingPage.submitScheduledReport);
+						vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.submitScheduledReport, "Submit");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Report updated successfully"));
+						
+						driver.navigate().refresh();
+						vc.getWebDriverUtils().checkPageIsReady();
+						
+						if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+							vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+							vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+						}
+						
+						Assert.assertTrue(vc.waitUntilTextIsPresent(editReportRecurring), "Validating the Edited Report in the list");
+						WebElement tcElementSchedule= driver.findElement(By.xpath("//tbody/tr["+rowNum+"]/td[2]"));	
+						Assert.assertTrue(vc.getWebDriverUtils().getText(tcElementSchedule, "Schedule").trim().contains("1 month report"), "Validate Schedule, expected :="+"1 month report");
+			
+						
+						Reporter.log("********  Run - Scheduled Report  ********", true);
+						WebElement tcElementActions1=  driver.findElement(By.xpath("//tbody/tr["+rowNum+"]/td[4]/div/button"));
+						vc.getWebDriverUtils().clickHiddenElement(tcElementActions1, "Actions");
+						WebElement tcElementRun= driver.findElement(By.xpath("//*[@id='tblScheduledUtilList']/tbody/tr["+rowNum+"]/td[4]/div/ul/li[2]/a"));	
+						vc.getWebDriverUtils().mouseHoveronElement(tcElementRun);
+						vc.getWebDriverUtils().clickHiddenElement(tcElementRun, "Run Report");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to run the report"));
+						vc.getWebDriverUtils().clickElement(we_ReportingPage.runReportNo, "Run Report - No");
+						vc.getWebDriverUtils().clickHiddenElement(tcElementActions1, "Actions");
+						vc.getWebDriverUtils().clickHiddenElement(tcElementRun, "Run Report");
+						vc.getWebDriverUtils().clickElement(we_ReportingPage.runReportYes, "Run Report - Yes");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Report has been executed"));
+					
+						Assert.assertTrue(we_ReportingPage.queuedReportValidation(we_HomePage,we_ReportingPage, editReportRecurring+" ("+vc.getWebDriverUtils().getCurrentTimeStamp().trim()+")"),"*********** Validate "+editReportRecurring + " under Queued Reports ***************");
+					       
+						Reporter.log("********   Delete - Scheduled Report ********", true);
+						WebElement tcElementActions2=  driver.findElement(By.xpath("//tbody/tr["+rowNum+"]/td[4]/div/button"));
+						vc.getWebDriverUtils().clickHiddenElement(tcElementActions2, "Actions");
+						WebElement tcElementDelete= driver.findElement(By.xpath("//*[@id='tblScheduledUtilList']/tbody/tr["+rowNum+"]/td[4]/div/ul/li[3]/a"));	
+						vc.getWebDriverUtils().mouseHoveronElement(tcElementDelete);
+						vc.getWebDriverUtils().clickHiddenElement(tcElementDelete, "Delete Report");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the report"));
+						vc.getWebDriverUtils().clickElement(we_ReportingPage.deleteReportNo, "Delete Report - No");
+						vc.getWebDriverUtils().clickHiddenElement(tcElementActions2, "Actions");
+						vc.getWebDriverUtils().clickHiddenElement(tcElementDelete, "Delete Report");
+						vc.getWebDriverUtils().clickElement(we_ReportingPage.deleteReportYes, "Delete Report - Yes");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Report has been deleted"));
+						driver.navigate().refresh();
+						vc.getWebDriverUtils().checkPageIsReady();
+						if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+							vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+							vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+						}
+						Assert.assertFalse(vc.waitUntilTextIsPresent(editReportRecurring), "Deleted Report should not be available in the list");
+						Reporter.log("Report has been deleted Successfully",true);
+						break;
+					}
+				} 
+				if (reportSearchFlag==false) {
+					Reporter.log("Error found in Scheduled Report", true);
+					Assert.assertFalse(true);
+				}
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_QueuedReports() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Network -> Queued Reports";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Scheduled Utilization Reports");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.queuedReports, "Queued Reports");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Queued Reports  - Windstream Enterprise"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Requested Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Expiration Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("In Progress"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("reports are those requested but not yet available to you"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Available"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("reports are ready for download. These reports expire after 7 calendar days"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You may delete a report at anytime"));
+			
+			if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.allRecords, "All Records")) {
+				vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.allRecords, "All Records");
+				vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			}
+			
+			List<WebElement> trQueuedReports_collection = driver.findElements(By.xpath("//*[@id='tblQueuedReportsList']/tbody/tr"));
+			Reporter.log("Number Of Records in the Queued Reports Table = "+ trQueuedReports_collection.size(),true);
+			
+			if (trQueuedReports_collection.size()>=2) {
+				WebElement tcQRDownloadElement=  driver.findElement(By.xpath("//tbody/tr[1]/td[6]/div/a[1]"));
+				Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDownloadElement, "title", "Download Element").trim().contains("Download"), "Validate title for Download under Queued Report");
+				Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDownloadElement, "href", "Download Element").trim().contains("/Reporting/Report/GetQueuedReportContent?queuedReportId"), "Validate href for Download under Queued Report");
+				
+				Reporter.log("*********** Delete Queued Report ***********", true);
+				WebElement tcQRDeleteElement=  driver.findElement(By.xpath("//tbody/tr[1]/td[6]/div/a[2]"));
+				Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDeleteElement, "title", "Delete Element").trim().contains("Delete"), "Validate title for Delete under Queued Report");
+				Assert.assertTrue(vc.getWebDriverUtils().getAttribute(tcQRDeleteElement, "href", "Delete Element").trim().contains("/Reporting/Report/DeleteQueuedReport?queuedReportId"), "Validate href for Delete under Queued Report");
+			} else {
+				Reporter.log("There are no existing queued reports",true);
+			}
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Network_TrafficStudy() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Network -> Traffic Study";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Reporting-> Network -> Traffic Study");
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.networkSubMenu, "Network");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.trafficStudy, "Traffic Study");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Take a snapshot of your traffic"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Traffic Study Reports provide a 'snapshot' and measurement of the quantity of inbound and outbound traffic"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The availability of certain reports depends on the services you have"));	  	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Traffic Studies log traffic data"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("contact us today at 855.352.2731"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Below are sample reports for your reference to help you understand"));
+		
+			vc.getWebDriverUtils().isElementPresentCheckUsingJavaScriptExecutor(we_ReportingPage.busyHourPBXSampleReport);
+			vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.busyHourPBXSampleReport, "Busy Hour PBX (Sample) Report");
+			vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.busyHourTrunkSampleReport, "Busy Hour Trunk (Sample) Report");
+			vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.hourlyDetailLineSampleReport, "ourly Detail Line (Sample) Report");
+			vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.hourlyDetailTrunkGroupSampleReport, "Hourly Detail Trunk Group (Sample) Report");
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.busyHourPBXSampleReport, "Busy Hour PBX (Sample) Report");
+			
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	
+	@Test
+	public void Reporting_Voice_VoiceCircuitUtilization_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Voice -> Voice Circuit Utilization";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.voiceSubMenu, "Voice");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.voiceCircuitUtilizationReport, "Voice Circuit Utilization");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Circuit Utilization  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("These reports display average voice circuit utilization over the specified time period for the selected circuit group"));	
+			vc.getWebDriverUtils().checkPageIsReady();
+			vc.waitUntilTextIsPresent("Loading...");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.accountSelect,"Account Select Dropdown");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.circuitList, "Circuit Group");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.numberOfDays, "", "Number of Days - Null Value");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewReport, "View Report");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please Select a Number of Days"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please Select Start Date"));
+			
+			vc.getWebDriverUtils().enterText(we_ReportingPage.numberOfDays, "90", "Number of Days");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.startDateCalendarIcon, "Start Date - Calendar Icon");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.dayActiveDefault, "- Default Active Date");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.startDateVCU, "11/05/2018", "Start Date");
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewReport, "View Report");
+			
+			/*Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					if (driver.getPageSource().contains(
+							"Voice Circuit Util - Report Viewer")) {
+						Reporter.log("Voice Circuit Util - Report Viewer - Opened Successfully",true);
+					} else {
+						Reporter.log("Failed to Open Voice Circuit Util - Report Viewer",true);
+						Assert.assertTrue(false);
+					}
+					we_ReportingPage.viewReport_ReportFrame();*/
+					driver.switchTo().frame("ivframe");
+					Reporter.log("Validating Report Content for Voice Circuit Utilization", true);
+					if (vc.waitUntilTextIsPresent("Subscriber")) {
+						
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Switch ID"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Total Number Of Circuits"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Group Type"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+						driver.switchTo().defaultContent();
+					}else if (vc.waitUntilTextIsPresent("No Data Found")) {
+						Assert.assertTrue(vc.waitUntilTextIsPresent("No Data Available"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+						driver.switchTo().defaultContent();
+					}else {
+						Reporter.log("Report not loaded/working as expected");
+						Assert.assertTrue(false);
+					}
+										
+				/*}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Circuit Utilization  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Data is only available for the most recent ninety days"));*/
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Voice_VoiceUsage() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Voice -> Voice Usage";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.voiceSubMenu, "Voice");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.voiceUsage, "Voice Usage");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Usage Reports  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Run New Report"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("We provide you the tools you need to manage your business online - whether you're looking for details on your call volume or statistics"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Simply select the information below to build the reports you need to more effectively manage your services"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customize Your Report"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("For Description of Voice Usage Reports, download"));	
+			Assert.assertTrue(vc.getWebDriverUtils().getAttribute(we_ReportingPage.voiceUsageReportGuide, "href", "Voice Usage Report Guide").contains("/Content/pdf/mylink-voice-usage-reports-user-guide.pdf"));
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.voiceUsageReportGuide, "Voice Usage Report Guide");
+			vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "mylink-voice-usage-reports-user-guide.pdf");
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportTypeDropDown, "Report Type", "Account Code Description Summary");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.selectAccountInvoiceReport, "Account");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.locationDropDown, "Location");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.dateDropDown, "Date");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.runReport, "Run Report");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.recentQueuedReportsTable, "Recently Queued Reports table");
+		
+			
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_ReportingPage.reportTypeDropDown, "Report Type", "Billing Number Summary");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.runReport, "Run Report");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.recentQueuedReportsTable, "Recently Queued Reports table");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Recently Queued Reports"));	
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.recentQueuedReportsTable, "Recently Queued Reports table"));
+			if (vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.moreQueuedReports, "More Queued Reports")) {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.moreQueuedReports, "More Queued Reports");
+			} else {
+				vc.getWebDriverUtils().clickElement(we_ReportingPage.queuedReportsContentTab, "Queued Reports - Content Tab");
+			}
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Queued Reports  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("All Queued Reports"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You may delete a report at anytime"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Requested Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Expiration Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Voice_VoiceUsage_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Reporting-> Voice -> Voice Usage";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.voiceSubMenu, "Voice");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.voiceUsage, "Voice Usage");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Usage Report  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("These reports display minutes of usage data over the specified time period for the selected circuit group. Select a circuit group, start date, and number of days below and click on the button for the report you wish to view"));	
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.accountSelect,"Account Select Dropdown");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.circuitList, "Circuit Group");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.numberOfDays, "", "Number of Days - Null Value");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewMinutesOfUsageDetails," View Minutes of Usage - Details");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please Select a Number of Days"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Please Select Start Date"));
+			
+			vc.getWebDriverUtils().enterText(we_ReportingPage.numberOfDays, "90", "Number of Days");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.startDateCalendarIcon, "Start Date - Calendar Icon");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.dayActiveDefault, "- Default Active Date");
+			
+			Reporter.log("**********  View Minutes of Usage - Details *********************",true);
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewMinutesOfUsageDetails,"View Minutes of Usage - Details");
+		/*	Set<String> allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					if (driver.getPageSource().contains(
+							"MOU Detail - Report Viewer")) {
+						Reporter.log("MOU Detail - Report Viewer - Opened Successfully",true);*/
+						//we_ReportingPage.viewReport_ReportFrame();
+						Reporter.log("Validating Report Content for Minutes of Usage - Details", true);
+						driver.switchTo().frame("ivframe");
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Minutes Of Usage - Details"));
+						Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+						driver.switchTo().defaultContent();
+				/*	} else {
+						Reporter.log("Failed to Open MOU Detail - Report Viewer",true);
+						Assert.assertTrue(false);
+					}
+					we_ReportingPage.viewReport_ReportFrame();
+					Reporter.log("Validating Report Content for Minutes of Usage - Details", true);
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Minutes Of Usage - Details"));
+				}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Usage Report  - Windstream Enterprise"));*/
+			
+			Reporter.log("**********  View Minutes of Usage - Graph *********************",true);
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewMinutesOfUsageGraph,"View Minutes of Usage - Graph");
+			/*allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					if (driver.getPageSource().contains(
+							"MOU Graph - Report Viewer")) {
+						Reporter.log("MOU Graph - Report Viewer - Opened Successfully",true);
+					} else {
+						Reporter.log("Failed to Open MOU Graph - Report Viewer",true);
+						Assert.assertTrue(false);
+					}*/
+					driver.switchTo().frame("ivframe");
+					Reporter.log("Validating Report Content for Minutes of Usage - Graph", true);
+					Assert.assertTrue(vc.waitUntilTextIsPresent("MOU Graph"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+					driver.switchTo().defaultContent();
+			/*	}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Usage Report  - Windstream Enterprise"));*/
+			
+			Reporter.log("**********  View Call Totals - Graph *********************",true);
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.viewCallDetailsGraph,"View Call Totals - Graph");
+		/*	allHandles = driver.getWindowHandles();
+			for (String currentHandle : allHandles) {
+				if (!currentHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(currentHandle);
+					if (driver.getPageSource().contains(
+							"MOU Call Totals - Report Viewer")) {
+						Reporter.log("MOU Call Totals - Report Viewer - Opened Successfully",true);
+					} else {
+						Reporter.log("Failed to Open MOU Call Totals - Report Viewer",true);
+						Assert.assertTrue(false);
+					}*/
+					driver.switchTo().frame("ivframe");
+					Reporter.log("Validating Report Content for View Call Totals - Graph", true);
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Minutes Of Usage - Call Totals"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Page"));
+					driver.switchTo().defaultContent();
+			/*	}
+			}
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Voice Usage Report  - Windstream Enterprise"));*/
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Reporting_Voice_SIPTrunkUtilization() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Reporting-> Voice -> SIP Trunk Utilization";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+			vc.getWebDriverUtils().clickHiddenElement(we_ReportingPage.voiceSubMenu, "Voice");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.sipTrunkingUtilization, "SIP Trunk Utilization");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SIP Trunking Utilization Reports  - Windstream Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("SIP Trunking Utilization Reports"));	
+			String fromDate=vc.getWebDriverUtils().getAttribute(we_ReportingPage.fromDate,"value" , "From Date - Get Value");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.fromDate,fromDate , "From Date");
+			String toDate=vc.getWebDriverUtils().getAttribute(we_ReportingPage.toDate,"value", "To Date - Get Value");
+			vc.getWebDriverUtils().enterText(we_ReportingPage.toDate,toDate, "To Date");
+			
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.locationDropDown, "Location Drop Down");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.trunkTID, "Trunk ID Drop Down");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.submitSIPTU, "Submit SIP Trunk Utilization");
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Session Summary"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Sessions"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Peak Utilization (Date / Time)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Peak Utilization (Percent)"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Peak Concurrent Sessions"));
+			
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.sessionummaryChart, "Session Summary Chart Validation"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.percentUtilizatioNChart, "Percent Utilization Chart Validation"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.peakConcurrentSessionsChart, "Peak Concurrent Sessions Chart Validation"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.inboundOutbounSessionChart, "Inbound/Outbound Session Chart Validation"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.inboundOutboundPercentChart, "Inbound/Putbound Percent Chart Validation"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_ReportingPage.downloadCSV, "Download CSV"));
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.setAlertAlarmThresholds, "Set Alert/Alarm thresholds");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Threshold Manager"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This is the place to manage the alert and alarm threshold for SIP Trunk Lines"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The current status of monitored equipment with the selected thresholds is"));
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.simpleAllLocationsHaveSameThresholdsRadioBtn, "Simple: All Locations Have Same Thresholds - Radio");
+			vc.getWebDriverUtils().getAttribute(we_ReportingPage.alertStartInputSimple, "value", "Alert Start Input Simple %");
+			vc.getWebDriverUtils().getAttribute(we_ReportingPage.alertStartSimpleSlider, "style", "Alert Start Simple Slider %");
+			
+/*			vc.getWebDriverUtils().getText(we_ReportingPage.alertStartInputSimple, "Alert Start Input Simple %");
+			vc.getWebDriverUtils().getText(we_ReportingPage.alertStartSimpleSlider, "Alert Start Simple Slider %");*/
+			
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.advancedManageByLocationRadioBtn, "Advanced: Manage By Location - Radio");
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_ReportingPage.locationName, "Location Name");
+			vc.getWebDriverUtils().clickElement(we_ReportingPage.applyFilters, "Apply Filters");
+			
+			vc.getWebDriverUtils().getText(we_ReportingPage.alertStartInputAdvanced, "Alert Start Adavcned %");
+			vc.getWebDriverUtils().getText(we_ReportingPage.alertStartAdvancedSlider, "Alert Start Advanced Slider %");
+			
+			//Assert.assertTrue(vc.getWebDriverUtils().getText(we_ReportingPage.alertStartInputSimple, "Alert Start %").equalsIgnoreCase(vc.getWebDriverUtils().getText(we_ReportingPage.alertStartSimpleSlider, "Alert Start Slider %")));
+			
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	
+}

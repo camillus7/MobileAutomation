@@ -1,0 +1,60 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import io.appium.java_client.android.AndroidDriver;
+
+public class AndroidDriver {
+
+	
+	public DesiredCapabilities getCapabilities() {
+
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+	
+		//capabilities.setCapability("deviceName", "Samsung");
+		//capabilities.setCapability("udid", "33001cc872ce1537");
+		
+		/*capabilities.setCapability("deviceName", "LG");
+		capabilities.setCapability("udid", "LGH81852c15fb1");
+		*/
+		capabilities.setCapability("deviceName", "galaxys8");
+		capabilities.setCapability("udid", "988e16314c4546414d");
+		
+		
+		capabilities.setCapability("platformName", "Android");
+		capabilities.setCapability("platformVersion", "7.1.1");
+
+		// enterprise
+		capabilities.setCapability("appPackage", "com.windstream.enterprise.we.dev");
+		capabilities.setCapability("appActivity", "com.windstream.po3.business.features.winauth.WinAuthActivity");
+
+		// consumer
+		/*capabilities.setCapability("appPackage", "com.windstream.residential.dev");
+		capabilities.setCapability("appActivity","com.windstream.po3.residential.winauth.WinAuthActivity");
+*/
+		// smb
+		/*capabilities.setCapability("appPackage", "com.windstream.enterprise.ilec.dev");
+		capabilities.setCapability("appActivity", "com.windstream.po3.business.features.winauth.WinAuthActivity");*/
+
+		capabilities.setCapability("noReset", true);
+		AndroidDriver driver =  new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		
+		
+
+		return capabilities;
+
+	}
+
+
+	@Override
+	public AndroidDriver getAndroidDriver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

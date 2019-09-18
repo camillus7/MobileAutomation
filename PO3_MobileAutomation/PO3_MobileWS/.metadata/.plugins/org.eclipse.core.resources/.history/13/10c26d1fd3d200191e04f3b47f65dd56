@@ -1,0 +1,84 @@
+package com.mobile.WeConnect.pageobject;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+import io.appium.java_client.android.AndroidDriver;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+import com.webautomation.validation.Validator;
+
+public class WeConnect_LoginPage {
+
+	private AndroidDriver driver;
+	private Validator vc;
+	
+
+	public WeConnect_LoginPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	
+	@FindBy(id = "username")
+	public static WebElement userName;
+
+	@FindBy(id = "password")
+	public static WebElement password;
+	
+	@FindBy(xpath = "//android.view.View[@text=' Sign In']")
+	public static WebElement signInBtn;
+	
+	
+	@FindBy(xpath = "//android.view.View[@text=' Send Request']")
+	public WebElement ForgotpwSendRequest;
+
+	@FindBy(xpath = "//android.view.View[@text=' Continue']")
+	public WebElement Forgotpwcontinue;
+	
+	@FindBy(xpath = "//android.view.View[@text='Please enter a Username.']")
+	public WebElement emptyUsername;
+	
+	
+
+	public void verifyInvalidLogin() throws InterruptedException {
+		vc.getMobileDriverUtils().elementAvailablity(userName, "username");
+		vc.getMobileDriverUtils().mobile_EnterText(userName, "weonlinetest", "username");
+		vc.getMobileDriverUtils().mobile_EnterText(password, "Po3DevTestPass", "password");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().clickMobileElement(signInBtn, "signinbtn");
+		
+	
+		if(vc.getMobileDriverUtils().elementAvailablity(WeConnect_LandingPage.HamburgerMenu, "LandingScreen")){
+			Reporter.log("Login is successfull with invalid Credentials",true);
+			Assert.assertFalse(true);
+		}else {
+			Reporter.log("Login is not Successfull with invalid credentials",true);
+		}
+		
+		
+	}
+	
+	 @FindBy(xpath = "//android.view.View[@text='Having trouble signing in?']")
+		public WebElement troubleSignin;
+		
+	
+	public void verifyForgotUsernameScreen() throws Exception {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Automation);
+		vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+		vc.getMobileDriverUtils().clickMobileElement(troubleSignin, "TroubleSignin");
+		vc.getMobileDriverUtils().elementAvailablity(userName, "Username");
+		vc.getMobileDriverUtils().clickMobileElement(ForgotpwSendRequest, "SendRequest");
+		Assert.assertEquals(emptyUsername.getText(), "Please enter a Username.");
+		Reporter.log("Warning message is displayed to enter username",true);
+		vc.getMobileDriverUtils().mobile_EnterText(userName, menu.getUsername(), "Username");
+		vc.getMobileDriverUtils().clickMobileElement(ForgotpwSendRequest, "SendRequest");
+		vc.getMobileDriverUtils().clickMobileElement(Forgotpwcontinue, "Continue");
+
+	}
+
+}

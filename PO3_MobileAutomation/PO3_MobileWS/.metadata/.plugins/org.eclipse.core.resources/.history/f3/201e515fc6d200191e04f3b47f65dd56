@@ -1,0 +1,183 @@
+package com.webautomation.pageobject.myWin_pages;
+
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.http.client.UserTokenHandler;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchFrameException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Reporter;
+import org.testng.Assert;
+
+import com.webautomation.pageobject.webpages.winLinkHomePage;
+import com.webautomation.validation.Validator;
+
+import Base.BaseSteps_SelGrid;
+import commonUtil.FileUtilities;
+import commonUtil.PropertiesUtil;
+
+public class MyWin_UserManagerPage extends BaseSteps_SelGrid {
+
+	final WebDriver driver;
+	private Validator vc;
+
+	public MyWin_UserManagerPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(id = "navbarProfileDropdown")
+	public WebElement signOutToggle;
+	
+	@FindBy(id="UserManager")
+	public WebElement UserManagerOption;
+	
+	@FindBy(id="createUserBtn")
+	public WebElement CreateUser;
+	
+	@FindBy(xpath="//label[@class='padding-left-10 cursor-pointer']")
+	public WebElement createNewUser;
+	
+	@FindBy(xpath="//button[@class='btn btn-primary']")
+	public WebElement createUserOkButton;
+	
+	@FindBy(xpath="//img[@src='/consumer/images/close-ico.png']")
+	public WebElement closeEdit;
+	
+	
+	@FindBy(id="firstname")
+	public WebElement Createuser_Firstname;
+	
+	@FindBy(id="lastname")
+	public WebElement Createuser_Lastname;
+	
+	@FindBy(id="emailaddress")
+	public WebElement Createuser_Email;
+	
+	@FindBy(id="userName")
+	public WebElement Createuser_Username;
+	
+	@FindBy(id="idExpandAll")
+	public WebElement Createuser_ExpandAll;
+	
+	@FindBy(id="idCollapseAll")
+	public WebElement Createuser_CollapseAll;
+	
+	@FindBy(id="createUserBtn")
+	public WebElement Createuser_CreateButton;
+	
+	@FindBy(id="createUserBtnCancel")
+	public WebElement Createuser_CancelButton;
+	
+	@FindBy(id="searchInput")
+	public WebElement SearchUser_Searchbox;
+	
+	@FindBy(id="searchUser")
+	public WebElement SearchUser_SearchButton;
+	
+	@FindBy(xpath="//button[@class='icon light edit editUserDetails k-grid-edit']")
+	public WebElement editUser;
+	
+	@FindBy(id="UserPerm")
+	public WebElement userPermissions;
+	
+	@FindBy(id="editUserPanel")
+	public WebElement userInformation;
+	
+	@FindBy(xpath=".//*[@id='CreateNewUserForm']/div/div[1]/div[1]/div[3]/div/div/div/div[1]/span")
+	public WebElement emailAddressToolTip ;
+	
+	@FindBy(xpath=".//*[@id='CreateNewUserForm']/div/div[1]/div[2]/div/div/div/div/div[1]/span")
+	public WebElement userNameToolTip ;
+	
+	@FindBy(xpath=".//*[@id='Edittreeview_tv_active']/ul/li[1]/div/span[2]/span")
+	public WebElement permissionsBilling ;
+	
+	@FindBy(xpath=".//*[@id='Edittreeview']/ul/li/ul/li[2]/div/span[2]/span")
+	public WebElement permissionsSupport ;
+	
+	@FindBy(id="editSaveButton")
+	public WebElement permissionsSave ;
+	
+	
+	
+	
+	public void clickOnUserManager() throws InterruptedException {
+		vc.getWebDriverUtils().clickElement(signOutToggle, "SignOut Toggle");
+		vc.getWebDriverUtils().clickElement(UserManagerOption,"UserManagement Option");
+	}
+	
+	
+	@FindBy(id="rowscount")
+	public WebElement rowCount;
+	
+	
+	
+	@FindBy(css="#dvViewUsersGrid table tbody tr")
+	public List<WebElement> usersTable;
+	
+	@FindBy(css="ul.k-pager-numbers li a")
+	public List<WebElement> usersPagenation;
+	
+	
+		
+	@FindBy(css="#dvViewUsersGrid table tbody tr .editUserDetails")
+	public List<WebElement> editableUsers;
+	
+	public int getRowCount() {
+		String text=rowCount.getText();
+		String[] a=text.split(" ");
+			System.out.println(Integer.parseInt(a[1]));
+		return Integer.parseInt(a[1]);
+		}
+	
+	public int getNumberOfEditableUsers() throws InterruptedException {
+		 int count=0;
+		 int totalPages=usersPagenation.size();
+		 count+=editableUsers.size();
+		 for (int i=0; i< totalPages;i++) {
+			 
+			 WebElement element=usersPagenation.get(i);
+			 vc.scrollToView(element);
+			element.click(); 
+			count+=editableUsers.size();
+		 }
+		 return count;
+		}
+	
+	
+	
+public int getNumberOfUsers() throws InterruptedException {
+	 int count=0;
+	 int totalPages=usersPagenation.size();
+	 count+=usersTable.size();
+	 for (int i=0; i< totalPages;i++) {
+		 
+		 WebElement element=usersPagenation.get(i);
+		 vc.scrollToView(element);
+		element.click(); 
+		count+=usersTable.size();
+	 }
+	 return count;
+	}
+		
+		
+	
+}

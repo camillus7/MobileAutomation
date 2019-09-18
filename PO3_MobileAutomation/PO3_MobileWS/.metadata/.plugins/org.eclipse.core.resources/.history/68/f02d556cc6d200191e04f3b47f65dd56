@@ -1,0 +1,54 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class EdgeWebDriver implements ApplicationWebDriver {
+
+	public WebDriver getWebDriver() {
+		WebDriver driver = new EdgeDriver(getCapabilities());
+		return driver;
+	}
+
+	public WebDriver getWebDriver(boolean isGrid, String hubUrl) {
+		WebDriver driver = null;
+		if (isGrid) {
+			try {
+				DesiredCapabilities capabilities = DesiredCapabilities.edge();
+				capabilities.setPlatform(Platform.WIN10);
+				capabilities.setBrowserName("MicrosoftEdge");
+				capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);   
+				driver = new RemoteWebDriver(new URL(hubUrl), capabilities);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			driver = new EdgeDriver(getCapabilities());
+		}
+
+		return driver;
+	}
+
+	public DesiredCapabilities getCapabilities() {
+		System.setProperty("webdriver.edge.driver",
+				".\\softwares\\MicrosoftWebDriver.exe");
+		DesiredCapabilities capabilities = DesiredCapabilities
+				.edge();
+		capabilities.setBrowserName("MicrosoftEdge");
+		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);  
+		capabilities.setCapability(CapabilityType.BROWSER_NAME, "EDGE");
+
+
+		return capabilities;
+	}
+
+
+	
+}

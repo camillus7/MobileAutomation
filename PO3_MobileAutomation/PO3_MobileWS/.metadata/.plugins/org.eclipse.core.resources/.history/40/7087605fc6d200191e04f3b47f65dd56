@@ -1,0 +1,116 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyCallTwinningWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyCallTwinningWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'My Call Twinning')]")
+	public WebElement myCallTwinningCheckbox;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//li[contains(.,'The selected extenstion is not part of any call groups.')]")
+	public WebElement callGroupMessage;
+	
+	@FindBy(xpath="//a[@id='saveCallTwinning']")
+	public WebElement saveButton;
+	
+	@FindBy(xpath = "//button[@data-id='SelectedTwinningExt']")
+	public static WebElement myCallTwinningDropdown;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//span[@class='toggle-checks k-switch-on']")
+	public WebElement twinningStatusON;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//span[@class='toggle-checks']")
+	public WebElement twinningStatusOFF;
+	
+	@FindBy(xpath="//input[@name='PhoneNumber']")
+	public WebElement phoneNumberField;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='My Call Twinning']//p[contains(.,'New settings applied successfully.')]")
+	public WebElement saveSettings;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//span[@class='error']")
+	public WebElement invalidNumber;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//span[@class='k-switch-handle']")
+	public WebElement toggleStatus;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//p[contains(@class,'default-value')]")
+	public WebElement forAccount;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My Call Twinning']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+	
+	public void myCallTwinningFunctionality() throws InterruptedException {
+		vc.getWebDriverUtils().genericDropDownSelectFirstItem(myCallTwinningDropdown, "For Extension");
+		if (vc.getWebDriverUtils().elementAvailablity(twinningStatusON, "TwinningStatus") == true) {
+			Reporter.log("Twinning is Enabled for the user",true);
+
+		} else if (vc.getWebDriverUtils().elementAvailablity(twinningStatusOFF, "TwinningStatus") == true) {
+			Reporter.log("Twinning is not enabled");
+			vc.getWebDriverUtils().clickElement(twinningStatusON, "TwinningStatus-ON");
+			vc.getWebDriverUtils().elementAvailablity(phoneNumberField, "PhoneNumber-Field");
+			vc.getWebDriverUtils().enterText(phoneNumberField, "123.456.7895", "PhoneNumber-Field");
+			
+			vc.getWebDriverUtils().clickElement(saveButton, "SaveButton");
+			Assert.assertEquals(saveSettings.getText(), "New settings applied successfully.",
+					"Unable to save the settings");
+			Reporter.log("New settings applied successfully ", true);
+
+		}else {
+			Reporter.log("Twinning Status Toggle Button is not Available",true);
+		}
+
+	}
+	
+	public void enableCallTwinning(String phoneNumber) throws InterruptedException {
+		vc.getWebDriverUtils().genericDropDownSelectFirstItem(myCallTwinningDropdown, "For Extension");
+		if (vc.getWebDriverUtils().elementAvailablity(phoneNumberField, "PhoneNumber")) {
+			Reporter.log("Twinning is Enabled for the user",true);
+
+		} else {
+			Reporter.log("Twinning is not enabled",true);
+			vc.getWebDriverUtils().clickElement(toggleStatus, "TwinningStatus-ON");
+			vc.getWebDriverUtils().elementAvailablity(phoneNumberField, "PhoneNumber-Field");
+			vc.getWebDriverUtils().enterText(phoneNumberField, phoneNumber, "PhoneNumber-Field");
+			vc.getWebDriverUtils().clickElement(saveButton, "SaveButton");
+			if(vc.getWebDriverUtils().elementAvailablity(invalidNumber, "InvalidPhoneNumber")==true) {
+				Reporter.log(invalidNumber.getText(),true);
+				Assert.assertFalse(true, "Please Enter Valid Number");
+			}else {
+				Assert.assertEquals(saveSettings.getText(), "New settings applied successfully.",
+						"Unable to save the settings");
+				Reporter.log("New settings applied successfully ", true);
+
+			}
+			
+		}
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("My Call Twinning");
+	}
+
+}

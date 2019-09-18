@@ -1,0 +1,58 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_VoipPage {
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_VoipPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	@FindBy(linkText="VoIP")
+	public WebElement voip;
+	
+	@FindBy(xpath = "(//button[contains(.,'Back')])[3]")
+	public WebElement backVoip;
+	
+	@FindBy(linkText="Manage Services")
+	public WebElement manageServices;
+	
+	@FindBy(linkText="Download User Guides")
+	public WebElement downloadUserGuides;
+	
+	@FindBy(linkText="Access Management")
+	public WebElement accessManagement;
+	
+	@FindBy(linkText="Manage Feature")
+	public WebElement manageFeatures;
+	
+	@FindBy(xpath="//a[@href='/Content/pdf/faxing-over-voip.pdf']")
+	public WebElement downloadFaxingOverIp;
+	
+	@FindBy(xpath="//a[@href='/Content/pdf/dynamic-ip-virtualpbx-user-guide.pdf']")
+	public WebElement downloadDynamicIp;
+	
+	@FindBy(xpath = "(//a[@href='/Services/Voip/AdministerUsers'])[2]")
+	public WebElement clickHereAccessTheVoIPUserAdmin1;
+	
+	@FindBy(xpath = "(//a[@href='/Services/Voip/ManageServices'])[2]")
+	public WebElement clickHereReadOurDetailedUserGuide1;
+	
+	@FindBy(xpath = "(//a[@href='/Services/Voip/AdministerUsers'])[3]")
+	public WebElement clickHereAccessTheVoIPUserAdmin2;
+	
+	@FindBy(xpath = "(//a[@href='/Services/Voip/ManageServices'])[3]")
+	public WebElement clickHereReadOurDetailedUserGuide2;
+	
+	@FindBy(xpath = "//a[contains(@id,'voipManageFeatureFromServices')]")
+	public WebElement clickHereContinueUsingThePrimaryVoIPInterface;
+}

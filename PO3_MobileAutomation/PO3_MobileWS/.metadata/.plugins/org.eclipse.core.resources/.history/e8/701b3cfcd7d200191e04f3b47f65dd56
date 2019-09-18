@@ -1,0 +1,102 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_TrunkUtilizationWidget {
+
+	final WebDriver driver;
+	
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_TrunkUtilizationWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Trunk Utilization')]")
+	public WebElement trunkUtilizationCheckbox;
+
+	@FindBy(xpath = "//h1[contains(.,'SIP Trunking Utilization Reports')]")
+	public WebElement viewAll_Reports_Title;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Trunk Utilization']//a[@class='filter fr pointer white frColorWhitehBlue']")
+	public WebElement filterIcon;
+
+	@FindBy(xpath = "//a[@href='/Reporting/Report/SIPTrunkingUtilization'][contains(.,'View All Reports')]")
+	public WebElement viewAll_Reports_Link;
+
+	@FindBy(xpath = "//a[contains(@class,'filter fr pointer white frColorWhitehBlue')]")
+	public WebElement location_Icon;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Trunk Utilization']//div[@class='ico-text ff-CL']")
+	public WebElement utilizationInfo;
+
+	@FindBy(xpath = "//div[@class='ico-text ff-CL'][1]")
+	public WebElement utilizedAlarms;
+
+	@FindBy(xpath = "//div[@class='ico-text ff-CL'][2]")
+	public WebElement utilizedAlerts;
+
+	@FindBy(xpath = "(//button[@class='checkbox'])[2]")
+	public WebElement show_Threshold_Checkbox;
+
+	@FindBy(xpath = "//button[@value='Save'][contains(.,'Save')]")
+	public WebElement saveButton;
+
+	@FindBy(xpath = "(//div[contains(@class,'close')])[4]")
+	public WebElement closeButton;
+
+	@FindBy(xpath="//div[@data-widgettitle='Trunk Utilization']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Trunk Utilization']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void trunkUtilizationWidget_Functionality() throws InterruptedException {
+
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Trunk Utilization"));
+		vc.getWebDriverUtils().elementAvailablity(filterIcon, "FilterIcon");
+		vc.getWebDriverUtils().clickElement(filterIcon, "Filter");
+		List<WebElement> locations = driver.findElements(By.xpath("//ul[@id='LeftThresholdLocationIds']//li"));
+		Reporter.log("Total No of Location available are==>" + locations.size(), true);
+		vc.getWebDriverUtils().clickHiddenElement(saveButton, "Save");
+
+		if (vc.getWebDriverUtils().elementAvailablity(utilizationInfo, "UtilizationCount") == true) {
+			List<WebElement> count = driver.findElements(
+					By.xpath("//div[@data-widgettitle='Trunk Utilization']//div[@class='ico-text ff-CL']"));
+
+			for (int i = 0; i < 2;) {
+				System.out.println("Utilization Alarms ==>" + count.get(0).getText());
+				System.out.println("Utilization Alerts ==>" + count.get(1).getText());
+				break;
+			}
+		}	
+		vc.getWebDriverUtils().clickElement(viewAll_Reports_Link, "viewAll_Reports_Link");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(),
+				"SIP Trunking Utilization Reports - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("SIP Trunking Utilization Reports"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Trunk Utilization");
+		
+	}
+	
+}

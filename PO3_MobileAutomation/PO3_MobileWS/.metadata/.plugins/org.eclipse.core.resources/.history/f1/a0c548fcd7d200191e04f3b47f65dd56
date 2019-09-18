@@ -1,0 +1,148 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyHDMeetingWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyHDMeetingWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	@FindBy(xpath = "//label[contains(.,'My HD Meeting')]")
+	public WebElement myHDMeetingCheckbox;
+
+	@FindBy(xpath="//a[contains(.,'Start with Video')]")
+	public WebElement startWithVideo;
+	
+	@FindBy(xpath="//a[contains(.,'Start without Video')]")
+	public WebElement startWithoutVideo;
+	
+	@FindBy(xpath="//input[@id='MeetingID']")
+	public WebElement joinMeetingField;
+	
+	@FindBy(xpath="//a[@id='btnjoin']")
+	public WebElement joinButton;
+	
+	@FindBy(xpath="//p[contains(.,'You do no have HD Meeting License. Please contact your administrator. ')]")
+	public WebElement noLicence_Message;
+	
+	@FindBy(xpath="//p[contains(.,'An error has occurred. Please try again.')]")
+	public WebElement serverError_Message;
+	
+	@FindBy(xpath="//span[@class='floatwarningclose']")
+	public WebElement closeIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My HD Meeting']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='My HD Meeting']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void joinHDMeeting(WebElement joinHDMeeting,String name) throws InterruptedException{
+		vc.getWebDriverUtils().clickElement(joinHDMeeting, name);
+		if(vc.getWebDriverUtils().elementAvailablity(noLicence_Message, "NoHDMeeting-ErrorMessage")){
+			Reporter.log(noLicence_Message.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+		}else if (vc.getWebDriverUtils().elementAvailablity(serverError_Message, "ServerSide-ErrorMessage")){
+			Reporter.log(serverError_Message.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+		}else {
+			Reporter.log("Functionality not available",true);
+			// logic to be written for true condition	
+			
+		} 
+	}
+	
+	public void myHdMeetingFunctionality() throws InterruptedException {
+		
+		Reporter.log("********** Verify HDMeeting-UI ************",true);
+		vc.getWebDriverUtils().elementAvailablity(startWithVideo, "StartWithVideo");
+		vc.getWebDriverUtils().elementAvailablity(startWithVideo, "StartWithoutVideo");
+		vc.getWebDriverUtils().elementAvailablity(joinMeetingField, "JoinMeetingField");
+		vc.getWebDriverUtils().elementAvailablity(joinButton, "JoinButton");
+		
+		Reporter.log("********** JoinWithVideo ************",true);
+		joinHDMeeting(startWithVideo, "StartWithVideo");
+		Reporter.log("********** JoinWithOutVideo ************",true);
+		joinHDMeeting(startWithVideo, "StartWithVideo");
+		Reporter.log("********** JoinWithMeetingID ************",true);
+		vc.getWebDriverUtils().enterText(joinMeetingField, "1128984811", "JoinMeetingField");
+		joinHDMeeting(joinButton, "JoinButton");
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("My HD Meeting");
+	}
+	
+	
+	
+	/*public void joinWithVideo() throws InterruptedException {
+		vc.getWebDriverUtils().clickElement(startWithVideo, "StartWithVideo");
+		if(vc.getWebDriverUtils().elementAvailablity(joinMessage_Error1, "NoHDMeeting-ErrorMessage")==true){
+			Reporter.log(joinMessage_Error1.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+		}else if (vc.getWebDriverUtils().elementAvailablity(joinMessage_Error2, "ServerSide-ErrorMessage")==true){
+			Reporter.log(joinMessage_Error2.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+			
+		}else {
+			Reporter.log("Start WithVideo functionlaity not available",true);
+			// logic to be written for true condition	
+			
+		} 
+
+	}
+	public void joinWithoutVideo() throws InterruptedException {
+		vc.getWebDriverUtils().clickElement(startWithoutVideo, "StartWithOutVideo");
+		if(vc.getWebDriverUtils().elementAvailablity(joinMessage_Error1, "ErrorMessage")==true){
+			Reporter.log(joinMessage_Error1.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+		}else if (vc.getWebDriverUtils().elementAvailablity(joinMessage_Error2, "ErrorMessage")==true){
+			Reporter.log(joinMessage_Error2.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+			
+		}else {
+			Reporter.log("Start WithVideo functionlaity not available",true);
+			// logic to be written for true condition	
+			
+		} 
+		
+	}
+	
+	public void joinWithMeetingID() throws InterruptedException {
+		vc.getWebDriverUtils().enterText(joinMeetingField, "1128984811", "JoinMeetingField");
+		vc.getWebDriverUtils().clickElement(joinButton, "JoinButton");
+		if(vc.getWebDriverUtils().elementAvailablity(noLicence_Message, "ErrorMessage")==true){
+			Reporter.log(noLicence_Message.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+		}else if (vc.getWebDriverUtils().elementAvailablity(joinMessage_Error2, "ErrorMessage")==true){
+			Reporter.log(joinMessage_Error2.getText(),true);
+			vc.getWebDriverUtils().clickElement(closeIcon, "CloseIcon");
+			Assert.assertFalse(true, "Unable to join Meeting");
+			
+		}else {
+			Reporter.log("Start WithVideo functionlaity not available",true);
+			// logic to be written for true condition	
+		}		
+		} */
+}

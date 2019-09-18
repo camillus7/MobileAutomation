@@ -1,0 +1,90 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_OrderStatusWidget {
+
+	final WebDriver driver;
+	public String orderName,orderValue;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_OrderStatusWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'Orders')]")
+	public WebElement ordersCheckbox;
+
+	@FindBy(id = "SimplebarOrderStatus")
+	public WebElement orders;
+
+	@FindBy(xpath = "//a[contains(.,'View Orders')]")
+	public WebElement orderViewOrder;
+	
+	@FindBy(xpath="//h2[contains(.,'Orders')]")
+	public WebElement widgetName;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Orders']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Orders']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void viewOrdersNavigation() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Orders"));
+		vc.getWebDriverUtils().elementAvailablity(orderViewOrder, "ViewOrder");
+		vc.getWebDriverUtils().clickElement(orderViewOrder, "viewOrder");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "View Orders - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Orders"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Orders");
+		
+		
+	}
+
+	public void availableOrders() {
+
+		vc.getWebDriverUtils().scrollPage(widgetName);
+		List<WebElement> ordersValue = driver.findElements(By.cssSelector("div[class='f16 color-on-light lh-20 rel']"));		
+		List<WebElement> orderInfo = driver.findElements(By.cssSelector("span[class='f12 ff-CB secondary-color lh-20 rel']"));
+		
+
+		for(int i=0;i<=orderInfo.size();i++) {
+			for(int j=i+1;j<ordersValue.size();j++) {
+				
+				System.out.println(orderInfo.get(i).getAttribute("innerHTML") + "==" +  ordersValue.get(j).getAttribute("innerHTML"));
+			}
+		}
+		
+
+		//	System.out.println(orderInfo.get(0).getAttribute("innerHTML") + "==" +  ordersValue.get(0).getAttribute("innerHTML"));
+		//	System.out.println(orderInfo.get(1).getAttribute("innerHTML") + "==" +  ordersValue.get(1).getAttribute("innerHTML"));
+		//	System.out.println(orderInfo.get(2).getAttribute("innerHTML") + "==" +  ordersValue.get(2).getAttribute("innerHTML"));
+		//	System.out.println(orderInfo.get(3).getAttribute("innerHTML") + "==" +  ordersValue.get(3).getAttribute("innerHTML"));
+	
+		}
+	}
+		
+	
+
+
+
+

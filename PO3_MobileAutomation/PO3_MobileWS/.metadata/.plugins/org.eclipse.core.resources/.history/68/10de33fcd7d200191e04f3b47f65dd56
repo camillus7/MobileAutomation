@@ -1,0 +1,94 @@
+package com.webautomation.pageobject.myWin_pages;
+
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Reporter;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+
+public class MyWin_SupportPage {
+
+	final WebDriver driver;
+	private Validator vc;
+
+	public MyWin_SupportPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/ticket.png']")
+	public WebElement supportRequests;
+	
+	@FindBy(xpath = "//img[@src='/consumer/images/FAQ/Help.png']")
+	public WebElement quickHelp;
+	
+	@FindBy(xpath = ".//*[@id='SpeedTest']/a/div/div[1]")
+	//@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/speedometer3.png']")
+	public WebElement speedTest;
+						
+	@FindBy(xpath = ".//*[@id='WIFI']/a/div/div[1]")
+	public WebElement NetworkSupportCenter;
+	
+	@FindBy(xpath = "//img[@src='/consumer/images/Mega Menu/faq.png']")
+	public WebElement faq;
+	
+	
+	
+	
+	@FindBy(xpath = "//span[contains(.,'Issues With My Modem')]")
+	public WebElement issuesWithModem;
+	
+	@FindBy(xpath = "//span[contains(.,'Questions About My Bill')]")
+	public WebElement questionsAboutMyBill;
+	
+	@FindBy(xpath = "//span[contains(.,'Slow Internet Speeds')]")
+	public WebElement slowInternetSpeeds;
+	
+	
+	//@FindBy(xpath= "//A[@class='navTab-link'][text()='CLOSED (2)']/self::A")
+	public WebElement ClosedRequest;
+	
+	//
+	@FindBy(id="accoridanarrow")
+	//@FindBy(xpath= "//SPAN[@class='support-ticket-status'][text()='CLOSED'][text()='CLOSED']")
+	public WebElement ClosedExpand;
+	
+	@FindBy(xpath= ".//*[@id='collapse1']/div/div/div[1]/div[1]/div[1]/span")
+	public WebElement serviceLocationText;
+	
+	@FindBy(className= "support-ticket-location-address")
+	public WebElement ServiceLocationAddress;
+	
+	@FindBy(className= "support-ticket-conatct-name")
+	public WebElement ContactName;
+	
+	@FindBy(className= "support-ticket-conatct-mail")
+	public WebElement Mail;
+	
+	
+}	
+
+
+
+
+

@@ -1,0 +1,87 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_NetworkStatusWidget {
+	
+	final WebDriver driver;
+	
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_NetworkStatusWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+
+}
+	@FindBy(xpath = "//h2[contains(.,'Network Status')]")
+	public WebElement widgetname;
+	
+	@FindBy(xpath = "//label[contains(.,'Network Status')]")
+	public WebElement networkStatusCheckbox;
+	
+	@FindBy(xpath = "//h2[contains(.,'Site Status')]")
+	public WebElement siteStatus;
+	
+	@FindBy(xpath = "//h2[contains(.,'Utilization Alerts')]")
+	public WebElement utilizationAlerts;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='Network Status']//a[contains(.,'View Report')]")
+	public WebElement viewReport;
+	
+	@FindBy(xpath = "//*[@id='networkStatus']/div")
+	public WebElement viewNetworkStatus;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='Network Status']//button[@data-id='LocationId']")
+	public WebElement networkStatusDropdown;
+	
+	@FindBy(xpath = "//h1[contains(.,'Network Tools')]")
+	public WebElement checkElementAvailability;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Network Status']//p[contains(@class,'default-value')]")
+	public static WebElement defaultLocation;
+	
+	//@FindBy(xpath="//div[@data-widgettitle='Network Status']//button[@class='ws-icon settings ws-menu menu-down closed']")
+	@FindBy(xpath="//div[@data-widgettitle='Network Status']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Network Status']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void networkStatusFunctionality() throws InterruptedException {
+		
+		Reporter.log("********** NetworkStatus-UI ************",true);
+		
+		vc.getWebDriverUtils().elementAvailablity(widgetname, "WidgetName");
+		vc.getWebDriverUtils().elementAvailablity(siteStatus, "SiteStatus");
+		vc.getWebDriverUtils().elementAvailablity(utilizationAlerts, "UtilAlerts");
+		
+		Reporter.log("********** Verify Navigation ************",true);
+		vc.getWebDriverUtils().clickElement(viewReport, "viewreport");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Network Utilization - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Network Tools"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Network Status");
+		
+		
+			
+	}
+	
+	
+	
+
+	
+}
+
+
+

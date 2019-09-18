@@ -1,0 +1,209 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+import com.webautomation.validation.Validator;
+
+public class WE_PhonesAndAccessoriesPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_PhonesAndAccessoriesPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+
+	@FindBy(xpath = "//h4[contains(.,'Current Equipment')]")
+	public WebElement currentEquipmentHeader;
+
+	@FindBy(xpath = "//a[contains(.,'View our line of products')]")
+	public WebElement lineOfProducts;
+
+	@FindBy(xpath = "//td[contains(.,'Product')]")
+	public WebElement gridHeader1;
+
+	@FindBy(xpath = "//td[contains(.,'Rent or Buy?')]")
+	public WebElement gridHeader2;
+
+	@FindBy(xpath = "//td[contains(.,'Quantity')]")
+	public WebElement gridHeader3;
+
+	@FindBy(xpath = "//td[@class='Unitpricehead']")
+	public WebElement gridHeader4;
+
+	@FindBy(xpath = "//td[contains(.,'One-Time')]")
+	public WebElement gridHeader5;
+
+	@FindBy(xpath = "//td[contains(.,'Monthly')]")
+	public WebElement gridHeader6;
+
+	@FindBy(xpath = "//button[@id='btnNewProduct']")
+	public WebElement addPhonesAndAccessories;
+
+	@FindBy(xpath = "//button[@id='btnReviewOrder']")
+	public WebElement btnReviewOrder;
+
+	@FindBy(xpath = "//button[@id='btnSubmitOrder']")
+	public WebElement btnSubmitOrder;
+
+	@FindBy(xpath = "//input[@id='txtAttentionTo']")
+	public WebElement txtAttentionTo;
+
+	@FindBy(xpath = "//*[@id='ctl00_AccountContent_currentPhonesAccessories_ctrl0_currentProduct']")
+	public WebElement productName;
+
+	@FindBy(xpath = "//*[@id='ctl00_AccountContent_currentPhonesAccessories_ctrl0_currentProductQuantity']")
+	public WebElement productQuantity;
+
+	@FindBy(xpath = "//h1[contains(.,'IP Phone Systems')]")
+	public WebElement headerIPPhoneSystems;
+
+	@FindBy(xpath = "//h2[contains(.,'Powerful Networks, Phones and Accessories')]")
+	public WebElement headerPowerfulNetworks;
+
+	@FindBy(xpath = "//a[contains(.,'Products ')]")
+	public WebElement productButton;
+
+	@FindBy(xpath = "//button[contains(.,'See Live Demo')]")
+	public WebElement seeLiveDemoButton;
+
+	@FindBy(xpath = "//button[@data-id='ddlProduct']")
+	public WebElement product;
+
+	@FindBy(xpath = "//*[@id='oneTimePrice2']")
+	public WebElement onetimeprice2nd;
+
+	@FindBy(xpath = "//input[@id='txtQty1']")
+	public WebElement qtyProduct1;
+
+	@FindBy(xpath = "//*[@id='txtQty2']")
+	public WebElement qtyProduct2;
+
+	@FindBy(xpath = "//*[@id='oneTimePrice1']")
+	public WebElement onetimePriceProduct1;
+
+	@FindBy(xpath = "//span[@class='k-icon k-i-arrow-60-up']")
+	public WebElement priceIncrease;
+
+	@FindBy(xpath = "//span[@class='k-icon k-i-arrow-60-down']")
+	public WebElement priceDecrease;
+
+	@FindBy(xpath = "//*[@id='clearUserSelection']")
+	public WebElement clearUserSelection;
+
+	@FindBy(xpath = "//button[@data-id='ddlShippingAddress']")
+	public WebElement ddlShippingAddress;
+
+	@FindBy(xpath = "//button[@data-id='ddlBillingAddress']")
+	public WebElement ddlBillingAddress;
+
+	@FindBy(xpath = "//span[@class='k-icon k-i-close']")
+	public WebElement reviewClose;
+
+	public int getSize() {
+		List<WebElement> allElements = driver
+				.findElements(By.xpath("//*[@id='excludeFooter']/div[3]/div[2]/form/div[2]/div[1]/ul"));
+		int count = allElements.size();
+		return count;
+	}
+
+	public void verifyOneTimePrice() throws InterruptedException {
+		WebElement a = driver.findElement(By.xpath("//*[@id='oneTimePrice1']"));
+		String oneqtyprice = a.getText();
+		String mainNumber = oneqtyprice.split("\\.", 2)[0];
+		int finalamount = Integer.parseInt(mainNumber);
+		if (finalamount > 0) {
+			vc.getWebDriverUtils().clickElement(priceIncrease, "Click quantity increase icon");
+			WebElement b = driver.findElement(By.xpath("//*[@id='oneTimePrice1']"));
+			String twoqtyprice = b.getText();
+			String mainNumber1 = twoqtyprice.split("\\.", 2)[0];
+			int finalamount1 = Integer.parseInt(mainNumber1);
+			Assert.assertTrue(!(finalamount == finalamount1));
+		}
+	}
+
+	public void verifyQtyOnetimePrice() throws InterruptedException {
+		WebElement a = driver.findElement(By.xpath("//*[@id='oneTimePrice1']"));
+		String oneqtyprice = a.getText();
+		String mainNumber = oneqtyprice.split("\\.", 2)[0];
+		int finalamount = Integer.parseInt(mainNumber);
+		if (finalamount > 0) {
+			vc.getWebDriverUtils().clickElement(priceIncrease, "Click quantity increase icon");
+			WebElement b = driver.findElement(By.xpath("//*[@id='oneTimePrice1']"));
+			String twoqtyprice = b.getText();
+			String mainNumber1 = twoqtyprice.split("\\.", 2)[0];
+			int finalamount1 = Integer.parseInt(mainNumber1);
+			Assert.assertTrue(finalamount1 == 2 * (finalamount));
+			vc.getWebDriverUtils().clickElement(priceDecrease, "Click quantity decrease icon");
+			WebElement c = driver.findElement(By.xpath("//*[@id='oneTimePrice1']"));
+			String oneqtypriceafterdec = c.getText();
+			String mainNumber2 = oneqtypriceafterdec.split("\\.", 2)[0];
+			int finalamount2 = Integer.parseInt(mainNumber2);
+			Assert.assertTrue(finalamount == finalamount2);
+		}
+	}
+
+	public void verifyMonthlyPrice() throws InterruptedException {
+		WebElement a = driver.findElement(By.xpath("//*[@id='monthlyPrice1']"));
+		String oneqtyprice = a.getText();
+		String mainNumber = oneqtyprice.split("\\.", 2)[0];
+		int finalamount = Integer.parseInt(mainNumber);
+		if (finalamount > 0) {
+			vc.getWebDriverUtils().clickElement(priceIncrease, "Click quantity increase icon");
+			WebElement b = driver.findElement(By.xpath("//*[@id='monthlyPrice1']"));
+			String twoqtyprice = b.getText();
+			String mainNumber1 = twoqtyprice.split("\\.", 2)[0];
+			int finalamount1 = Integer.parseInt(mainNumber1);
+			Assert.assertTrue(!(finalamount == finalamount1));
+		}
+	}
+
+	public void verifyQtyMonthlyPrice() throws InterruptedException {
+		WebElement a = driver.findElement(By.xpath("//*[@id='monthlyPrice1']"));
+		String oneqtyprice = a.getText();
+		String mainNumber = oneqtyprice.split("\\.", 2)[0];
+		int finalamount = Integer.parseInt(mainNumber);
+		if (finalamount > 0) {
+			vc.getWebDriverUtils().clickElement(priceIncrease, "Click quantity increase icon");
+			WebElement b = driver.findElement(By.xpath("//*[@id='monthlyPrice1']"));
+			String twoqtyprice = b.getText();
+			String mainNumber1 = twoqtyprice.split("\\.", 2)[0];
+			int finalamount1 = Integer.parseInt(mainNumber1);
+			Assert.assertTrue(finalamount1 == 2 * (finalamount));
+			vc.getWebDriverUtils().clickElement(priceDecrease, "Click quantity decrease icon");
+			WebElement c = driver.findElement(By.xpath("//*[@id='monthlyPrice1']"));
+			String oneqtypriceafterdec = c.getText();
+			String mainNumber2 = oneqtypriceafterdec.split("\\.", 2)[0];
+			int finalamount2 = Integer.parseInt(mainNumber2);
+			Assert.assertTrue(finalamount == finalamount2);
+		}
+	}
+
+	public String getOneTimePrice() throws InterruptedException {
+		String onetimeprice = driver.findElement(By.xpath("//*[@id='oneTimePrice1']")).getText();
+		return onetimeprice;
+	}
+
+	public String getMonthlyPrice() throws InterruptedException {
+		String monthlyprice = driver.findElement(By.xpath("//*[@id='monthlyPrice1']")).getText();
+		return monthlyprice;
+	}
+}

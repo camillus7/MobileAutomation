@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />  
+      <listener class-name="com.webautomation.validation.RetryListener" />  
+</listeners>
+
+
+<test name="we_DashboardPageWidgets_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_DashboardPageWidgets_WOL"/> </methods> </class> </classes> </test>
+<test name="we_BillingDetailsWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_BillingDetailsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_BillingSettingsWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_BillingSettingsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_CircuitUtilizationWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_CircuitUtilizationWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_CurrentUsersWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_CurrentUsersWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_CommunityWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_CommunityWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_MonitoredRoutersWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_MonitoredRouters_WOL"/> </methods> </class> </classes> </test>
+<test name="we_MostActiveCircuitsWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_MostActiveDataCircuitsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_NetworkHealthWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_NetworkHealth_WOL"/> </methods> </class> </classes> </test>
+<test name="we_NetworkStatusWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_Networkstatuswidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_OrdersWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_OrdersWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_SupportRequestWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_SupportRequestWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_WeatherAlertsWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_WeatherAlertsWidget_WOL"/> </methods> </class> </classes> </test>
+<test name="we_WinBotwidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_WinBotwidget_WOL"/> </methods> </class> </classes> </test>
+
+<!-- <test name="we_KineticBusinessSupportWidget_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_WOL"> <methods> <include name="we_KineticBusinessSupportWidget_WOL"/> </methods> </class> </classes> </test>
+ -->
+
+</suite>
+

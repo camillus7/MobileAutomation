@@ -1,0 +1,51 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_ConnectivityTestWidget {
+
+	final WebDriver driver;
+	String winHandleBefore = null;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_ConnectivityTestWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'Connectivity Test')]")
+	public WebElement ctCheckbox;
+	
+	@FindBy(xpath="//a[@id='btnBeginTest']")
+	public WebElement ctBeginTest;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Connectivity Test']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Connectivity Test']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	
+	public void connectivityTestWidget() throws InterruptedException {
+		vc.getWebDriverUtils().elementAvailablity(ctBeginTest, "Begintest");
+		vc.getWebDriverUtils().clickElement(ctBeginTest, "Begintest");
+		vc.getWebDriverUtils().validateBrowser2(winHandleBefore, "");
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Connectivity Test");
+		
+		
+	}
+	
+	
+}

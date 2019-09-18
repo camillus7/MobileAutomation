@@ -1,0 +1,65 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CurrentUsersWidget {
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_CurrentUsersWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Current Users')]")
+	public WebElement currentUsersCheckbox;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Current Users']//div[@class='indent-4 black']")
+	public List<WebElement> username;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Current Users']//a[@class='block indent-4 f11 mdown-1']")
+	public List<WebElement> userEmailid;
+	
+	@FindBy(xpath="//span[contains(.,'Full User List')]")
+	public WebElement fullUserListButton;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Current Users']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Current Users']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	public void getUserDetails() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Current Users"));
+		Reporter.log("Users Displayed in Dashboard widgets are==>" + username.size(),true);
+		Reporter.log("Displaying first 4 Users available in Dashboard Widgets",true);
+		for(int i=0;i<4;i++) {
+			Reporter.log(username.get(i).getText() + "==" + userEmailid.get(i).getText(),true);
+		}
+		vc.getWebDriverUtils().elementAvailablity(fullUserListButton, "FullUsersList - Button");
+		vc.getWebDriverUtils().clickElement(fullUserListButton, "FullUserList");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "User List - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("User Manager"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Current Users");
+		
+	}
+	
+
+}

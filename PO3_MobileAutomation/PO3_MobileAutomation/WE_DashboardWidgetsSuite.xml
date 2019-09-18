@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+	<listeners>
+		<listener class-name="commonUtil.ExtentReporterNG" />
+		<!-- <listener class-name="com.webautomation.validation.RetryListener" 
+			/> -->
+	</listeners>
+
+	<test name="TC_WE_DashBoardWidgets-TestCases">
+	<classes>
+		<class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+			<methods>
+				<include name="we_DashboardPageWidgets" />
+			</methods>
+		</class>
+	</classes>
+</test>
+	<test name="TC_WE_AutoAttendantWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_AutoAttendantWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	 <test name="TC_WE_BillingDetailsWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_BillingDetailsWidget()" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_BillingReportsWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_BillingReportsWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	
+	<test name="TC_WE_CordlessPhonesWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_CordlessPhonesWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_CurrentUsersWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_CurrentUsersWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_FaxAccountsWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_FaxAccountsWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_HDMeetingLicenseWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_HDMeetingLicenseWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_IncomingCallRoutingWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_IncomingCallRoutingWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="TC_WE_MOHWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_MOHWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_NetworkHealth-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_NetworkHealth" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_OfficeSuiteLicenseWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_OfficeSuiteLicenseWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_OrdersWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_OrdersWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="TC_WE_SupportRequestWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_SupportRequestWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="TC_WE_WeatherAlertsWidget-TestCases">
+		<classes>
+			<class
+				name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite">
+				<methods>
+					<include name="we_WeatherAlertsWidget" />
+				</methods>
+			</class>
+		</classes>
+	</test> 
+</suite>

@@ -1,0 +1,300 @@
+package com.webautomation.pageobject.we_pages;
+
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+public class WE_UsermanagerPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_UsermanagerPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+
+	// User Manager
+
+	@FindBy(xpath = "//button[@id='btnUser']")
+	public WebElement btnUser;
+	
+	@FindBy(xpath = "//button[contains(.,'Active User')]")
+	public WebElement activeUser;	
+	
+	@FindBy(xpath = "//button[contains(.,'Inactive Users')]")
+	public WebElement inactiveUser;	
+
+	@FindBy(xpath = "//a[contains(.,'Invite User')]")
+	public WebElement inviteUser;
+	
+	@FindBy(xpath = "//span[@class='floatwarningclose']")
+	public WebElement floatWarningClose;
+
+	@FindBy(xpath = "//a[@class='fr previous backbtn']")
+	public WebElement previous;
+	
+	@FindBy(xpath = "//label[@for='globalAccountCheckbox']")
+	public WebElement globalAccount;
+
+	@FindBy(xpath = "//label[@for='mirrorUserCheckbox']")
+	public WebElement mirrorUser;
+
+	@FindBy(xpath = "//label[@for='accessByAccountCheckbox']")
+	public WebElement accessByAccount;
+
+	@FindBy(xpath = "//label[@for='stdOSPermCheckbox']")
+	public WebElement stdOSPermission;
+
+	@FindBy(xpath = "//label[@for='individuallySetCheckbox']")
+	public WebElement individualSet;
+
+	@FindBy(xpath = "//a[contains(.,'Show more.')]")
+	public WebElement showMore;
+
+	@FindBy(xpath = "//label[@for='NoAccess0']")
+	public WebElement noAccess;
+
+	@FindBy(xpath = "//label[@for='FullAccess0']")
+	public WebElement fullAccess;
+
+	@FindBy(xpath = "//label[@for='Admin0']")
+	public WebElement admin;
+
+	@FindBy(xpath = "//label[@for='Customize0']")
+	public WebElement customize;
+
+	@FindBy(xpath = "//input[@id='FirstName']")
+	public WebElement firstName;
+
+	@FindBy(xpath = "//input[@id='LastName']")
+	public WebElement lastName;
+
+	@FindBy(xpath = "//input[@id='UserName']")
+	public WebElement userName;
+
+	@FindBy(xpath = "//input[@id='Email']")
+	public WebElement email;
+
+	@FindBy(xpath = "//input[@id='VerifyEmail']")
+	public WebElement verifyEmail;
+
+	@FindBy(xpath = "//input[@id='PhoneNumber']")
+	public WebElement phoneNumber;
+
+	@FindBy(xpath = "//input[@id='MobilePhoneNumber']")
+	public WebElement mobilePhoneNumber;
+
+	@FindBy(xpath = "//button[@id='submitCreateNewUser']")
+	public WebElement submitNewUser;
+
+	@FindBy(xpath = "//input[@id='AdminUserList_Username']")
+	public WebElement userNameFilter;
+
+	@FindBy(xpath = "//button[@type='submit']")
+	public WebElement applyFilterSubmit;
+
+	@FindBy(xpath = "//button[@value='Clear Filters']")
+	public WebElement clearFilterSubmit;
+	
+	public WebElement gridUserName(String userName)
+	{
+		WebElement gridUserName = driver.findElement(By.xpath("//td[contains(.,'"+userName+"')]"));		
+		return gridUserName;
+	}
+	
+	String name = "Test, User";
+	public WebElement gridName()
+	{
+		WebElement gridName= driver.findElement(By.xpath("//span[contains(.,'"+name+"')]"));
+		return gridName;
+	}
+	
+	String emailaddress = "testemail@windstream.com";	
+	public WebElement gridEmail()
+	{
+		WebElement gridEmail= driver.findElement(By.xpath("//td[contains(.,'"+emailaddress+"')]"));
+		return gridEmail;
+	}
+
+	public WebElement gridAdminStatus(String admin)
+	{
+		WebElement gridAdminStatus= driver.findElement(By.xpath("//td[contains(.,'"+admin+"')]"));
+		return gridAdminStatus;
+	}
+
+	@FindBy(xpath = "//button[contains(.,'Resend Invite')]")
+	public WebElement gridResendEmail;
+
+	@FindBy(xpath = "//td[@data-property='userpic']")
+	public WebElement gridUploadPicture;
+
+	@FindBy(xpath = "//*[@id='tblAdminUserList']/tbody/tr[2]/td[9]")
+	public WebElement gridEdit;
+	
+	@FindBy(xpath = "//td[@data-title='UserName']")
+	public WebElement getAvailableUserName;
+
+	@FindBy(xpath = "//a[contains(.,'Filters')]")
+	public WebElement userManagerFilters;
+
+	@FindBy(xpath = "//h3[contains(.,'Upload Image')]")
+	public WebElement uploadImageHeader;
+
+	@FindBy(xpath = "//input[@id='userImage']")
+	public WebElement userImage;
+	
+	@FindBy(css = "#Textselect")
+	public WebElement uploadImageSelect;
+
+	@FindBy(xpath = "//button[contains(.,'Remove')]")
+	public WebElement userImageRemove;
+
+	@FindBy(xpath = "//button[@class='profile-upload-option-list icon light close']")
+	public WebElement userImageCancel;
+
+	@FindBy(xpath = "//li[contains(.,'User Information')]")
+	public WebElement editUserInformation;
+
+	@FindBy(xpath = "//li[contains(.,'User Permissions')]")
+	public WebElement editUserPermissions;
+	
+	@FindBy(xpath = "//label[contains(.,'First Name:')]")
+	public WebElement userInformationLabel1;
+	
+	@FindBy(xpath = "//label[contains(.,'Last Name:')]")
+	public WebElement userInformationLabel2;
+	
+	@FindBy(xpath = "//label[contains(.,'Email')]")
+	public WebElement userInformationLabel3;
+	
+	@FindBy(xpath = "//label[contains(.,'Phone')]")
+	public WebElement userInformationLabel4;
+	
+	@FindBy(xpath = "//label[contains(.,'Mobile')]")
+	public WebElement userInformationLabel5;
+
+	@FindBy(xpath = "//li[contains(.,'MFA-Governed Permissions')]")
+	public WebElement editGovernedPermissions;
+
+	@FindBy(xpath = "//span[contains(.,'SD-WAN - MODIFY FULL CONFIGURE')]")
+	public WebElement modifyFullConfigure;
+
+	@FindBy(xpath = "//span[contains(.,'SD-WAN - MODIFY LIMITED CONFIGURE')]")
+	public WebElement modifyLimitedConfigure;
+
+	@FindBy(xpath = "//span[contains(.,'SD-WAN - VIEW CONFIGURE')]")
+	public WebElement viewConfigure;
+
+	@FindBy(xpath = "//span[contains(.,'SD-WAN - VIEW MONITORING')]")
+	public WebElement viewMonitoring;
+
+	@FindBy(xpath = "//input[@id='radioButtonSelectedValue2']")
+	public WebElement modifyLimitedConfigureRadio;
+
+	@FindBy(xpath = "//input[@id='btnSubmit']")
+	public WebElement governedPermissionsSubmit;
+
+	@FindBy(xpath = "//input[@id='btnReset']")
+	public WebElement governedPermissionsReset;
+
+	@FindBy(xpath = "//button[@id='submitUserBtnCancel']")
+	public WebElement editBack;
+
+	@FindBy(xpath = "//a[contains(.,'View user')]")
+	public WebElement viewUser;
+
+	@FindBy(xpath = "//h1[contains(.,'Edit Contact Information')]")
+	public WebElement editContactInformationHeader;
+
+	@FindBy(xpath = "//a[contains(.,'Contact Information')]")
+	public WebElement editContactInformation;
+
+	@FindBy(xpath = "//a[contains(.,'Preferences')]")
+	public WebElement editPreferences;
+
+	@FindBy(xpath = "//a[contains(.,'Activity Log')]")
+	public WebElement editActivityLog;
+
+	@FindBy(xpath = "//a[contains(.,'Change Password')]")
+	public WebElement editChangePassword;
+
+	@FindBy(xpath = "//input[@id='name.givenName']")
+	public WebElement editName;
+
+	@FindBy(xpath = "//*[@id='tblAdminUserList_wrapper']/div[7]/div[2]/span[4]/a[2]")
+	public WebElement userGridSecondLink;
+
+	@FindBy(xpath = "//*[@id='tblAdminUserList_wrapper']/div[7]/div[2]/a[2]")
+	public WebElement previousPageicon;
+
+	@FindBy(xpath = "//*[@id='tblAdminUserList_wrapper']/div[7]/div[2]/a[3]")
+	public WebElement nextPageicon;
+
+	@FindBy(xpath = "//td[contains(.,'There are no users set up yet. You can invite users by clicking on Invite User button below.')]")
+	public WebElement noinactiveUsersGridmsg;
+
+	public void gridUserStatusVerification(String Status) {
+		WebElement table = driver.findElement(By.xpath("//*[@id='tblAdminUserList']/tbody"));
+		List<WebElement> listOfRows = table.findElements(By.tagName("tr"));
+		int rowcount = listOfRows.size();
+		if (rowcount == 0) {
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"There are no users set up yet. You can invite users by clicking on Invite User button below."));
+		} else {
+			Assert.assertTrue(vc.waitUntilTextIsPresent(Status));
+		}
+	}
+
+	public void verifyPagination() throws InterruptedException {
+		vc.getWebDriverUtils().checkPageIsReady();
+		vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		try {
+		if (driver.findElement(By.xpath("//a[@data-val='-1']")).isDisplayed()== true)
+		{
+		WebElement a = driver.findElement(By.xpath("//a[@data-val='-1']"));
+		String str = a.getText();
+		String[] part = str.split("(?<=\\D)(?=\\d)");
+		String Count = part[1];
+		int finalcount = Integer.parseInt(Count);
+		if (finalcount > 15) {
+			System.out.println("Pagination exists");
+			// Verifying each page link
+			vc.getWebDriverUtils().clickElement(userGridSecondLink, "Click second page link");
+			vc.getWebDriverUtils().sleep(2000);
+			String pageUrl = driver.getCurrentUrl();
+			assertTrue(pageUrl.contains("AdminUserList-Page=2"));
+			// Verifying Previous link functionality
+			vc.getWebDriverUtils().clickElement(previousPageicon, "Click Previous icon");
+			//Thread.sleep(1000);
+			String pageUrl1 = driver.getCurrentUrl();
+			assertTrue(pageUrl1.contains("UserList#"));
+			// Verifying next link functionality
+			vc.getWebDriverUtils().clickElement(nextPageicon, "Click Next icon");
+			//Thread.sleep(1000);
+			String pageUrl2 = driver.getCurrentUrl();
+			assertTrue(pageUrl2.contains("AdminUserList-Page=2"));
+		} else {
+			System.out.println("Pagination doesn't exists");
+		} } }
+		 catch(Exception e)     
+		  {   
+				System.out.println("Pagination doesn't exists");
+			}     
+		  }       
+		}    
+		
+	
+

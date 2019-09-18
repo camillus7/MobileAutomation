@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WE_General_Themes"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_Themes"/> </methods> </class> </classes> </test>
+
+</suite>

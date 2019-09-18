@@ -1,0 +1,229 @@
+package com.webautomation.pageobject.webpages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class winLinkHomePage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public winLinkHomePage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "//a[contains(.,'Sign Out')]")
+	public WebElement signOut;
+
+	@FindBy(id = "navbarProfileDropdown")
+	public WebElement signOutToggle;
+
+	@FindBy(xpath = "//A[@id='lnkMyProfile']/self::A")
+	public WebElement myProfile;
+
+	@FindBy(xpath = "//a[contains(.,'Home')]")
+	public WebElement home;
+
+	// @FindBy(xpath = "//a[@href='#support_accordian']")
+	@FindBy(xpath = "//*[@id='navbarDropdownSupportlink']/img")
+	public WebElement supportMenu;
+
+	@FindBy(xpath = "//a[contains(.,'Shop')]")
+	public WebElement shop;
+
+	@FindBy(xpath = "//a[contains(.,'Blog')]")
+	public WebElement blog;
+
+	@FindBy(xpath = "//a[contains(.,'Contact Us')]")
+	public WebElement contactUs;
+
+	@FindBy(xpath = "//*[@id='contactus_myModal']/div/div/div[1]/button")
+	public WebElement contactUsCloseX;
+
+	@FindBy(xpath = "//i[contains(.,'close')]")
+	public WebElement closeX;
+
+	@FindBy(xpath = "//a[contains(.,'Terms & Conditions')]")
+	public WebElement termsAndConditions;
+
+	@FindBy(xpath = "//a[contains(.,'Privacy Policy')]")
+	public WebElement privacyPolicy;
+
+	@FindBy(id = "navbarDropdownNotificationlink")
+	public WebElement notifications;
+
+	@FindBy(xpath = "//IMG[@src='/consumer/images/Dashboard/winstreamtextalerts.jpg']/self::IMG")
+	public WebElement TextAlerts;
+
+	@FindBy(xpath = "//IMG[@src='/consumer/images/Dashboard/thankyourewards.jpg']/self::IMG")
+	public WebElement ThankYouRewards;
+
+	/* Internet Offer Home Page */
+	@FindBy(xpath = "//P[@class='margin-0 currentplanText2']/self::P")
+	public WebElement InternetSubcriber;
+
+	@FindBy(xpath = "//DIV[@class='rel float-right text-white arrowIconBtn'][contains(.,'Get Internet Support')]")
+	public WebElement GetInternetSupport;
+
+	// Billing
+	@FindBy(id = "navbarDropdownBillingLink")
+	public WebElement billing;
+
+	// Go paperless
+	@FindBy(xpath = "//span[contains(.,'Go Paperless')]")
+	public WebElement goPaperless;
+
+	/* TV Subscriber */
+
+	@FindBy(xpath = "//*[@id=\"mCSB_1_container\"]/div/div[3]/div/div[1]/div[2]/div/div[2]/a/div/div/div[2]/p")
+	public WebElement TVSubcriber;
+
+	@FindBy(xpath = "//DIV[@class='rel float-right text-white arrowIconBtn'][contains(.,'Learn more')]")
+	public WebElement LearnMoreTV;
+
+	@FindBy(xpath = "//DIV[@class='rel float-right text-white arrowIconBtn'][contains(.,'Add TV Now')]")
+	public WebElement AddTVNow;
+
+	@FindBy(xpath = "//DIV[@class='ff-b margin-top-15'][text()=' With DIRECTV You Get ']/self::DIV")
+	public WebElement AddTVNow_Txt;
+
+	@FindBy(xpath = "//*[@id=\"AddTvNow_myModal\"]/div/div/div[1]/button")
+	public WebElement AddTVNow_CloseButton;
+
+	/* Phone Offer Home Page */
+
+	@FindBy(xpath = "//P[@class='margin-0 currentplanText2']/self::P")
+	public WebElement PhoneSubcriber;
+
+	@FindBy(xpath = "//DIV[@class='rel float-right text-white arrowIconBtn'][contains(.,'Get Phone Support')]")
+	public WebElement GetPhoneSupport;
+
+	/* My Profile */
+
+	public void GetInternetText() throws InterruptedException {
+		vc.getWebDriverUtils().getText(InternetSubcriber, "Internetsubcriber");
+		String InternetText = InternetSubcriber.getText();
+		System.out.println(InternetText);
+	}
+
+	public String GetTVText() throws InterruptedException {
+		vc.getWebDriverUtils().getText(TVSubcriber, "TVSubcriber");
+		String TVText = TVSubcriber.getText();
+		System.out.println(TVText);
+		return TVText;
+	}
+
+	public void Validate_AddTVText() throws InterruptedException {
+		String AddTVText = AddTVNow_Txt.getText();
+		Assert.assertTrue(vc.waitUntilTextIsPresent(AddTVText));
+		// Reporter.log("Displayed message : " + AddTVText
+		// + " successfully");
+		System.out.println(AddTVText);
+	}
+
+	public void GetPhoneText() throws InterruptedException {
+		vc.getWebDriverUtils().getText(PhoneSubcriber, "PhoneSubcriber");
+		String PhoneText = PhoneSubcriber.getText();
+		System.out.println(PhoneText);
+	}
+
+	public void clickOnSignout() throws InterruptedException {
+		vc.getWebDriverUtils().clickElement(signOutToggle, "SignOut Toggle");
+		vc.getWebDriverUtils().clickElement(signOut, "SignOut");
+	}
+
+	public void clickOnMyProfile() throws InterruptedException {
+		vc.getWebDriverUtils().clickElement(signOutToggle, "SignOut Toggle");
+		vc.getWebDriverUtils().clickElement(myProfile, "My Profile");
+	}
+
+	public void clickonSupportMenu() throws InterruptedException {
+		// driver.navigate().refresh();
+		home.click();
+		// vc.getWebDriverUtils().waitUntilNoWheelSpins(".lds-double-ring>div");
+		vc.getWebDriverUtils().clickElement(supportMenu, "Support Menu");
+
+	}
+
+	@FindBy(linkText = "News")
+	public WebElement News;
+
+	@FindBy(linkText = "windstream.cares@windstream.com")
+	public WebElement emailLink;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Dashboard/tv1.png']")
+	public WebElement addTvNow;
+
+	@FindBy(xpath = "//img[@src='/consumer/images/Dashboard/phone1.png']")
+	public WebElement getPhoneSupport;
+
+	@FindBy(xpath = ".//*[@id='AddTvNow_myModal']/div/div/div[1]/button")
+	public WebElement directTv;
+
+	@FindBy(linkText = "Email")
+	public WebElement email;
+
+	@FindBy(xpath = "//img[contains(@src,'/consumer/images/Dashboard/Refer_a_Friend_Ver_Final.jpg')]")
+	public WebElement referFriends;
+
+	@FindBy(xpath = ".//div[1]/div/div/div/a[2]/div/div")
+	public WebElement internetSupport;
+
+	// Consumer Scrolling Advertisements
+	@FindBy(id = "home_circle_progressbar1")
+	public WebElement circle_progressbar1;
+
+	@FindBy(id = "home_circle_progressbar2")
+	public WebElement circle_progressbar2;
+
+	@FindBy(id = "home_circle_progressbar3")
+	public WebElement circle_progressbar3;
+
+	@FindBy(xpath = "//A[@href='https://www.directvnow.com/windstream'][contains(.,'Shop')]")
+	public WebElement DirectTVShopNow_Button;
+
+	@FindBy(xpath = "//A[@href='https://www.windstream.com/security-packages'][contains(.,'Learn More')]")
+	public WebElement SecurityPackage_LearnMore_Button;
+
+	@FindBy(xpath = "//A[@href='https://www.windstream.com/kinetic'][contains(.,'Shop')]")
+	public WebElement Kinetic_Shop_Button;
+
+	@FindBy(xpath = "//DIV[@class='col-12 carousel-left-title-top padding-bottom-28'][contains(.,'Get the ultimate streaming experience')]")
+	public WebElement DirectTVNow_TXT;
+
+	@FindBy(xpath = "//DIV[@class='col-12 carousel-left-title-top padding-bottom-28'][contains(.,'Security Packages')]")
+	public WebElement Security_TXT;
+
+	@FindBy(xpath = "//DIV[@class='col-12 carousel-left-title-top padding-bottom-28'][contains(.,'Stronger network, faster speeds, better service')]")
+	public WebElement Kinetic_TXT;
+
+	public String GetDirectTVText() throws InterruptedException {
+		String DirectTV_Text = DirectTVNow_TXT.getText();
+		Reporter.log(DirectTV_Text, true);
+		return DirectTV_Text;
+	}
+
+	public String GetKineticText() throws InterruptedException {
+		String Kinetic_Text = Kinetic_TXT.getText();
+		Reporter.log(Kinetic_Text, true);
+		return Kinetic_Text;
+	}
+	
+	public String GetSecurityPackages_Text() throws InterruptedException {
+		String SecurityPackages_Text = Security_TXT.getText();
+		Reporter.log(SecurityPackages_Text, true);
+		return SecurityPackages_Text;
+	}
+
+}

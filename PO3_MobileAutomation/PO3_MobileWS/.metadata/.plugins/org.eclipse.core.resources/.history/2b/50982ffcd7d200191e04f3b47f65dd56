@@ -1,0 +1,78 @@
+package com.webautomation.pageobject.we_pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_HomePage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_HomePage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	@FindBy(xpath=".//*[@id='excludeFooter']/header/nav/ul/li[1]/a")
+	public WebElement dashboard;
+	
+	@FindBy(xpath=".//*[@id='excludeFooter']/header/nav/ul/li[2]/a")
+	public WebElement services;
+	
+	@FindBy(xpath="//li[@class='currency MenuOrders Menu']/a")
+	public WebElement orders;
+	
+	@FindBy(xpath="//a[@class='submenu'][contains(.,'Reporting')]")
+	public WebElement reporting;
+	
+	@FindBy(xpath="//a[@class='submenu'][contains(.,'Billing')]")
+	public WebElement billing;
+	
+	@FindBy(xpath="//a[@class='submenu'][contains(.,'Support')]")
+	public WebElement suppport;
+	
+	@FindBy(xpath="//a[@class='submenu'][contains(.,'Account')]")
+	public WebElement account;
+	
+	@FindBy(xpath="//li[@class='currency MenuDownload Menu']/a")
+	public WebElement downloads;
+	
+	//@FindBy(xpath="//li[@class='MenuManager Menu']/a")
+	@FindBy(xpath = "(//a[@href='/Admin/Home/UserList'][contains(.,'User Manager')])[1]")
+	public WebElement userManager;
+	
+	//@FindBy(xpath="//a[@id='tblUserSearch']")
+	@FindBy(xpath="//a[@id='tblUserSearch']|//img[contains(@src,'UserAvatar')]")
+	public WebElement userImageHomeScreen;
+	
+	@FindBy(xpath="//a[@class='user submenu']")
+	public WebElement myProfile;
+	
+	@FindBy(xpath="//a[@href='/Account/PingAuth/SignOut']")
+	public WebElement signOut;
+	
+	@FindBy(xpath="//*[@id='mCSB_1_container']")
+	public WebElement dropDownInnserSelect;
+	
+	
+	
+	
+	
+	
+	
+	
+}	
+
+
+
+
+

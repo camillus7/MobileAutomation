@@ -1,0 +1,91 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MonitoredRoutersWidget {
+
+	final WebDriver driver;
+	
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MonitoredRoutersWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Monitored Routers')]")
+	public WebElement monitoredRoutersCheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Monitored Routers']//button[@data-id='SelectedMonitorLocation']")
+	public WebElement monitoredRouterDropdown;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Monitored Routers']//p[contains(@class,'default-value')]")
+	public WebElement defaultLocation;
+
+	@FindBy(xpath = "//div[@data-name='MonitoredRouters']//h2[contains(.,'Monitored Routers')]")
+	public WebElement widgetName;
+
+	@FindBy(xpath = "//p[contains(.,'Utilization monitoring')]")
+	public WebElement utilizationMonitoring;
+
+	@FindBy(xpath = "//p[contains(.,'Up / Down monitoring')]")
+	public WebElement updownMonitoring;
+
+	@FindBy(xpath = "//button[contains(@data-id,'SelectedMonitorLocation')]")
+	public WebElement clickdropdownLocation;
+
+	@FindBy(xpath = "//span[@class='text'][contains(.,'3301 Veterans Memorial Blvd Suite 39, Metairie, LA')]")
+	public WebElement selectLocation;
+
+	@FindBy(xpath = "//button[contains(@data-id,'RouterId')]")
+	public WebElement clickdropdownRouterid;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Monitored Routers']//a[contains(.,'View More')]")
+	public WebElement clickViewMore;
+
+	@FindBy(xpath = "//h4[contains(.,'Router')]")
+	public WebElement checkRouterAvailability;
+
+	@FindBy(xpath = "//div[@class='managelocat_hidebtn panel-tab active'][contains(.,'Manage Locations')]")
+	public WebElement checkManageLocationPage;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Monitored Routers']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Monitored Routers']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	@FindBy(xpath=" //div[@class='managelocat_hidebtn panel-tab active']//span[contains(.,'Manage Locations')]")
+	public WebElement manageLocations;
+
+	public void monitoredRoutersWidget() throws InterruptedException {
+
+		vc.getWebDriverUtils().elementAvailablity(widgetName, "WidgetName");
+		vc.getWebDriverUtils().elementAvailablity(utilizationMonitoring, "UtilizationMonitoring");
+		vc.getWebDriverUtils().elementAvailablity(updownMonitoring, "UpdownMonitoring");
+
+		if (vc.getWebDriverUtils().elementAvailablity(clickdropdownRouterid, "RouterDropdown") == true) {
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(clickdropdownRouterid, "RouterDropdown");
+		}else{
+			Reporter.log("Router is not available for the selected Location,",true);
+		}
+		vc.getWebDriverUtils().clickElement(clickViewMore, "ClickViewMore");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("FILTER BY PRODUCTS"));
+		vc.getWebDriverUtils().clickElement(manageLocations, "ManageLocations");
+		vc.getWebDriverUtils().checkPageIsReady();	
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Monitored Routers");
+
+	}
+
+}

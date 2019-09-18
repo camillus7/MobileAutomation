@@ -1,0 +1,823 @@
+package com.webautomation.tests.seleniumGrid;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.dashboardwidgets.pageobjects.WE_BillingAlertsAndInquiries;
+import com.webautomation.dashboardwidgets.pageobjects.WE_BillingDetailsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CordlessPhonesWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MusicOnHoldWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_NetworkStatusWidget;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+import Base.testCaseNames;
+
+public class WE_DashBoardWidgetsSuite_ELNK extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	public void checkWidgetAvailability(String widgetName, WebElement widgetCheckbox, String widgetTitle)
+			throws InterruptedException {
+
+		if (we_CommonWidgets.availableWidget(widgetName)) {
+			Reporter.log("Widget is already added", true);
+		} else {
+
+			Reporter.log("Widget is not Added.. Now Adding", true);
+			if (we_CommonWidgets.getWidgetLists(widgetName)) {
+				we_CommonWidgets.addWidget(widgetName,widgetCheckbox,widgetTitle);
+			} else {
+				Reporter.log("There is an exception", true);
+			}
+		}
+	}
+
+	public void dropdownAvailability(WebElement dropDown, String dropdownName, WebElement dropdownValue,
+			String widgetName) throws InterruptedException {
+		for (int i = 0; i < 30; i++) {
+			if (driver.findElement(By.cssSelector(".lds-double-ring>div")).isDisplayed()) {
+				vc.getWebDriverUtils().sleep(2000);
+				//Reporter.log("Waiting for Widget to load",true);
+				vc.getWebDriverUtils().pageRefresh();
+			} else {
+				break;
+			}
+		}
+		
+		if (we_CommonWidgets.isDropdownPresent(dropDown, dropdownName)) {
+			vc.getWebDriverUtils().checkPageIsReady();
+			vc.getWebDriverUtils().sleep(2000);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(dropDown, "DropDownValue");
+		} else {
+			Reporter.log("Default Account Displayed in For Account is ==>" + dropdownValue.getText(), true);
+
+		}
+	}
+
+	@Test
+	public void we_DashboardPageWidgets_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : Dashboard Page Widget List Validation ", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Dashboard-List Of added Widgets";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.AddWidgets_109948);
+			we_CommonWidgets.widgetsList();
+			we_CommonWidgets.getAddedWidget();
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_AutoAttendantWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : AutoAttendant Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add AutoAttendant Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.AutoAttendant);
+
+			checkWidgetAvailability("Auto Attendants", we_AutoAttendantsWidget.autoAttendantsCheckbox,
+					"Auto Attendants");
+			we_AutoAttendantsWidget.configureNavigation();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_BillingDetailsWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : BillingDetails Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add BillingDetails Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.BillingDetailsWidget);
+
+			checkWidgetAvailability("Billing Details", we_BillingDetailsWidget.billingDetailscheckbox,
+					"Billing Details");
+			dropdownAvailability(WE_BillingDetailsWidget.billingDropdown, "Billing Dropdown",
+					WE_BillingDetailsWidget.forAccount, "Billing Details");
+
+			we_BillingDetailsWidget.billingDetails_Functionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_BillingReportsWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : BillingReports Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add BillingReports Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.BillingReports);
+
+			checkWidgetAvailability("Billing Reports", we_BillingReportsWidget.billingReportscheckbox,
+					"Billing Reports");
+			dropdownAvailability(we_BillingReportsWidget.billingDropdown, "BillingReport-Dropdown",
+					WE_BillingDetailsWidget.forAccount, "Billing Reports");
+
+			we_BillingReportsWidget.viewReportNavigation();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_BillingSettingsWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : BillingSettings Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add BillingSettings Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.BillingSettings);
+
+			checkWidgetAvailability("Billing Settings", we_BillingSettingsWidget.billingSettingsCheckbox,
+					"Billing Settings");
+			dropdownAvailability(we_BillingSettingsWidget.billingSettingDropdown, "BillingSetting-Dropdown",
+					we_BillingSettingsWidget.forAccount, "Billing Settings");
+
+			we_BillingSettingsWidget.billingSettingsWidgetFunctionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_CircuitUtilizationWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : CircuitUtilization Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add CircuitUtilization Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.CircuitUtilization);
+
+			checkWidgetAvailability("Circuit Utilization", we_CircuitUtilizationWidget.circuitUtilizationCheckbox,
+					"Circuit Utilization");
+
+			we_CircuitUtilizationWidget.circuitUtilzationWidget_Functionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_CommunityWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : WECommunity Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add WECommunity Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.WECommunity);
+
+			checkWidgetAvailability("Community", we_CommunityWidget.weCommunityCheckbox,"Community");
+
+			we_CommunityWidget.weCommunityWidget_Functionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_KineticBusinessSupportWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : Kinetic Business Support Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+	
+		try {
+			userStoryDescription = "Add Kinetic Business Support Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,"Kinetic Business Support Widget");
+
+			checkWidgetAvailability("Kinetic Business Support", we_KineticBusinessSupportWidget.weKineticBusinessSupportCheckbox,
+					"Kinetic Business Support");
+
+			we_KineticBusinessSupportWidget.weKinteicBusinessSupportWidget_Functionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void we_CordlessPhonesWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : CordlessPhones Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add CordlessPhones Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.CordlessPhones_110305);
+
+			checkWidgetAvailability("Cordless Phones", we_CordlessPhonesWidget.cordlessPhonesCheckbox,
+					"Cordless Phones");
+			dropdownAvailability(WE_CordlessPhonesWidget.cpDropdown, "CordlessPhone-Dropdown",
+					WE_CordlessPhonesWidget.forAccount, "Cordless Phones");
+
+			we_CordlessPhonesWidget.changeConfiguration();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_CurrentUsersWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : CurrentUsers Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add CurrentUsers Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.CurrentUsers);
+
+			checkWidgetAvailability("Current Users", we_CurrentUsersWidget.currentUsersCheckbox, "Current Users");
+			we_CurrentUsersWidget.getUserDetails();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_FaxAccountsWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : FaxAccounts Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add FaxAccount Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.FaxAccounts_110552);
+
+			checkWidgetAvailability("Fax Accounts", we_FaxAccountsWidget.faxAccountCheckbox, "Fax Accounts");
+
+			we_FaxAccountsWidget.faxAccountWidget();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_HDMeetingLicenseWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : HDMeetingLicence Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add HDMeetingLicence Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.HDMeetingLicenses_122095);
+			checkWidgetAvailability("HD Meeting Licenses", we_HDMeetingLicencesWidget.hdMeetingCheckbox,
+					"HD Meeting Licenses");
+
+			we_HDMeetingLicencesWidget.hdMeetingLicenceWidget();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_IncomingCallRoutingWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : IncomingCallRouting Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add IncomingCallRouting Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.IncomingCallRouting);
+			checkWidgetAvailability("Incoming Call Routing", we_IncomingCallRoutingWidget.incomingCallRoutingCheckbox,
+					"Incoming Call Routing");
+
+			we_IncomingCallRoutingWidget.configureNavigation();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_LocationUpdate_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : LocationUpdate Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add LocationUpdate Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.LocationUpdate);
+			checkWidgetAvailability("Location Update", we_LocationUpdateWidget.locationUpdateCheckbox,
+					"Location Update");
+
+			we_LocationUpdateWidget.updateNavigation();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_MonitoredRouters_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : MonitoredRouters Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add MonitoredRouters Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.MonitoredRouters);
+
+			checkWidgetAvailability("Monitored Routers", we_MonitoredRoutersWidget.monitoredRoutersCheckbox,
+					"Monitored Routers");
+			dropdownAvailability(we_MonitoredRoutersWidget.monitoredRouterDropdown, "MonitoredRouterDropdown",
+					we_MonitoredRoutersWidget.defaultLocation, "Monitored Routers");
+
+			we_MonitoredRoutersWidget.monitoredRoutersWidget();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_MOHWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : MusicOnHold Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add MusinOnHold Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.MusiconHold_110312);
+			checkWidgetAvailability("Music on Hold", we_MusicOnHoldWidget.mohCheckbox, "Music on Hold");
+			dropdownAvailability(WE_MusicOnHoldWidget.mohDropdown, "MusicOnHold Dropdown",
+					WE_MusicOnHoldWidget.selectMusic, "Music on Hold");
+
+			try {
+				we_MusicOnHoldWidget.mohDropdownvalues("None", "System Default");
+			} catch (Throwable e) {
+				Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+			try {
+				we_MusicOnHoldWidget.musicOnHold_Functionality();
+			} catch (Throwable e) {
+				Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_NetworkHealth_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : NetworkHealth Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add NetworkHealth Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.NetworkHealth);
+			checkWidgetAvailability("Network Health", we_NetworkHealthWidget.networkHealthCheckbox, "Network Health");
+
+			we_NetworkHealthWidget.networkStatus();
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_OfficeSuiteLicenseWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : OfficeSuiteLicense Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add OfficeSuiteLicences Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.OfficesuiteLicenses_118504);
+			checkWidgetAvailability("OfficeSuite Licenses", we_OfficeSuiteLicencesWidget.officeSuiteLicenseCheckbox,
+					"OfficeSuite Licenses");
+
+			we_OfficeSuiteLicencesWidget.osLicencesWidgetNavigation();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_OrdersWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : OrderStatus Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add Orders Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.OrderStatus_111474);
+			checkWidgetAvailability("Orders", we_OrderStatusWidget.ordersCheckbox, "Orders");
+
+			we_OrderStatusWidget.viewOrdersNavigation();
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_ScheduledMaintenanceWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : scheduledMaintenance Widget_ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add scheduledMaintenance Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.ScheduledMaintenance);
+
+			checkWidgetAvailability("Scheduled Maintenance",
+					we_ScheduledMaintananceWidget.scheduledMaintenance_Checkbox, "Maintenance Calendar");
+
+			we_ScheduledMaintananceWidget.scheduledMaintenanceWidget();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_SupportRequestWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : SupportRequest Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add SupportRequest Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.SupportRequest);
+			checkWidgetAvailability("Support Request", we_SupportRequest.supportRequestCheckbox, "Support Requests");
+
+			we_SupportRequest.supportRequestFunctionality("Support Requests");
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_TrunkUtilizationWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : TrunkUtilization Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add TrunkUtilization Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.TrunkUtilization);
+			checkWidgetAvailability("Trunk Utilization", we_TrunkUtilizationWidget.trunkUtilizationCheckbox,
+					"Trunk Utilization");
+
+			we_TrunkUtilizationWidget.trunkUtilizationWidget_Functionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_WeatherAlertsWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : WeatherAlerts Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add WeatherAlerts Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.WeatherAlerts);
+			checkWidgetAvailability("Weather Alerts", we_WeatherAlertsWidget.weatherAlertsCheckbox, "Weather Alerts");
+
+			we_WeatherAlertsWidget.getWeatherAlertCities();
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_MostActiveDataCircuitsWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : MostActiveDataCircuits Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add MostActiveDataCircuit Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.MostActiveCircuits);
+			checkWidgetAvailability("Most Active Data Circuits", we_MostActiveCircuitsWidget.MostActivecircuitsCheckbox,
+					"Most Active Circuits");
+
+			we_MostActiveCircuitsWidget.navigationFunctionality();
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_BillingAlertAndInquiriesWidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : Billing Alert and Inquiry Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add BillingAlertsAndInquiries Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.BillingAlertAndEnquiry);
+
+			checkWidgetAvailability("Billing Alerts & Inquiries", we_BillingAlertsAndInquiries.billingAlertsCheckbox,
+					"Billing Alerts & Inquiries");
+			dropdownAvailability(WE_BillingAlertsAndInquiries.billingAlertsDropdown,
+					"BillingAlertsAndInquiries-Dropdown", WE_BillingAlertsAndInquiries.forAccount,
+					"Billing Alerts & Inquiries");
+
+			we_BillingAlertsAndInquiries.billingAlertAndInquiriesFunctionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_NewBillingInquirywidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : NewBillingInquiry Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add NewBillingInquiryWidget Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.NewBillingInquiry);
+
+			checkWidgetAvailability("New Billing Inquiry", we_NewBillingInquiryWidget.newbillinginquirycheckbox,
+					"New Billing Inquiry");
+
+			we_NewBillingInquiryWidget.verifyNewBillingInquiryWidgetFunctionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_Networkstatuswidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : NetworkStatus Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add NetworkStatusWidget Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.NetworkStatus);
+			checkWidgetAvailability("Network Status", we_NetworkStatusWidget.networkStatusCheckbox, "Network Status");
+			dropdownAvailability(we_NetworkStatusWidget.networkStatusDropdown, "Networkstatusdropdown-Dropdown",
+					WE_NetworkStatusWidget.defaultLocation, "Network Status");
+
+			we_NetworkStatusWidget.networkStatusFunctionality();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	@Test
+	public void we_WinBotwidget_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : WinBotwidget Widget-ELNK", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			userStoryDescription = "Add WinBotwidget Widget and Verify the Functionalities";
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testCaseNames.WinBot);
+			checkWidgetAvailability("WinBot", we_WinBotWidget.winBotCheckbox, "WinBot Insights");
+
+			we_WinBotWidget.winBotWidget();
+
+			successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+}

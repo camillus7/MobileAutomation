@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WE_Billing_ViewAndPaybill_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_ViewAndPaybill_ELNK"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_Billing_SchedulePayment_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_SchedulePayment_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Billing_Autopay_Paynow_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_Autopay_Paynow_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Billing_BillingHistory_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_BillingHistory_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Billingsettings_AddPaymentMethod_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_Billingsettings_AddPaymentMethod_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Billingsettings_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_Billingsettings_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Billing_FTPBillingInvoice_WOL"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_FTPBillingInvoice_WOL"/> </methods> </class> </classes> </test>
+
+ <!-- <test name="TC_WE_Billing_ViewBillingHistory_ELNK"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_ViewBillingHistory_ELNK"/> </methods> </class> </classes> </test>
+  -->
+
+</suite>

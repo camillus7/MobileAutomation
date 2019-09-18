@@ -1,0 +1,345 @@
+package Base;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.ParseException;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
+import WebDriver.WebDriverFactory;
+
+import com.webautomation.pageobject.hWin_pages.BillingPage;
+import com.webautomation.pageobject.webpages.GopaperlessPage;
+import com.webautomation.pageobject.webpages.NotificationsPage;
+import com.webautomation.pageobject.webpages.hWin_MyProfilePage;
+import com.webautomation.pageobject.webpages.supportPage;
+import com.webautomation.pageobject.webpages.winLinkHomePage;
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+
+import com.webautomation.pageobject.we_pages.WE_HomePage;
+import com.webautomation.pageobject.we_pages.WE_LoginPage;
+import com.webautomation.pageobject.we_pages.WE_MyProfilePage;
+import com.webautomation.pageobject.we_pages.WE_ServicesPage;
+import com.webautomation.dashboardwidgets.pageobjects.WE_AutoAttendantsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_BillingDetailsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_BillingReportsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CallGroupsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CommonWidgets;
+import com.webautomation.dashboardwidgets.pageobjects.WE_ConnectivityTestWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CordlessPhonesWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CurrentUsersWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_FaxAccountsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_HDMeetingLicencesWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_IncomingCallRoutingWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_LocationUpdateWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MusicOnHoldWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyCallForwardingWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyCallGroupsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyCallTwinningWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyDirectoryRecordingWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyHDMeetingWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyOnlineFaxWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyPhonesWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MyVoicemailWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_NetworkHealthWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_OfficeSuiteLicencesWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_OrderStatusWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_PhoneKeyProfilesWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_SupportRequestWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_TollFreeServiceWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_WeatherAlertsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_BillingSettingsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CircuitUtilizationWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_CommunityWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_KineticBusinessSupportWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MonitoredRoutersWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_ScheduledMaintananceWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_TrunkUtilizationWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_WinBotWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_BillingAlertsAndInquiries;
+import com.webautomation.dashboardwidgets.pageobjects.WE_MostActiveCircuitsWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_NetworkStatusWidget;
+import com.webautomation.dashboardwidgets.pageobjects.WE_NewBillingInquiryWidget;
+import com.webautomation.pageobject.we_pages.services.WE_BusinessDetailsPage;
+import com.webautomation.pageobject.we_pages.services.WE_BusinessHoursPage;
+import com.webautomation.pageobject.we_pages.services.WE_CallPermissionProfilesPage;
+import com.webautomation.pageobject.we_pages.services.WE_ExtensionManagerPage;
+import com.webautomation.pageobject.we_pages.services.WE_MyCallHandlingPage;
+import com.webautomation.pageobject.we_pages.services.WE_PhonesAndAccessoriesPage;
+import com.webautomation.pageobject.we_pages.services.WE_TollFreePage;
+import com.webautomation.pageobject.we_pages.services.WE_MyCallLogPage;
+import com.webautomation.pageobject.we_pages.services.WE_VoiceLineAdminPage;
+import com.webautomation.pageobject.we_pages.services.WE_VoipPage;
+//import com.webautomation.pageobject.we_pages.WE_DashboardPage;
+import com.webautomation.pageobject.we_pages.WE_AccountPage;
+
+import com.webautomation.pageobject.myWin_pages.MyWin_BillingPage;
+import com.webautomation.pageobject.myWin_pages.MyWin_UserManagerPage;
+import com.webautomation.pageobject.myWin_pages.MyWin_GoPaperlessPage;
+import com.webautomation.pageobject.myWin_pages.MyWin_NotificationsPage;
+import com.webautomation.pageobject.myWin_pages.MyWin_MyProfilePage;
+import com.webautomation.pageobject.myWin_pages.MyWin_SupportPage;
+import com.webautomation.pageobject.myWin_pages.MyWin_HomePage;
+import com.webautomation.pageobject.myWin_pages.MyWin_LoginPage;
+
+import com.webautomation.pageobject.empPortal_pages.EmpPortal_HomePage;
+import com.webautomation.pageobject.empPortal_pages.EmpPortal_LoginPage;
+import com.webautomation.pageobject.empPortal_pages.EmpPortal_PortalSearchPage;
+import com.webautomation.pageobject.empPortal_pages.EmpPortal_ReportsPage;
+import com.webautomation.pageobject.empPortal_pages.EmpPortal_SalesMarketingPage;
+import com.webautomation.pageobject.empPortal_pages.EmpPortal_DeveloperSupportToolsPage;
+
+import com.webautomation.pageobject.we_pages.WE_BillingPage;
+import com.webautomation.pageobject.we_pages.WE_DownloadsPage;
+import com.webautomation.pageobject.we_pages.WE_ReportingPage;
+import com.webautomation.pageobject.we_pages.WE_SupportPage;
+import com.webautomation.pageobject.we_pages.WE_OrdersPage;
+import com.webautomation.pageobject.we_pages.WE_UsermanagerPage;
+import com.webautomation.validation.DateValidator;
+import com.webautomation.validation.Validator;
+
+import commonUtil.DataProviderReader_SelGrid;
+import commonUtil.ExcelUtils_SelGrid;
+import commonUtil.PropertiesUtil;
+import commonUtil.WebDriverTimingUtil;
+import commonUtil.WebDriverUtils;
+
+public class BaseSteps_SelGrid  {
+
+
+
+	protected	Actions action;
+	protected	DataProviderReader_SelGrid dataProviderReader_SelGrid;
+	protected	DataProviderReader_SelGrid dp = new DataProviderReader_SelGrid();
+	protected	DateValidator dateValidator;
+	
+	protected 	winLinkLoginPage winLinkLoginPage;
+	protected 	winLinkHomePage winLinkHomePage;
+	protected 	supportPage supportPage;
+	
+	protected 	WE_HomePage we_HomePage;
+	protected 	WE_LoginPage we_LoginPage;
+	protected 	WE_AccountPage we_AccountPage;
+	protected   WE_MyProfilePage we_MyProfilePage;
+	protected   WE_ServicesPage we_ServicesPage;
+	protected 	WE_BusinessHoursPage we_BusinessHoursPage;
+	protected 	WE_BusinessDetailsPage we_BusinessDetailsPage;
+	protected 	WE_CallPermissionProfilesPage We_CallPermissionProfilesPage;
+	protected 	WE_MyCallHandlingPage We_MyCallHandlingPage;
+	protected 	WE_PhonesAndAccessoriesPage We_PhonesAndAccessoriesPage;
+	protected 	WE_ExtensionManagerPage We_ExtensionManagerPage;
+	protected	WE_TollFreePage we_TollFreePage;
+	protected 	WE_MyCallLogPage we_MyCallLogPage;
+	protected 	WE_VoiceLineAdminPage we_VoiceLineAdminPage;
+	protected 	WE_VoipPage we_VoipPage;
+	protected 	WE_DownloadsPage we_DownloadsPage;
+	protected 	WE_ReportingPage we_ReportingPage;
+	protected 	WE_SupportPage we_SupportPage;
+	protected 	WE_BillingPage we_BillingPage;
+	protected 	WE_OrdersPage we_OrdersPage;
+	protected 	WE_UsermanagerPage We_UserManagerPage;
+	protected	ExcelUtils_SelGrid excelUtils_SelGrid;
+	
+	protected   MyWin_BillingPage myWin_BillingPage;
+    protected   MyWin_GoPaperlessPage myWin_GoPaperlessPage;
+    protected   MyWin_HomePage myWin_HomePage;
+    protected   MyWin_LoginPage myWin_LoginPage;
+    protected   MyWin_MyProfilePage myWin_MyProfilePage;
+    protected   MyWin_NotificationsPage myWin_NotificationsPage;
+    protected   MyWin_SupportPage myWin_SupportPage;
+    protected   MyWin_UserManagerPage myWin_UserManagerPage;
+
+	
+	protected 	EmpPortal_HomePage empPortal_HomePage;
+	protected 	EmpPortal_LoginPage empPortal_LoginPage;
+	protected 	EmpPortal_PortalSearchPage empPortal_PortalSearchPage;
+	protected 	EmpPortal_ReportsPage empPortal_ReportsPage;
+	protected 	EmpPortal_SalesMarketingPage empPortal_SalesMarketingPage;
+	protected 	EmpPortal_DeveloperSupportToolsPage empPortal_DeveloperSupportToolsPage;
+	
+	protected	NotificationsPage notificationsPage;
+	protected   GopaperlessPage gopaperless;
+	protected   BillingPage billingPage;
+	protected	hWin_MyProfilePage myProfilePage;
+	
+	//DashBoard Widgets
+	protected WE_CommonWidgets we_CommonWidgets;
+	protected WE_BillingDetailsWidget we_BillingDetailsWidget;
+	protected WE_MusicOnHoldWidget we_MusicOnHoldWidget;
+	protected WE_TollFreeServiceWidget we_TollFreeServiceWidget;
+	protected WE_CallGroupsWidget we_CallGroupsWidget;
+	protected WE_ConnectivityTestWidget we_ConnectivityTestWidget;
+	protected WE_CordlessPhonesWidget we_CordlessPhonesWidget;
+	protected WE_FaxAccountsWidget we_FaxAccountsWidget;
+	protected WE_HDMeetingLicencesWidget we_HDMeetingLicencesWidget;
+	protected WE_MyCallForwardingWidget we_MyCallForwardingWidget;
+	protected WE_MyCallGroupsWidget we_MyCallGroupsWidget;
+	protected WE_MyCallTwinningWidget we_MyCallTwinningWidget;
+	protected WE_MyDirectoryRecordingWidget we_MyDirectoryRecordingWidget;
+	protected WE_MyHDMeetingWidget we_MyHDMeetingWidget;
+	protected WE_MyOnlineFaxWidget we_MyOnlineFaxWidget;
+	protected WE_MyPhonesWidget we_MyPhonesWidget;
+	protected WE_MyVoicemailWidget we_MyVoicemailWidget;
+	protected WE_OfficeSuiteLicencesWidget we_OfficeSuiteLicencesWidget;
+	protected WE_OrderStatusWidget we_OrderStatusWidget;
+	protected WE_AutoAttendantsWidget we_AutoAttendantsWidget;
+	protected WE_BillingReportsWidget we_BillingReportsWidget;
+	protected WE_CurrentUsersWidget we_CurrentUsersWidget;
+	protected WE_IncomingCallRoutingWidget we_IncomingCallRoutingWidget;
+	protected WE_LocationUpdateWidget we_LocationUpdateWidget;
+	protected WE_NetworkHealthWidget we_NetworkHealthWidget; 
+	protected WE_SupportRequestWidget we_SupportRequest;
+	protected WE_WeatherAlertsWidget we_WeatherAlertsWidget;	
+	protected WE_BillingAlertsAndInquiries we_BillingAlertsAndInquiries;
+	protected WE_MostActiveCircuitsWidget we_MostActiveCircuitsWidget;
+	protected WE_NetworkStatusWidget we_NetworkStatusWidget;
+	protected WE_NewBillingInquiryWidget we_NewBillingInquiryWidget;
+	protected WE_BillingSettingsWidget we_BillingSettingsWidget;
+	protected WE_CircuitUtilizationWidget we_CircuitUtilizationWidget;
+	protected WE_CommunityWidget we_CommunityWidget;
+	protected WE_KineticBusinessSupportWidget we_KineticBusinessSupportWidget;
+	protected WE_MonitoredRoutersWidget we_MonitoredRoutersWidget;
+	protected WE_ScheduledMaintananceWidget we_ScheduledMaintananceWidget;
+	protected WE_TrunkUtilizationWidget we_TrunkUtilizationWidget;
+	protected WE_WinBotWidget we_WinBotWidget;
+	protected WE_PhoneKeyProfilesWidget we_PhoneKeyProfilesWidget;
+	protected	Validator vc;
+	
+	protected	WebDriver driver;
+	protected	WebDriverTimingUtil webDriverTimingUtil;
+	protected	WebDriverUtils webDriverUtils;
+	
+	//Old Voip page objects
+	
+	
+	protected String testMethodName;
+	
+
+	@BeforeMethod
+	public void beforeMethod(Method method) throws IOException, ParseException, InterruptedException{
+			setUpPageObjects();
+			driver.get(PropertiesUtil.getValue(PropertiesUtil.URL_PROPERTY));
+			driver.manage().window().maximize();
+			driver.manage().deleteAllCookies();
+			driver.navigate().refresh();
+			testMethodName = method.getName();
+	}
+
+	@AfterMethod
+	public void afterMethod() {
+		
+		driver.quit();
+	}
+
+	private void setUpPageObjects() throws IOException, ParseException, InterruptedException {
+		driver = WebDriverFactory.getSeleniumWebDriver();
+		vc = new Validator(driver);
+		vc.setDriver(driver);
+		
+		//Page Objects - Consumer
+		winLinkLoginPage = PageFactory.initElements(driver, winLinkLoginPage.class);
+		winLinkHomePage = PageFactory.initElements(driver, winLinkHomePage.class);
+		supportPage = PageFactory.initElements(driver, supportPage.class);
+		notificationsPage = PageFactory.initElements(driver, NotificationsPage.class);
+		gopaperless = PageFactory.initElements(driver, GopaperlessPage.class);
+		billingPage = PageFactory.initElements(driver, BillingPage.class);
+		
+		//Page Objects - Enterprise
+		we_HomePage = PageFactory.initElements(driver, WE_HomePage.class);
+		we_LoginPage = PageFactory.initElements(driver, WE_LoginPage.class);
+		we_MyProfilePage = PageFactory.initElements(driver, WE_MyProfilePage.class);
+		we_AccountPage = PageFactory.initElements(driver, WE_AccountPage.class);
+		we_ServicesPage = PageFactory.initElements(driver, WE_ServicesPage.class);
+		we_BusinessHoursPage = PageFactory.initElements(driver, WE_BusinessHoursPage.class);
+		we_BusinessDetailsPage = PageFactory.initElements(driver, WE_BusinessDetailsPage.class);
+		We_CallPermissionProfilesPage = PageFactory.initElements(driver, WE_CallPermissionProfilesPage.class);
+		We_MyCallHandlingPage = PageFactory.initElements(driver, WE_MyCallHandlingPage.class);
+		We_PhonesAndAccessoriesPage = PageFactory.initElements(driver, WE_PhonesAndAccessoriesPage.class);
+		We_ExtensionManagerPage = PageFactory.initElements(driver, WE_ExtensionManagerPage.class);
+		we_DownloadsPage = PageFactory.initElements(driver, WE_DownloadsPage.class);
+		we_TollFreePage = PageFactory.initElements(driver, WE_TollFreePage.class);
+		we_MyCallLogPage = PageFactory.initElements(driver, WE_MyCallLogPage.class); 
+		we_VoiceLineAdminPage = PageFactory.initElements(driver, WE_VoiceLineAdminPage.class); 
+		we_VoipPage = PageFactory.initElements(driver, WE_VoipPage.class); 
+		
+		//DashBoardWidgets PageObjects
+		we_CommonWidgets = PageFactory.initElements(driver, WE_CommonWidgets.class);
+		we_KineticBusinessSupportWidget =  PageFactory.initElements(driver,WE_KineticBusinessSupportWidget.class);
+		we_BillingDetailsWidget = PageFactory.initElements(driver, WE_BillingDetailsWidget.class);
+		we_MusicOnHoldWidget = PageFactory.initElements(driver, WE_MusicOnHoldWidget.class);
+		we_CallGroupsWidget = PageFactory.initElements(driver, WE_CallGroupsWidget.class);
+		we_ConnectivityTestWidget = PageFactory.initElements(driver, WE_ConnectivityTestWidget.class);
+		we_CordlessPhonesWidget = PageFactory.initElements(driver, WE_CordlessPhonesWidget.class);
+		we_FaxAccountsWidget = PageFactory.initElements(driver, WE_FaxAccountsWidget.class);
+		we_HDMeetingLicencesWidget = PageFactory.initElements(driver, WE_HDMeetingLicencesWidget.class);
+		we_MyCallForwardingWidget=PageFactory.initElements(driver, WE_MyCallForwardingWidget.class);
+		we_MyCallGroupsWidget = PageFactory.initElements(driver, WE_MyCallGroupsWidget.class);
+		we_MyCallTwinningWidget =PageFactory.initElements(driver, WE_MyCallTwinningWidget.class);
+		we_MyDirectoryRecordingWidget = PageFactory.initElements(driver, WE_MyDirectoryRecordingWidget.class);
+		we_MyHDMeetingWidget = PageFactory.initElements(driver, WE_MyHDMeetingWidget.class);
+		we_MyOnlineFaxWidget = PageFactory.initElements(driver, WE_MyOnlineFaxWidget.class);
+		we_MyPhonesWidget = PageFactory.initElements(driver, WE_MyPhonesWidget.class);
+		we_MyVoicemailWidget = PageFactory.initElements(driver, WE_MyVoicemailWidget.class);
+		we_OfficeSuiteLicencesWidget = PageFactory.initElements(driver, WE_OfficeSuiteLicencesWidget.class);
+		we_OrderStatusWidget = PageFactory.initElements(driver, WE_OrderStatusWidget.class);
+		we_TollFreeServiceWidget = PageFactory.initElements(driver, WE_TollFreeServiceWidget.class);
+		we_AutoAttendantsWidget = PageFactory.initElements(driver, WE_AutoAttendantsWidget.class);
+		we_BillingReportsWidget = PageFactory.initElements(driver, WE_BillingReportsWidget.class);
+		we_CurrentUsersWidget = PageFactory.initElements(driver, WE_CurrentUsersWidget.class);
+		we_IncomingCallRoutingWidget = PageFactory.initElements(driver, WE_IncomingCallRoutingWidget.class);
+		we_LocationUpdateWidget = PageFactory.initElements(driver, WE_LocationUpdateWidget.class);
+		we_NetworkHealthWidget = PageFactory.initElements(driver, WE_NetworkHealthWidget.class);
+		we_SupportRequest = PageFactory.initElements(driver, WE_SupportRequestWidget.class);
+		we_WeatherAlertsWidget  = PageFactory.initElements(driver, WE_WeatherAlertsWidget.class);
+		we_BillingAlertsAndInquiries = PageFactory.initElements(driver, WE_BillingAlertsAndInquiries.class);
+		we_MostActiveCircuitsWidget = PageFactory.initElements(driver, WE_MostActiveCircuitsWidget.class);
+		we_NetworkStatusWidget = PageFactory.initElements(driver, WE_NetworkStatusWidget.class);
+		we_NewBillingInquiryWidget = PageFactory.initElements(driver, WE_NewBillingInquiryWidget.class);
+		
+		 we_BillingSettingsWidget = PageFactory.initElements(driver, WE_BillingSettingsWidget.class);
+		 we_CircuitUtilizationWidget = PageFactory.initElements(driver, WE_CircuitUtilizationWidget.class);
+		 we_CommunityWidget = PageFactory.initElements(driver, WE_CommunityWidget.class);
+		 we_MonitoredRoutersWidget  = PageFactory.initElements(driver, WE_MonitoredRoutersWidget.class);
+		we_ScheduledMaintananceWidget = PageFactory.initElements(driver, WE_ScheduledMaintananceWidget.class);
+		we_TrunkUtilizationWidget = PageFactory.initElements(driver, WE_TrunkUtilizationWidget.class);
+		we_WinBotWidget = PageFactory.initElements(driver, WE_WinBotWidget.class);
+		we_PhoneKeyProfilesWidget = PageFactory.initElements(driver, WE_PhoneKeyProfilesWidget.class);
+		we_ReportingPage = PageFactory.initElements(driver, WE_ReportingPage.class); 
+		we_SupportPage = PageFactory.initElements(driver, WE_SupportPage.class);         	
+		we_BillingPage = PageFactory.initElements(driver, WE_BillingPage.class);
+		we_OrdersPage =  PageFactory.initElements(driver, WE_OrdersPage.class);
+		We_UserManagerPage = PageFactory.initElements(driver, WE_UsermanagerPage.class); 
+		
+		//MyWin Consumer - Page Objects
+        myWin_BillingPage = PageFactory.initElements(driver, MyWin_BillingPage.class);
+        myWin_GoPaperlessPage = PageFactory.initElements(driver, MyWin_GoPaperlessPage.class);
+        myWin_HomePage = PageFactory.initElements(driver, MyWin_HomePage.class);
+        myWin_LoginPage = PageFactory.initElements(driver, MyWin_LoginPage.class);
+        myWin_MyProfilePage = PageFactory.initElements(driver, MyWin_MyProfilePage.class);
+        myWin_NotificationsPage = PageFactory.initElements(driver, MyWin_NotificationsPage.class);
+        myWin_SupportPage = PageFactory.initElements(driver, MyWin_SupportPage.class);
+        myWin_UserManagerPage = PageFactory.initElements(driver, MyWin_UserManagerPage.class);
+
+		
+		empPortal_HomePage= PageFactory.initElements(driver, EmpPortal_HomePage.class);
+		empPortal_LoginPage= PageFactory.initElements(driver, EmpPortal_LoginPage.class);
+		empPortal_PortalSearchPage= PageFactory.initElements(driver, EmpPortal_PortalSearchPage.class);
+		empPortal_ReportsPage= PageFactory.initElements(driver, EmpPortal_ReportsPage.class);
+		empPortal_SalesMarketingPage= PageFactory.initElements(driver, EmpPortal_SalesMarketingPage.class);
+		empPortal_DeveloperSupportToolsPage= PageFactory.initElements(driver, EmpPortal_DeveloperSupportToolsPage.class);
+		
+		dateValidator = new DateValidator();
+		excelUtils_SelGrid  = new ExcelUtils_SelGrid();
+		webDriverTimingUtil  = PageFactory.initElements(driver, WebDriverTimingUtil.class);
+		webDriverTimingUtil = new WebDriverTimingUtil();
+		webDriverUtils =  new WebDriverUtils(driver);
+		
+		//dateFunction = PageFactory.initElements(driver, DateFunction.class);
+				
+	}
+
+}

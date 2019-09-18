@@ -1,0 +1,35 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_TollFreePage {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+
+	public WE_TollFreePage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	
+	@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/TollFreeSearchActivation']")
+	public WebElement getANewNumber;
+	
+	@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/TollFreeWOLServices']")
+	public WebElement repointTollFreeNumber;
+	
+	@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/RoutingReport']")
+	public WebElement routingReport;
+	
+	@FindBy(xpath = "//a[@href='/Services/TollFreeWOLServices/ChangeHistory']")
+	public WebElement changeHistoryReport;
+
+	
+}

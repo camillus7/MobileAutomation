@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+      <listener class-name="com.webautomation.validation.RetryListener" />   
+</listeners>
+ 
+<test name="TC_WL_PayBill_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="PayBill_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_billing_008"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="PayNow_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_viewBills_011"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="ViewBills_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_PaymentHistory_007"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="PaymentHistory_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_reports_009"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="Reports_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_paperBills_010"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="PaperBills_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_MyProfile_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="MyProfile_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_notificationsMenu_End2End_015"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="NotificationsMenu_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Home_TC_PP_SO_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="HomePage_AllLinks_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Support_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="SupportMenu_End2End"/> </methods> </class> </classes> </test>  
+<test name="TC_WL_intenet_TV_Phone"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="Intenet_TV_Phone"/> </methods> </class> </classes> </test> 
+<test name="TC_WL_Email"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="Email_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_referFriends"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="ReferFriends_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Shop_005"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="Blog_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_Blog_006"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="Shop_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_News"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="News_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_ContactUs_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="ContactUs_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_TextAlerts_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="WindstreamTextAlert_114574"/> </methods> </class> </classes> </test>
+<test name="TC_WL_ConsumerOffers_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="ConsumerOffers"/> </methods> </class> </classes> </test>
+<test name="TC_WL_SupportRequest_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="SupportRequest_Page"/> </methods> </class> </classes> </test>
+<test name="TC_WL_IosAppStore_End2End"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="IosAppStore_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_AndroidAppStore_End2End"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="AndroidAppStore_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_autoPay_012"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="AutoPay_End2End"/> </methods> </class> </classes> </test>
+
+
+<!-- <test name="TC_WL_UserManagement"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="UserManagement_End2End"/> </methods> </class> </classes> </test>
+<test name="TC_WL_MyProfile"> <classes> <class name="com.webautomation.tests.seleniumGrid.MyWin_ConsumerPortalSuite"> <methods> <include name="AndroidAppStore_End2End"/> </methods> </class> </classes> </test>
+ -->
+</suite>

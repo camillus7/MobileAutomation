@@ -1,0 +1,48 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Reporter;
+
+import commonUtil.PropertiesUtil;
+
+public final class WebDriverFactory {
+
+	public final static String FIREFOX = "firefox";
+	public final static String CHROME = "chrome";
+	public final static String IE = "ie";
+	public final static String GECKO = "gecko";
+	public final static String ANDROID = "android";
+	public final static String EDGE = "edge";
+	
+	protected AndroidDriver driver;
+
+	
+	public WebDriver getDriver(String browser) {
+		
+		if(browser.contains(ANDROID)) {
+			driver =  new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		}
+		return null;
+		
+	}
+
+	public static AndroidDriver getAndroidDriver() {
+		
+		AndroidDriver androidDriver;
+		applicationWebDriver = new AndroidAppiumDriver();
+		androidDriver = applicationWebDriver.getAndroidDriver();
+		androidDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		return androidDriver;
+	}
+
+}

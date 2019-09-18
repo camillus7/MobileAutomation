@@ -1,0 +1,84 @@
+package WebDriver;
+
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import commonUtil.PropertiesUtil;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+
+public final class WebDriverFactory {
+
+	
+	public final static String ANDROID = "android";
+	
+	
+	
+	public void launchDriver(String browser) {
+		if (browser.contains(ANDROID)) {
+			 AndroidDriver<AndroidElement> driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
+		} 
+	}
+	
+	public DesiredCapabilities getCapabilities() {
+
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+	
+		//capabilities.setCapability("deviceName", "Samsung");
+		//capabilities.setCapability("udid", "33001cc872ce1537");
+		
+		/*capabilities.setCapability("deviceName", "LG");
+		capabilities.setCapability("udid", "LGH81852c15fb1");
+		*/
+		capabilities.setCapability("deviceName", "galaxys8");
+		capabilities.setCapability("udid", "988e16314c4546414d");
+		
+		
+		capabilities.setCapability("platformName", "Android");
+		capabilities.setCapability("platformVersion", "7.1.1");
+
+		// enterprise
+		capabilities.setCapability("appPackage", "com.windstream.enterprise.we.dev");
+		capabilities.setCapability("appActivity", "com.windstream.po3.business.features.winauth.WinAuthActivity");
+
+		// consumer
+		/*capabilities.setCapability("appPackage", "com.windstream.residential.dev");
+		capabilities.setCapability("appActivity","com.windstream.po3.residential.winauth.WinAuthActivity");
+*/
+		// smb
+		/*capabilities.setCapability("appPackage", "com.windstream.enterprise.ilec.dev");
+		capabilities.setCapability("appActivity", "com.windstream.po3.business.features.winauth.WinAuthActivity");*/
+
+		capabilities.setCapability("noReset", true);
+		
+		
+
+		return capabilities;
+
+	}
+	
+	/**
+	 * Return the appropriate WebDriver object based on configuration values found in config.properties file.
+	 * 
+	 * @return
+	 */
+
+	
+//	public static WebDriver getAndroidDriver() {
+//
+//		String deviceName = PropertiesUtil.getValue(PropertiesUtil.DEVICE_NAME);
+//		String appPackage = PropertiesUtil.getValue(PropertiesUtil.APP_PACKAGE);
+//		String appActivity = PropertiesUtil.getValue(PropertiesUtil.APP_ACTIVITY);
+//		String appiumIp = PropertiesUtil.getValue(PropertiesUtil.APPIUM_IP);
+//		String appiumPort = PropertiesUtil.getValue(PropertiesUtil.APPIUM_PORT);
+//		return getandroidDriver(deviceName,appPackage,appActivity,appiumIp,appiumPort);
+//
+//	}
+
+
+
+	
+}

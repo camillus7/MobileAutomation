@@ -1,0 +1,66 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_WeatherAlertsWidget {
+
+	final WebDriver driver;
+	
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_WeatherAlertsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Weather Alerts')]")
+	public WebElement weatherAlertsCheckbox;
+	
+	@FindBy(xpath="//a[contains(.,'Configure')]")
+	public WebElement configureButton;
+	
+	@FindBy(xpath="//a[contains(.,'View On Map')]")
+	public WebElement viewOnMap;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Weather Alerts']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Weather Alerts']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	@FindBy(xpath="//div[@id='managelocationsFlyOut']")
+	public WebElement locationMap;
+	
+	@FindBy(xpath="//div[@class='managelocat_hidebtn panel-tab active' and contains(.,'  Manage Locations')]")
+	public WebElement manageLocations;
+	
+	
+	public void getWeatherAlertCities() throws InterruptedException {
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Weather Alerts"));
+		List<WebElement> weather = driver.findElements(By.id("location1"));
+		for(int i=0;i<weather.size();i++) {
+			System.out.println(weather.get(i).getText());
+		}
+		
+		Reporter.log("********** Navigate to Map ************",true);
+		vc.getWebDriverUtils().clickElement(viewOnMap, "ViewOnMap-Button");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("View as list"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("More"));
+		vc.getWebDriverUtils().clickHiddenElement(manageLocations, "ManageLocations");
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Weather Alerts");
+	}
+
+}

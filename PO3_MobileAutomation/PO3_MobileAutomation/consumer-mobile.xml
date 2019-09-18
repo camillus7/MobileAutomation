@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+	<listeners>
+		<listener class-name="commonUtil.ExtentReporterNG" />
+		<!-- <listener class-name="com.webautomation.validation.RetryListener" 
+			/> -->
+	</listeners>
+
+
+	<test name="TC_MyWin_Login-TestCases">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_LoginSuite"></class>
+		</classes>
+	</test>
+	<test name="TC_MyWin_OnScreenBoarding-TestCases">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_OnScreenBoardingSuite"></class>
+		</classes>
+	</test>
+	<test name="TC_MyWin_Payments-TestCases">
+		<classes>
+			<class name="com.mobileautomation.tests.MyWin_PaymentsSuite"></class>
+		</classes>
+	</test>
+</suite>

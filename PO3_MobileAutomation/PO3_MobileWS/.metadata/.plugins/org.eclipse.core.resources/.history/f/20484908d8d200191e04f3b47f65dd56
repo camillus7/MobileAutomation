@@ -1,0 +1,126 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.util.Set;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import Base.BaseSteps_SelGrid;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+public class WE_Downloads_Suite extends BaseSteps_SelGrid{
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	
+	
+	@Test 
+	public void WE_Downloads_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		Reporter.log("User Story : Downloads Validation", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {	
+			we_DownloadsPage.downloadsValidation(winHandleBefore, userStoryDescription, we_HomePage, we_DownloadsPage);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test 
+	public void WE_Downloads_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		Reporter.log("User Story : Downloads Validation", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {	
+			we_DownloadsPage.downloadsValidation(winHandleBefore, userStoryDescription, we_HomePage, we_DownloadsPage);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test 
+	public void WE_DownloadsOfficeSuite() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.BVN_User);
+		Reporter.log("User Story : Downloads Validation", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+
+			try {
+				userStoryDescription = "Downloads-OfficeSuite Basic validation";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Downloads-OfficeSuite Basic validation");
+
+				vc.getWebDriverUtils().clickElement(we_DownloadsPage.downloads, "Downloads");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("OfficeSuite"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Locations"));
+				//Assert.assertTrue(vc.waitUntilTextIsPresent("Turn numbers on any webpage in Google Chrome into OfficeSuite click-to-call links."));
+				
+				/*vc.getWebDriverUtils().clickHiddenElement(we_DownloadsPage.androidGetItNow, "Android GetItNow");
+				//vc.scrollToView(we_DownloadsPage.androidDownload);
+				vc.getWebDriverUtils().clickElement(we_DownloadsPage.androidDownload, "Android Download");
+				vc.getWebDriverUtils().validateBrowser2(winHandleBefore,"Windstream Enterprise Connect");
+				vc.getWebDriverUtils().clickElement(we_DownloadsPage.androidGetItNow, "Android GetItNow");
+				vc.getWebDriverUtils().clickElement(we_DownloadsPage.androidScanCode, "Android ScanCode");
+				*/
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Downloads-OfficeSuiteDropdown";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Downloads-OfficeSuiteDropdown");
+
+				vc.getWebDriverUtils().clickElement(we_DownloadsPage.downloads, "Downloads");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("OfficeSuite"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Locations"));
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Applications", "Applications");
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Mobile Apps", "Mobile Apps");
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Plugins", "Plugins");
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Platform: Android", "Platform: Android");
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Platform: iOS", "Platform: iOS");
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Platform: Windows", "Platform: Windows");
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_DownloadsPage.downloadAllDropDown, "Platform: MAC OS X", "Platform: MAC OS X");
+				
+				
+				
+				
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(userStoryDescription, failMsgDesc);
+			}
+
+
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc, failMsgDesc);
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+	}
+
+}

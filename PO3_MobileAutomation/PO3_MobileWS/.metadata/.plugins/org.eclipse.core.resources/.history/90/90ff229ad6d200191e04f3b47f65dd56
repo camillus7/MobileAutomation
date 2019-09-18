@@ -1,0 +1,165 @@
+package com.mobile.WeConnect.pageobject;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+import commonUtil.WebDriverUtils;
+
+public class WeConnect_PaymentPage {
+
+	final WebDriver driver;
+	private Validator vc;
+	public String cardName, cardholderName, cardnumber;
+
+	public WeConnect_PaymentPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Payment method not available. Please add a valid Credit / Debit card or Bank account.']")
+	public WebElement CardNotavailable;
+
+	@FindBy(id = "terms_and_conditions")
+	public WebElement TermsandConditioncheckbox;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Please agree to the Terms and Conditions..']")
+	public WebElement termsandconditionErrorMessage;
+
+	@FindBy(id = "selection")
+	public WebElement CardRadioButton;
+	
+	@FindBy(id = "name")
+	public WebElement CardHolderName;
+	
+	@FindBy(id="add_new_payment")
+	public WebElement addPaymentMethod;
+	
+	@FindBy(id="message")
+	public static WebElement paymentErrorMessage;
+	
+	@FindBy(id="button1")
+	public WebElement OK;
+	
+	
+	@FindBy(xpath="//android.widget.Button[@text='Not Really']")
+	public WebElement notReally;
+	
+	@FindBy(xpath="//android.widget.Button[@text='Yes']")
+	public WebElement enrollYes;
+	
+	@FindBy(id="snackbar_text")
+	public static WebElement termsandConditionsMessage;
+	
+	@FindBy(id = "btn_pay_now")
+	public WebElement payNowButton;
+	
+	@FindBy(id = "btn_pay_now")
+	public WebElement previousButton;
+	
+	@FindBy(id="amount")
+	public WebElement amountPaid;
+	
+	@FindBy(xpath="//android.widget.TextView[@text='Your Payment is Successful']")
+	public WebElement paymentSuccessMessage;
+	
+	@FindBy(id="confirmation_number")
+	public WebElement paymentConfirmationNo;
+	
+	@FindBy(id="payment_date")
+	public WebElement paymentDate;
+	
+	@FindBy(xpath="//android.widget.TextView[@text='Are you happy with the MyWin app']")
+	public WebElement happywithMYWinapp;
+	
+	@FindBy(id="done")
+	public WebElement doneButton;
+	
+	@FindBy(id = "txt_current_balance")
+	public WebElement currentBalance;
+	
+	
+	
+	
+	public boolean checkCardAvailability() {
+		return (vc.getWebDriverUtils().elementAvailablity(CardHolderName, "CardDetails"));
+	}
+	
+	public void paymentUI() {
+		vc.getWebDriverUtils().elementAvailablity(addPaymentMethod, "AddPaymentMethod-Button");
+		vc.getWebDriverUtils().elementAvailablity(TermsandConditioncheckbox,"Terms&Conditions-Checkbox");
+		vc.getWebDriverUtils().elementAvailablity(previousButton, "Previous-Button");
+		vc.getWebDriverUtils().elementAvailablity(payNowButton, "PayNow-Button");
+	}
+	
+	public void getAvailablecards2() {
+		List<WebElement> cardNames = driver.findElements(By.id("selection"));
+		List<WebElement> cardHolderNames = driver.findElements(By.id("name"));
+		List<WebElement> cardNumber = driver.findElements(By.id("card"));
+
+		for (int i = 0; i < cardNames.size(); i++) {
+			for (int j = 0; j <= i; j++) {
+				for (int k = 0; k <= j; k++) {
+					cardnumber = cardNumber.get(k).getText();
+				}
+				cardName = cardNames.get(j).getText();
+			}
+			cardholderName = cardHolderNames.get(i).getText();
+			System.out.println(cardName + "==" + cardholderName + "==" + cardnumber);
+		}
+	}
+	
+	
+	
+	public void makePaymentWithoutSelecting() throws InterruptedException {
+		vc.getWebDriverUtils().clickMobileElement(payNowButton, "PayNow-Button");
+		Reporter.log(paymentErrorMessage.getText().toUpperCase(),true);
+		Assert.assertTrue(true, paymentErrorMessage.getText());
+		Reporter.log("******ERROR PROMPT IS DISPLAYED TO SELECT PAYMENT METHOD******",true);
+		vc.getWebDriverUtils().clickMobileElement(OK, "OK");
+		vc.getWebDriverUtils().sleep(3000);
+		vc.getWebDriverUtils().selectRadioButton(CardHolderName, "Card");
+		vc.getWebDriverUtils().clickMobileElement(payNowButton, "PayNow-Button");
+		Reporter.log(paymentErrorMessage.getText().toUpperCase(),true);
+		Assert.assertTrue(true, paymentErrorMessage.getText());
+		Reporter.log("******ERROR PROMPT IS DISPLAYED TO AGREE TERMS AND CONDITIONS******",true);
+		vc.getWebDriverUtils().clickMobileElement(OK, "OK");
+		
+		
+	}
+	
+	public void makePayment() throws InterruptedException {
+		vc.getWebDriverUtils().selectRadioButton(CardHolderName, "Card");
+		Reporter.log("Selected " + CardHolderName.getText() + " from saved cards ",true);
+		vc.getWebDriverUtils().selectCheckbox(TermsandConditioncheckbox,"TermsandConditions");
+		vc.getWebDriverUtils().clickMobileElement(payNowButton, "PayNow-Button");
+		vc.getWebDriverUtils().sleep(2000);
+		vc.getWebDriverUtils().getText(amountPaid, "AmountPaid");
+		Reporter.log("Amount paid is==> " + amountPaid.getText(),true);
+		Reporter.log(paymentSuccessMessage.getText(),true);
+		Reporter.log(paymentConfirmationNo.getText(),true);
+		Reporter.log(paymentDate.getText(),true);
+		vc.getWebDriverUtils().clickMobileElement(doneButton,"Done-Button");
+		Reporter.log(happywithMYWinapp.getText(),true);
+		vc.getWebDriverUtils().clickMobileElement(notReally, "Not Really");
+		Reporter.log("Current Balance after paying Other Amount is ==> " + currentBalance.getText(),true);
+	
+	}
+	
+	public void verifyBalance() {
+		Integer a = Integer.parseInt(amountPaid.getText());
+		Integer b = Integer.parseInt(currentBalance.getText());
+		Integer c = a - b;
+		System.out.println(c);
+
+	}
+	
+	
+}

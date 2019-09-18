@@ -1,0 +1,271 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CallPermissionProfilesPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_CallPermissionProfilesPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath="xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+	//Call permission profiles
+	
+	@FindBy(linkText="Call Permission Profiles")
+	public WebElement callPermissionProfiles;
+	
+	@FindBy(xpath="//button[@id='addCallPermissionProfile']")
+	public WebElement createNewProfile;
+	
+	@FindBy(xpath="//input[@id='profileName']")
+	public WebElement profileName;
+	
+	@FindBy(xpath="//a[contains(.,'Call Type')]")
+	public WebElement callType;
+
+	@FindBy(xpath="//td[contains(.,'Emergency')]")
+	public WebElement emergency;
+
+	@FindBy(xpath="//td[contains(.,'Internal')]")
+	public WebElement internal;
+	
+	@FindBy(xpath="//td[contains(.,'International')]")
+	public WebElement international;
+	
+	@FindBy(xpath="//td[contains(.,'Local')]")
+	public WebElement local;
+	
+	@FindBy(xpath="//td[contains(.,'Long Distance')]")
+	public WebElement longDistance;
+	
+	@FindBy(xpath="//td[contains(.,'Operator Assisted')]")
+	public WebElement operatorAssisted;
+	
+	@FindBy(xpath="//td[contains(.,'Regional')]")
+	public WebElement regional;
+	
+	@FindBy(xpath="//td[contains(.,'Toll Free')]")
+	public WebElement tollFree;
+	
+	@FindBy(xpath="//td[contains(.,'Toll Premium')]")
+	public WebElement tollPremium;
+	
+	@FindBy(xpath="//td[contains(.,'Redirect Inbound Call to External Number')]")
+	public WebElement redirectInbound;
+	
+	@FindBy(xpath="//button[@id='createProfileSubmit']")
+	public WebElement createProfileSubmit;
+	
+	@FindBy(xpath="//*[@id='createCallPermissionPopup']/div/div[5]/div[2]/button[2]")
+	public WebElement cancel;
+	
+	@FindBy(xpath="//table/tbody/tr[3]/td[3]/div/input")
+	public WebElement checkBoxInternationalAll;
+	
+	@FindBy(xpath="//table/tbody/tr[4]/td[4]/div/input")
+	public WebElement checkBoxLocal;
+	
+	@FindBy(xpath="//table/tbody/tr[7]/td[3]/div/input")
+	public WebElement checkBoxRegional;
+	
+	@FindBy(xpath="//*[@id=\"MemberExtension\"]/div[3]/div[1]/div[1]/div/div[3]/div/ul/li")
+	public WebElement clickUser;
+	
+	@FindBy(xpath="//*[@id=\"MemberExtension\"]/div[3]/div[2]/div/div/div[3]/div/ul/li")
+	public WebElement deselectUser;
+	
+	@FindBy(xpath="//*[@id='editMemberExtension']/div[3]/div[1]/div/div/div[3]/div/ul/li")
+	public WebElement editClickUser;
+	
+	@FindBy(xpath="//a[@class='k-button k-bare k-button-icon k-window-action']")
+	public WebElement closeUser;
+	
+	@FindBy(id="toggleFilters")
+	public WebElement filterOpen;
+		
+	@FindBy(id="ProfileName")
+	public WebElement profileNameSearch;	
+		
+	@FindBy(id="CallPermissionApplyFilter")
+	public WebElement applyFilters;
+	
+	@FindBy(xpath="//table/tbody/tr/td[1]")
+	public WebElement firstRecordCallPermissionProfile;
+	
+	@FindBy(xpath="//*[@id='CallPermissionProfileGrid']/div[2]/table/tbody/tr[1]/td[2]/button[1]")
+	public WebElement editProfile;
+	
+	@FindBy(id="editProfileSubmit")
+	public WebElement editProfileSubmit;
+	
+	@FindBy(id="editprofileName")
+	public WebElement editProfileName;
+	
+	@FindBy(xpath="//*[@id='CallPermissionProfileGrid']/div[2]/table/tbody/tr[1]/td[2]/button[3]")
+	public WebElement deleteProfile;
+	
+	@FindBy(id="deleteProfileNo")
+	public WebElement deleteProfileCancel; 
+	
+	@FindBy(xpath="//span[@class='k-icon k-i-close']")
+	public WebElement close; 
+
+	@FindBy(id="deleteProfileYes")
+	public WebElement deleteProfileOk;	
+	
+	@FindBy(id="searchBoxAvailableExtension")
+	public WebElement availableExtensionSearch;
+		
+	@FindBy(id="moveAllExtnAffected")
+	public WebElement markAllAffected;   
+	
+	@FindBy(id="closeBtnAvailableExtension")
+	public WebElement selectedExtensionSearch;
+		
+	@FindBy(id="moveAllExtnUnAffected")
+	public WebElement markAllUnAffected;
+	
+	@FindBy(xpath="//*[@id='CallPermissionProfileGrid']/div[2]/table/tbody/tr[1]/td[2]/button[2]")
+	public WebElement cloneProfile;
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[1]/td[1]/span")
+	public WebElement toolTipEmergency;
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[2]/td[1]/span")
+	public WebElement toolTipInternal;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[3]/td[1]/span")
+	public WebElement toolTipInternational;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[4]/td[1]/span")
+	public WebElement toolTipLocal;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[5]/td[1]/span")
+	public WebElement toolTipLongdistance;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[6]/td[1]/span")
+	public WebElement toolTipOperatorAssigned;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[7]/td[1]/span")
+	public WebElement toolTipRegional;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[8]/td[1]/span")
+	public WebElement toolTipTollFree;	
+	
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[9]/td[1]/span")
+	public WebElement toolTipTollFreePremium;
+		
+	@FindBy(xpath="//*[@id=\"CreateProfileGrid\"]/div[2]/table/tbody/tr[10]/td[1]/span")
+	public WebElement toolTipTollRedirectInbound;
+	
+	@FindBy(xpath="//*[@id=\"EditProfileGrid\"]/div[2]/table/tbody/tr[1]/td[3]/div/input")
+	public WebElement callPermissionProfileCheckbox;
+	
+	@FindBy(xpath="//*[@id=\"EditProfileGrid\"]/div[2]/table/tbody/tr[4]/td[4]/div/input")
+	public WebElement callPermissionProfileCheckbox1;
+	
+	@FindBy(xpath="//*[@id=\"EditProfileGrid\"]/div[2]/table/tbody/tr[10]/td[5]/div/input")
+	public WebElement callPermissionProfileCheckbox2;
+	
+	@FindBy(xpath="//*[@id=\"CallPermissionProfileGrid\"]/div[3]/a[2]")
+	public WebElement previousPageicon;
+		
+	@FindBy(xpath="//*[@id=\"CallPermissionProfileGrid\"]/div[3]/a[3]")
+	public WebElement nextPageicon;
+	
+	@FindBy(xpath="//*[@id=\"CallPermissionProfileGrid\"]/div[3]/ul/li[3]")
+	public WebElement secondPage;
+	
+	@FindBy(xpath="//*[@id=\"CallPermissionProfileGrid\"]/div[3]/ul/li[2]")
+	public WebElement firstPage;
+	
+	public void defaultprofile(String defaultprofile) {	
+		
+		WebElement mytable = driver.findElement(By.xpath("//*[@id='CallPermissionProfileGrid']/div[2]/table/tbody"));
+		List<WebElement> rows = mytable.findElements(By.tagName("tr"));
+		if (rows.contains(defaultprofile))
+		{
+			System.out.println("Profile exists");
+		}
+		
+		else
+		{	       	  		
+		} }	
+	
+	public void verifyPagination() throws InterruptedException{	    
+		
+		List<WebElement> pagination =driver.findElements(By.xpath("//*[@id='CallPermissionProfileGrid']/div[3]/ul/li"));
+		// check if pagination link exists 
+		   if(pagination.size()>0)
+		   { 
+	       // click on pagination links 
+			System.out.println("Pagination exists");
+	     		for(int i=1; i<pagination.size(); i++)
+	     		{ 
+	     		Thread.sleep(2000);	    
+	            pagination = driver.findElements(By.xpath("//*[@id='CallPermissionProfileGrid']/div[3]/ul/li"));
+	            pagination.get(i).click(); 
+	            Thread.sleep(2000);	
+	            }
+	      }	
+		 else {
+	        System.out.println("Pagination doesn't exists");
+	      }
+		} 
+
+	public void verifyforward() throws InterruptedException{	    
+		
+		List<WebElement> pagination =driver.findElements(By.xpath("//*[@id='CallPermissionProfileGrid']/div[3]/ul/li")); 
+		// check if pagination link exists 
+		if (pagination.size()>1)
+		{   
+			// Click Next page icon
+	        Thread.sleep(1000);	    
+		    vc.getWebDriverUtils().clickElement(nextPageicon,"Click Next icon"); 	
+			boolean result = secondPage.isEnabled();
+		    Assert.assertTrue(result, "false");
+
+		} 
+		else {
+	        System.out.println("There is only one page in the grid");
+		} } 	
+   
+	public void verifyBackward() throws InterruptedException{	    
+		
+		List<WebElement> pagination =driver.findElements(By.xpath("//*[@id='CallPermissionProfileGrid']/div[3]/ul/li")); 
+		// check if pagination link exists 
+		if(pagination.size()>1)
+		{   
+		    // Click Previous page icon
+	        vc.getWebDriverUtils().clickElement(previousPageicon,"Click Previous icon");        
+	        boolean result = firstPage.isEnabled();
+		    Assert.assertTrue(result, "false");
+	     }	
+		else {
+	        System.out.println("There is only one page in the grid");
+	        }				
+		}  
+}
+	
+
+
+
+
+

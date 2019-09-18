@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="we_DashboardPageWidgets_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_DashboardPageWidgets_BVN"/> </methods> </class> </classes> </test>
+<test name="we_AutoAttendantWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_AutoAttendantWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_BillingDetailsWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_BillingDetailsWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_BillingReportsWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_BillingReportsWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_CallGroupsWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_CallGroupsWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_ConnectivityTestWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_ConnectivityTestWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_CordlessPhonesWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_CordlessPhonesWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_CurrentUsersWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_CurrentUsersWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_FaxAccountsWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_FaxAccountsWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_HDMeetingLicenseWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_HDMeetingLicenseWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_IncomingCallRoutingWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_IncomingCallRoutingWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_LocationUpdate_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_LocationUpdate_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MOHWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MOHWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MyCallForwardingWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyCallForwardingWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MyCallGroupsWidget"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyCallGroupsWidget"/> </methods> </class> </classes> </test>
+<test name="we_MyCallTwinningWidget"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyCallTwinningWidget"/> </methods> </class> </classes> </test>
+<test name="we_MyDirectoryRecording_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyDirectoryRecording_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MyHDMeeting_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyHDMeeting_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MyOnlineFaxWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyOnlineFaxWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MyPhonesWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyPhonesWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_MyVoicemailWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_MyVoicemailWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_NetworkHealth_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_NetworkHealth_BVN"/> </methods> </class> </classes> </test>
+<test name="we_OfficeSuiteLicenseWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_OfficeSuiteLicenseWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_OrdersWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_OrdersWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_PhoneKeyProfiles_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_PhoneKeyProfiles_BVN"/> </methods> </class> </classes> </test>
+<test name="we_ScheduledMaintenanceWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_ScheduledMaintenanceWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_SupportRequestWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_SupportRequestWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_TollFreeServiceWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_TollFreeServiceWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_CommunityWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_CommunityWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_WeatherAlertsWidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_WeatherAlertsWidget_BVN"/> </methods> </class> </classes> </test>
+<test name="we_WinBotwidget_BVN"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_DashBoardWidgetsSuite_BVN"> <methods> <include name="we_WinBotwidget_BVN"/> </methods> </class> </classes> </test>	
+
+
+
+
+</suite>
+

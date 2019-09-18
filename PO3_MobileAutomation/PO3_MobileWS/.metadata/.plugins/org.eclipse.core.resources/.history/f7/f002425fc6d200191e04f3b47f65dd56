@@ -1,0 +1,190 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+import com.webautomation.validation.Validator;
+
+public class WE_MyCallHandlingPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_MyCallHandlingPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(xpath="xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+	
+	//My Call Handling
+	
+	@FindBy(linkText="My Call Handling")
+	public WebElement myCallHandling;
+	
+	@FindBy(xpath="//h2[contains(.,'Call Forwarding (Immediate) ')]")
+	public WebElement callForwardingHeader;
+	
+	@FindBy(xpath="//h2[contains(.,'Do Not Disturb ')]")
+	public WebElement doNotDisturbHeader;
+
+	@FindBy(xpath="//h2[contains(.,'Call Waiting Tone')]")
+	public WebElement callWaitingToneHeader;
+
+	@FindBy(xpath="//h2[contains(.,'Call Twinning')]")
+	public WebElement callTwinningHeader;
+
+	@FindBy(xpath="//h2[contains(.,'Call Forwarding (No Answer Call Coverage) ')]")
+	public WebElement callForwardingNoAnswerHeader;
+	
+	//Call forwarding (Immediate)
+	
+	@FindBy(xpath="//label[contains(.,'None')]")
+	public WebElement callForwardingNoneSelect;
+	
+	@FindBy(id="btnSaveCallForwardingImmediate")
+	public WebElement callForwardingSubmit;
+
+	@FindBy(id="IsNoneChecked")
+	public WebElement callForwardingNone;
+	
+	@FindBy(xpath="//label[contains(.,'Another Phone')]")
+	public WebElement callForwardingAnotherPhone;
+	
+	@FindBy(xpath="//label[contains(.,'Auto Attendant')]")
+	public WebElement callForwardingAutoAttendant;
+	
+	@FindBy(xpath="//label[contains(.,'Call Coverage')]")
+	public WebElement callForwardingCallCoverage;	
+		
+	@FindBy(xpath="//label[contains(.,'Extension/Call Group/Ccs Extension')]")
+	public WebElement callForwardingExtension;
+	
+	@FindBy(xpath="//label[contains(.,'Extension/Call Group/CCS Extension')]")
+	public WebElement callForwardingImmediateExt;
+	
+	@FindBy(xpath="//label[contains(.,'Phone Number')]")
+	public WebElement callForwardingPhoneNumberSelect;	
+	
+	@FindBy(xpath="//input[@id='callForwardPhoneNumber']")
+	public WebElement immediatePhoneNumber;	
+	
+	@FindBy(xpath="//*[@id='CallForwardingTargetExtension']")
+	public WebElement immediateExtension;
+		
+	@FindBy(xpath="//button[@data-id='CallForwardingTargetExtension']")
+	public WebElement callForwardingExtEnable;
+	
+	@FindBy(xpath="//button[@data-id='Extension']")
+	public WebElement extensionDropdown;	
+	
+	public void extensionDisableStatus() {
+		boolean status = immediateExtension.isEnabled();
+	    Assert.assertEquals(status, false);
+	}
+	
+	public void phonenofielddisablestatus() {
+		boolean status = immediatePhoneNumber.isEnabled();
+		Assert.assertEquals(status, false);
+	}
+	
+	// Do Not Disturb
+	
+	@FindBy(xpath="//label[contains(.,'Do Not Disturb')]")
+	public WebElement doNotDisturb;
+	
+	@FindBy(xpath="//*[@id='excludeFooter']/div[3]/form/div/div[1]/div[2]/div[2]/div[1]/p[2]/label/button")
+	public WebElement checkBoxDoNotDisturb;
+	
+	@FindBy(xpath="//*[@id='btnSaveDoNotDisturbSettings']")
+	public WebElement saveDoNotDisturb;
+	
+	// Call twinning
+	
+	@FindBy(xpath="//label[contains(.,'Call Twinning')]") 
+	public WebElement callTwinning;
+	
+	@FindBy(xpath="//*[@id='excludeFooter']/div[3]/form/div/div[2]/div[2]/div[2]/div[1]/p/label/button") 
+	public WebElement callTwinningCheckbox;
+		
+	@FindBy(xpath="//*[@id='btnSaveCallTwinning']")
+	public WebElement callTwinningSave;
+	
+	@FindBy(xpath="//input[@id='CallTwinning_TwinningTarget']")
+	public WebElement callTwinningInput;
+	
+	@FindBy(xpath="//span[@class='floatwarningclose']")
+	public WebElement warningClose;
+	
+	// Call waiting
+	
+	@FindBy(xpath="//label[contains(.,'Call Waiting Tone')]")
+	public WebElement callWaiting;
+	
+	@FindBy(xpath="//*[@id='excludeFooter']/div[3]/form/div/div[2]/div[1]/div[2]/p[2]/label/button")
+	public WebElement callWaitingToneCheckbox;
+	
+	@FindBy(xpath="//*[@id='btnSaveCallWaitingTone']")
+	public WebElement callWaitingToneSave;
+	
+	// Call forwarding (No answer call coverage)
+	
+	@FindBy(xpath="//label[contains(.,'No Call Forwarding')]")
+	public WebElement noCallForwarding;
+	
+	@FindBy(xpath="//label[contains(.,'Voicemail')]")
+	public WebElement voicemailCallForwarding;
+	
+	@FindBy(xpath="//a[@id='btnSaveCallCoverage']")
+	public WebElement saveCallCoverage;
+	
+	public void anotherphone() {
+	List<WebElement> divs = driver.findElements(By.xpath("//label[contains(.,'Another Phone')]"));
+	divs.get(1).click();
+	}
+	
+	public void autoattendant() {
+	List<WebElement> divs = driver.findElements(By.xpath("//label[contains(.,'Auto Attendant')]"));
+	divs.get(1).click();
+		}
+	
+	@FindBy(xpath="//input[@id='callCoveragePhoneNumber']")
+	public WebElement anotherPhoneNumberTextField;
+	
+	@FindBy(xpath="//button[@data-id='callCoverageExtension']")
+	public WebElement callCoverageExtension;
+
+	@FindBy(xpath="//button[@data-id='CallCoverageAutoAttendantTargetExt']")
+	public WebElement autoAttendantExt;
+	
+	@FindBy(xpath="//button[@class='_pendo-close-guide_']")
+	public WebElement pendoClose;
+	
+	@FindBy(xpath="//label[contains(.,' Another Phone Number')]")
+	public WebElement anotherPhoneNumber;
+
+	public void verifyphonenodisablestatus() {
+		boolean phonenofieldstatus = anotherPhoneNumberTextField.isEnabled();
+	    Assert.assertEquals(phonenofieldstatus, false);
+	}
+	
+	public void verifyextdisablestatus() {
+		boolean extension = callCoverageExtension.isEnabled();
+	    Assert.assertEquals(extension, false);
+	}
+ }

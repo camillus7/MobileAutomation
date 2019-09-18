@@ -1,0 +1,461 @@
+package com.mobile.WeConnect.pageobject;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.mobile.MyWin.pageobject.MyWinMobile_BillingPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_LandingPage;
+import com.mobile.MyWin.pageobject.MyWinMobile_ManagePaymentMethodPage;
+import com.mobile.commonpageobjects.AutoPay;
+import com.mobile.commonpageobjects.BillingPage;
+import com.webautomation.validation.Validator;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+
+public class WeConnect_BillingPage2 {
+
+	protected AndroidDriver<AndroidElement> driver;
+	private Validator vc;
+	private BillingPage commonBillingMethods;
+	private AutoPay commonautoPayMethods;
+	
+
+	public WeConnect_BillingPage2(AndroidDriver<AndroidElement> driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.commonBillingMethods = new BillingPage(driver);
+		this.commonautoPayMethods = new AutoPay(driver);
+	}
+	
+	@FindBy(id = "label_payment_accounts")
+	public WebElement billingtitle;
+	
+	@FindBy(id="filter_icon")
+	public WebElement filtericon;
+	
+	@FindBy(id="amount_sort")
+	public WebElement sortByAmount;
+	
+	@FindBy(id="account_sort")
+	public WebElement sortByAccount;
+	
+	@FindBy(id="date_sort")
+	public WebElement sortByDueDate;
+	
+	@FindBy(id="text_big_price")
+	public WebElement currentBalanceDue;
+		
+	@FindBy(xpath = "//android.widget.TextView[@text='Current Bill']")
+	public static WebElement currentBillTitle;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Current Bill']")
+	public static WebElement currentBillTab;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Invoices']")
+	public static WebElement invoicesTab;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Options']")
+	public static WebElement optionsTab;
+	
+	@FindBy(id = "txt_account_id")
+	public WebElement accountid;
+	
+	@FindBy(id = "text_big_price")
+	public WebElement amountDue;
+	
+	
+	
+	
+	public String billTitle, billValues,dueamount;
+	public String billDate;
+	
+	 
+
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Billing']")
+	public  WebElement billingMenu;
+	
+	@FindBy(id = "account_number")
+	public WebElement accountNumber;
+	
+	@FindBy(id = "amount_due")
+	public WebElement dueAmount;
+	
+	public void makePaymentAmount() throws InterruptedException {
+		vc.getMobileDriverUtils().clickMobileElement(billingMenu, "Billing-Screen");
+
+		if (vc.getMobileDriverUtils().elementAvailablity(accountNumber, "AccountDetails")) {
+			commonBillingMethods.makePaymentAmount();
+		} else {
+			Reporter.log("Accounts not available", true);
+		}
+
+	}
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Manage Payment Methods ']")
+	public WebElement managePaymentmethod;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Manage AutoPay ']") 
+	public WebElement manageAutoPay;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Options']")
+	public WebElement Options;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='You are not Enrolled in AutoPay']")
+	public WebElement notEnrolledAutopay;
+	
+	@FindBy(id = "card")
+	public WebElement paymentOptionDropdown;
+
+	@FindBy(id = "text1")
+	public WebElement dueDate;
+
+	@FindBy(xpath = "//android.widget.CheckedTextView[4]")
+	public WebElement selectDate;
+
+	@FindBy(id = "no_limit")
+	public WebElement noLimitRadioBtn;
+
+	@FindBy(id = "other_amount")
+	public WebElement otherAmountRadioBtn;
+
+	@FindBy(id = "terms_and_conditions")
+	public WebElement termsCheckbox;
+
+	@FindBy(id = "cancel")
+	public WebElement cancelBtn;
+
+	@FindBy(id = "enroll")
+	public WebElement enrollBtn;
+
+	@FindBy(id = "name")
+	public WebElement cardDetails;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Your AutoPay has been successfully updated.']")
+	public WebElement confirmationMessage;
+	
+	@FindBy(id = "auto_pay_status")
+	public WebElement autopayStatus;
+	
+	@FindBy(id = "done")
+	public WebElement doneButton;
+	
+	@FindBy(id = "deenroll")
+	public WebElement deenrollBtn;
+	
+	@FindBy(id = "title")
+	public WebElement autoPayText;
+	
+	@FindBy(id="com.windstream.enterprise.we.dev:id/id_option_txt")
+	public List<WebElement> optionsext;
+	
+	public void enrollAutoPay() throws InterruptedException {
+		vc.getMobileDriverUtils().clickMobileElement(billingMenu, "Billing-Screen");
+		vc.getMobileDriverUtils().clickMobileElement(accountNumber, "Account");
+		vc.getMobileDriverUtils().clickMobileElement(Options, "Options");
+		vc.getMobileDriverUtils().elementAvailablity(managePaymentmethod, "ManagePaymentMethod");
+		vc.getMobileDriverUtils().clickMobileElement(manageAutoPay, "ManageAutopay");
+		
+		commonautoPayMethods.enrollAutoPay();
+
+	}
+	
+	@FindBy(id = "button1")
+	public WebElement CancelAutoPayYes;
+	
+	public void deenrollAutoPay() {
+		vc.getMobileDriverUtils().clickMobileElement(billingMenu, "Billing-Screen");
+		vc.getMobileDriverUtils().clickMobileElement(accountNumber, "Account");
+		vc.getMobileDriverUtils().clickMobileElement(Options, "Options");
+		vc.getMobileDriverUtils().clickMobileElement(manageAutoPay, "ManageAutopay");
+		vc.getMobileDriverUtils().elementAvailablity(paymentOptionDropdown, "ManageAutoPay-Screen");
+		
+		commonautoPayMethods.deenrollAutoPay();
+	}
+		
+	
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Add Payment Method']")
+	public WebElement addPaymentMethodButton;
+	
+	@FindBy(id = "check")
+	public WebElement optionsBlock;
+	
+	@FindBy(xpath = "//android.view.View[@text='ELECTRONIC CHECK']")
+	public WebElement electronicCheckOption;
+
+	@FindBy(xpath = "//android.view.View[@text='DEBIT/CREDIT CARD']")
+	public WebElement debitCreditCardOption;
+
+	@FindBy(id = "new_BankAccountType")
+	public WebElement BankAccountType;
+
+	@FindBy(id = "new_PayeeLastName")
+	public WebElement PayeeLastName;
+
+	@FindBy(id = "new_PayeeFirstName")
+	public WebElement PayeeFirstName;
+
+	@FindBy(id = "new_BankRoutingNumber")
+	public WebElement BankRoutingNumber;
+
+	@FindBy(id = "new_BankAccountNumber")
+	public WebElement BankAccountNumber;
+
+	@FindBy(id = "new_ecZip")
+	public WebElement ZipCode;
+
+	@FindBy(xpath = "//android.view.View[@text='Add Check']")
+	public WebElement addCheckButton;
+	
+	@FindBy(id = "AddECSubmit")
+	public WebElement addCheckButton1;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Unable to communicate with server']")
+	public WebElement serverError;
+	
+	@FindBy(id = "name")
+	public WebElement cardholderName;
+	
+	@FindBy(xpath = "//android.widget.TextView[@text='Delete']")
+	public WebElement Delete;
+	
+	@FindBy(id = "NewECError")
+	public WebElement addPaymentErrorMessage;
+	
+	public void addElectronicCheck(String Cardnum) throws InterruptedException {
+		vc.getMobileDriverUtils().clickMobileElement(billingMenu, "Billing-Screen");
+		vc.getMobileDriverUtils().clickMobileElement(accountNumber, "Account");
+		vc.getMobileDriverUtils().clickMobileElement(Options, "Options");
+		vc.getMobileDriverUtils().clickMobileElement(managePaymentmethod, "ManagePaymentmethod");
+		vc.getMobileDriverUtils().elementAvailablity(addPaymentMethodButton, "AddPaymentMethod");
+		vc.getMobileDriverUtils().clickMobileElement(addPaymentMethodButton, "AddPaymentMethod");
+		vc.getMobileDriverUtils().elementAvailablity(optionsBlock, "PaymentType");
+		vc.getMobileDriverUtils().selectMobileRadioButton(electronicCheckOption, "ElectronicCheck-Option");
+		vc.getMobileDriverUtils().mobile_EnterText(PayeeLastName, "LastName", "LastName");
+		vc.getMobileDriverUtils().mobile_EnterText(PayeeFirstName, "FirstName", "FirstName");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().mobile_EnterText(BankRoutingNumber, "061119888", "RoutingNo");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().mobile_EnterText(BankAccountNumber, Cardnum, "AccountNumber");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().mobile_EnterText(ZipCode, "11111", "ZipCode");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().elementAvailablity(addCheckButton, "Add Check button");
+		vc.getMobileDriverUtils().sleep(2000);
+		vc.getMobileDriverUtils().clickMobileElement(addCheckButton1, "AddCheck-Button");
+		vc.getMobileDriverUtils().clickMobileElement(addCheckButton, "AddCheck-Button");
+		vc.getMobileDriverUtils().elementAvailablity(cardholderName, "ManagePaymentMethod-Screen");
+	}
+	
+	
+	public void addAnddeleteElectonicCheck(String Cardnum) throws InterruptedException {
+
+		addElectronicCheck(Cardnum);
+
+		if (vc.getMobileDriverUtils().validateCreditCard(Cardnum)) {
+			Reporter.log("Electronic check is Successfully added", true);
+			vc.getMobileDriverUtils().elementAvailablity(cardholderName, "ManagePaymentMethod-Screen");
+			int ilen = Cardnum.length();
+			String cNum = Cardnum.substring(ilen - 4, ilen);
+			Reporter.log("Added Electronic check is " + cNum, true);
+			WebElement MoreBtn = driver
+					.findElement(By.xpath("//android.widget.TextView[@text='********" + cNum + "']"));
+			vc.getMobileDriverUtils().clickMobileElement(MoreBtn, "More Button");
+			vc.getMobileDriverUtils().clickMobileElement(Delete, "More -> Delete Button");
+			vc.getMobileDriverUtils().clickMobileElement(MyWinMobile_BillingPage.ok, "OK");
+			vc.getMobileDriverUtils().clickMobileElement(MyWinMobile_BillingPage.ok, "OK");
+			vc.getMobileDriverUtils().sleep(2000);
+
+			if (vc.getMobileDriverUtils().validateCreditCard(Cardnum)) {
+				Assert.assertFalse(true, Cardnum + " Deleting card Failed");
+			} else {
+				Reporter.log(Cardnum + " ElectronicCheck Deleted Successfully", true);
+
+			}
+
+		} else if (addPaymentErrorMessage.getText().contains("Electronic Check already exists for the account!")) {
+			Reporter.log(addPaymentErrorMessage.getText().toUpperCase(), true);
+			Reporter.log("PLEASE ADD NEW ELECTRONIC CHECK ACCOUNT", true);
+		} else if (vc.getMobileDriverUtils().elementAvailablity(addPaymentErrorMessage,
+				"AddPaymentAlert-Message") == true) {
+			Reporter.log(addPaymentErrorMessage.getText(), true);
+			Assert.assertFalse(true, "Adding ElectronicCheck  Failed");
+
+		} else {
+			Reporter.log("Adding ElectronicCheck Failed", true);
+			Assert.assertFalse(true);
+
+		}
+	}
+	
+	
+	@FindBy(id = "new_ccNumber")
+	public WebElement cardNumber;
+
+	@FindBy(xpath = "//android.widget.Spinner[@text='MM']")
+	public WebElement expiryMonth;
+
+	@FindBy(xpath = "//android.widget.Spinner[@text='YYYY']")
+	public WebElement expiryYear;
+	
+	@FindBy(id = "new_ccCVV2")
+	public WebElement cvvNumber;
+
+	@FindBy(id = "new_ccZip")
+	public WebElement cardZipCode;
+
+	@FindBy(id = "addNewCCSubmit")
+	public WebElement addCardButton;
+
+	@FindBy(xpath = "//android.view.View[@text='Add Card']")
+	public WebElement AddCard;
+
+	@FindBy(id = "NewCCError")
+	public WebElement addCardErrorMessage;
+
+	
+	public void selectDropdown(WebElement element, String dropdownName, String dropdownValue) {
+//		vc.getMobileDriverUtils().clickMobileElement(element, dropdownName);
+		List<WebElement> ccDropdown = driver.findElements(By.className("android.widget.CheckedTextView"));
+		for (int i = 0; i < ccDropdown.size(); i++) {
+			if (ccDropdown.get(i).getText().equalsIgnoreCase(dropdownValue)) {
+				ccDropdown.get(i).click();
+				Reporter.log("Selected ==" + dropdownValue + "from " + dropdownName, true);
+				break;
+			}
+
+		}
+	}
+	
+	public void addCreditCard(String cardNo) throws InterruptedException {
+
+		vc.getMobileDriverUtils().clickMobileElement(billingMenu, "Billing-Screen");
+		vc.getMobileDriverUtils().clickMobileElement(accountNumber, "Account");
+		vc.getMobileDriverUtils().clickMobileElement(Options, "Options");
+		vc.getMobileDriverUtils().clickMobileElement(managePaymentmethod, "ManagePaymentmethod");
+		vc.getMobileDriverUtils().elementAvailablity(addPaymentMethodButton, "AddPaymentMethod");
+		vc.getMobileDriverUtils().clickMobileElement(addPaymentMethodButton, "AddPaymentMethod");
+		vc.getMobileDriverUtils().elementAvailablity(optionsBlock, "PaymentType");
+		vc.getMobileDriverUtils().selectMobileRadioButton(debitCreditCardOption, "CreditCard-Option");
+		vc.getMobileDriverUtils().mobile_EnterText(cardNumber, cardNo, "Card Number");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().clickMobileElement(expiryMonth, "ExpiryMonthDropdown");
+		selectDropdown(expiryMonth, "ExpiryMonthDropdown", "04");
+		vc.getMobileDriverUtils().clickMobileElement(expiryYear, "ExpiryYearDropdown");
+		selectDropdown(expiryYear, "ExpiryYearDropdown", "2020");
+		vc.getMobileDriverUtils().mobile_EnterText(cvvNumber, "744", "Cvv");
+		driver.navigate().back();
+		vc.getMobileDriverUtils().mobile_EnterText(cardZipCode, "24577", "Zipcode");
+		vc.getMobileDriverUtils().elementAvailablity(AddCard, "Add Card Button");
+		vc.getMobileDriverUtils().clickMobileElement(addCardButton, "AddCard-Button");
+		vc.getMobileDriverUtils().clickMobileElement(addCardButton, "AddCard-Button");
+	}
+
+	public void addDebit_CreditCard(String cardNo) throws InterruptedException {
+	
+		addCreditCard(cardNo);
+					
+			if (vc.getMobileDriverUtils().validateCreditCard(cardNo)) {
+				Reporter.log(cardNo + " credit/Debit Card is Successfully added",true);
+				vc.getMobileDriverUtils().elementAvailablity(cardholderName, "ManagePaymentMethod-Screen");
+				int ilen = cardNo.length();
+				String cNum = cardNo.substring(ilen - 4, ilen);
+				Reporter.log(cNum, true);
+				WebElement MoreBtn=driver.findElement(By.xpath("//android.widget.TextView[@text='XXXXXXXXXXXX"+cNum+"']"));
+				vc.getMobileDriverUtils().clickMobileElement(MoreBtn, "More Button");
+				vc.getMobileDriverUtils().sleep(2000);
+				vc.getMobileDriverUtils().clickMobileElement(Delete, "More -> Delete Button");
+				//vc.getMobileDriverUtils().clickMobileElement(DelDelete, "Delete Button");
+				vc.getMobileDriverUtils().clickMobileElement(MyWinMobile_BillingPage.ok, "OK");
+				vc.getMobileDriverUtils().clickMobileElement(MyWinMobile_BillingPage.ok, "OK");
+				vc.getMobileDriverUtils().sleep(2000);
+				if(vc.getMobileDriverUtils().validateCreditCard(cardNo)) {
+					Assert.assertFalse(true, cardNo + "Deleting card Failed");
+				} else {
+					Reporter.log(cardNo + " Card Deleted Successfully", true);
+
+				}
+		
+		} else if (vc.getMobileDriverUtils().elementAvailablity(addCardErrorMessage,
+				"AddPaymentAlert-Message") == true) {
+			Reporter.log(addCardErrorMessage.getText(), true);
+			Assert.assertFalse(true, "Adding Credit/Debit Card Failed");
+
+		} else {
+			Reporter.log("Adding Credit/Debit card Failed", true);
+			Assert.assertFalse(true);
+			
+		}
+	}
+	
+	public boolean checkCardAvailability() {
+		return (vc.getMobileDriverUtils().elementAvailablity(cardDetails, "CardDetails"));
+	}
+
+	@FindBy(id = "btn_pay_now")
+	public WebElement payNowButton;
+	
+	@FindBy(id = "payment_date")
+	public WebElement paymentDate;
+	
+	@FindBy(id="button1")
+	public WebElement ok;
+	
+	@FindBy(id = "btn_pay_now")
+	public WebElement continueButton;
+	
+	@FindBy(xpath="//android.widget.TextView[@text='Your Payment is Successful']")
+	public WebElement paymentSuccessMessage;
+	
+	
+	public void schedulePayment() throws InterruptedException {
+		vc.getMobileDriverUtils().clickMobileElement(billingMenu, "Billing-Screen");
+		if (vc.getMobileDriverUtils().elementAvailablity(accountNumber, "AccountDetails")) {
+			String text = dueAmount.getText();
+			if (text.equals("$0.00")) {
+				Reporter.log("You do not have any dues", true);
+			} else {
+				vc.getMobileDriverUtils().clickMobileElement(payNowButton, "PayNow-Button");
+				if (!vc.getMobileDriverUtils().elementAvailablity(paymentDate, "PaymentDate-DateSelection")) {
+					Reporter.log("Schedule Payment options is not available", true);
+				} else {
+					vc.getMobileDriverUtils().clickMobileElement(paymentDate, "PaymentDate-DateSelection");
+					vc.getMobileDriverUtils().clickMobileElement(ok, "OK-Button");
+					WebElement selectedDate = driver.findElement(By.xpath(
+							"//android.widget.RelativeLayout[contains(@resource-id,'payment_date')]//android.widget.TextView"));
+					Reporter.log("Selected Date is ==> " + selectedDate.getText(), true);
+					vc.getMobileDriverUtils().clickMobileElement(continueButton, "Continue");
+
+					if (checkCardAvailability()) {
+						Reporter.log("CARDS ALREADY ADDED", true);
+						vc.getMobileDriverUtils().selectMobileRadioButton(cardholderName, "Card");
+						vc.getMobileDriverUtils().selectCheckbox(termsCheckbox, "TermsandConditions");
+						vc.getMobileDriverUtils().clickMobileElement(payNowButton, "PayNow-Button");
+						if (vc.getMobileDriverUtils().elementAvailablity(paymentSuccessMessage,
+								"PaymentSuccess-Message")) {
+							Reporter.log(paymentDate.getText(), true);
+							Reporter.log("Payment Scheduled Successfully", true);
+							vc.getMobileDriverUtils().clickMobileElement(doneButton, "Done-Button");
+
+						} else {
+							Reporter.log("Exception", true);
+						}
+					} else {
+						Reporter.log("No Cards Available. Add Card...", true);
+					}
+				}
+			}
+		} else {
+			Reporter.log("Accounts not available", true);
+		}
+	}
+
+}

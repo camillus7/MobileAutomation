@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="1">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG_Mobile" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="WE-FavoriteContact">
+	<classes>	
+		<class name="com.mobileautomation.tests.WE_OfficeSuiteUC">
+			<methods>
+				<include name="weConnect_ContactAddFavorite" />
+			</methods>
+		</class>
+	</classes>
+</test>
+	<test name="WE-FavoriteGroup">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_OfficeSuiteUC">
+				<methods>
+					<include name="weConnect_GroupsAddFavorite" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<!-- <test name="WE-SearchCoworkers">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_OfficeSuiteUC">
+				<methods>
+					<include name="weConnect_SearchCoworkers" />
+				</methods>
+			</class>
+		</classes>
+	</test> -->
+	<test name="WE-Create/Delete Group">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_OfficeSuiteUC">
+				<methods>
+					<include name="weConnect_CreateandDeleteGroup" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE-VerifyDueAmount">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_VerifyDueAmount" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE-SchedulePayment">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_SchedulePayment" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE_MakePayment">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_MakePayment" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE_EnrollAutopay">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_EnrollAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="WE-DeEnroll Autopay">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_DeenrollAutoPay" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-Add ElectronicCheck">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_AddElectronicCheck" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-Add CreditCard">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_BillingSuite">
+				<methods>
+					<include name="we_AddCredit_DebitCard" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-Notification Subscription">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_CommonSuite">
+				<methods>
+					<include name="we_Notification" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-CompanyContacts">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_CommonSuite">
+				<methods>
+					<include name="we_CompanyContacts" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-ProfileSettings">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_ProfileSettingsSuite">
+				<methods>
+					<include name="weConnect_ProfileSettings" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+	<test name="WE-CreateSupportRequest">
+		<classes>
+			<class name="com.mobileautomation.tests.WE_SupportRequestSuite">
+				<methods>
+					<include name="weConnect_CreateSupportRequest" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	
+</suite>
+

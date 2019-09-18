@@ -1,0 +1,140 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import Base.BaseSteps_SelGrid;
+
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+public class MyWin_RWD_ConsumerPortal_MobileSuite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+	private String firstName = "test" + Math.random();
+	private String username = "test" + Math.random();
+	
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void ConsumerEnd2End_RWD() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.Home);
+		Reporter.log("Consumer Mobile RWD", true);
+		myWin_LoginPage.navigateToWinLinkMobileHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			System.out.println("******** InstallApp ************");
+			driver.findElement(By.xpath("//*[@id='mobile-wrapper']/div[1]/div/div[4]/div[1]/button")).click();
+			vc.getWebDriverUtils().checkPageIsReady();
+			System.out.println(driver.getTitle());
+			driver.navigate().back();
+			
+			System.out.println("******** ContinueAsBrowser ************");
+			driver.findElement(By.xpath("//*[@id='mobile-wrapper']/div[1]/div/div[4]/a/div/button")).click();
+			vc.waitUntilTextIsPresent("Current Balance Due");
+			vc.waitUntilTextIsPresent("View Details");
+			
+			System.out.println("******** Billing ************");
+			driver.findElement(By.xpath("//*[@id='billing_li']/a/div[1]/img")).click();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CURRENT BILL"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("OPTIONS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Now"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("YOUR CURRENT BILL"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("YOUR PREVIOUS BILL"));
+			
+			System.out.println("******** Billing - Options ************");
+			System.out.println("******** Billing - Manage Payment Methods************");
+			driver.findElement(By.xpath("//div[@class='tab-text'][contains(.,'Options')]")).click();
+			driver.findElement(By.xpath("//div[@style='float: left; height: 40px; line-height: 40px; margin-left: 20px;'][contains(.,'Manage Payment Methods')]")).click();
+			//driver.findElement(By.xpath("//*[@id='options']/div/a[1]/div/div[2]"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Saved Payment Options"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ELECTRONIC CHECK"));
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.xpath("//a[contains(@onclick,'history.back()')]")).click();
+			
+			System.out.println("******** Billing - Paper Bills************");
+			vc.waitUntilTextIsPresent("Current Balance Due");
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.xpath("//div[@class='tab-text'][contains(.,'Options')]")).click();
+			vc.getWebDriverUtils().checkPageIsReady();
+			vc.waitUntilTextIsPresent("Paper Bills");
+			//driver.findElement(By.xpath("//*[@id='options']/div/a[2]/div/div[2]")).click();
+		
+		
+			System.out.println("******** Support ************");
+			//driver.findElement(By.xpath("//*[@id='support_li']/a/div[1]/img")).click();
+			driver.findElement(By.xpath("//img[@src='/consumer/images/MobileBrowser/support.png']")).click();
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Install App"));
+			try {
+				vc.getWebDriverUtils().elementAvailablity(driver.findElement(By.xpath("//img[@src='/consumer/images/MobileBrowser/app_store.png']")), "App Store - Install Image");
+					
+			} catch (Exception e) {
+				vc.getWebDriverUtils().elementAvailablity(driver.findElement(By.xpath("//img[@src='/consumer/images/MobileBrowser/play_store.png']")), "Play Store - Install Image");
+			}
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Quick Help"));
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.xpath("//*[@id='support']/div[2]/a[1]/div/div[2]")).click();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Have a Question?"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Support Categories"));
+			driver.navigate().back();
+			
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.xpath("//*[@id='support']/div[2]/a[2]/div/div[2]")).click();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Customer Care"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("800-347-1991"));
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.cssSelector("#contactus_modal > div.modal-header > a")).click();
+			
+			System.out.println("******** Home ************");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Home"));
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.xpath("//*[@id='home_li']/a/div[1]/img")).click();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View Details"));
+			
+			System.out.println("******** LogOut ************");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Logout"));
+			vc.getWebDriverUtils().checkPageIsReady();
+			driver.findElement(By.xpath("//div[@class='tab-text'][contains(.,'Logout')]")).click();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("You have successfully signed off"));
+			
+			System.out.println("******** Return to Login ************");
+			driver.findElement(By.xpath("//a[contains(@class,'ping-button normal allow')]")).click();
+			vc.getWebDriverUtils().checkPageIsReady();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("New user"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Start Here"));
+			
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+}

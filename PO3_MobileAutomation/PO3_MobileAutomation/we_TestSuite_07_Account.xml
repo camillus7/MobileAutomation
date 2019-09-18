@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+     <!--  <listener class-name="com.webautomation.validation.RetryListener" />   -->
+</listeners>
+
+<test name="TC_WE_Account_001"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Account_Suite"> <methods> <include name="Account_AccountHierarchy_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Account_002"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Account_Suite"> <methods> <include name="Account_CompanyContacts_WOL"/> </methods> </class> </classes> </test>
+<test name="TC_WE_Account_003"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Account_Suite"> <methods> <include name="Account_NotitificationCenter"/> </methods> </class> </classes> </test>
+
+</suite>

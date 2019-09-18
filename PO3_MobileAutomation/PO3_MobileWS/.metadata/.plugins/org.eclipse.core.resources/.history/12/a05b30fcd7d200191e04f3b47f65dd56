@@ -1,0 +1,128 @@
+package com.webautomation.pageobject.we_pages;
+
+import java.util.Set;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+
+public class WE_DownloadsPage {
+	final WebDriver driver;
+	private Validator vc;
+
+	public WE_DownloadsPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+	
+	@FindBy(linkText="Downloads")
+	public WebElement downloads;
+		
+	@FindBy(xpath = "//div[@class='ag_Image front-card'][contains(@style,'AndroidMyOS')]")
+	public WebElement androidMyOSImage;
+	
+	@FindBy(xpath = "//div[@class='ag_Image front-card'][contains(@style,'iOSMyOS')]")
+	public WebElement iOSMyOSImage;
+		
+    @FindBy(id="BtnRestict")
+	public WebElement androidGetItNow;
+		
+		 
+	@FindBy(xpath = "(//button[@id='BtnRestict'])[2]")
+	public WebElement iOSGetItNow;
+	
+	@FindBy(linkText="Show QR Code")
+	public WebElement androidScanCode;
+	
+	@FindBy(xpath = "(//a[@href='#'][contains(.,'Show QR Code')])[2]")
+	public WebElement iOSScanCode;
+	
+	@FindBy(linkText="Download")
+	public WebElement androidDownload;
+
+	@FindBy(xpath = "(//a[@href='#'][contains(.,'Download')])[2]")
+	public WebElement iOSDownload;
+	
+	@FindBy(xpath="//button[@data-id='ddlAvailableGalleryTypes']")
+	public WebElement downloadAllDropDown;
+	
+	@FindBy(xpath="//img[@alt='Available for Android']")
+	public WebElement availableForAndroid;
+	
+	@FindBy(xpath="//img[@alt='Available for iOS']")
+	public WebElement availableForiOS;
+	
+	@FindBy(xpath = "(//button[contains(.,'Hide QR')])[1]")
+	public WebElement hideQRAndroid;
+	
+	@FindBy(xpath = "(//button[contains(.,'Hide QR')])[2]")
+	public WebElement hideQRiOS;
+	
+	public void downloadsValidation(String winHandleBefore,String userStoryDescription,WE_HomePage we_HomePage,WE_DownloadsPage we_DownloadsPage) throws InterruptedException {
+		userStoryDescription = "Downloads - Connect for Android";
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Downloads-Connect for Android");
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.downloads, "Downloads");
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("AppGallery  - Windstream Enterprise"));
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Connect for Android"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Connect for iOS"));
+		
+		vc.getWebDriverUtils().mouseHoveronElement(we_DownloadsPage.androidMyOSImage);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Consolidate all of your unified communications features into one easily accessible app on your Android phone"));
+		vc.getWebDriverUtils().clickHiddenElement(we_DownloadsPage.androidGetItNow, "Android GetItNow");
+		
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.androidDownload, "Android Download");
+		
+		Set<String> allHandles = driver.getWindowHandles();
+		for (String currentHandle : allHandles) {
+			if (!currentHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(currentHandle);
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Windstream Enterprise Connect - Apps on Google Play"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Install"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Add to Wishlist"));
+			}
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_DownloadsPage.availableForAndroid, "Available for Android"), "Available for Android - Image validation");
+		
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.androidGetItNow, "Android GetItNow");
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.androidScanCode, "Android ScanCode");
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.hideQRAndroid, "Hide QR - Android");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Available for Android"));
+	
+		userStoryDescription = "Downloads-Connect for IOS";
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Downloads-Connect for IOS");
+		vc.getWebDriverUtils().mouseHoveronElement(we_DownloadsPage.iOSMyOSImage);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Consolidate all of your unified communications features into one easily accessible app on your iPhone"));
+
+		vc.getWebDriverUtils().clickHiddenElement(we_DownloadsPage.iOSGetItNow, "iOS GetItNow");
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.iOSDownload, "iOS Download");
+		
+		Set<String> allHandlesIOS = driver.getWindowHandles();
+		for (String currentHandle : allHandlesIOS) {
+			if (!currentHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(currentHandle);
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Windstream Enterprise Connect"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("App Store"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Preview"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("iPhone Screenshots"));
+			}
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_DownloadsPage.availableForiOS, "Available for iOS"), "Available for iOS - validation");
+		
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.iOSGetItNow, "iOS GetItNow");
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.iOSScanCode, "iOS ScanCode");
+		vc.getWebDriverUtils().clickElement(we_DownloadsPage.hideQRiOS, "Hide QR - iOS");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Available for iOS"));
+	}
+	
+}

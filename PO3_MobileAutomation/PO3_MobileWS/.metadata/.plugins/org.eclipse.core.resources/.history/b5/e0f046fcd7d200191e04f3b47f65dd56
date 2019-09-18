@@ -1,0 +1,63 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.webautomation.validation.Validator;
+public class WE_SynoptekWidget {
+
+
+	final WebDriver driver;
+	WebElement detailsButton;
+
+	private Validator vc;
+
+	public WE_SynoptekWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Synoptek')]")
+    public WebElement SynoptekCheckbox;
+	
+	@FindBy(xpath ="//*[@id='widget0']/div[3]/a")
+	public WebElement Login;
+	
+	@FindBy(xpath = "//*[@id='widget1050036']/div[1]/h2")
+    public WebElement widgetName;
+
+	@FindBy(xpath = "//*[@id='widget1050036']/div[1]/button")
+    public WebElement settingsButton;
+	
+	@FindBy(xpath = "//*[@id='widget1050036']/div[1]/div/ul/li/a")
+    public WebElement removeWidget;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Settings']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Settings']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	
+
+	
+public void navigationFunctionality() throws InterruptedException {
+		
+	Assert.assertTrue(vc.waitUntilTextIsPresent("Login"));
+	vc.getWebDriverUtils().elementAvailablity(Login, "Login");
+	vc.getWebDriverUtils().clickElement(Login, "Login");
+	//vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Network Utilization - Windstream Enterprise");
+	//vc.waitUntilTextIsPresent("Network Utilization");
+	//driver.navigate().back();
+	//vc.getWebDriverUtils().checkPageIsReady();
+	//vc.getWebDriverUtils().scrollPage(widgetName);
+	//vc.getWebDriverUtils().clickElement(settingsButton, "SettingsButton");
+	//vc.getWebDriverUtils().clickElement(removeWidget, "RemoveWidget");
+	
+	
+}
+
+
+}

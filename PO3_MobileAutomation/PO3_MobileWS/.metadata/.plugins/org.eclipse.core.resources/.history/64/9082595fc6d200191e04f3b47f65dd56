@@ -1,0 +1,114 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactoryFinder;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_NewBillingInquiryWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_NewBillingInquiryWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+
+	}
+
+	@FindBy(xpath = "//label[contains(.,'New Billing Inquiry')]")
+	public WebElement newbillinginquirycheckbox;
+
+	@FindBy(name="Email")
+	public WebElement contactemail;
+
+	@FindBy(name="Comments")
+	public WebElement comments;
+
+	@FindBy(xpath = "//h2[contains(.,'New Billing Inquiry')]")
+	public WebElement verifyWidgetName;
+
+	@FindBy(xpath = "(//*[@id='widget1062772']/div[1]/button")
+	public WebElement verifysettings;
+
+	@FindBy(xpath = "//span[@class='filter-option pull-left'][contains(.,'Select Account')]")
+	public WebElement newBillingInquirydropdown;
+
+	@FindBy(xpath = "//button[contains(.,'All Accounts ')]")
+	public WebElement selectaccountdropdown;
+
+	@FindBy(xpath = "//input[contains(@class,'input-block-level form-control')]")
+	public WebElement enteraccountnumb;
+
+	@FindBy(xpath = "//*[@id='mCSB_5_container']/ul/li[2]/a/span[2]")
+	public WebElement selectaccountnumb;
+
+	@FindBy(xpath = "//input[@name='Email']")
+	public WebElement entercontactemailid;
+
+	@FindBy(xpath = "//textarea[@name='Comments']")
+	public WebElement entercomment;
+
+	@FindBy(xpath = "//span[contains(.,'Submit')]")
+	public WebElement submitdetails;
+
+	@FindBy(xpath = "//p[contains(.,'Your Billing Inquiry was successfully submitted.')]")
+	public WebElement updatedmessage;
+
+	@FindBy(xpath = "//*[@id='divInquiryContainer']/div[1]/div")
+	public WebElement invalidemailid;
+	
+	@FindBy(xpath="//span[@class='floatwarningclose']")
+	public WebElement closeIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='New Billing Inquiry']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='New Billing Inquiry']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	
+	public void verifyNewBillingInquiryWidgetFunctionality() throws InterruptedException {
+
+		Assert.assertTrue(vc.waitUntilTextIsPresent("New Billing Inquiry"));
+		vc.getWebDriverUtils().enterText(entercontactemailid, "ibl@gmail.com", "Contactemailid");
+		vc.getWebDriverUtils().enterText(entercomment, "ALL IS WELL", "Comment or Queries");
+		Reporter.log("********** Verify Alert is displayed to select account ************", true);
+		vc.getWebDriverUtils().clickHiddenElement(submitdetails, "Submit");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Please select an account."));
+		vc.getWebDriverUtils().clickHiddenElement(closeIcon, "Close");
+
+		vc.getWebDriverUtils().elementAvailablity(contactemail, "Contactemail");
+		vc.getWebDriverUtils().elementAvailablity(comments, "Comments");
+		vc.getWebDriverUtils().genericDropDownSelectFirstItem(newBillingInquirydropdown, "BillingInquiry-Dropdown");
+		Reporter.log("********** Submit BillingInquiry ************", true);
+		vc.getWebDriverUtils().enterText(entercontactemailid, "ibl@gmail.com", "Contactemailid");
+		vc.getWebDriverUtils().enterText(entercomment, "ALL IS WELL", "Comment or Queries");
+		vc.getWebDriverUtils().clickElement(submitdetails, "Submit");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Your Billing Inquiry was successfully submitted."));
+
+		Reporter.log("********** Verify Invalid Validations ************", true);
+		vc.getWebDriverUtils().enterText(entercontactemailid, "iblgmail.com", "Contactemailid");
+		vc.getWebDriverUtils().enterText(entercomment, "ALL IS WELL", "Comment or Queries");
+		vc.getWebDriverUtils().sleep(3000);
+		vc.getWebDriverUtils().clickHiddenElement(submitdetails, "Submit");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Invalid email address"));
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("New Billing Inquiry");
+
+	}
+
+}

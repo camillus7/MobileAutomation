@@ -1,0 +1,115 @@
+package WebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Reporter;
+
+import commonUtil.PropertiesUtil;
+
+public final class WebDriverFactory {
+
+	public final static String FIREFOX = "firefox";
+	public final static String CHROME = "chrome";
+	public final static String IE = "ie";
+	public final static String GECKO = "gecko";
+	public final static String ANDROID = "android";
+	public final static String EDGE = "edge";
+	
+	public static ApplicationWebDriver getWebDriver(String browser) {
+
+		ApplicationWebDriver applicationWebDriver = null;
+		
+		if(browser.contains(FIREFOX)) {
+			applicationWebDriver =  new FireFoxWebDriver();
+		} else  if(browser.contains(GECKO)) { 
+			applicationWebDriver =  new GeckoWebDriver();
+		} else  if(browser.contains(CHROME)) { 
+			applicationWebDriver =  new ChromeWebDriver();
+		/*} else  if(browser.contains(EDGE)) { 
+			applicationWebDriver =  new EdgeWebDriver();	*/
+		} else if(IE.equalsIgnoreCase(browser)) {			
+			applicationWebDriver =  new InternetExplorerWebDriver();
+		}else if (browser.contains(ANDROID)) {
+			applicationWebDriver = new AndroidAppiumDriver();
+			//androidDriver = new AndroidDriver();
+
+		}
+
+		return applicationWebDriver;
+	}
+
+	/**
+	 * Return the appropriate WebDriver object based on configuration values found in config.properties file.
+	 * 
+	 * @return
+	 */
+	public static WebDriver getSeleniumWebDriver() {
+	    return getSeleniumWebDriver(PropertiesUtil.getValue(PropertiesUtil.BROWSER_PROPERTY), PropertiesUtil.isGridPlatform(), PropertiesUtil.getGridUrl());
+	}
+	
+	
+//	public static WebDriver getAndroidDriver() {
+//
+//		String deviceName = PropertiesUtil.getValue(PropertiesUtil.DEVICE_NAME);
+//		String appPackage = PropertiesUtil.getValue(PropertiesUtil.APP_PACKAGE);
+//		String appActivity = PropertiesUtil.getValue(PropertiesUtil.APP_ACTIVITY);
+//		String appiumIp = PropertiesUtil.getValue(PropertiesUtil.APPIUM_IP);
+//		String appiumPort = PropertiesUtil.getValue(PropertiesUtil.APPIUM_PORT);
+//		return getandroidDriver(deviceName,appPackage,appActivity,appiumIp,appiumPort);
+//
+//	}
+
+	/**
+	 * Return the appropriate WebDriver object based on indicated parameters.
+	 * @param browser - a String representing the browser type, e.g. 'chrome', 'firefox', or 'ie'.
+	 * @param isGridPlatform - a boolean that indicates whether or not driver is for the grid platform.
+	 * @param gridUrl - a String that represents the grid's URL.
+	 * @return WebDriver for the indicated environment and browser type.
+	 */
+	public static WebDriver getSeleniumWebDriver(String browser, boolean isGridPlatform, String gridUrl) {
+		WebDriver driver = null;
+		ApplicationWebDriver applicationWebDriver;		
+
+		if (browser.contains(FIREFOX)) {
+			applicationWebDriver = new FireFoxWebDriver();
+		} else if (browser.contains(GECKO)) {
+			applicationWebDriver = new GeckoWebDriver();
+		} else if (browser.contains(CHROME)) {
+			applicationWebDriver = new ChromeWebDriver();
+		/*} else if (browser.contains(EDGE)) {
+			applicationWebDriver = new EdgeWebDriver();*/
+		} else if (browser.contains(ANDROID)) {
+			applicationWebDriver = new AndroidAppiumDriver();
+		} 
+		else {
+			applicationWebDriver = new InternetExplorerWebDriver();
+		}
+
+		driver = applicationWebDriver.getWebDriver(isGridPlatform, gridUrl);
+		
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		return driver;
+	}
+	
+	
+
+
+	public static AndroidDriver getAndroidDriver() {
+		ApplicationWebDriver applicationWebDriver;
+		AndroidDriver androidDriver;
+		applicationWebDriver = new AndroidAppiumDriver();
+		androidDriver = applicationWebDriver.getAndroidDriver();
+		androidDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		return androidDriver;
+	}
+
+}

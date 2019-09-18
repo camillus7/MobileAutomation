@@ -1,0 +1,90 @@
+package com.webautomation.pageobject.myWin_pages;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.validation.Validator;
+
+import commonUtil.PropertiesUtil;
+
+public class MyWin_LoginPage {
+
+	final WebDriver driver;
+
+	@FindBy(id = "username")
+	public WebElement userName;
+	
+	@FindBy(id = "password")
+	public WebElement password;
+
+	//@FindBy(xpath = "//a[@title='Sign In']")
+		@FindBy(xpath = "//a[contains(.,' Sign In')]")
+		public WebElement signInBtn; 
+
+	@FindBy(xpath = "//button[@class='close no-thanks']")
+	public WebElement closeNoThanks;
+	
+	
+			
+	private Validator vc;
+
+	public MyWin_LoginPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	public void navigateToWinLinkHome(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Password"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Remember my username"));
+
+		vc.getWebDriverUtils().enterText(userName, menu.getUsername(), "Username");
+		vc.getWebDriverUtils().enterText(password, menu.getPassword(), "Password");
+		vc.getWebDriverUtils().clickElement(signInBtn, "Sign In Button");
+		
+		vc.getWebDriverUtils().checkPageIsReady();
+	//	Thread.sleep(3000);
+		try {
+			if (closeNoThanks.isEnabled()) {
+				Reporter.log("Modal appears - Clicking Close", true);
+				closeNoThanks.click();
+				Thread.sleep(1000);
+				vc.getWebDriverUtils().checkPageIsReady();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+		
+	}
+	
+	public void navigateToWinLinkMobileHome(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Password"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Remember my username"));
+
+		vc.getWebDriverUtils().enterText(userName, menu.getUsername(), "Username");
+		vc.getWebDriverUtils().enterText(password, menu.getPassword(), "Password");
+		//vc.getWebDriverUtils().clickElement(signInBtn, "Sign In Button");
+		signInBtn.click();	
+		Reporter.log("Clicked on Sign In Button",true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("The MyWin by Windstream mobile app has been created to give you the best possible experience"));
+	}
+
+}

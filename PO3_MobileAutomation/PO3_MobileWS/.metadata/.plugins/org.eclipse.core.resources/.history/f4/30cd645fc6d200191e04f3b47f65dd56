@@ -1,0 +1,96 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CordlessPhonesWidget {
+
+	final WebDriver driver;
+
+			
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_CordlessPhonesWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+	
+	
+	@FindBy(xpath = "//label[contains(.,'Cordless Phones')]")
+	public WebElement cordlessPhonesCheckbox;
+	
+	@FindBy(xpath="//button[@data-id='locationID']")
+	public static WebElement cpDropdown;
+	
+	@FindBy(id="changebsconfig")
+	public WebElement cpChangeConfiguration;
+	
+	@FindBy(xpath="//h1[contains(.,'Cordless Phone Manager')]")
+	public WebElement verifyNavigation;
+	
+	@FindBy(xpath="//input[@id='MACAddress']")
+	public WebElement cpNewBaseStationField;
+	
+	@FindBy(xpath="//button[@id='btnVerifyAddPhoneConfig']")
+	public WebElement cpverifyandAddButton;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Cordless Phones']//button[@value='Cancel']")
+	public WebElement cpcancelButton;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Cordless Phones']//p[contains(@class,'default-value')]")
+	public static WebElement forAccount;
+
+	@FindBy(xpath="//div[@data-widgettitle='Cordless Phones']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Cordless Phones']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+
+	public boolean cordlessPhonesUI() {
+		return(vc.getWebDriverUtils().elementAvailablity(cpChangeConfiguration, "ChangeConfigurationOption"));
+		
+	}
+	
+	public void changeConfiguration() throws InterruptedException {
+		vc.getWebDriverUtils().elementAvailablity(cpChangeConfiguration, "ChangeConfigurationOption");
+		vc.getWebDriverUtils().clickElement(cpChangeConfiguration, "ChangeConfigurationOption");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Cordless Phone Manager - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Cordless Phone Manager"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Cordless Phones");
+	}
+	
+	public void cordlessPhoneDropdown() throws InterruptedException {
+
+		vc.getWebDriverUtils().clickElement(cpDropdown, "CordlessPhoneDropdown");
+		List<WebElement> drop = driver.findElements(By.xpath("//span[@class='accn_name']"));
+
+		for (int i = 0; i < drop.size(); i++) {
+			if (drop.isEmpty()) {
+				System.out.println("List is empty");
+			} else {
+				drop.get(0).click();
+				System.out.println("Selected Location from the dropdown is==>" + drop.get(0).getText());
+			}break;
+			
+		}
+		
+		
+		
+		
+	}
+}

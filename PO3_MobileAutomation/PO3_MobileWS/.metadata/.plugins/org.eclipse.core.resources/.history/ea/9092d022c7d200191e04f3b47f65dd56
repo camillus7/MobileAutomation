@@ -1,0 +1,216 @@
+package com.webautomation.tests.seleniumGrid;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_PortalSuite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	// **************** Test Scripts Starts Here *****************//
+
+	@Test
+	public void WE_HomePageMenuValidation() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.TestCase1);
+		Reporter.log("User Story : Home Page Menus Validation", true);
+		we_LoginPage.navigateTo_WEHome(menu);
+		successMsgDesc = "";
+		failMsgDesc = "";
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			
+			try {
+				userStoryDescription = "Dashboard";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Dashboard");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.dashboard, "Dashboard");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Add Widgets"));
+	
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+			try {
+				userStoryDescription = "Services";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Services");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.services, "Services");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("My Services"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("CCS Console"));
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Orders";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Orders");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.orders, "Orders");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Order Date"));
+	
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Reporting";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Reporting");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.reporting, "Reporting");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Rates"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Reports"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Reports"));
+	
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Billing";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Billing");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			try {
+				userStoryDescription = "Support";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Support");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Community"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Us"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Nationwide Status"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Support Requests"));
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+			try {
+				userStoryDescription = "Account";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Account");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.account, "Account");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Hierarchy"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Company Contacts"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Notification Center"));
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+
+			try {
+				userStoryDescription = "Downloads";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"Downloads");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.downloads, "Downloads");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Google Chrome"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("OfficeSuite UC"));
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+			
+			try {
+				userStoryDescription = "User Manager";
+				vc.getWebDriverUtils().logUserStoryStart(userStoryDescription,
+						"User Manager");
+
+				vc.getWebDriverUtils().clickElement(we_HomePage.userManager, "User Manager");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("User Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Last Login Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Resend Invite"));
+				
+				successMsgDesc = vc.getWebDriverUtils().logUserStoryEndSuccess(
+						userStoryDescription, successMsgDesc);
+			} catch (Throwable e) {
+				failMsgDesc = vc.getWebDriverUtils().logUserStoryEndFail(
+						userStoryDescription, failMsgDesc);
+			}
+			
+		} catch (Throwable e) {
+			vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+					failMsgDesc);
+		}
+		vc.getWebDriverUtils().displayExecutionResults(successMsgDesc,
+				failMsgDesc);
+	}
+	
+	}

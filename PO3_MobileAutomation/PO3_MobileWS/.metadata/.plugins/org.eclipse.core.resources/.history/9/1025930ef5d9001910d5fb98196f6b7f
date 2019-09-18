@@ -1,0 +1,21 @@
+<h2>Reporter output</h2><table><tr><td>***************  Properties ***************</td></tr>
+<tr><td>URL :=weconnect_mobile</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Data  ***************</td></tr>
+<tr><td>col A - Menu : BVN_User2</td></tr>
+<tr><td>col B - Username : weonlinetest6</td></tr>
+<tr><td>col C - Pwd : P03DevTestPass6666</td></tr>
+<tr><td>col D - additional customer parameters: Null</td></tr>
+<tr><td>col E - additional usernames: Null</td></tr>
+<tr><td>col F - external user name: Null</td></tr>
+<tr><td>col G - external user password: Null</td></tr>
+<tr><td>                                                   </td></tr>
+<tr><td>*************** Test Execution log  ***************</td></tr>
+<tr><td>WeConnect App is launched</td></tr>
+<tr><td>Searching for element :=LandingScreen</td></tr>
+<tr><td>Timed out waiting for element := LandingScreen</td></tr>
+<tr><td>Web element = 'LandingScreen' is not identified</td></tr>
+<tr><td>Searching for element :=userName</td></tr>
+<tr><td>Timed out waiting for element := userName</td></tr>
+<tr><td>Web element = 'userName' is not identified</td></tr>
+</table>

@@ -1,0 +1,17 @@
+package WebDriver;
+
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public interface ApplicationWebDriver {
+    
+    WebDriver getWebDriver();
+    WebDriver getWebDriver(boolean isGrid, String hubUrl);
+    AndroidDriver getAndroidDriver();
+    DesiredCapabilities getCapabilities();
+    
+}
+
+

@@ -1,0 +1,88 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MyVoicemailWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MyVoicemailWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'My Voicemail')]")
+	public WebElement myVoicemailcheckbox;
+
+	@FindBy(xpath = "//button[@data-id='SelectedVMExt']")
+	public WebElement myVoicemailDropdown;
+
+	@FindBy(xpath = "//div[@data-widgettitle='My Voicemail']//a[contains(.,'Voicemail')]")
+	public WebElement voicemailButton;
+
+	@FindBy(xpath = "//div[@data-widgettitle='My Voicemail']//a[contains(.,'Settings')]")
+	public WebElement settingsButton;
+
+	@FindBy(xpath = "//div[data-widgettitle='My Voicemail']//span[@id='vmCount']")
+	public WebElement voicemailCount;
+
+	@FindBy(xpath = "//button[@class'icon refresh icon-manual-position']")
+	public WebElement refreshCount;
+
+	@FindBy(xpath = "//div[@data-widgettitle='My Voicemail']//button[@data-toggle='dropdown']")
+	public WebElement extensionNumber;
+	
+	@FindBy(xpath="//h2[contains(.,'Voicemail')]")
+	public WebElement widgetName;
+	
+	@FindBy(xpath="//div[@class='voicemailWidgetFooter']")
+	public WebElement widgetFooter;
+	
+	@FindBy(xpath="//div[@data-name='Voicemail'']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-name='Voicemail']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public void myVoicemailWidgetFunctionality() throws InterruptedException {
+		
+	
+		Reporter.log("********** Refresh Voicemail  ************",true);
+		String voicemailcount = vc.getWebDriverUtils().getText(voicemailCount, "Voicemail Count");
+		vc.getWebDriverUtils().genericDropDownSelectFirstItem(myVoicemailDropdown, "VoicemailDropdown");
+		vc.getWebDriverUtils().clickElement(refreshCount, "RefreshButton");
+		String voicemailcountafterRefresh = vc.getWebDriverUtils().getText(voicemailCount, "Voicemail Count");
+		Reporter.log("Total number of Voicemail Messages are==> " + voicemailcount
+				+ " After Refresh Voicemail Messages are==> " + voicemailcountafterRefresh,true);
+		
+		Reporter.log("********** Verify Navigation  ************",true);
+		vc.getWebDriverUtils().clickElement(voicemailButton, "VoicemailButton");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "My Voicemail - Windstream Enterprise");
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		vc.getWebDriverUtils().clickElement(settingsButton, "SettingsButton");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "VoicemailSettings - Windstream Enterprise");
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("My Voicemail");
+		
+		
+	}
+	
+	
+
+	
+}

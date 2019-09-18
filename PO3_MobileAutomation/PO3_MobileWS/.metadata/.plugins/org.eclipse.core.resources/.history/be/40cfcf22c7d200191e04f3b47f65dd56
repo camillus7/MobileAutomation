@@ -1,0 +1,1897 @@
+
+package com.webautomation.tests.seleniumGrid;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.exec.util.StringUtils;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+
+import com.webautomation.pageobject.webpages.winLinkLoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+
+import Base.BaseSteps_SelGrid;
+
+public class WE_Billing_Suite extends BaseSteps_SelGrid {
+
+	/**
+	 * Constructor
+	 */
+
+	String winHandleBefore = null;
+
+	boolean elementIsClickable = false;
+	private int passCount;
+	private int failCount;
+	private int totalTestCaseCount;
+	private String testCaseName;
+	private String userStoryDescription;
+	private String successMsgDesc = "";
+	private String failMsgDesc = "";
+
+	// **************** Billing History Test Scripts Starts Here *****************//
+
+	@Test
+	public void Billing_BillingHistory_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> Billing History";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("Test Case 109210: Billing History - Verify the pagination on the Invoice History tab.", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Billing -> Billing History");
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.billingHistory, "Billing History");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing History"));
+			we_BillingPage.verifyPaginationInvoice();
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("Test Case 109347: Billing History - Verify the pagination on the Payment History tab.", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentHistoryTab, "click Payment History tab");
+			we_BillingPage.verifyPaginationPayment();
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"109352 Verify the user is able to download invoice history in excel format under billing history & 109353 Verify the user is able to download invoice history in pdf format under billing history",
+					true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.billingHistory, "Billing History");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing History"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.export, "Export");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to Excel"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to PDF"));
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("109365 Billing History - Verify the columns available in Invoice History grid.", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name/Account No."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Address"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Charged"));
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("109350 Billing History - Verify the filters functionality for 'Invoice History'", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.filter, "Click filter");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Time Period"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Charged"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Make these filters my default"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Clear Filters"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Apply Filters"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.filter, "Click filter");
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"109367 Verify the user is able to download payment history in excel format under billing history & 109368 Verify the user is able to download payment history in pdf format under billing history",
+					true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentHistoryTab, "click Payment History tab");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.export, "Export");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to Excel"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to PDF"));
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	// Billing Inquiry page has been removed from the portal
+
+	// **************** Billing Inquiry Test Scripts Starts Here *****************//
+/*
+	@Test
+	public void Billing_BillingInquiry_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> Billing Inquiries";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log(
+					"Test Case 119552:BILLING - BILLING INQUIRIES - Create Billing Inquiry - Add phone number field to Billing Inquiry form and History pages",
+					true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Billing -> Billing Inquiries");
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.billingInquiries, "Billing Inquiries");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.newBillingInquiry, "Click New Billing Inquiry");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Create Billing Inquiry"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Email"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Urgency"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Problem or Request"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"Test Case 119555:BILLING - BILLING INQUIRIES - Create Billing Inquiry - To check the 'Submit Ticket' button",
+					true);
+			vc.getWebDriverUtils().enterText(we_BillingPage.billingInquiryName, "Test", "Billing Inquiry Name");
+			we_BillingPage.billingInquiryName.sendKeys(Keys.ENTER);
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_BillingPage.billingAccountID,
+					"Select account number");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.calendericon, "Click calender");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.date, "Select date");
+			vc.getWebDriverUtils().enterText(we_BillingPage.emailAddress, "test@windstream.com", "Enter Email address");
+			we_BillingPage.emailAddress.sendKeys(Keys.ENTER);
+			vc.getWebDriverUtils().enterText(we_BillingPage.phoneNumber, "1234567899", "Enter Phone Number");
+			we_BillingPage.phoneNumber.sendKeys(Keys.ENTER);
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_BillingPage.urgency, "Select urgency",
+					"Medium");
+			vc.getWebDriverUtils().enterText(we_BillingPage.comments,
+					"This billing inquiry is created for test purpose", "Enter comments");
+			we_BillingPage.comments.sendKeys(Keys.ENTER);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.submit, "Click submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing inquiry created successfully!"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.filters, "Click filters");
+			vc.getWebDriverUtils().enterText(we_BillingPage.filtersPhonenumber, "123.456.7899", "Phone number");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.filtersSubmit, "Click applyfilters");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.filters, "Click filters");
+			vc.waitUntilTextIsPresent("testxyz");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.inquiryGridPhonenumber, "Phone number")
+					.contains("123.456.7899"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.inquiryGridEmailaddress, "Email")
+					.contains("test@windstream.com"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"Test Case 119557:BILLING - BILLING INQUIRIES - Create Billing Inquiry - To check the validations on Create form",
+					true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.newBillingInquiry, "Click New Billing Inquiry");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Create Billing Inquiry"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.billingInquiryName, "", "billingInquiryName");
+			vc.getWebDriverUtils().enterText(we_BillingPage.emailAddress, "", "emailAddress");
+			vc.getWebDriverUtils().enterText(we_BillingPage.phoneNumber, "", "phoneNumber");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.submit, "Click submit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Name field is required."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Account field is required."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Invoice Date field is required."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Email Address field is required."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Phone Number field is required."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The Problem or Request field is required."));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.cancelButton, "Click cancel button");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log(
+					"Test Case 119563:BILLING - BILLING INQUIRIES - To verify the column headers in Billing Inquiry grid",
+					true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.supportRequestNo, "Support Request number")
+					.contains("Support Request No."));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.creationDate, "Creation date")
+					.contains("Creation Date"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.billingAddress, "Billing address")
+					.contains("Billing Address"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().getText(we_BillingPage.accountNo, "Account number").contains("Account No."));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.phone, "Phone").contains("Phone"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.email, "Email").contains("Email"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.status, "Status").contains("Status"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("Test Case 122295:BILLING - BILLING INQUIRIES - View details works", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.detailsicon, "Click detailsicon");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Support Request"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ACCOUNT NUMBER"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("ADDRESS NAME"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("PHONE NUMBER"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("123.456.7899"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("CREATED DATE"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("EMAIL"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("test@windstream.com"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("STATUS"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Submitted"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("COMMENT"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("This billing inquiry is created for test purpose"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Date"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("Test Case 122301:BILLING - BILLING INQUIRIES - Back to billing inquiries works", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.backToInquiry, "Click back to Inquiries");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Inquiries"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}*/
+
+	// **************** FTP Billing Invoice Test Scripts Starts Here
+	// *****************//
+
+	@Test
+	public void Billing_FTPBillingInvoice_WOL() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.WOL_User);
+		userStoryDescription = "Billing -> FTP Billing Invoice";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			Reporter.log("Test Case : Billing  - FTP Billing Invoice", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, testMethodName);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.ftpBillingInvoice, "FTP Billing Invoice");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"To receive invoice files via SFTP delivery please contact your Account Manager or call us here 1-800-600-5050 to proceed with setup"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Please note, Windstream does not deliver invoices or invoice data to external FTP or SFTP hosts"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"If you would like to proceed, please gather the following information and a Windstream representative will help process your request"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("What is your billable account number"));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("Do you want to receive usage files monthly only or monthly and daily"));
+			Assert.assertTrue(
+					vc.waitUntilTextIsPresent("Do you want to receive usage files in the standard or extended format"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Do you want to receive local usage in your usage files"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Do you want to receive non-usage in your monthly file"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("What email address should we contact for SFTP setup"));
+			vc.getWebDriverUtils().mouseHoveronElement(we_BillingPage.fileFormatsToolTip1);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Field Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("The standard usage file includes the following fields"));
+			vc.getWebDriverUtils().mouseHoveronElement(we_HomePage.billing);
+			vc.getWebDriverUtils().mouseHoveronElement(we_BillingPage.fileFormatsToolTip2);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("File Formats"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"The extended usage file includes all fields from the standard format and the following fields"));
+			vc.getWebDriverUtils().mouseHoveronElement(we_HomePage.billing);
+			vc.getWebDriverUtils().mouseHoveronElement(we_BillingPage.localUsageToolTip);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Local usage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Local usage data includes calls and events that are not classified as long distance usage"));
+			vc.getWebDriverUtils().mouseHoveronElement(we_HomePage.billing);
+			vc.getWebDriverUtils().mouseHoveronElement(we_BillingPage.monthlyNonUsageToolTip);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Monthly non-usage"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"The monthly non-usage file contains a summary of all charges for the invoice including taxes"));
+			vc.getWebDriverUtils().mouseHoveronElement(we_HomePage.billing);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.setupSecureFTPInvoiceDelivery,
+					"Setup secure FTP invoice delivery");
+			vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+			// Assert.assertTrue(vc.waitUntilTextIsPresent("FTP Billing Invoice - Windstream
+			// Enterprise"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Once your Windstream SFTP account has been created, a Windstream representative will provide your credentials"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	// **************** View & pay bill - Test Scripts Starts Here
+	// *****************//
+
+	@Test
+	public void Billing_ViewAndPaybill_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> View and pay bill";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("124381 Verify the functionality of View & Pay Bill - 'View Billing History'", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View invoice and payment history"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewBillingHistory, "Click view billing history");
+			vc.getWebDriverUtils().validatePageTitle("Payment History");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name/Account No"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Address"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Amount Paid"));
+			vc.getWebDriverUtils().pageRefresh();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		try {
+			Reporter.log("124371 Verify the 'View & Pay Bill' UI", true);
+			vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Billing -> View & Pay bill");
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.currentBill,
+					"Check for current bill field"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.account, "Check for account field"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.autoPay, "Check for autopay field"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.paperLess, "Check for paperless field"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.paymentHistory,
+					"Check for payment history field"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("124372 Verify the 'Current Bill' UI", true);
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.selectInvoice,
+					"Check for select invoice button"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.textCurrentBalance,
+					"Check for current balance field"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Download Call Details"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Invoice Date"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.invoiceId,
+					"Check for invoice id drop-down field"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.btnDownloadCallDetail,
+					"Check for download button"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("124374 Validate the functionality of 'Select Invoice'", true);
+			we_BillingPage.amountvalue();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+
+		try {
+			Reporter.log("124375 Verify the functionality of 'View Summary'", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewSummary, "Click view summary");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Bill Summary"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Total Current Charges"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Values reflect last statement"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Print"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.billingAlertsClose, "Click close");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+		
+		try {
+			Reporter.log("124376 Verify the UI of 'Account' ", true);
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.accountHeader,
+					"Check for account header"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account No"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Address"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+		
+		try {
+			Reporter.log("124377 Verify the functionality of 'Account' ", true);
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Map"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Satellite"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.toogleView,
+					"Check for Toogle fullscreen view"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.streetView,
+					"Check for streetview"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.zoomIn,
+					"Check for Zoomin icon"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.zoomOut,
+					"Check for zoomout icon"));
+			vc.getWebDriverUtils().elementAvailablity(we_BillingPage.gmCurrentLocation,"Check for Googlemap CurrentLocation icon");
+			/*Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.gmCurrentLocation,
+					"Check for Googlemap CurrentLocation icon"));*/
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+	
+	@Test
+	public void Billing_Autopay_Paynow_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> View and pay bill";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		String accountnumber = null;
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+		try {
+			Reporter.log("124378 Verify the functionality of 'Enroll in Auto Pay' using credit card", true);	
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			Actions action = new Actions(driver);
+			action.moveToElement(we_BillingPage.billingAccountId);
+			action.click();
+			action.perform();
+			action.moveToElement(we_BillingPage.accountSearch);
+			action.click().sendKeys("00000000").build().perform();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+			if ((vc.getWebDriverUtils().elementAvailablity(we_BillingPage.payNow, "Check paynow existance"))
+					&& (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutoPay,
+							"Check for edit autopay existance")) == false) {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.enrollAutoPay, "Click enroll in autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.addCreditCard, "Click on add new credit card");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+						"Check header for New payment method"));
+				// TODO Following line need to be removed once bug regarding the default selection is resolved
+				vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+						"Click credit/debit card in new payment method");
+				vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.name,
+						"Enter payment method name");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+				vc.switchToFrame("ptframe");
+				String username = "test" + Math.random();
+				Thread.sleep(30000);
+				vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, username, "Enter name on the card");
+				vc.getWebDriverUtils().enterText(we_BillingPage.address, "1018 W. 9th Avenue", "Enter address");
+				vc.getWebDriverUtils().enterText(we_BillingPage.city, "King of Prussia", "Enter city");
+				vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.state, "Pennsylvania", "Enter state");
+				vc.getWebDriverUtils().enterText(we_BillingPage.zip, "19406", "Enter zip");
+				vc.getWebDriverUtils().enterText(we_BillingPage.cCNumber, "378729810272003",
+						"Enter credit card number");
+				vc.getWebDriverUtils().enterText(we_BillingPage.cCV, "413", "Enter CCV number");
+				vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expMonth, "09", "Enter expiry month");
+				vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expYear, "2026", "Enter expiry year");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.buttonComplete, "Click complete button");
+				Thread.sleep(5000);
+				vc.switchtoDefaultFrame();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("XXXX XXXX XXXX 2003"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(username));
+				we_BillingPage.selectCard();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.termsAndCondition, "Click terms and condition link");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Terms and Conditions"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.acceptTermsAndCondition,
+						"Click 'I Accept' in terms and condition link");
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.applyTermsAndCondition,
+						"Check agree in terms and condition");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.setAutoPayment, "Click set autopayment");		
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Pay Confirmation"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Thank You !"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Your Auto Pay enrollment has successfully completed."));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("WINDSTREAM ACCOUNT NUMBER"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("REGISTRATION DATE"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("DRAFT DAY"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT TYPE"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("AUTO PAY ACCOUNT NUMBER"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("CONFIRMATION NUMBER"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.autopayPrint,
+						"Check for autopayPrint button"));
+				accountnumber = vc.getWebDriverUtils().getText(we_BillingPage.accountNumberAutopay, "Get account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.autopayClose, "Click close in autopay confirmation");	
+				Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+				
+				Reporter.log("130995 Verify edit functionality for the added credit card in view & pay bill", true);	
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click();
+				action.perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys(accountnumber).build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				we_BillingPage.moreIconEdit();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Edit Saved Payment Option"));
+				vc.getWebDriverUtils().enterText(we_BillingPage.accountHolderName, "Account Holder Name", "Enter account holder name");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.saveChanges, "Click save button in edit");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option updated successfully!"));
+				
+				Reporter.log("131168 Check user is not allowed to delete the card when enrolled to auto-pay", true);	
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click();
+				action.perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys(accountnumber).build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");	
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Holder Name"));
+				Assert.assertFalse(vc.waitUntilTextIsPresent(username));
+				we_BillingPage.moreIconDelete();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Payment Enrollment Message"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("The selected payment option is currently either enrolled in Auto-Pay or used for a One-Time Scheduled payment.  The Auto-Pay and One-Time Scheduled Payment enrollments that are associated with this payment method must be deleted before the selected payment option can be deleted."));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.autoPayEnrollmentMsgCloseIcon, "Click close button");							
+			} else {
+				Reporter.log("124378 Verify the functionality of 'Enroll in Auto Pay' using credit card", true);	
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.billingSettings, "Billing Settings");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+				Actions actions = new Actions(driver);
+				actions.moveToElement(we_BillingPage.billingAccountId);
+				actions.click();
+				actions.perform();
+				actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+				actions.click().sendKeys("00000000").build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.filterOpen, "Filter Open")) {
+					vc.getWebDriverUtils().clickElement(we_BillingPage.filterOpen, "Filter Open");
+				}
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.selectEnrolled, "Check enrolled checkbox");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.applyFilters, "Click apply filters");
+				vc.getWebDriverUtils().elementAvailablity(we_BillingPage.stopAutoPay, "Check for stop autopay field");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.stopAutoPay, "Click stop autopay");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.autoPaymentRemove, "Click 'Yes' in remove autopay");
+				Assert.assertTrue(vc.waitUntilTextIsPresent(
+						"Your Auto-Pay has been cancelled. If this auto-pay was scheduled for today, it may have been used already. Check your payment history to verify if necessary."));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click().perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys("00000000").build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.enrollAutoPay, "Click enroll in autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.addCreditCard, "Click on add new credit card");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+						"Check header for New payment method"));
+				// TODO Following line need to be removed once bug regarding the default selection is resolved
+				vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+						"Click credit/debit card in new payment method");
+				vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.name,
+						"Enter payment method name");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+				vc.switchToFrame("ptframe");
+				String username = "test" + Math.random();
+				Thread.sleep(3000);
+				vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, username, "Enter name on the card");
+				vc.getWebDriverUtils().enterText(we_BillingPage.address, "1018 W. 9th Avenue", "Enter address");
+				vc.getWebDriverUtils().enterText(we_BillingPage.city, "King of Prussia", "Enter city");
+				vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.state, "Pennsylvania", "Enter state");
+				vc.getWebDriverUtils().enterText(we_BillingPage.zip, "19406", "Enter zip");
+				vc.getWebDriverUtils().enterText(we_BillingPage.cCNumber, "378729810272003",
+						"Enter credit card number");
+				vc.getWebDriverUtils().enterText(we_BillingPage.cCV, "413", "Enter CCV number");
+				vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expMonth, "09", "Enter expiry month");
+				vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expYear, "2026", "Enter expiry year");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.buttonComplete, "Click complete button");
+				vc.switchtoDefaultFrame();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("XXXX XXXX XXXX 2003"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(username));
+				we_BillingPage.selectCard();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.termsAndCondition, "Click terms and condition link");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Terms and Conditions"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.acceptTermsAndCondition,
+						"Click 'I Accept' in terms and condition link");
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.applyTermsAndCondition,
+						"Check agree in terms and condition");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.setAutoPayment, "Click set autopayment");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Pay Confirmation"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Thank You !"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Your Auto Pay enrollment has successfully completed."));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("WINDSTREAM ACCOUNT NUMBER"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("REGISTRATION DATE"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("DRAFT DAY"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT TYPE"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("AUTO PAY ACCOUNT NUMBER"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("CONFIRMATION NUMBER"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.autopayPrint,
+						"Check for autopayPrint button"));
+				accountnumber = vc.getWebDriverUtils().getText(we_BillingPage.accountNumberAutopay, "Get account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.autopayClose, "Click close in autopay confirmation");	
+				Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+		
+				Reporter.log("130995 Verify edit functionality for the added credit card in view & pay bill", true);
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click();
+				action.perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys(accountnumber).build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				we_BillingPage.moreIconEdit();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Edit Saved Payment Option"));
+				vc.getWebDriverUtils().enterText(we_BillingPage.accountHolderName, "Account Holder Name", "Enter account holder name");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.saveChanges, "Click save button in edit");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option updated successfully!"));
+				
+				Reporter.log("131168 Check user is not allowed to delete the card when enrolled to auto-pay", true);	
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click();
+				action.perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys("00000000").build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");	
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Holder Name"));
+				Assert.assertFalse(vc.waitUntilTextIsPresent(username));
+				we_BillingPage.moreIconDelete();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Payment Enrollment Message"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("The selected payment option is currently either enrolled in Auto-Pay or used for a One-Time Scheduled payment.  The Auto-Pay and One-Time Scheduled Payment enrollments that are associated with this payment method must be deleted before the selected payment option can be deleted."));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.autoPayEnrollmentMsgCloseIcon, "Click close button");
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}  		
+		
+		try {
+			Reporter.log("124373 Verify the functionality of 'Edit AutoPay' using credit card", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+			Actions actions = new Actions(driver);
+			actions.moveToElement(we_BillingPage.billingAccountId);
+			actions.click();
+			actions.perform();
+			actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+			actions.click().sendKeys(accountnumber).build().perform();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutoPay,
+					"Check for edit autopay button"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutoPayEnrollment,
+					"Check for edit autopay enrollment link"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+					"Check for edit autopay header"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+					"Check for edit autopay header"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("124946 Verify edit & stop Autopay functionality using credit card", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.billingSettings, "Billing Settings");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			Actions actions = new Actions(driver);
+			actions.moveToElement(we_BillingPage.billingAccountId);
+			actions.click();
+			actions.perform();
+			actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+			actions.click().sendKeys(accountnumber).build().perform();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+			if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.filterOpen, "Filter Open")) {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.filterOpen, "Filter Open");
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.selectEnrolled, "Check enrolled checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.applyFilters, "Click apply filters");
+			vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutopay, "Check for edit autopay existance");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.editAutopay, "Click edit for the default autopay");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Pay with Bank Account"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Pay with Credit Card"));
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.billingSettings, "Billing Settings");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			actions.moveToElement(we_BillingPage.billingAccountId);
+			actions.click();
+			actions.perform();
+			actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+			actions.click().sendKeys(accountnumber).build().perform();			
+			vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+			if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.filterOpen, "Filter Open")) {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.filterOpen, "Filter Open");
+			}
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.selectEnrolled, "Check enrolled checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.applyFilters, "Click apply filters");
+			vc.getWebDriverUtils().elementAvailablity(we_BillingPage.stopAutoPay, "Check for stop autopay field");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.stopAutoPay, "Click stop autopay");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.deleteCancel, "Click 'No' in remove autopay");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.stopAutoPay, "Click stop autopay");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.autoPaymentRemove, "Click 'Yes' in remove autopay");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Your Auto-Pay has been cancelled. If this auto-pay was scheduled for today, it may have been used already. Check your payment history to verify if necessary."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		try {
+			Reporter.log("130997 Verify delete functionality for the added credit card in view & pay bill", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			Actions action = new Actions(driver);
+			action.moveToElement(we_BillingPage.billingAccountId);
+			action.click();
+			action.perform();
+			action.moveToElement(we_BillingPage.accountSearch);
+			action.click().sendKeys(accountnumber).build().perform();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.enrollAutoPay, "Click enroll in autopay");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");				
+			we_BillingPage.moreIconDelete();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Payment Option Confirmation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the selected payment option?"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.deleteYesButton, "Click 'Yes' in confirmation pop-up");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option deleted successfully!"));
+			Assert.assertFalse(vc.waitUntilTextIsPresent(we_BillingPage.name));	
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("126799 Verify paynow functionality using credit card", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.payNow, "Click paynow")) {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.payNow, "Click paynow");
+			}
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+					"Check for schedule billing page header"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Bill"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.otherAmount, "1", "Enter other amount");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.firstAvailableCardSelection,
+					"Click first available card");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.payTermsAndCondition,
+					"Check agree checkbox in terms and condition");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.sendPayment, "Click paynow");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation of Payment"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Thank you for your payment of"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Your payment will post to your account within 2 business days of the payment date and will be reflected in the following invoice. You will be receiving an email confirmation for your records."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Amount"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Type"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Credit Card"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"A confirmation email has been sent to the email address in your user profile: "));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("If this address is not correct, please update your "));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("user profile"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+				Reporter.log("131178 Verify the functionality of 'Enroll Auto Pay' using bank account", true);	
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+				Actions action = new Actions(driver);
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click();
+				action.perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys("00000000").build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				if ((vc.getWebDriverUtils().elementAvailablity(we_BillingPage.payNow, "Check paynow existance"))
+						&& (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutoPay,
+								"Check for edit autopay existance")) == false) {
+					vc.getWebDriverUtils().clickElement(we_BillingPage.enrollAutoPay, "Click enroll in autopay");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+					vc.getWebDriverUtils().clickElement(we_BillingPage.btnAddNewBank, "Click on add new bank account");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+							"Check header for New payment method"));					
+					vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.accountname,
+							"Enter payment method name");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+					vc.switchToFrame("ptframe");
+					Thread.sleep(30000);
+					vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "Test bank account", "Enter payment method name");
+					vc.getWebDriverUtils().enterText(we_BillingPage.routingNumber, "063113099", "Enter routing number");
+					vc.getWebDriverUtils().enterText(we_BillingPage.accountNumber, "423423452", "Enter account number");
+					vc.getWebDriverUtils().enterText(we_BillingPage.bankName, "TestBank", "Enter bank name");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.buttonComplete, "Click complete button");
+					Thread.sleep(5000);
+					vc.switchtoDefaultFrame();
+					Assert.assertTrue(vc.waitUntilTextIsPresent(we_BillingPage.accountname));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("063113099"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("*****3452"));
+					we_BillingPage.selectBankAccount();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.termsAndCondition, "Click terms and condition link");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Terms and Conditions"));
+					vc.getWebDriverUtils().clickElement(we_BillingPage.acceptTermsAndCondition,
+							"Click 'I Accept' in terms and condition link");
+					vc.getWebDriverUtils().selectCheckbox(we_BillingPage.applyTermsAndCondition,
+							"Check agree in terms and condition");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.setAutoPayment, "Click set autopayment");		
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Pay Confirmation"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Thank You !"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Your Auto Pay enrollment has successfully completed."));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("WINDSTREAM ACCOUNT NUMBER"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("REGISTRATION DATE"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("DRAFT DAY"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT TYPE"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("AUTO PAY ACCOUNT NUMBER"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("CONFIRMATION NUMBER"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.autopayPrint,
+							"Check for autopayPrint button"));
+					accountnumber = vc.getWebDriverUtils().getText(we_BillingPage.accountNumberAutopay, "Get account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.autopayClose, "Click close in autopay confirmation");	
+					Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+					
+					Reporter.log("130996 Verify edit functionality for the added bank account in view & pay bill", true);	
+					action.moveToElement(we_BillingPage.billingAccountId);
+					action.click();
+					action.perform();
+					action.moveToElement(we_BillingPage.accountSearch);
+					action.click().sendKeys(accountnumber).build().perform();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+					we_BillingPage.moreIconEditBankAccount();
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Edit Saved Payment Option"));
+					vc.getWebDriverUtils().enterText(we_BillingPage.accountHolderName, "Account Holder Name", "Enter account holder name");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.saveChanges, "Click save button in edit");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option updated successfully!"));
+					
+					Reporter.log("131168 Check user is not allowed to delete the card when enrolled to auto-pay", true);	
+					vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+					action.moveToElement(we_BillingPage.billingAccountId);
+					action.click();
+					action.perform();
+					action.moveToElement(we_BillingPage.accountSearch);
+					action.click().sendKeys(accountnumber).build().perform();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Account Holder Name"));
+					Assert.assertFalse(vc.waitUntilTextIsPresent("Test bank account"));
+					we_BillingPage.moreIconDeleteBankAccount();
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Payment Enrollment Message"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("The selected payment option is currently either enrolled in Auto-Pay or used for a One-Time Scheduled payment.  The Auto-Pay and One-Time Scheduled Payment enrollments that are associated with this payment method must be deleted before the selected payment option can be deleted."));
+					vc.getWebDriverUtils().clickElement(we_BillingPage.autoPayEnrollmentMsgCloseIcon, "Click close button");									
+				} else {
+					Reporter.log("131178 Verify the functionality of 'Enroll Auto Pay' using bank account", true);	
+					vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.billingSettings, "Billing Settings");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+					Actions actions = new Actions(driver);
+					actions.moveToElement(we_BillingPage.billingAccountId);
+					actions.click();
+					actions.perform();
+					actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+					actions.click().sendKeys("00000000").build().perform();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+					if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.filterOpen, "Filter Open")) {
+						vc.getWebDriverUtils().clickElement(we_BillingPage.filterOpen, "Filter Open");
+					}
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+					vc.getWebDriverUtils().selectCheckbox(we_BillingPage.selectEnrolled, "Check enrolled checkbox");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.applyFilters, "Click apply filters");
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.stopAutoPay, "Check for stop autopay field");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.stopAutoPay, "Click stop autopay");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.autoPaymentRemove, "Click 'Yes' in remove autopay");
+					Assert.assertTrue(vc.waitUntilTextIsPresent(
+							"Your Auto-Pay has been cancelled. If this auto-pay was scheduled for today, it may have been used already. Check your payment history to verify if necessary."));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+					vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+					action.moveToElement(we_BillingPage.billingAccountId);
+					action.click().perform();
+					action.moveToElement(we_BillingPage.accountSearch);
+					action.click().sendKeys("00000000").build().perform();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.enrollAutoPay, "Click enroll in autopay");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+					
+					vc.getWebDriverUtils().clickElement(we_BillingPage.btnAddNewBank, "Click on add new bank account");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+							"Check header for New payment method"));					
+					vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.accountname,
+							"Enter payment method name");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+					vc.switchToFrame("ptframe");
+					Thread.sleep(30000);
+					vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "Test bank account", "Enter payment method name");
+					vc.getWebDriverUtils().enterText(we_BillingPage.routingNumber, "063113099", "Enter routing number");
+					vc.getWebDriverUtils().enterText(we_BillingPage.accountNumber, "423423452", "Enter account number");
+					vc.getWebDriverUtils().enterText(we_BillingPage.bankName, "TestBank", "Enter bank name");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.buttonComplete, "Click complete button");
+					Thread.sleep(5000);
+					vc.switchtoDefaultFrame();
+					Assert.assertTrue(vc.waitUntilTextIsPresent(we_BillingPage.accountname));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("063113099"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("*****3452"));
+					we_BillingPage.selectBankAccount();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.termsAndCondition, "Click terms and condition link");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Terms and Conditions"));
+					vc.getWebDriverUtils().clickElement(we_BillingPage.acceptTermsAndCondition,
+							"Click 'I Accept' in terms and condition link");
+					vc.getWebDriverUtils().selectCheckbox(we_BillingPage.applyTermsAndCondition,
+							"Check agree in terms and condition");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.setAutoPayment, "Click set autopayment");		
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Pay Confirmation"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Thank You !"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Your Auto Pay enrollment has successfully completed."));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("WINDSTREAM ACCOUNT NUMBER"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("REGISTRATION DATE"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("DRAFT DAY"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("PAYMENT TYPE"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("AUTO PAY ACCOUNT NUMBER"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("CONFIRMATION NUMBER"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.autopayPrint,
+							"Check for autopayPrint button"));
+					accountnumber = vc.getWebDriverUtils().getText(we_BillingPage.accountNumberAutopay, "Get account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.autopayClose, "Click close in autopay confirmation");	
+					Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+					
+					Reporter.log("130996 Verify edit functionality for the added bank account in view & pay bill", true);	
+					action.moveToElement(we_BillingPage.billingAccountId);
+					action.click();
+					action.perform();
+					action.moveToElement(we_BillingPage.accountSearch);
+					action.click().sendKeys(accountnumber).build().perform();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+					we_BillingPage.moreIconEditBankAccount();
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Edit Saved Payment Option"));
+					vc.getWebDriverUtils().enterText(we_BillingPage.accountHolderName, "Account Holder Name", "Enter account holder name");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.saveChanges, "Click save button in edit");
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option updated successfully!"));
+					
+					Reporter.log("131168 Check user is not allowed to delete the card when enrolled to auto-pay", true);	
+					vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+					action.moveToElement(we_BillingPage.billingAccountId);
+					action.click();
+					action.perform();
+					action.moveToElement(we_BillingPage.accountSearch);
+					action.click().sendKeys(accountnumber).build().perform();
+					vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+					vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Account Holder Name"));
+					Assert.assertFalse(vc.waitUntilTextIsPresent("Test bank account"));
+					we_BillingPage.moreIconDeleteBankAccount();
+					Assert.assertTrue(vc.waitUntilTextIsPresent("Auto Payment Enrollment Message"));
+					Assert.assertTrue(vc.waitUntilTextIsPresent("The selected payment option is currently either enrolled in Auto-Pay or used for a One-Time Scheduled payment.  The Auto-Pay and One-Time Scheduled Payment enrollments that are associated with this payment method must be deleted before the selected payment option can be deleted."));
+					vc.getWebDriverUtils().clickElement(we_BillingPage.autoPayEnrollmentMsgCloseIcon, "Click close button");							
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+				Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+				vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			}  		
+			
+			try {
+				Reporter.log("131190 Verify the functionality of 'Edit AutoPay' using bank account", true);			
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+				Actions actions = new Actions(driver);
+				actions.moveToElement(we_BillingPage.billingAccountId);
+				actions.click();
+				actions.perform();
+				actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+				actions.click().sendKeys(accountnumber).build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutoPay,
+						"Check for edit autopay button"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutoPayEnrollment,
+						"Check for edit autopay enrollment link"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.editAutoPay, "click edit autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+						"Check for edit autopay header"));
+			} catch (Throwable e) {
+				e.printStackTrace();
+				Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+				vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			}
+
+			try {
+				Reporter.log("131189 Verify edit & stop Auto pay functionality using bank account", true);
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.billingSettings, "Billing Settings");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+				Actions actions = new Actions(driver);
+				actions.moveToElement(we_BillingPage.billingAccountId);
+				actions.click();
+				actions.perform();
+				actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+				actions.click().sendKeys(accountnumber).build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.filterOpen, "Filter Open")) {
+					vc.getWebDriverUtils().clickElement(we_BillingPage.filterOpen, "Filter Open");
+				}
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.selectEnrolled, "Check enrolled checkbox");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.applyFilters, "Click apply filters");
+				vc.getWebDriverUtils().elementAvailablity(we_BillingPage.editAutopay, "Check for edit autopay existance");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.editAutopay, "Click edit for the default autopay");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Pay with Bank Account"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Pay with Credit Card"));
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.billingSettings, "Billing Settings");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+				actions.moveToElement(we_BillingPage.billingAccountId);
+				actions.click();
+				actions.perform();
+				actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+				actions.click().sendKeys(accountnumber).build().perform();			
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.filterOpen, "Filter Open")) {
+					vc.getWebDriverUtils().clickElement(we_BillingPage.filterOpen, "Filter Open");
+				}
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Method"));
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.selectEnrolled, "Check enrolled checkbox");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.applyFilters, "Click apply filters");
+				vc.getWebDriverUtils().elementAvailablity(we_BillingPage.stopAutoPay, "Check for stop autopay field");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.stopAutoPay, "Click stop autopay");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.deleteCancel, "Click 'No' in remove autopay");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.stopAutoPay, "Click stop autopay");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.autoPaymentRemove, "Click 'Yes' in remove autopay");
+				Assert.assertTrue(vc.waitUntilTextIsPresent(
+						"Your Auto-Pay has been cancelled. If this auto-pay was scheduled for today, it may have been used already. Check your payment history to verify if necessary."));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			} catch (Throwable e) {
+				e.printStackTrace();
+				Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+				vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			}
+			
+			try {
+				Reporter.log("130998 Verify delete functionality for the added bank account in view & pay bill", true);
+				vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+				Actions action = new Actions(driver);
+				action.moveToElement(we_BillingPage.billingAccountId);
+				action.click();
+				action.perform();
+				action.moveToElement(we_BillingPage.accountSearch);
+				action.click().sendKeys(accountnumber).build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.enrollAutoPay, "Click enroll in autopay");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+							"Check for edit autopay header"));
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+							"Check for edit autopay header"));
+				we_BillingPage.moreIconDeleteBankAccount();
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Payment Option Confirmation"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the selected payment option?"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.deleteYesButton, "Click 'Yes' in confirmation pop-up");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option deleted successfully!"));	
+				Assert.assertFalse(vc.waitUntilTextIsPresent(we_BillingPage.accountname));	
+			} catch (Throwable e) {
+				e.printStackTrace();
+				Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+				vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+			}
+
+
+		try {
+			Reporter.log("124947 Verify paynow functionality using bank account", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.payNow, "Click paynow")) {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.payNow, "Click paynow");
+			}
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+					"Check for schedule billing page header"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Bill"));
+			if(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.cardSelectionStatus,
+					"Check whether the bank account selected already") == false){		
+			vc.getWebDriverUtils().clickElement(we_BillingPage.firstAvailableBankAccountSelection,
+					"Click first available bank account"); }
+			vc.getWebDriverUtils().enterText(we_BillingPage.otherAmount, "1", "Enter other amount");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.payTermsAndCondition,
+					"Check agree checkbox in terms and condition");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.sendPayment, "Click paynow");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation of Payment"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Thank you for your payment of"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Your payment will post to your account within 2 business days of the payment date and will be reflected in the following invoice. You will be receiving an email confirmation for your records."));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Amount"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Type"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Bank Account"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"A confirmation email has been sent to the email address in your user profile: "));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("If this address is not correct, please update your "));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("user profile"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+	}
+
+	@Test
+	public void Billing_SchedulePayment_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> View and pay bill";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+		try {
+			Reporter.log("126800 Verify the functionality of 'Schedule payment' with credit card", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			if ( vc.waitUntilTextIsPresent("Not accepting scheduled payments at this time") == true )
+			{ 
+				Assert.assertFalse(vc.getWebDriverUtils().getText(we_BillingPage.billingAccountId, "Accountnumber").startsWith("00000000"));
+				Actions actions = new Actions(driver);
+				actions.moveToElement(we_BillingPage.billingAccountId);
+				actions.click();
+				actions.perform();
+				actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+				actions.click().sendKeys("00000000").build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Set your payment schedule now"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePayment, "Click schedule payment");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for schedule billing page header"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Bill"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.firstAvailableCardSelection,
+						"Click first available card");
+				vc.getWebDriverUtils().enterText(we_BillingPage.otherAmount, "1", "Enter other amount");
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.payTermsAndCondition,
+						"Check agree checkbox in terms and condition");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentSubmit, "Click schedule payment");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentOk,
+						"Click submit in schedule payment calender");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation of Payment"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Amount"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Type"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Credit Card"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(
+						"A confirmation email has been sent to the email address in your user profile: "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("If this address is not correct, please update your "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("user profile"));
+			} else {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePayment, "Click schedule payment");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for schedule billing page header"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Bill"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.firstAvailableCardSelection,
+						"Click first available card");
+				vc.getWebDriverUtils().enterText(we_BillingPage.otherAmount, "1", "Enter other amount");
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.payTermsAndCondition,
+						"Check agree checkbox in terms and condition");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentSubmit, "Click schedule payment");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentOk,
+						"Click submit in schedule payment calender");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation of Payment"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Amount"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Type"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Credit Card"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(
+						"A confirmation email has been sent to the email address in your user profile: "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("If this address is not correct, please update your "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("user profile"));			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("124380 Verify the functionality of 'Schedule payment' with bank account", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			if ( vc.waitUntilTextIsPresent("Not accepting scheduled payments at this time") == true )
+			{
+				Assert.assertFalse(vc.getWebDriverUtils().getText(we_BillingPage.billingAccountId, "Accountnumber").startsWith("00000000"));
+				Actions actions = new Actions(driver);
+				actions.moveToElement(we_BillingPage.billingAccountId);
+				actions.click();
+				actions.perform();
+				actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+				actions.click().sendKeys("00000000").build().perform();
+				vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Set your payment schedule now"));
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePayment, "Click schedule payment");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for schedule billing page header"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Bill"));
+				if(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.cardSelectionStatus,
+						"Check whether the bank account selected already") == false){		
+				vc.getWebDriverUtils().clickElement(we_BillingPage.firstAvailableBankAccountSelection,
+						"Click first available bank account"); }
+				vc.getWebDriverUtils().enterText(we_BillingPage.otherAmount, "1", "Enter other amount");
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.payTermsAndCondition,
+						"Check agree checkbox in terms and condition");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentSubmit, "Click schedule payment");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentOk,
+						"Click submit in schedule payment calender");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation of Payment"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Amount"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Type"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Bank Account"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(
+						"A confirmation email has been sent to the email address in your user profile: "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("If this address is not correct, please update your "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("user profile"));
+			} else {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePayment, "Click schedule payment");
+				Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+						"Check for schedule billing page header"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Pay Bill"));
+				if(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.cardSelectionStatus,
+						"Check whether the bank account selected already") == false){	
+					vc.getWebDriverUtils().clickElement(we_BillingPage.firstAvailableBankAccountSelection,
+						"Click first available bank account"); }
+				vc.getWebDriverUtils().enterText(we_BillingPage.otherAmount, "1", "Enter other amount");
+				vc.getWebDriverUtils().selectCheckbox(we_BillingPage.payTermsAndCondition,
+						"Check agree checkbox in terms and condition");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentSubmit, "Click schedule payment");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.schedulePaymentOk,
+						"Click submit in schedule payment calender");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Confirmation of Payment"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Amount"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("$1.00"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Date"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Payment Type"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Bank Account"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent(
+						"A confirmation email has been sent to the email address in your user profile: "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("If this address is not correct, please update your "));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("user profile"));			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	
+	@Test
+	public void Billing_ViewBillingHistory_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> View and pay bill";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		try {
+			Reporter.log("124381 Verify the functionality of 'View Billing History'", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewAndPayBill, "View & Pay bill");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.viewBillingHistory, "Click view billing history");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing History"));
+		} catch (Throwable e) {
+			e.printStackTrace();
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+
+	// **************** Billing settings - Test Scripts Starts Here
+	// *****************//
+
+	@Test
+	public void Billing_Billingsettings_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> Billing Settings";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+		try {
+			Reporter.log(
+					"109167 Check whether 'billing settings' submenu option displays on clicking billing & 109168 Check whether 'Billing Settings' page open on clicking Billing settings sub-menu option",
+					true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.billingSettings, "Billing Settings");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+
+			Reporter.log("109172 Validate the elements in the Screen1 of 'Add new payment' option", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Credit/Debit Cards"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Bank Accounts"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Method Name"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Make this my default payment method"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.next, "Check for next button"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Test", "Enter payment method name");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.defaultPayment, "Click default payment checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.nameOnCard, "Check Name field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.routingNumber,
+					"Check routing number existance"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCancel,
+					"Click cancel button in add a payment method");
+			vc.switchtoDefaultFrame();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+
+			Reporter.log("109175 Check whether an user able to close the 'Add new payment option' in screen1", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testbankaccount",
+					"Enter payment method name");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.defaultPayment, "Click default payment checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCloseIcon, "Click close button");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+					"Click credit/debit card in new payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testcreditcard",
+					"Enter payment method name");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.defaultPayment, "Click default payment checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCloseIcon, "Click close button");
+
+			Reporter.log("109176 Check whether an user able to close the 'Add new payment option' in screen2", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testbankaccount",
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "Testaccount", "Enter payment method name");
+			vc.getWebDriverUtils().enterText(we_BillingPage.routingNumber, "063113099", "Enter routing number");
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCloseIcon, "Click close button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+					"Click credit/debit card in new payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testcreditcard",
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "AutomationTest", "Enter name on the card");
+			vc.getWebDriverUtils().enterText(we_BillingPage.address, "1018 W. 9th Avenue", "Enter address");
+			vc.getWebDriverUtils().enterText(we_BillingPage.city, "King of Prussia", "Enter city");
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCloseIcon, "Click close button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+
+			Reporter.log("109177 Check whether 'card type' radio button works in 'Add New Payment Option' page", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			we_BillingPage.methodtypebankselected();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1BankAccount,
+					"Choose Bank account radio button");
+			we_BillingPage.methodtypecreditselected();
+
+			Reporter.log(
+					"109196 Check whether an user able to cancel the 'Add new payment option' page on clicking cancel button in screen2",
+					true);
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testbankaccount",
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "Testaccount", "Enter payment method name");
+			vc.getWebDriverUtils().enterText(we_BillingPage.routingNumber, "063113099", "Enter routing number");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCancel,
+					"Click cancel button in add a payment method");
+			vc.switchtoDefaultFrame();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+					"Click credit/debit card in new payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testcreditcard",
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "AutomationTest", "Enter name on the card");
+			vc.getWebDriverUtils().enterText(we_BillingPage.address, "1018 W. 9th Avenue", "Enter address");
+			vc.getWebDriverUtils().enterText(we_BillingPage.city, "King of Prussia", "Enter city");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expMonth, "09", "Enter expiry month");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expYear, "2026", "Enter expiry year");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.addPaymentCancel,
+					"Click cancel button in add a payment method");
+			vc.switchtoDefaultFrame();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+
+			Reporter.log("109198 Validate the elements in the Screen2 of 'Add new payment option' page", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testbankaccount",
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.nameOnCard, "Check Name field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.routingNumber,
+					"Check routing number existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.accountNumber,
+					"Check account number existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.bankName,
+					"Check bank name field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.buttonComplete,
+					"Check complete button existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.addPaymentCancel,
+					"Check cancel button existance"));
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.addPaymentCancel,
+					"Click cancel button in add a payment method");
+			vc.switchtoDefaultFrame();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().elementAvailablity(we_BillingPage.addPaymentScreen1Credit, "Add New Payment Method");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.addPaymentScreen1Credit,
+					"Click credit/debit card in new payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, "Testcreditcard",
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			Thread.sleep(5000);
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.nameOnCard,
+					"Check Name on card field existance"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.address, "Check address field existance"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.city, "Check city field existance"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.state, "Check state field existance"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.zip, "Check zip field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.cCNumber,
+					"Check CCNumber field existance"));
+			Assert.assertTrue(
+					vc.getWebDriverUtils().elementAvailablity(we_BillingPage.cCV, "Check CCV field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.expMonth,
+					"Check expiry month field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.expYear,
+					"Check expiry year field existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.buttonComplete,
+					"Check complete button existance"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.addPaymentCancel,
+					"Check cancel button existance"));
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentCloseIcon, "Click close button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try { 
+			Reporter.log("125159 Check whether 'Paperless billing' exists in billing settings", true);		
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.paperlessBilling,
+					"Check paperless billing existance"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(
+					"Click on the checkboxes next to the billing accounts that you would like to view the invoices online only"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.paperlessBillingSave,
+					"Check paperless billing save button existance"));
+
+			Reporter.log("125169 Verify 'paperless billing' export functionality - Billing Settings", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.export, "Export");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to Excel"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Export to PDF"));
+
+			Reporter.log("125170 Check whether 'Paperless billing' functionality works", true);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(we_BillingPage.billingAccountId);
+			actions.click();
+			actions.perform();
+			actions.moveToElement(we_BillingPage.accountSearchBillingsettings);
+			actions.click().sendKeys("00000000").build().perform();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.accountSelect, "Select account number");	
+			if (vc.getWebDriverUtils().elementAvailablity(we_BillingPage.paperlessBillingStatus,
+					"Check paperless Billing status") == true ){	
+				Reporter.log("Paperless billing already enabled",true);	
+			} else {
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paperlessBillingEnable, "Enable paperless billing");
+				vc.getWebDriverUtils().clickElement(we_BillingPage.paperlessBillingSave, "Click save button");
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Successfully Saved Paperless Billing Settings. It will take a few days for the change to take affect."));		
+			}
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		try {
+			Reporter.log("110213 Verify enroll functionality in the auto pay grid", true);
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.autoPayHeader,
+					"Check autopay existance"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.autoPayEnroll, "Click Enroll in autopay");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headerAutoPay,
+					"Check for edit autopay header"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.header2AutoPay,
+					"Check for edit autopay header"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.setAutoPayment,
+					"Check for set autopayment"));
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+		}  
+
+	@Test
+	public void Billing_Billingsettings_AddPaymentMethod_ELNK() throws Throwable {
+		Menu menu = MenuFactory.getModule1MenuByTitle(module1AppMenu.ELNK_User);
+		userStoryDescription = "Billing -> Billing Settings";
+		we_LoginPage.navigateTo_WEHome(menu);
+		winHandleBefore = driver.getWindowHandle();
+
+		try {
+			Reporter.log("109171 Verify whether an user able to add 'New payment' for credit/debit card ", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.billingSettings, "Billing Settings");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+					"Check header for New payment method"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.name,
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+					"Click credit/debit card in new payment method");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");		
+			String username = "test" + Math.random();
+			Thread.sleep(3000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, username, "Enter name on the card");
+			vc.getWebDriverUtils().enterText(we_BillingPage.address, "1018 W. 9th Avenue", "Enter address");
+			vc.getWebDriverUtils().enterText(we_BillingPage.city, "King of Prussia", "Enter city");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.state, "Pennsylvania", "Enter state");
+			vc.getWebDriverUtils().enterText(we_BillingPage.zip, "19406", "Enter zip");
+			vc.getWebDriverUtils().enterText(we_BillingPage.cCNumber, "378729810272003", "Enter credit card number");
+			vc.getWebDriverUtils().enterText(we_BillingPage.cCV, "413", "Enter CCV number");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expMonth, "09", "Enter expiry month");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expYear, "2026", "Enter expiry year");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.buttonComplete, "Click complete button");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option created successfully!"));
+			Thread.sleep(5000);
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(username));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(we_BillingPage.name));
+
+			Reporter.log("109209 Check whether added credit/debit cards can be edited", true);
+			we_BillingPage.moreIconEdit();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Edit Saved Payment Option"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.accountHolderName, "Account Holder Name", "Enter account holder name");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.saveChanges, "Click save button in edit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option updated successfully!"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Holder Name"));
+			Assert.assertFalse(vc.waitUntilTextIsPresent(username));
+			
+			Reporter.log("131000 Check whether added credit/debit cards can be deleted", true);
+			we_BillingPage.moreIconDelete();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Payment Option Confirmation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the selected payment option?"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.deleteYesButton, "Click 'Yes' in confirmation pop-up");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option deleted successfully!"));
+			driver.navigate().refresh();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+			Assert.assertFalse(vc.waitUntilTextIsPresent(we_BillingPage.name));	
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		
+		try {
+			Reporter.log("109197 Verify whether an user able to add 'New payment option' with bank account", true);
+			vc.getWebDriverUtils().clickElement(we_HomePage.billing, "Billing");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.billingSettings, "Billing Settings");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Settings"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+					"Check header for New payment method"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.accountname,
+					"Enter payment method name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");		
+			Thread.sleep(5000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "Test bank account", "Enter payment method name");
+			vc.getWebDriverUtils().enterText(we_BillingPage.routingNumber, "063113099", "Enter routing number");
+			vc.getWebDriverUtils().enterText(we_BillingPage.accountNumber, "423423452", "Enter account number");
+			vc.getWebDriverUtils().enterText(we_BillingPage.bankName, "TestBank", "Enter bank name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.buttonComplete, "Click complete button");
+			Thread.sleep(3000);
+			vc.switchtoDefaultFrame();
+			Assert.assertTrue(vc.waitUntilTextIsPresent(we_BillingPage.accountname));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("063113099"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("*****3452"));
+			
+			Reporter.log("131001 Check whether added bank accounts can be edited", true);
+			we_BillingPage.moreIconEditBankAccount();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Edit Saved Payment Option"));
+			vc.getWebDriverUtils().enterText(we_BillingPage.accountHolderName, "Account Holder Name", "Enter account holder name");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.saveChanges, "Click save button in edit");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option updated successfully!"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Account Holder Name"));
+		
+			Reporter.log("131002 Check whether added bank accounts can be deleted", true);
+			we_BillingPage.moreIconDeleteBankAccount();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Payment Option Confirmation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the selected payment option?"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.deleteYesButton, "Click 'Yes' in confirmation pop-up");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option deleted successfully!"));
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DEFAULT PAYMENT OPTION"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.addPaymentMethodButton,
+					"Click add a payment method"));
+			Assert.assertFalse(vc.waitUntilTextIsPresent(we_BillingPage.accountname));	
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("109199 Verify the functionality of default payment mode with credit/debit card option", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.headeraddCreditCard,
+					"Check header for New payment method"));
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentScreen1Credit,
+					"Click credit/debit card in new payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.name,
+					"Enter payment method name");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.defaultPayment, "Click default payment checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");
+			String username = "test" + Math.random();
+			Thread.sleep(3000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, username, "Enter name on the card");
+			vc.getWebDriverUtils().enterText(we_BillingPage.address, "1018 W. 9th Avenue", "Enter address");
+			vc.getWebDriverUtils().enterText(we_BillingPage.city, "King of Prussia", "Enter city");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.state, "Pennsylvania", "Enter state");
+			vc.getWebDriverUtils().enterText(we_BillingPage.zip, "19406", "Enter zip");
+			vc.getWebDriverUtils().enterText(we_BillingPage.cCNumber, "378729810272003", "Enter credit card number");
+			vc.getWebDriverUtils().enterText(we_BillingPage.cCV, "413", "Enter CCV number");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expMonth, "09", "Enter expiry month");
+			vc.getWebDriverUtils().selectByVisibleText(we_BillingPage.expYear, "2026", "Enter expiry year");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.buttonComplete, "Click complete button");		
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option created successfully!"));
+			Thread.sleep(5000);
+			vc.switchtoDefaultFrame();
+			vc.getWebDriverUtils().clickElement(we_BillingPage.paymentCredit, "Click pay with credit card");
+			Assert.assertTrue(vc.waitUntilTextIsPresent(username));
+			Assert.assertTrue(vc.waitUntilTextIsPresent(we_BillingPage.name));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DEFAULT PAYMENT OPTION"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.defaultPaymentImage,
+					"Check for default payment card image"));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.defaultPaymentHolderName, "Holder name")
+					.contains(username));
+			we_BillingPage.moreIconDelete();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Payment Option Confirmation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the selected payment option?"));
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.deleteYesButton, "Click 'Yes' in confirmation pop-up");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option deleted successfully!"));
+			vc.getWebDriverUtils().pageRefresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.addPaymentMethodButton,
+					"Click add a payment method"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("NO DEFAULT PAYMENT OPTION ASSIGNED"));
+			Assert.assertFalse(vc.waitUntilTextIsPresent(we_BillingPage.name));	
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+
+		try {
+			Reporter.log("109208 Verify the functionality of default payment mode with bank accounts option", true);
+			vc.getWebDriverUtils().clickElement(we_BillingPage.addPaymentMethodButton, "Click add a payment method");
+			vc.getWebDriverUtils().enterText(we_BillingPage.paymentMethodName, we_BillingPage.accountname,
+					"Enter payment method name");
+			vc.getWebDriverUtils().selectCheckbox(we_BillingPage.defaultPayment, "Click default payment checkbox");
+			vc.getWebDriverUtils().clickElement(we_BillingPage.next, "Click next button");
+			vc.switchToFrame("ptframe");		
+			Thread.sleep(5000);
+			vc.getWebDriverUtils().enterText(we_BillingPage.nameOnCard, "Test bank account", "Enter payment method name");
+			vc.getWebDriverUtils().enterText(we_BillingPage.routingNumber, "063113099", "Enter routing number");
+			vc.getWebDriverUtils().enterText(we_BillingPage.accountNumber, "423423452", "Enter account number");
+			vc.getWebDriverUtils().enterText(we_BillingPage.bankName, "TestBank", "Enter bank name");
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.buttonComplete, "Click complete button");
+			Thread.sleep(5000);
+			vc.switchtoDefaultFrame();
+			Assert.assertTrue(vc.waitUntilTextIsPresent(we_BillingPage.accountname));
+			Assert.assertTrue(vc.getWebDriverUtils().getText(we_BillingPage.defaultPaymentHolderName, "Holder name")
+					.contains("Test bank account"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("063113099"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("*****3452"));
+			we_BillingPage.moreIconDeleteBankAccount();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Delete Payment Option Confirmation"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to delete the selected payment option?"));
+			vc.getWebDriverUtils().clickHiddenElement(we_BillingPage.deleteYesButton, "Click 'Yes' in confirmation pop-up");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Payment option deleted successfully!"));
+			driver.navigate().refresh();
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Manage Payment Methods"));
+			Assert.assertTrue(vc.waitUntilTextIsPresent("DEFAULT PAYMENT OPTION"));
+			Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_BillingPage.addPaymentMethodButton,
+					"Click add a payment method"));	
+			Assert.assertTrue(vc.waitUntilTextIsPresent("NO DEFAULT PAYMENT OPTION ASSIGNED"));
+			Assert.assertFalse(vc.waitUntilTextIsPresent(we_BillingPage.accountname));
+		} catch (Throwable e) {
+			Reporter.log(testMethodName + " ==> " + "Test case Failed", true);
+			vc.getWebDriverUtils().takeScreenshot(testMethodName + "_error");
+		}
+		Reporter.log(testMethodName + " ==> " + "Test case passed", true);
+	}
+}

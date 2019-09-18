@@ -1,0 +1,1560 @@
+package com.webautomation.pageobject.we_pages;
+
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_SupportPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_SupportPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(xpath = "xxxxxxxxxxxxxx")
+	public WebElement xxxxxxxxxxxxxx;
+
+	@FindBy(xpath = "//h4[contains(.,'Community')]")
+	public WebElement community;
+
+	@FindBy(xpath = "//p[contains(.,'User conversations, tips & tricks')]")
+	public WebElement userConversationsTipsAndTricks;
+
+	@FindBy(xpath = "//h4[contains(.,'OfficeSuite Training')]")
+	public WebElement officeSuiteTraining;
+
+	@FindBy(xpath = "//h4[contains(.,'Get Help')]")
+	public WebElement getHelp;
+	
+	//Nationwide Status
+	@FindBy(xpath = "//h4[contains(.,'Nationwide Status')]")
+	public WebElement nationwideStatus;
+	
+	@FindBy(xpath = "//p[contains(.,'View real-time nationwide network status')]")
+	public WebElement viewRealTimeNationwideStatus;
+	
+	@FindBy(xpath = "//button[@data-id='NetworkStatus_Started_range']")
+	public WebElement date;
+	
+	@FindBy(xpath = "(//i[contains(@data-date-icon,'icon-calendar')])[1]")
+	public WebElement startDate;
+	
+	@FindBy(xpath = "//input[@id='NetworkStatus_Started_end']")
+	public WebElement endDate;
+	
+	@FindBy(xpath = "//input[@id='NetworkStatus_TicketNumber']")
+	public WebElement outage;
+	
+	@FindBy(xpath = "//button[@class='checkbox']")
+	public WebElement statusHideClosedTickets;
+	
+	@FindBy(xpath = "//input[@id='NetworkStatus_NumLocations']")
+	public WebElement numberOfLocation;
+	
+	@FindBy(xpath = "//div[@class='arrow'][contains(.,'Outage')]")
+	public WebElement outageSortTable;
+	
+	@FindBy(xpath = "//div[@class='arrow'][contains(.,'Started')]")
+	public WebElement startedSortTable;
+	
+	@FindBy(xpath = "//div[@class='arrow'][contains(.,'Status')]")
+	public WebElement statusSortTable;
+	
+	@FindBy(xpath = "//div[@class='arrow'][contains(.,'Number of Potentially Affected Locations')]")
+	public WebElement numberOfPetentialLocationsSortTable;
+	
+	@FindBy(xpath = "//tr[1]/td[6]/a")
+	public WebElement detailsFirstRecord;
+	
+	@FindBy(xpath = "//tbody/tr[1]/td[7]/a")
+	public WebElement locationsFirstRecord;
+	
+	@FindBy(xpath="//div[7]/div[2]/a[1]")
+	public WebElement firstPage;
+	
+	@FindBy(xpath="//div[7]/div[2]/a[2]")
+	public WebElement prevPage;
+	
+	@FindBy(xpath="//div[7]/div[2]/a[3]")
+	public WebElement nextPage;
+	
+	@FindBy(xpath="//div[7]/div[2]/a[4]")
+	public WebElement lastPage;
+	
+	//@FindBy(xpath="//div[7]/div[1]/a[2]")
+	@FindBy(xpath="//a[@data-val='-1']")
+	public WebElement allLogs;
+	
+	@FindBy(xpath="//a[@data-val='15']")
+	public WebElement logs15;
+	
+	//Escalation process
+	
+	@FindBy(xpath = "//h4[contains(.,'Escalation Process')]")
+	public WebElement escalationProcess;
+	
+	@FindBy(xpath = "(//a[@href='/Support/HelpCenter/EscalationProcess'])[2]")
+	public WebElement escalationProcessSubMenu;
+	
+	@FindBy(xpath = "//p[contains(.,'Windstream Service Assurance and Care points of contact for elevated issue escalation')]")
+	public WebElement windstreamServiceAssuranceAndCarePoints;
+	
+	@FindBy(xpath = "//a[contains(.,' here ')]")
+	public WebElement here;
+	
+	@FindBy(xpath = "//a[@href='/Support/HelpCenter']")
+	public WebElement helpCenter;
+	
+		@FindBy(xpath = "(//a[@href='/Support/HelpCenter/DataInternetHelpCenter'])[1]")
+		public WebElement networkHelpCenterSubMenu;
+		
+		@FindBy(xpath = "(//a[@href='/Support/HelpCenter/VoiceHelpCenter'])[1]")
+		public WebElement voiceHelPCenterSubMenu;
+		
+		@FindBy(xpath = "(//a[@href='/Support/HelpCenter/SecurityHelpCenter'])[1]")
+		public WebElement securityHelpCenterSubMenu;
+		
+		@FindBy(xpath = "(//a[@href='/Support/HelpCenter/DataInternetHelpCenter'])[4]")
+		public WebElement networkHelpCenterImage;
+		
+		@FindBy(xpath = "(//a[@href='/Support/HelpCenter/VoiceHelpCenter'])[4]")
+		public WebElement voiceHelpCenterImage;
+		
+		@FindBy(xpath = "(//a[@href='/Support/HelpCenter/SecurityHelpCenter'])[4]")
+		public WebElement securityHelpCenterImage;
+		
+		@FindBy(xpath = "//a[contains(.,'All Network Help')]")
+		public WebElement allNetworkHelp;
+		
+		@FindBy(xpath = "//a[contains(.,'All Voice & Unified Communications Help')]")
+		public WebElement allVoiceUnifiedCommunicationsHelp;
+		
+		@FindBy(xpath = "//a[contains(.,'All Security Help')]")
+		public WebElement allSecurityHelp;
+		
+		@FindBy(xpath = "//button[contains(.,'Go')]")
+		public WebElement go;
+		
+		@FindBy(xpath = "//button[@value='Search']")
+		public WebElement search;
+	
+	
+	@FindBy(xpath = "//a[contains(.,'Create Ticket')]")
+	public WebElement createTicket;
+	
+	@FindBy(xpath = "//a[contains(.,'Ticket Status')]")
+	public WebElement ticketStatusEscalationProcess;
+	
+	@FindBy(xpath = "//a[@href='/Support/Forms']")
+	public WebElement forms;
+	
+	@FindBy(xpath = "(//a[@target='_blank'][contains(.,'NDA')])[1]")
+	public WebElement ndaSubMenu;
+	
+	@FindBy(xpath = "(//a[@target='_blank'][contains(.,'W9')])[1]")
+	public WebElement w9SubMenu;
+	
+	@FindBy(xpath = "(//a[contains(.,'Change of Ownership Request')])[1]")
+	public WebElement changeOfOwnershipRequestFormSubMenu;
+	
+	@FindBy(xpath = "//a[contains(.,'Non-Disclosure')]")
+	public WebElement mutualNonDisclosureAgreement;
+	
+	@FindBy(xpath = "//a[contains(.,'Taxpayer Identification')]")
+	public WebElement w9RequestForEarthlinkTaxpayerIdentification;
+	
+	//@FindBy(xpath = "//strong[contains(.,'Change Of Ownership')]")
+	@FindBy(xpath = "//a[contains(.,'Change Of Ownership')]")
+	public WebElement changeOfOwnershipRequest;
+	
+	@FindBy(xpath = "//h4[contains(.,'New Support Request')]")
+	public WebElement newSupportRequestMenu;
+	
+	@FindBy(xpath = "//p[contains(.,'Create a new Support Request')]")
+	public WebElement createANewSupportRequest;
+
+	
+/*	@FindBy(xpath = "//button[@id='btnCreateRequest']")
+	public WebElement createNewSupportRequest;*/
+	
+	@FindBy(xpath = "//p[contains(.,'View, modify & submit support requests')]")
+	public WebElement supportRequestMenu;
+	
+	@FindBy(xpath = "//h4[contains(.,'Frequently Asked Questions')]")
+	public WebElement frequentlyAskedQuestionsMenu;
+	
+	@FindBy(xpath = "//p[contains(.,'Answers to every last question')]")
+	public WebElement answersToEveryLastQuestionMenu;
+	
+	// Get Help
+
+	@FindBy(id = "tabServices")
+	public WebElement myServices;
+
+	@FindBy(id = "tabHelp")
+	public WebElement generalHelp;
+
+	@FindBy(id = "MyGuidesTabVoice")
+	public WebElement myServicesTabVoice;
+
+	@FindBy(id = "MyGuidesTabData")
+	public WebElement myServicesTabData;
+
+	@FindBy(id = "tabVoice")
+	public WebElement voice;
+
+	@FindBy(xpath = "tabData")
+	public WebElement data;
+
+	@FindBy(xpath = "tabVoiceData")
+	public WebElement bothVoiceAndData;
+
+	@FindBy(xpath = "tabSerivces")
+	public WebElement managedServices;
+
+	@FindBy(xpath = "tabOffice")
+	public WebElement office365;
+
+	@FindBy(xpath = "tabMyLink")
+	public WebElement myLINK;
+
+	@FindBy(xpath = "tabCircuit")
+	public WebElement circuitID;
+
+	@FindBy(xpath = "tabOthers")
+	public WebElement other;
+
+	@FindBy(xpath = "//table[1]/tbody/tr/td[2]/a")
+	public WebElement myOfficeSuiteAdminGuide;
+
+	@FindBy(xpath = "//table[2]/tbody/tr/td[2]/a")
+	public WebElement myOfficeSuiteDesktopUserGuide;
+
+	@FindBy(xpath = "//table[3]/tbody/tr/td[2]/a")
+	public WebElement officeSuiteHDMeetingUserGruide;
+
+	@FindBy(xpath = "//table[4]/tbody/tr/td[2]/a")
+	public WebElement officeSuiteDialerUserGuide;
+
+	@FindBy(xpath = "//table[5]/tbody/tr/td[2]/a")
+	public WebElement officeSuitePCSoftPhoneUserGuide;
+
+	@FindBy(xpath = "//table[6]/tbody/tr/td[2]/a")
+	public WebElement chromeClickToCallUserGuide;
+
+	@FindBy(xpath = "//table[7]/tbody/tr/td[2]/a")
+	public WebElement officeSuiteConnectorForSkypeForBusiness;
+
+	@FindBy(xpath = "//table[8]/tbody/tr/td[2]/a")
+	public WebElement bandwidthGuide;
+
+	@FindBy(xpath = "//table[9]/tbody/tr/td[2]/a")
+	public WebElement officeSuiteFaxGude;
+
+	// Get Help Download
+
+	// myOfficeSuiteDesktop
+	@FindBy(xpath = "//a[contains(@href,'/Content/doc/Guides/GeneralHelp_OS/Downloads/MyOfficeSuiteInstaller')]")
+	public WebElement myOfficeSuiteDesktopWindows;
+
+	// officeSuiteHDMeeting
+	@FindBy(xpath = ".//*[@id='downloadsDiv']/div[1]/div[2]/div[2]/span/a[1]")
+	public WebElement officeSuiteHDMeetingWindows;
+
+	@FindBy(xpath = "//*[@id='downloadsDiv']/div[1]/div[2]/div[2]/span/a[2]")
+	public WebElement officeSuiteHDMeetingMac;
+
+	@FindBy(xpath = "//*[@id='downloadsDiv']/div[1]/div[2]/div[2]/span/a[3]")
+	public WebElement officeSuiteHDMeetingIOS;
+
+	@FindBy(xpath = "//a[@href='https://play.google.com/store/apps/details?id=com.broadviewnet.meetings']")
+	public WebElement officeSuiteHDMeetingAndroid;
+
+	// officeSuiteDialer
+	@FindBy(xpath = "//a[@href='/Content/doc/Guides/GeneralHelp_OS/Downloads/BroadviewDialerSetup.msi']")
+	public WebElement officeSuiteDialerWindows;
+
+	// officeSuitePCSoftphone
+	@FindBy(xpath = "//*[@id='downloadsDiv']/div[3]/div[1]/div[2]/span/a[1]")
+	public WebElement officeSuitePCSoftphoneWindows;
+
+	@FindBy(xpath = "//*[@id='downloadsDiv']/div[3]/div[1]/div[2]/span/a[2]")
+	public WebElement officeSuitePCSoftphoneWindowsMac;
+
+	@FindBy(xpath = "//*[@id='downloadsDiv']/div[3]/div[1]/div[2]/span/a[3]")
+	public WebElement officeSuitePCSoftphoneWindowsIOS;
+
+	@FindBy(xpath = "//a[@href='https://communities.windstreamenterprise.com/OfficeSuite-UC/broadview/topics/where_can_i_download_and_get_information_about_mobile_softphone_and_smartphone_apps']")
+	public WebElement officeSuitePCSoftphoneWindowsAndroid;
+
+	// chromeClickToCall
+	@FindBy(linkText = "Chrome")
+	public WebElement chromeClickToCall;
+
+	// osConectorForSkypeForBusiness
+	@FindBy(xpath = "//a[contains(@href,'/Content/doc/Guides/GeneralHelp_OS/Downloads/Install_OSConnectorForS4B')]")
+	public WebElement osConectorForSkypeForBusinessWindows;
+
+	// Windstream SoftPhone
+	@FindBy(xpath = "//a[@href='/Content/installer/windstream_softphone_windows.exe']")
+	public WebElement windstreamSoftPhoneWindows;
+
+	@FindBy(xpath = "//a[@href='/Content/installer/windstream_softphone_mac.dmg']")
+	public WebElement windstreamSoftPhoneMac;
+
+	@FindBy(xpath = "//a[@href='/Content/installer/toolbar_download.msi']")
+	public WebElement toolBarDownload;
+
+	@FindBy(xpath = "//div[@id='voice-tab']/div/div/div/div[2]/div/div[3]/button")
+	public WebElement moreGeneralhelp;
+
+	@FindBy(xpath = "//h4[contains(.,'Contact Us')]")
+	public WebElement contactUs;
+
+	@FindBy(xpath = "//p[contains(.,'Contact our support team')]")
+	public WebElement contactOurSupportTeam;
+
+	// Contact Us
+
+	@FindBy(xpath = "//input[@name='FirstName']")
+	public WebElement firstName;
+
+	@FindBy(xpath = "//input[@name='LastName']")
+	public WebElement lastName;
+
+	@FindBy(xpath = "//input[@name='CompanyName']")
+	public WebElement company;
+
+	@FindBy(xpath = "//input[@name='Email']")
+	public WebElement emailAddress;
+
+	@FindBy(xpath = "//input[@name='Address']")
+	public WebElement address;
+
+	@FindBy(xpath = "//input[@name='Address2']")
+	public WebElement address2;
+
+	@FindBy(xpath = "//input[@id='City']")
+	public WebElement city;
+
+	@FindBy(xpath = "//button[@data-id='Country']")
+	public WebElement country;
+
+	@FindBy(xpath = "//button[@data-id='ddlstate']")
+	public WebElement stateProvinceRegion;
+
+	@FindBy(xpath = "//input[@id='Zip']")
+	public WebElement zipCode;
+
+	@FindBy(xpath = "//input[@id='PhoneNumber']")
+	public WebElement phoneNumber;
+
+	@FindBy(xpath = "//input[@id='Extension']")
+	public WebElement ext;
+
+	@FindBy(xpath = "//button[@data-id='ContactMeBy']")
+	public WebElement contactMeBy;
+
+	@FindBy(xpath = "//button[@data-id='BillingAccountId']")
+	public WebElement accountNumber;
+
+	@FindBy(xpath = "//button[@data-id='ContactReason']")
+	public WebElement reasonForContactingCustomerCare;
+
+	@FindBy(xpath = "//button[@data-id='ServiceLocation']")
+	public WebElement ifThisIssueIsSpecificToALocation;
+
+	@FindBy(xpath = "//input[@id='RelatedService']")
+	public WebElement relatedService;
+
+	@FindBy(xpath = "//textarea[@id='Comments']")
+	public WebElement comments;
+
+	@FindBy(xpath = "//button[contains(.,'Submit')]")
+	public WebElement submit;
+
+	@FindBy(xpath = "//a[@title='Create a Support Ticket']")
+	public WebElement createASupportTicket;
+
+	@FindBy(xpath = "//a[@title='Ticket Status']")
+	public WebElement ticketStatusTitle;
+
+	@FindBy(xpath = "//a[@title='Order Status']")
+	public WebElement orderStatus;
+
+	@FindBy(xpath = "//a[@title='Live Chat']")
+	public WebElement liveChat;
+
+	@FindBy(xpath = "//img[@class='chatbot-ico']")
+	public WebElement chatIcon;
+
+	@FindBy(css = "div.lp_maximized.lpmx > div.lp_header > div.lp_header-content-wrapper > div.lp_header-buttons-container > button.lp_close")
+	public WebElement closeChatWindow;
+
+	@FindBy(css = "button.lp_confirm_button")
+	public WebElement yesConfirmCloseChatWindow;
+
+	@FindBy(xpath = "//*[@id='excludeFooter']/div[3]/div[2]/div[2]/div[13]/div[2]/div/span/a")
+	public WebElement businessCCForVoiceDataServices;
+
+	@FindBy(xpath = "//*[@id='excludeFooter']/div[3]/div[2]/div[2]/div[14]/div[2]/div/span/a")
+	public WebElement businessCCForManagedITServicesCustomers;
+
+	@FindBy(xpath = "//a[@class='submit primary light submit icon light primary']")
+	public WebElement iHaveLookedThereOrderStatus;
+
+	@FindBy(xpath = "//a[@class='submit primary light hve-qstn check']")
+	public WebElement iHaveLookedThereChangeContact;
+
+	@FindBy(xpath = "//span[contains(.,'Leave this form and take me to the Billing Contact Info change form.')]")
+	public WebElement leavethisFormTakeMeToBilling;
+
+	@FindBy(xpath = "//span[contains(.,'Leave this form and take me to Order Status')]")
+	public WebElement leavethisFormTakeMeToOrderStatus;
+
+	@FindBy(xpath = "//*[@id='ChangeContactEscalationModal']/div/div[1]/div")
+	public WebElement closeChangeContactInformartionDialogModal;
+
+	@FindBy(xpath = ".//*[@id='OrderStatusEscalationModal']/div/div[1]/div")
+	public WebElement closeOrderStatusEscalationModal;
+
+	@FindBy(xpath = "//input[@placeholder='Enter text here']")
+	public WebElement whatIsYourName;
+
+	@FindBy(xpath = "//select[@role='listbox']")
+	public WebElement howCanWeHelpToday;
+
+	@FindBy(xpath = "//button[@class='lp_submit_button']")
+	public WebElement chatSubmit;
+
+	// Create Support request
+
+	@FindBy(xpath = "//a[contains(.,'Refresh Support Request List')]")
+	public WebElement refreshSupportRequestList;
+
+	@FindBy(xpath = "//button[@id='ordersExport']")
+	public WebElement exportRequests;
+
+	@FindBy(xpath = "//button[contains(.,'Export to Excel')]")
+	public WebElement exportToExcel;
+
+	@FindBy(xpath = "//button[contains(.,'Export to PDF')]")
+	public WebElement exportToPDF;
+
+	@FindBy(xpath = "//button[@id='btnCreateRequest']")
+	public WebElement createNewSupportRequest;
+	
+	@FindBy(xpath = "//img[@class='mCS_img_loaded']")
+	public WebElement loadingImg;
+	
+	@FindBy(xpath = "//*[@id='newTktFlyout']")
+	public WebElement createSupportRequestFlyOut;
+	
+	@FindBy(xpath = "//button[@id='cancelTktCreation']")
+	public WebElement cancelSupportRequest;
+	
+	@FindBy(xpath = "//button[@aria-label='Yes']")
+	public WebElement cancelSupportRequestYes;
+	
+	@FindBy(xpath = "//button[@aria-label='No']")
+	public WebElement cancelSupportRequestNo;
+	
+	@FindBy(xpath = "//div[@data-target='#account-details-section']")
+	public WebElement accountDetailsSection;
+	
+	@FindBy(xpath = "//div[@data-target='#issue-details-section']")
+	public WebElement issueDetailsSection;
+	
+	@FindBy(xpath = "//div[contains(@data-target,'#authorization-section')]")
+	public WebElement authorizationDetailsSection;
+	
+	@FindBy(xpath = "//div[contains(@data-target,'#contact-details-section')]")
+	public WebElement contactDetailsSection;
+	
+	// @FindBy(xpath="//button[@data-id='BillingAccountId']")
+	// @FindBy(xpath="//button[contains(@ng-class,'{caretup: showddlAccount}')]")
+	@FindBy(xpath = "//button[@ng-click='toggleAcctVisibility()']")
+	public WebElement account;
+
+	@FindBy(xpath = "//select[@name='ddlAccount']")
+	public WebElement accountDropDown;
+
+	// @FindBy(xpath="//button[@data-id='LocationId']")
+	// @FindBy(xpath="//button[contains(@ng-class,'{caretup: showddlLocation}')]")
+	@FindBy(xpath = "//button[@ng-click='toggleLocVisibility()']")
+	public WebElement location;
+
+	/*
+	 * @FindBy(xpath="//*[@id='mCSB_1_container']") public WebElement
+	 * accountDropDown;
+	 */
+
+	@FindBy(xpath = "//select[@name='ddlLocation']")
+	public WebElement locationDropDown;
+
+	@FindBy(xpath = "//select[@name='ddlService']")
+	public WebElement selectAServiceDropDown;
+
+	@FindBy(xpath = "//select[@name='ddlTrouble']")
+	public WebElement selectTheGeneralIssueDropDown;
+
+	@FindBy(xpath = "//select[@name='ddlSymptom']")
+	public WebElement defineTheSpecificIssueDropDown;
+
+	@FindBy(xpath = "//select[@name='opt']")
+	public WebElement primarySelectAffectedCircuitDropDown;
+
+	@FindBy(xpath = "//select[@name='ddlPrimaryContact']")
+	public WebElement primaryContactDropDown;
+
+	@FindBy(xpath = "//div[@data-target='#issue-details-section']")
+	public WebElement issue;
+
+	@FindBy(xpath = "//button[@data-id='ServiceId']")
+	public WebElement selectAService;
+
+	@FindBy(xpath = "//*[@id='mCSB_2_container']")
+	public WebElement selectServiceDropDown;
+
+	@FindBy(xpath = "//button[@data-id='TroubleType']")
+	public WebElement selectTheGeneralIssue;
+
+	@FindBy(xpath = "//button[@data-id='Details_Triage_Symptoms_3']")
+	public WebElement defineTheSpecificIssue;
+
+	@FindBy(xpath = "//select[@name='opt']")
+	public WebElement pleaseSelectAffectedCircuit;
+
+	@FindBy(xpath = "//select[@name='opt']")
+	public WebElement pleaseSelectAffectedCircuitDropDown;
+
+	@FindBy(xpath = "//input[@name='opt']")
+	public WebElement pleaseProvideABriefDescriptionOfTheTrouble;
+
+	@FindBy(xpath = "//*[@id='mCSB_3_container']")
+	public WebElement selectTheGeneralIssueDropDown2;
+	
+	@FindBy(xpath = "//input[@ng-model='ques.Value']")
+	public WebElement pleaseProvideBriefDescription;
+
+	@FindBy(xpath = "//textarea[@ng-model='additionalInfo']")
+	public WebElement additionalInfo;
+
+	@FindBy(xpath = "//label[@for='minorRadio']")
+	public WebElement minorRadio;
+
+	@FindBy(xpath = "//label[@for='majorRadio']")
+	public WebElement majorRadio;
+
+	@FindBy(xpath = "//label[@for='criticalRadio']")
+	public WebElement criticalRadio;
+
+	@FindBy(xpath = "//p[contains(.,'3Contact Info Please complete this section before submitting your ticket')]")
+	public WebElement contactInfo;
+
+	@FindBy(xpath = "//p[contains(.,'4Authorization Please complete this section before submitting your ticket')]")
+	public WebElement authorization;
+
+	@FindBy(xpath = "//*[@id='mCSB_4_container']")
+	public WebElement primaryContactDropDown2;
+
+	@FindBy(xpath = "//button[@data-id='PrimaryContact_ContactId']")
+	public WebElement primaryContact;
+
+	@FindBy(xpath = "//label[@for='Primary_1']")
+	public WebElement primaryContact_Email;
+
+	@FindBy(xpath = "//label[@for='Primary_2']")
+	public WebElement primaryContact_Phone;
+
+	@FindBy(xpath = "//label[@for='Primary_3']")
+	public WebElement primaryContact_EmailAndPhone;
+
+	@FindBy(xpath = "//input[@id='txtName']")
+	public WebElement newContact_Name;
+
+	@FindBy(xpath = "//input[@id='txtEmail']")
+	public WebElement newContact_Email;
+
+	@FindBy(xpath = "//input[@id='txtPhone']")
+	public WebElement newContact_Phone;
+
+	@FindBy(xpath = "//button[@class='checkbox']")
+	public WebElement usePrimaryCheckBox;
+
+	@FindBy(xpath = "//select[@name='ddlSiteContact']")
+	public WebElement siteContactDropDown;
+
+	@FindBy(xpath = "//button[@data-id='SiteContact_ContactId']")
+	public WebElement siteContact;
+
+	@FindBy(xpath = "//label[@for='Site_1']")
+	public WebElement siteContact_Email;
+
+	@FindBy(xpath = "//label[@for='Site_2']")
+	public WebElement siteContact_Phone;
+
+	@FindBy(xpath = "//label[@for='Site_3']")
+	public WebElement siteContact_EmailAndPhone;
+
+	@FindBy(xpath = "//a[@onclick='ShowHideAfterHoursContact(); return false;']")
+	public WebElement addAfterHoursContact;
+	
+	@FindBy(xpath = "//select[@id='ddlAfterHrsContact']")
+	public WebElement addAfterHoursContactDropDown;
+
+	@FindBy(xpath = "//button[@id='removeAfterHrsContact']")
+	public WebElement addAfterHoursContactCloseX;
+
+	@FindBy(xpath = "//button[@data-id='AfterHoursContact_ContactId']")
+	public WebElement afterHoursContactSelect;
+
+	@FindBy(xpath = "//label[@for='AfterHours_1']")
+	public WebElement afterHoursContact_Email;
+
+	@FindBy(xpath = "//label[@for='AfterHours_2']")
+	public WebElement afterHoursContact_Phone;
+
+	@FindBy(xpath = "//label[@for='AfterHours_3']")
+	public WebElement afterHoursContact_EmailAndPhone;
+
+	@FindBy(xpath = "//label[@for='anytimeRadio']")
+	public WebElement anyTimeRadio;
+
+	@FindBy(xpath = "//label[@for='workhoursRadio']")
+	public WebElement busniessHoursRadio;
+
+	@FindBy(xpath = "//label[@for='otherHours']")
+	public WebElement otherCustomRadio;
+
+	@FindBy(xpath = "//textarea[@id='SpecialAccessRequirements']")
+	public WebElement specialAccessRequirement;
+
+	@FindBy(xpath = "//label[@for='testYesRadio']")
+	public WebElement testYesRadio;
+
+	@FindBy(xpath = "//label[@for='testScheduleRadio']")
+	public WebElement testScheduleRadio;
+
+	@FindBy(xpath = "//label[@for='testNoRadio']")
+	public WebElement testNoRadio;
+
+	@FindBy(xpath = "//label[@for='billYesRadio']")
+	public WebElement billYesRadio;
+
+	@FindBy(xpath = "//label[@for='billNoRadio']")
+	public WebElement billNoRadio;
+
+	@FindBy(xpath = "//input[@value='Review & Submit']")
+	public WebElement reviewAndSubmit;
+
+	// @FindBy(xpath="//input[@value='Submit'])[2]")
+	@FindBy(xpath = "//button[contains(.,'Submit')]")
+	public WebElement submitRequest;
+
+	@FindBy(xpath = "//a[@class='icon close pull-right btn-ticket-cancel box-hdr-buttons']")
+	public WebElement cancelSupportRequestHeader;
+
+	@FindBy(xpath = "//a[@class='button light icon close inline mL14 lh-40 closetickets']")
+	public WebElement cancelSupportRequestFooter;
+
+	@FindBy(xpath = "//p[@class='message']")
+	public WebElement messageCreateRequest;
+
+	// Filter Support Requests
+
+	@FindBy(xpath = "//a[contains(.,'Filters')]")
+	public WebElement filters;
+
+	@FindBy(xpath = "//a[@class='light btnExpandCollapseFilters ws-icon ws-menu btn-up closed']")
+	public WebElement filterOpen;
+
+	@FindBy(xpath = "//a[@class='light btnExpandCollapseFilters ws-icon ws-menu btn-down open']")
+	public WebElement filterClose;
+
+	@FindBy(xpath = "//input[@id='TicketStatus_TicketNumber']")
+	public WebElement ticketID;
+
+	@FindBy(xpath = "//button[@data-id='TicketStatus_TicketStatus']")
+	public WebElement ticketStatus;
+
+	@FindBy(xpath = "//button[@data-id='TicketStatus_ServiceType']")
+	public WebElement ticketServiceType;
+
+	@FindBy(xpath = "//button[@data-id='TicketStatus_TroubleType']")
+	public WebElement ticketReportedProblem;
+
+	@FindBy(xpath = "//button[@data-id='TicketStatus_BillingAccountID']")
+	public WebElement ticketAccountOMS;
+
+	@FindBy(xpath = "//button[@data-id='TicketStatus_UpdatedDate_range']")
+	public WebElement ticketLastUpdated;
+
+	@FindBy(xpath = "//input[@id='TicketStatus_UpdatedDate_start']")
+	public WebElement ticketStartDate;
+
+	@FindBy(xpath = "//input[@id='TicketStatus_UpdatedDate_end']")
+	public WebElement ticketEndDate;
+
+	@FindBy(css = "i.icon-calendar")
+	public WebElement ticketStartDateCalendar;
+
+	@FindBy(xpath = "//div[2]/div[2]/span/i")
+	public WebElement ticketEndDateCalendar;
+
+	@FindBy(xpath = "//td[contains(concat(' ', @class, ' '), 'day active')]")
+	public WebElement activeDate;
+
+	@FindBy(xpath = "//input[@id='TicketStatus_ServiceNumber']")
+	public WebElement ticketServiceNumber;
+
+	@FindBy(xpath = "//button[@data-id='TicketStatus_Address1']")
+	public WebElement ticketServiceAddress;
+
+	@FindBy(xpath = "//button[@value='Clear Filters']")
+	public WebElement clearFilters;
+
+	@FindBy(xpath = "//button[@value='Apply Filters']")
+	public WebElement applyFilters;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody")
+	public WebElement ticketTableStatus;
+
+	@FindBy(xpath = "//a[@data-target='#AddNotesModal']")
+	public WebElement addNotes;
+	
+	@FindBy(xpath = "//*[@id='ticketNotes']")
+	public WebElement addNotesTxt;
+
+	@FindBy(xpath = "//textarea[@name='ticketNotes']")
+	public WebElement ticketNotesText;
+
+	@FindBy(xpath = "//*[@id='AddNotesModal']/div/div[1]/h3/div")
+	public WebElement addNotesCloseX;
+
+	@FindBy(xpath = "//button[@id='btnCancelDefault']")
+	public WebElement addNotesCancel;
+
+	@FindBy(xpath = "//button[@class='icon light check primary btnSaveNotes']")
+	public WebElement saveNotes;
+
+	@FindBy(xpath = "//a[@data-target='#CloseTicketModal']")
+	public WebElement closeTicket;
+
+	@FindBy(xpath = "//label[@for='cancelTicketRadio']")
+	public WebElement cancelRequestRadio;
+
+	@FindBy(xpath = "//label[@for='resolvedTicketRadio']")
+	public WebElement closeAsResolvedTicketRadio;
+
+	@FindBy(xpath = "//button[@class='icon light check primary btnCloseTicket']")
+	public WebElement saveCloseTicket;
+	
+	@FindBy(xpath = "//*[@id='CloseTicketModal']/div/div[1]/h3/div")
+	public WebElement closeTicketX;
+
+	@FindBy(xpath = ".//*[@id='CloseTicketModal']/div/div[3]/button[2]")
+	public WebElement closeTicketCancel;
+
+	@FindBy(xpath = "//a[@class='icon button light close pull-left']")
+	public WebElement closeTicketPage;
+	
+	@FindBy(xpath = "//a[@data-target='#EscalateModal']")
+	public WebElement escalateTicket;
+	
+	@FindBy(xpath = "//button[@data-id='EscalationReasonId']")
+	public WebElement escalationReasonId;
+	
+	@FindBy(xpath = "//textarea[@id='EscalationNotes']")
+	public WebElement escalationNotes;
+	
+	@FindBy(xpath = "//button[@id='btnCreateEscalation']")
+	public WebElement escalateSave;
+	
+	@FindBy(xpath = "//*[@id='EscalateModal']/div/div[3]/button[2]")
+	public WebElement escalateCancel;
+	
+	@FindBy(xpath = "//*[@id='EscalateModal']/div/div[1]/h3/div")
+	public WebElement escalateCloseX;
+	
+	//Escalating Support Request...
+	//Loading Escalation Info...
+	//Ticket has been escalated to Level 1
+//	/Ticket closed by
+	
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[1]/span[1]")
+	public WebElement recentTicketID;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[1]/span[2]")
+	public WebElement recentTicketAccountID;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[2]")
+	public WebElement recentTicketStatus;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[3]/span[1]")
+	public WebElement recentTicketServiceType;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[3]/span[2]")
+	public WebElement recentTicketServiceNumber;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[4]")
+	public WebElement recentTicketReportedProblem;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[5]")
+	public WebElement recentTicketServiceAddress;
+
+	@FindBy(xpath = "//*[@id='tblTicketStatus']/tbody/tr[1]/td[6]/a")
+	public WebElement recentTicketViewDetails;
+
+	public void navigateToCreateSupportRequest(String userStoryDescription, WE_HomePage we_HomePage)
+			throws InterruptedException {
+		Reporter.log("************************ Navigating to Create Support request ************************", true);
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> New Support Request");
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickHiddenElement(newSupportRequestMenu, "New Support Request");
+		Assert.assertTrue(driver.getTitle().contains("New Support Request"));
+		vc.waitUntilTextIsPresent("Account Details");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Select an Account or a Location"));
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickHiddenElement(createANewSupportRequest, "Create a New Support Request");
+		vc.waitUntilTextIsPresent("Issue Details");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Select an Account or a Location"));
+	}
+	
+	public void navigateToSupportRequest_CreateSupportRequestFlyOut(String userStoryDescription, WE_HomePage we_HomePage)
+			throws InterruptedException {
+		Reporter.log("************************ Navigating to Create Support request ************************", true);
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> New Support Request");
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickElement(supportRequestMenu, "Support Requests - View,Modify & submit support requests");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Refresh Support Request List")); 
+		vc.getWebDriverUtils().clickElement(createNewSupportRequest, "Create New Support Request");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Select an Account or a Location"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(createSupportRequestFlyOut,  "Create Support Request - Fly Out"));		
+		vc.getWebDriverUtils().clickHiddenElement(cancelSupportRequest, "Cancel - Create Support Request FlyOut");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Cancel Support Request"));
+		vc.getWebDriverUtils().clickElement(cancelSupportRequestNo, "Cancel No - Create Support Request FlyOut");
+		
+		vc.getWebDriverUtils().clickElement(cancelSupportRequest, "Cancel - Create Support Request FlyOut");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Unsaved changes will be lost. Do you want to continue"));
+		vc.getWebDriverUtils().clickElement(cancelSupportRequestYes, "Cancel Yes - Create Support Request FlyOut");
+		
+		Reporter.log("*** Relaunching Create Support Request Flyout *********", true);
+		vc.getWebDriverUtils().clickElement(createNewSupportRequest, "Create New Support Request");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Select an Account or a Location"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(createSupportRequestFlyOut,  "Create Support Request - Fly Out"));		
+	}
+
+	public String createSupportRequest_SelectLocation() throws InterruptedException {
+		Reporter.log("************************ Select location ************************", true);
+		String selectedLocation = null;
+		if (vc.getWebDriverUtils().elementAvailablity(location, "chooseLocation")) {
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(location, "chooseLocation");
+			selectedLocation = vc.getWebDriverUtils().getAttribute(location, "title", "Location ID");
+		}
+		return selectedLocation;
+	}
+
+	public String createSupportRequest_SelectAccount() throws InterruptedException {
+		Reporter.log("************************ Select Account ************************", true);
+		String selectedAccount = null;
+		if (vc.getWebDriverUtils().elementAvailablity(account, "chooseAccount")) {
+			vc.getWebDriverUtils().genericDropDownSelectFirstItem(account, "chooseAccount");
+			selectedAccount = vc.getWebDriverUtils().getText(account, "Account");
+		}
+		return selectedAccount;
+	}
+
+	public void createSupportRequest_IssueDetails(String strSelectAServiceDropDown,String strselectTheGeneralIssueDropDown, String strDefineTheSpecificIssueDropDown) throws InterruptedException {
+		Reporter.log("************************ Issue Details ************************", true);
+		// vc.getWebDriverUtils().clickElement(we_SupportPage.issue, "Issue");
+		if (!strSelectAServiceDropDown.contains("Index")) {
+			vc.getWebDriverUtils().selectByVisibleText(selectAServiceDropDown, strSelectAServiceDropDown,"Select A Service");
+		} else {
+			vc.getWebDriverUtils().selectByIndexValue(selectAServiceDropDown, 1, "Select A Service");
+		}
+		vc.getWebDriverUtils().selectByVisibleText(selectTheGeneralIssueDropDown,strselectTheGeneralIssueDropDown ,"Select the general issue");
+		
+		if (vc.waitUntilTextIsPresent("Select the specific issue")) {
+			Assert.assertTrue(vc.waitUntilTextIsPresent("Select the specific issue"));
+			vc.getWebDriverUtils().selectByVisibleText(defineTheSpecificIssueDropDown,strDefineTheSpecificIssueDropDown, "Select the specific issue");
+			if (vc.waitUntilTextIsPresent("Please select affected circuit")) {
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Please select affected circuit"));
+				vc.getWebDriverUtils().selectDropDownDefaultFirstItem(pleaseSelectAffectedCircuitDropDown,"Please select affected circuit");
+				vc.getWebDriverUtils().enterText(pleaseProvideABriefDescriptionOfTheTrouble, "Test Ticket - Please Ignore",
+						"Please provide a brief description of the trouble you are experiencing or the assistance that is needed");
+			}
+		}
+		
+		if (vc.getWebDriverUtils().elementAvailablity(pleaseProvideBriefDescription, "PLEASE PROVIDE A BRIEF DESCRIPTION OF THE TROUBLE YOU ARE EXPERIENCING")) {
+			vc.getWebDriverUtils().enterText(pleaseProvideBriefDescription, "Test Ticket Brief Description - Please Ignore", "PLEASE PROVIDE A BRIEF DESCRIPTION OF THE TROUBLE YOU ARE EXPERIENCING");
+		}
+		
+		Reporter.log("************************ Additional Info ************************", true);
+		vc.getWebDriverUtils().scrollToViewElement(additionalInfo, "Additional info");
+		vc.getWebDriverUtils().enterText(additionalInfo, "Test Ticket Additional Info - Please Ignore", "Issue - Additional info");
+		
+	}
+
+	public void createSupportRequest_Priority(String priority) throws InterruptedException {
+		Reporter.log("************************ Priority ************************", true);
+		vc.getWebDriverUtils().scrollToViewElement(criticalRadio, "Priority");
+		if (priority.equalsIgnoreCase("Critical")) {
+			vc.getWebDriverUtils().clickHiddenElement(criticalRadio, "Critical");
+		} else if (priority.equalsIgnoreCase("Major")) {
+			vc.getWebDriverUtils().clickHiddenElement(majorRadio, "Major");
+		} else {
+			vc.getWebDriverUtils().clickHiddenElement(minorRadio, "Minor");
+		}
+	}
+
+	public void createSupportRequest_ContactDetails() throws InterruptedException {
+		Reporter.log("************************ Contact Details ************************", true);
+		vc.getWebDriverUtils().scrollToViewElement(primaryContactDropDown, "Primary Contact");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Primary Contact"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Site Contact"));
+		if (primaryContactDropDown.getText().contains("SQA Test")) {
+			vc.getWebDriverUtils().selectByVisibleText(primaryContactDropDown, "SQA Test", "Primary Contact");
+		} else {
+			vc.getWebDriverUtils().selectByVisibleText(primaryContactDropDown, "New Contact", "Primary Contact");
+			vc.getWebDriverUtils().enterText(newContact_Name, "SQA Test", "New Contact Name");
+			vc.getWebDriverUtils().enterText(newContact_Email, "g9953556@windstream.com", "New Contact Email");
+			vc.getWebDriverUtils().enterText(newContact_Phone, "5039276830", "New Contact Phone");
+		}
+
+		vc.getWebDriverUtils().clickHiddenElement(accountDetailsSection, "Minimize Account Details Section");
+		vc.getWebDriverUtils().clickHiddenElement(issueDetailsSection, "Minimize Issue Details Section");
+		vc.getWebDriverUtils().clickHiddenElement(authorizationDetailsSection, "Minimize Authorization Details Section");
+		
+		vc.getWebDriverUtils().selectByVisibleText(siteContactDropDown, "Use Primary Contact",
+				"Site Contact - Use Primary Contact");
+		vc.waitUntilTextIsPresent("After Hours Contact (Optional)");
+		vc.getWebDriverUtils().selectByVisibleText(addAfterHoursContactDropDown, "Use Primary Contact",
+				"After Hours Contact - Use Primary Contact");
+		
+		vc.getWebDriverUtils().clickHiddenElement(contactDetailsSection, "Minimize Contact  Details Section");
+		vc.getWebDriverUtils().clickHiddenElement(authorizationDetailsSection, "Expand Authorization Details Section");
+		
+		
+	}
+
+	public void createSupportRequest_Authorization() throws InterruptedException {
+		Reporter.log("************************ Authorization ************************", true);
+		// vc.getWebDriverUtils().clickElement(we_SupportPage.authorization,
+		// "Authorization");
+
+		vc.getWebDriverUtils().scrollToViewElement(anyTimeRadio, "Authorization");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("We can access your site"));
+		vc.getWebDriverUtils().clickHiddenElement(anyTimeRadio, "Anytime");
+		vc.getWebDriverUtils().clickHiddenElement(otherCustomRadio, "Other");
+		vc.getWebDriverUtils().clickHiddenElement(busniessHoursRadio, "Working Hours  -> 9am–5pm, Mon–Fri");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Special Access Requirements"));
+		// vc.getWebDriverUtils().clickElement(we_SupportPage.reviewAndSubmit, "Review &
+		// Submit");
+		Assert.assertTrue(vc.waitUntilTextIsPresent(
+				"Do you authorize us to perform testing that may temporarily take down your service"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent(
+				"Do you authorize billable charges, if testing or fixing your issue requires them"));
+	}
+
+	public void createSupportRequest_SubmitRequest() throws InterruptedException {
+		Reporter.log("************************ Submit Request ************************", true);
+		vc.getWebDriverUtils().clickHiddenElement(submitRequest, "Submit Request");
+		vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Successfully created support request"));
+		/*Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(refreshSupportRequestList, "Refresh Support Request List"));*/
+		vc.getWebDriverUtils().clickElement(refreshSupportRequestList, "Refresh Support Request List");
+	}
+
+	public String createSupportRequest_ViewRequest(String serviceType,String reportedProblem,String serviceAccount,String serviceAddress) throws InterruptedException {
+		Reporter.log("************************ View Request ************************", true);
+		String getTicketID = null;
+		getTicketID = vc.getWebDriverUtils().getText(recentTicketID, "Ticket ID");
+		if (getTicketID.contains("Not Yet Assigned, Please Refresh")) {
+			for (int i = 0; i < 60; i++) {
+				recentTicketAccountID.click();
+				Thread.sleep(1000);
+				getTicketID = vc.getWebDriverUtils().getText(recentTicketID, "Ticket ID");
+				/*	System.out.println("Ticket ID displayed as : = "+getTicketID);*/
+				if (!getTicketID.contains("Not Yet Assigned, Please Refresh")) {
+					break;
+				}else {
+					vc.getWebDriverUtils().clickElement(refreshSupportRequestList, "Refresh Support request List");
+				}
+			}
+		}
+		
+		if (!vc.getWebDriverUtils().elementAvailablity(applyFilters, "Apply Filters")) {
+			vc.getWebDriverUtils().clickElement(filters, "Filter Open");
+		}
+		
+		
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketStatus, "Ticket Status", "Open");
+		
+		if (vc.getWebDriverUtils().elementAvailablity(ticketServiceType, "Service Type")) {
+			if (!serviceType.contains("OfficeSuite")) {
+				vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketServiceType, "Ticket Service Type", serviceType);
+			}
+		}
+		
+		
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketReportedProblem, "Ticket Reported Problem", reportedProblem);
+		
+		if (vc.getWebDriverUtils().elementAvailablity(ticketAccountOMS, "Ticket Account OMS")) {
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketAccountOMS, "Ticket Account OMS", serviceAccount);
+		}
+		
+		if (vc.getWebDriverUtils().elementAvailablity(ticketServiceAddress, "TicketService Addesss")) {
+			vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketServiceAddress, "TicketService Addesss", serviceAddress);
+		}
+		
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketLastUpdated, "Ticket Last Updated", "Custom");
+
+		
+		vc.getWebDriverUtils().clickElement(ticketEndDateCalendar, "End Date Calendar");
+		if (vc.getWebDriverUtils().elementAvailablity(activeDate, "Active Date")) {
+			vc.getWebDriverUtils().clickElement(activeDate, "Active Date - End Date Calendar");
+		} else {
+			vc.getWebDriverUtils().clickElement(ticketEndDate, "End Date");
+		}
+		
+		vc.getWebDriverUtils().clickElement(ticketStartDateCalendar, "Start Date Calendar");
+		vc.getWebDriverUtils().clickElement(activeDate, "Active Date - Start Date Calendar");	
+		vc.getWebDriverUtils().clickElement(applyFilters, "Apply Filters");
+		
+		getTicketID = vc.getWebDriverUtils().getText(recentTicketID, "Ticket ID");
+		Reporter.log("Ticket ID := "+getTicketID,true);
+		Reporter.log("Account ID := "+ vc.getWebDriverUtils().getText(recentTicketAccountID, "Account ID"),true);
+		Reporter.log("Ticket Status := "+vc.getWebDriverUtils().getText(recentTicketStatus, "Ticket Status"),true);
+		
+		if (vc.getWebDriverUtils().getText(recentTicketServiceType, "Service Type").contains("OfficeSuite")) {
+			Reporter.log("Service Type : "+vc.getWebDriverUtils().getText(recentTicketServiceType, "Service Type"),true);
+		}else {
+			Reporter.log("Service Type : "+vc.getWebDriverUtils().getText(recentTicketServiceType, "Service Type"),true);
+		
+			if (vc.getWebDriverUtils().elementAvailablity(recentTicketServiceNumber, "Service Number")) {
+				Reporter.log("Service Number := "+vc.getWebDriverUtils().getText(recentTicketServiceNumber, "Service Number"),true);
+			}
+		}
+		
+		Reporter.log("Reported Problem := "+vc.getWebDriverUtils().getText(recentTicketReportedProblem, "Reported Problem"),true);
+		Reporter.log("Service Address := "+vc.getWebDriverUtils().getText(recentTicketServiceAddress, "Service Address"),true);
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(ticketTableStatus, "Ticket Table"));
+		
+		vc.getWebDriverUtils().clickElement(recentTicketViewDetails, "View Details");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Service Information"));
+		
+		return getTicketID;
+	}
+	
+	public void createSupportRequest_AddNotes() throws InterruptedException {
+		Reporter.log("************************ Add Notes ************************", true);
+		vc.getWebDriverUtils().clickElement(addNotes, "Add Notes");
+		vc.getWebDriverUtils().clickElement(addNotesCloseX, "Add Notes - Close X");
+		vc.getWebDriverUtils().clickElement(addNotes, "Add Notes");
+		vc.getWebDriverUtils().clickElement(addNotesCloseX, "Add Notes - Cancel");
+		vc.getWebDriverUtils().clickElement(addNotes, "Add Notes");
+		vc.getWebDriverUtils().enterText(ticketNotesText, "Test Ticket Notes - Please Ignore Ticket", "Add Notes Text");	
+		vc.getWebDriverUtils().clickElement(saveNotes, "Save Notes");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Successfully added notes to the support request"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Test Ticket Notes - Please Ignore Ticket"));
+	}
+	
+	public void createSupportRequest_CloseTicketAsResolved(String getTicketID) throws InterruptedException {
+		Reporter.log("************************ Close Ticket ************************", true);
+		vc.getWebDriverUtils().clickElement(closeTicket, "Close Ticket");
+		vc.getWebDriverUtils().clickElement(closeTicketX, "Close Ticket - X");
+		
+		vc.getWebDriverUtils().clickElement(closeTicket, "Close Ticket");
+		vc.getWebDriverUtils().clickElement(closeTicketCancel, "Close Ticket - Cancel");
+		
+		vc.getWebDriverUtils().clickElement(closeTicket, "Close Ticket");
+		vc.getWebDriverUtils().clickElement(cancelRequestRadio, "Cancel Request Radio");
+		vc.getWebDriverUtils().clickElement(closeAsResolvedTicketRadio, "Close as Resolved Radio");
+		vc.getWebDriverUtils().clickElement(saveCloseTicket, "Save - Close Ticket");
+		vc.waitUntilTextIsPresent("Successfully closed the support request");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Ticket closed by"));
+		
+		vc.getWebDriverUtils().clickElement(closeTicketPage, "Close Ticket Page");
+		
+		if (!vc.getWebDriverUtils().elementAvailablity(applyFilters, "Apply Filters")) {
+			vc.getWebDriverUtils().clickElement(filters, "Filter Open");
+		}
+		
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(ticketStatus, "Ticket Status", "Resolved");
+		vc.getWebDriverUtils().enterText(ticketID, getTicketID, "Ticket ID");
+		vc.getWebDriverUtils().clickElement(applyFilters, "Apply Filters");
+		vc.getWebDriverUtils().clickElement(recentTicketViewDetails, "View Details");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Resolved"));
+		vc.getWebDriverUtils().clickElement(closeTicketPage, "Close Ticket Page");
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(refreshSupportRequestList, "Refresh Support Request List"));
+	}
+
+	public void createSupportRequest_EscalateTicket() throws InterruptedException {
+		Reporter.log("************************ Escalate Ticket ************************", true);
+		vc.getWebDriverUtils().clickElement(escalateTicket, "Escalate Ticket");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("The current Escalation level is 0. Your ticket is being actively worked by the technician assigned"));
+		vc.getWebDriverUtils().clickElement(escalateCloseX, "Escalate Request - Close X");
+		vc.getWebDriverUtils().clickElement(escalateTicket, "Escalate Ticket");
+		vc.getWebDriverUtils().clickElement(escalateCancel, "Escalate Request - Cancel");
+		vc.getWebDriverUtils().clickElement(escalateTicket, "Escalate Ticket");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(escalationReasonId, "Escalation Reason", "Status(lack of)");
+		vc.getWebDriverUtils().enterText(escalationNotes, "Test Ticket Escalate - Please Ignore", "Escalation Notes");
+		vc.getWebDriverUtils().clickElement(escalateSave, "Escalate Ticket - Save");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Ticket has been escalated to Level 1"));
+	}
+	
+	public void exportSupportRequestValidation() throws InterruptedException {
+		vc.getWebDriverUtils().clickHiddenElement(exportRequests, "Export Requests");
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(exportToExcel, "Export to Excel"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(exportToPDF, "Export to PDF"));
+		vc.getWebDriverUtils().clickElement(exportRequests, "Export Requests");
+	}
+	
+	public boolean community(String userStoryDescription,WE_HomePage we_HomePage,WE_SupportPage we_SupportPage,String winHandleBefore) throws InterruptedException {
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> Community");
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.community, "Community");
+		driver.getWindowHandles();
+
+		Set<String> allHandles = driver.getWindowHandles();
+		for (String currentHandle : allHandles) {
+			if (!currentHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(currentHandle);
+
+				Assert.assertTrue(
+						vc.waitUntilTextIsPresent("Welcome to the Windstream Enterprise Online Community!"));
+				Assert.assertTrue(
+						vc.waitUntilTextIsPresent("We know you have questions and we are here to get you answers"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Solutions"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Wholesale"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Company"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Account"));
+				Assert.assertTrue(vc.waitUntilTextIsPresent("Industries"));
+			}
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return false;
+	}
+	
+	public boolean contactUs(String userStoryDescription,WE_HomePage we_HomePage,WE_SupportPage we_SupportPage) throws InterruptedException {
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> Contact Us");
+
+		Reporter.log("Test Case 109663:Check whether “Contact Us” option available in the Menu", true);
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.contactUs, "Contact Us");
+		// TO DO - Commenting below lines which is no more valid as per new deployment 
+		/*Reporter.log("Test Case 109664:Check whether “Contact Us” page opens on clicking contact us", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Email Customer Support"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("First Name"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Company"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Address"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Address(2)"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("City"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Country"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("State/Province/Region"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Zip Code"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Phone Number"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("EXT"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Me By"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Account Number"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Reason for contacting Customer Care"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("If this issue is specific to a location"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Related Service"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Comments"));
+
+		Reporter.log("Test Case 109665:Check whether user information's populated automatically on load", true);
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.firstName, "value", "First Name").length() > 0) {
+			Reporter.log("First Name field value auto populated as expected", true);
+		} else {
+			Reporter.log("First Name field value not auto populated as expected", true);
+			Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.lastName, "value", "Last Name").length() > 0) {
+			Reporter.log("Last Name field value auto populated as expected", true);
+		} else {
+			Reporter.log("Last Name field value not auto populated as expected", true);
+			Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.company, "value", "Company").length() > 0) {
+			Reporter.log("Company field value auto populated as expected", true);
+		} else {
+			Reporter.log("Company field value not auto populated as expected", true);
+			Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.phoneNumber, "value", "Phone Number").length() > 0) {
+			Reporter.log("Phone Number field value auto populated", true);
+		} else {
+			Reporter.log("Phone Number field value not auto populated", true);
+			//Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.accountNumber, "title", "Account Number")
+				.length() > 0) {
+			Reporter.log("Account Numberc field value auto populated as expected", true);
+		} else {
+			Reporter.log("Account Number field value not auto populated as expected", true);
+			Assert.assertTrue(false);
+		}
+
+		Reporter.log("Test Case 109666:Verify whether the user able to edit pre-populated values", true);
+		vc.getWebDriverUtils().enterText(we_SupportPage.firstName, "SQA", "First Name");
+		vc.getWebDriverUtils().enterText(we_SupportPage.lastName, "Test", "Last Name");
+		vc.getWebDriverUtils().enterText(we_SupportPage.phoneNumber, "1231231234", "Phone Number");
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.firstName, "value", "First Name").equals("SQA")) {
+			Reporter.log("Able to successfully edit First Name field", true);
+		} else {
+			Reporter.log("Unable to successfully edit First Name field", true);
+			Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.lastName, "value", "Last Name").equals("Test")) {
+			Reporter.log("Able to successfully edit Last Name field", true);
+		} else {
+			Reporter.log("Unable to successfully edit Last Name field", true);
+			Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils().getAttribute(we_SupportPage.phoneNumber, "value", "Phone Number")
+				.equals("123.123.1234")) {
+			Reporter.log("Able to successfully edit Phone Number field", true);
+		} else {
+			Reporter.log("Unable to successfully edit Phone Number field", true);
+			Assert.assertTrue(false);
+		}
+
+		Reporter.log("Test Case 109667:Validate mandatory fields in Contact Us form", true);
+		vc.getWebDriverUtils().enterText(we_SupportPage.firstName, "", "First Name");
+		vc.getWebDriverUtils().enterText(we_SupportPage.lastName, "", "Last Name");
+		vc.getWebDriverUtils().enterText(we_SupportPage.emailAddress, "", "Email Addess");
+		vc.getWebDriverUtils().enterText(we_SupportPage.phoneNumber, "", "Phone Number");
+		vc.getWebDriverUtils().enterText(we_SupportPage.comments, "", "Comments");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.submit, "Submit");
+
+		Assert.assertTrue(vc.waitUntilTextIsPresent("First Name is required"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Last Name is required"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Email Address is required"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("The Phone Number field is required"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("A contact reason is required"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("The Comments field is required"));
+
+		Reporter.log("Test Case 109668:Check whether the user able to submit a form to email to support team",
+				true);
+		vc.getWebDriverUtils().enterText(we_SupportPage.firstName, "SQA", "First Name");
+		vc.getWebDriverUtils().enterText(we_SupportPage.lastName, "Test", "Last Name");
+		vc.getWebDriverUtils().enterText(we_SupportPage.emailAddress, "sqatest@windstream.com", "Email Addess");
+		vc.getWebDriverUtils().enterText(we_SupportPage.phoneNumber, "1231231234", "Phone Number");
+		vc.getWebDriverUtils().enterText(we_SupportPage.ext, "1234", "Extension");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.contactMeBy, "Contact Me By", "Phone");
+	//	vc.getWebDriverUtils().selectSpanDropDownValue(we_SupportPage.contactMeBy, "Contact Me By", "Phone");
+		
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "General Product or Service Question");
+		vc.getWebDriverUtils().genericDropDownSelectFirstItem(we_SupportPage.ifThisIssueIsSpecificToALocation, "If this issue is specific to a location");
+		//vc.getWebDriverUtils().selectSpanDropDownValue(we_SupportPage.ifThisIssueIsSpecificToALocation,"If this issue is specific to a location", "1018 9Th Av, King of Prussia, PA");
+		vc.getWebDriverUtils().enterText(we_SupportPage.relatedService, "Test Service", "Related Service");
+		vc.getWebDriverUtils().enterText(we_SupportPage.comments, "SQA Test Comments", "Comments");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.submit, "Submit");
+
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Contact Customer Care - Thank You"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Thank you for submitting your request to Customer Care"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent(
+				"Business Customer Care representative will follow up as soon as possible"));
+
+		if (vc.getWebDriverUtils()
+				.getAttribute(we_SupportPage.businessCCForVoiceDataServices, "href",
+						"Business Customer Care for Voice and Data Services")
+				.equals("mailto:partnerportalsupport@elnk.com")) {
+			Reporter.log(
+					"Business Customer Care for Voice and Data Services link pointing to expected email address",
+					true);
+		} else {
+			Reporter.log(
+					"Business Customer Care for Voice and Data Services link not pointing to expected email Address",
+					true);
+			Assert.assertTrue(false);
+		}
+
+		if (vc.getWebDriverUtils()
+				.getAttribute(we_SupportPage.businessCCForManagedITServicesCustomers, "href",
+						"Business Customer Care for Managed IT Services Customers")
+				.equals("mailto:partnerportalsupport@elnk.com")) {
+			Reporter.log(
+					"Business Customer Care for Managed IT Services Customers link pointing to expected email address",
+					true);
+		} else {
+			Reporter.log(
+					"Business Customer Care for Managed IT Services Customers link not pointing to expected email Address",
+					true);
+			Assert.assertTrue(false);
+		}*/
+
+		Reporter.log("Test Case 109671:Verify the functionality of “Create a Service Ticket” link", true);
+		
+		if (!vc.waitUntilTextIsPresent("I need to report an issue")) {
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.contactUs, "Contact Us");
+		}
+		Assert.assertTrue(vc.waitUntilTextIsPresent("I need to report an issue"));
+		vc.getWebDriverUtils().clickElement(we_SupportPage.createASupportTicket, "Create A Support Ticket");
+		Assert.assertTrue(driver.getTitle().contains("New Support Request"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Create Support Request"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Account Details"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Issue Details"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Authorization"));
+
+		Reporter.log("Test Case 109672:Verify the functionality of “Ticket status” link", true);
+		if (!vc.waitUntilTextIsPresent("What's the status of my ticket?")) {
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.contactUs, "Contact Us");
+		}
+		Assert.assertTrue(vc.waitUntilTextIsPresent("What's the status of my ticket?"));
+		vc.getWebDriverUtils().clickElement(we_SupportPage.ticketStatusTitle, "Ticket Status");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Support Request Status  - Windstream Enterprise"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Ticket ID"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Service Type"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Service Number"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Reported Problem"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Service Address"));
+
+		Reporter.log("Test Case 109673:Verify the functionality of “Order Status” link", true);
+		if (!vc.waitUntilTextIsPresent("I want to check on an order")) {
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.contactUs, "Contact Us");
+		}
+		Assert.assertTrue(vc.waitUntilTextIsPresent("I want to check on an order"));
+		vc.getWebDriverUtils().clickElement(we_SupportPage.orderStatus, "Order Status");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("View Orders  - Windstream Enterprise"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Account No"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Account Name"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Order ID"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Order Date"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Description"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Status"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Details"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Export"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Refresh"));
+		
+		Reporter.log("Test Case 109674:Verify the functionality of “Live Chat” link", true);
+		if (!vc.waitUntilTextIsPresent("I want to talk to a person")) {
+			vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+			vc.getWebDriverUtils().clickElement(we_SupportPage.contactOurSupportTeam, "Contact our support team");
+		}
+		Assert.assertTrue(vc.waitUntilTextIsPresent("I want to talk to a person"));
+		vc.getWebDriverUtils().clickElement(we_SupportPage.liveChat, "Live Chat");
+		//vc.getWebDriverUtils().clickElement(we_SupportPage.chatIcon, "Chat Icon");
+		
+		//TODO - Add additional validation here
+		vc.waitUntilTextIsPresent("Loading");
+		
+/*		while (driver.findElement(By.xpath("//img[@alt='Loading']")).isDisplayed()) {
+			System.out.println("waiting");
+			Thread.sleep(1000);
+		}*/
+		
+		vc.waitUntilTextIsPresent("Connecting");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Please hold while we load your live-chat experience"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Now connected to your virtual-assistant WinBot"));
+		//Assert.assertTrue(vc.waitUntilTextIsPresent("Welcome to Windstream Enterprise! How may I help you today?"));
+		vc.getWebDriverUtils().clickElement(we_SupportPage.closeChatWindow, "Close Chat Window");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Are you sure you want to end the conversation"));
+		vc.getWebDriverUtils().clickElement(we_SupportPage.yesConfirmCloseChatWindow, "yes Confirm - Close Chat Window");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Thank you for connecting with us"));
+		try {
+			vc.getWebDriverUtils().clickElement(we_SupportPage.closeChatWindow, "Close Chat Window");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+		
+		/*Reporter.log(
+				"Test Case 109669:Verify Order status question & Change contact information in Reason for contacting customer care",
+				true);
+	
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.contactUs, "Contact Us");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Order Status Question");
+		
+		vc.getWebDriverUtils().clickElement(we_SupportPage.closeOrderStatusEscalationModal,
+				"Close X Order Status");
+		
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Select Your Reason for Contact");
+
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Order Status Question");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.iHaveLookedThereOrderStatus,
+				"I Have Looked there and Still Have a Question");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Select Your Reason for Contact");
+
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Order Status Question");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.leavethisFormTakeMeToOrderStatus,
+				"Leave this form and take me to Order Status");
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("View Orders  - Windstream Enterprise"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent(
+				"If you ever have questions about your bill, it’s easy to create a billing inquiry here. Click Billing Inquiry History to review the status of previous inquiries"));
+
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.contactUs, "Contact Us");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Change Contact Information");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.closeChangeContactInformartionDialogModal,
+				"Close X Change Contact Information");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Select Your Reason for Contact");
+
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Change Contact Information");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.iHaveLookedThereChangeContact,
+				"I Have Looked there and Still Have a Question");
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Select Your Reason for Contact");
+
+		vc.getWebDriverUtils().genericDropDownSelectSpecificValue(we_SupportPage.reasonForContactingCustomerCare,
+				"Reason For Contacting Customer Care", "Change Contact Information");
+		vc.getWebDriverUtils().clickElement(we_SupportPage.leavethisFormTakeMeToBilling,
+				"Leave this form and take me to the Billing Contact Info change form");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Create Billing Inquiry"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent(
+				"If you ever have questions about your bill, it’s easy to create a billing inquiry here. Click Billing Inquiry History to review the status of previous inquiries"));
+*/
+	}
+	
+	public boolean getHelp(String userStoryDescription,WE_HomePage we_HomePage,WE_SupportPage we_SupportPage) throws InterruptedException {
+		Reporter.log("Test Case 109640:Check whether Get Help option available in the menu", true);
+		vc.getWebDriverUtils().logUserStoryStart(userStoryDescription, "Support -> Get Help");
+		vc.getWebDriverUtils().clickElement(we_HomePage.suppport, "Support");
+		vc.getWebDriverUtils().clickHiddenElement(we_SupportPage.getHelp, "Get Help");
+		vc.waitUntilTextIsPresent("Guides and Tools");
+		vc.waitUntilTextIsPresent("Help guides and tools that are available for your account");
+		
+		Reporter.log("Test Case 109641:Check whether Get help page opens on clicking in the menu", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Get Help - Windstream Enterprise"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("My Services"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("General Help"));
+			
+		Reporter.log("Test Case 109642: Check whether all services are listed in General help tab", true);
+		
+		Reporter.log("Test Case 109643: Check whether \"Guides\" and \"Tools\" displayed on selecting particular services in General help", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Guides and Tools"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Help guides and tools that are available for your account"));
+
+
+		Reporter.log("Test Case 109644: Verify whether PDF can be viewed/downloaded on clicking PDF icon in General help", true);
+	
+		Reporter.log("Test Case 109646: Verify “Updates and Upcoming Events” options in General help ", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Updates and Upcoming Events"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Read about new features and other ways to stay up to date on officeSuite"));
+		
+		
+		Reporter.log("Test Case 109647: Verify \"Updates and Upcoming Events\" functionality in General help", true);
+		//TODO - Follow up - Test Case 109647 
+		
+		Reporter.log("Test Case 109648: Verify “more” option in \"Updates and Upcoming Events\"  in General help ", true);
+		//TODO - Follow up - Test Case 109647
+		
+		Reporter.log("Test Case 109649: Verify “virtual tours” functionality in General help", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Virtual Tours"));
+		//TODO - Commented temporarliy as youtube links are not available
+		//Assert.assertTrue(vc.waitUntilTextIsPresent("https://img.youtube.com"));
+		//TODO - Follow up - Commented Downloads functionality as this is currently not available
+		/*Reporter.log("Test Case 109650: Verify “Downloads” functionality in General help", true);
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.myOfficeSuiteDesktopWindows, "Downloads - My Office Suite Desktop Windows"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingWindows, "Downloads - Office Suite HD Meeting Windows"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingMac, "Downloads - Office Suite HD Meeting Mac"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingIOS, "Downloads - Office Suite HD Meeting IOS"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingAndroid, "Downloads - Office Suite HD Meeting Android"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteDialerWindows, "Downloads - Office Suite Dialer Windows"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindows, "Downloads - Office Suite PC Softphone Windows"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindowsMac, "Downloads - Office Suite PC Softphone Mac"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindowsIOS, "Downloads - Office Suite PC Softphone IOS"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindowsAndroid, "Downloads - Office Suite PC Softphone Android"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.chromeClickToCall, "Downloads - Chrome Click to call"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.osConectorForSkypeForBusinessWindows, "Downloads - OS Connector for Skype for Business Windows"));
+		
+
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.windstreamSoftPhoneWindows, "Downloads - Windstream SoftPhone Windows"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.windstreamSoftPhoneMac, "Downloads - Windstream SoftPhone Mac"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.chromeClickToCall, "Downloads - Tool Bar Download"));
+		*/
+		Reporter.log("Test Case 109652: Check whether all the subscribed services are listed in My Services tab", true);
+		
+		Reporter.log("Test Case 109653: Check whether \"Guides\" and \"Tools\" displayed on selecting particular services in My Services", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Guides and Tools"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Help guides and tools that are available for your account"));
+		
+		Reporter.log("Test Case 109654: Verify whether PDF can be viewed/downloaded on clicking PDF icon in My Services", true);
+		
+		Reporter.log("Test Case 109656: Validate “Updates and Events” options in My Services", true);
+
+		
+		Reporter.log("Test Case 109657: Verify \"Updates and Upcoming Events\" functionality in My Services", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Updates and Upcoming Events"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Read about new features and other ways to stay up to date on officeSuite"));
+		
+		Reporter.log("Test Case 109658: Verify “more” option in \"Updates and Upcoming Events\" in My Services", true);
+		
+		Reporter.log("Test Case 109659: Verify “virtual tours” functionality in My Services", true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Virtual Tours"));
+		return false;
+		
+		//TODO - Follow up - Commented Downloads functionality as this is currently not available
+	/*	Reporter.log("Test Case 109660: Verify “Downloads” functionality in My Services", true);
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.myOfficeSuiteDesktopWindows, "Downloads - My Office Suite Desktop Windows"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingWindows, "Downloads - Office Suite HD Meeting Windows"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingMac, "Downloads - Office Suite HD Meeting Mac"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingIOS, "Downloads - Office Suite HD Meeting IOS"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteHDMeetingAndroid, "Downloads - Office Suite HD Meeting Android"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuiteDialerWindows, "Downloads - Office Suite Dialer Windows"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindows, "Downloads - Office Suite PC Softphone Windows"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindowsMac, "Downloads - Office Suite PC Softphone Mac"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindowsIOS, "Downloads - Office Suite PC Softphone IOS"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.officeSuitePCSoftphoneWindowsAndroid, "Downloads - Office Suite PC Softphone Android"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.chromeClickToCall, "Downloads - Chrome Click to call"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.osConectorForSkypeForBusinessWindows, "Downloads - OS Connector for Skype for Business Windows"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.windstreamSoftPhoneWindows, "Downloads - Windstream SoftPhone Windows"));
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.windstreamSoftPhoneMac, "Downloads - Windstream SoftPhone Mac"));
+		
+		Assert.assertTrue(vc.getWebDriverUtils().elementAvailablity(we_SupportPage.chromeClickToCall, "Downloads - Tool Bar Download"));
+	*/
+	}
+}

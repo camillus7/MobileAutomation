@@ -1,0 +1,127 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_BillingDetailsWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_BillingDetailsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//h2[contains(.,'Billing Details')]")
+	public WebElement widgetName;
+
+	@FindBy(xpath = "//label[contains(.,'Billing Details')]")
+	public WebElement billingDetailscheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//button[@data-id='BillingAccountId']")
+	public static WebElement billingDropdown;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//p[contains(@class,'default-value')]")
+	public static WebElement forAccount;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//span[contains(.,'View/Pay My Bill')]")
+	public WebElement viewPayBillOption;
+
+	@FindBy(xpath = "//div[@class='tb-m']")
+	public WebElement billingPaymentMessage;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//span[@class='black']")
+	public WebElement invoiceNo;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//div[@class='f12 mdown-6']")
+	public WebElement invoiceIssueDate;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//p[@class='center large-amount inline']")
+	public WebElement dueAmount;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//p[@class='center mdown-4']")
+	public WebElement dueDate;
+
+	@FindBy(xpath = "//div[@class='white inline w45 f56 ff-CL makePaybtn totla-amt']")
+	public WebElement dueamt_PayBillPage;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']/div[1]/button")
+	public WebElement settingsIcon;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Details']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	public boolean isDropdownPresent(WebElement element, String dropDown) throws InterruptedException {
+		boolean isDropdownPresent = false;
+		vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+
+		if (vc.getWebDriverUtils().elementAvailablity(element, dropDown)) {
+			isDropdownPresent = true;
+			Reporter.log("Dropdown is available", true);
+		} else {
+			vc.getWebDriverUtils().sleep(10000);
+			Reporter.log("Retry if Dropdwon is available", true);
+			if (vc.getWebDriverUtils().elementAvailablity(element, dropDown)) {
+				isDropdownPresent = true;
+				Reporter.log("Dropdown is available", true);
+			} else {
+				isDropdownPresent = false;
+				Reporter.log("Dropdown not available", true);
+			}
+		}
+
+		return isDropdownPresent;
+
+	}
+
+	public void billingDetails_Functionality() throws InterruptedException {
+		Reporter.log("********** GetDueAmount ************", true);
+		if(vc.getWebDriverUtils().elementAvailablity(viewPayBillOption, "View/payBill Option")){
+			Reporter.log(invoiceNo.getText() + "==>" + invoiceIssueDate.getText(), true);
+			Reporter.log("DueAmount is " + dueAmount.getText(), true);
+			Reporter.log("********** Navigation Check ************", true);
+			vc.getWebDriverUtils().clickElement(viewPayBillOption, "View/PayBill");
+			vc.getWebDriverUtils().titleVerification(driver.getTitle(), "View & Pay Bill - Windstream Enterprise");
+			Assert.assertTrue(vc.waitUntilTextIsPresent("View & Pay Bill"));
+			driver.navigate().back();
+			vc.getWebDriverUtils().checkPageIsReady();
+		}else{
+			Reporter.log("No Billable Accounts", true);
+		}
+		
+
+		Reporter.log("********** Remove Widget ************", true);
+		cw.removeAddedWidget("Billing Details");
+	}
+
+	public void selectDropdown(String dropDownValue) throws InterruptedException {
+
+		vc.getWebDriverUtils().clickElement(billingDropdown, "BillingDropdown");
+		List<WebElement> forExtensionDropdown = driver.findElements(By.xpath("//div[@id='mCSB_2']/div/ul/li/a/span"));
+		Reporter.log(" Total Number of Dropdown values are == " + forExtensionDropdown.size(), true);
+		for (int i = 0; i < forExtensionDropdown.size(); i++) {
+
+			if (forExtensionDropdown.get(i).getText().equalsIgnoreCase(dropDownValue)) {
+				forExtensionDropdown.get(i).click();
+				Reporter.log("Selected ==" + dropDownValue + " from For Extension Dropdown ", true);
+				String text = dueAmount.getText();
+				Reporter.log(" Due amount for account " + dropDownValue + " is " + text, true);
+				break;
+			}
+		}
+
+	}
+
+}

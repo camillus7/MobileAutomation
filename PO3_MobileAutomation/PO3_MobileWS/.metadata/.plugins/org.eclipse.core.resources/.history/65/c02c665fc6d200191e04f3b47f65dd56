@@ -1,0 +1,86 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CallGroupsWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_CallGroupsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Call Groups')]")
+	public WebElement callGroupscheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Call Groups']//a[@href='/Officesuite/CallGroups/ViewCallGroups']")
+	public WebElement callGroupmoreButton;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Call Groups']//button[@data-id='extCallgroupsWidget']")
+	public WebElement callGroupDropdown;
+	
+	@FindBy(xpath="//div[@class='btn-group bootstrap-select open']/div/div/div/div/ul/li/a/span")
+	public WebElement dropDownValues;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Call Groups']//p[contains(@class,'default-value')]")
+	public WebElement forAccount;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Call Groups']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Call Groups']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+
+	public void callGroupsManage() throws InterruptedException {
+		Reporter.log("********** Verify Navigation ************",true);
+		vc.getWebDriverUtils().elementAvailablity(callGroupmoreButton, "CallGroupsMoreButton");
+		vc.getWebDriverUtils().clickElement(callGroupmoreButton, "MoreButton");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Call Groups - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Call Groups"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Call Groups");
+	}
+
+		
+
+	
+	public void callGroupsDropdownSelect(String dropDownValue) throws InterruptedException {
+
+		vc.getWebDriverUtils().clickElement(callGroupDropdown, "callGroupDropdown");
+		List<WebElement> forExtensionDropdown = driver
+				.findElements(By.xpath("//div[@class='btn-group bootstrap-select open']/div/div/div/div/ul/li/a/span"));
+		Reporter.log("Total Number of Dropdown values are ==" + forExtensionDropdown.size(),true);
+		for (int i = 0; i < forExtensionDropdown.size(); i++) {
+
+			if (forExtensionDropdown.get(i).getText().equalsIgnoreCase(dropDownValue)) {
+				forExtensionDropdown.get(i).click();
+				Reporter.log("Selected ==" + dropDownValue + "from For Extension Dropdown",true);
+				break;
+			}
+
+		}
+
+	}
+
+}

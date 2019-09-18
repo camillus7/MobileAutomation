@@ -1,0 +1,500 @@
+package com.mobile.WeConnect.pageobject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.mobile.MyWin.pageobject.MyWinMobile_LoginPage;
+import com.webautomation.testdata.factory.MenuFactory;
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.testdata.menu.module1AppMenu;
+import com.webautomation.validation.Validator;
+
+public class WeConnect_OfficeSuiteUCPage {
+
+	final WebDriver driver;
+	private Validator vc;
+
+	public String favoritedContact,favoritedGroup;
+
+	MyWinMobile_LoginPage loginPage;
+
+	public WeConnect_OfficeSuiteUCPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(id = "tab_text")
+	public WebElement officesuiteMenus;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='OfficeSuite UC']")
+	public WebElement officeSuiteUC;
+
+	@FindBy(id = "welcome_user")
+	public WebElement welcomeUserMessage;
+
+	@FindBy(id = "skip")
+	public WebElement Skipoption;
+
+	@FindBy(id = "start")
+	public WebElement Startoption;
+
+	// favorites
+
+	@FindBy(id = "com.windstream.enterprise.we.dev:id/contact_name")
+	public static WebElement contactName;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Favorites']")
+	public WebElement favoritesTab;
+
+	@FindBy(id = "com.windstream.enterprise.we.dev:id/app_contact")
+	public WebElement contactIcon;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Add your Coworkers in favorites and stay connected to improve productivity']")
+	public WebElement favoriteCoworker;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Chat']")
+	public WebElement chatTab;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Calls']")
+	public WebElement callsTab;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Voicemail']")
+	public WebElement voicemailTab;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Device']")
+	public WebElement deviceTab;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Groups']")
+	public WebElement groupsTab;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='New Group']")
+	public WebElement newGroup;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Create']")
+	public WebElement createnewGroup;
+
+	@FindBy(xpath = "//android.widget.EditText[@text='Enter Group Name']")
+	public WebElement groupName;
+
+	@FindBy(id = "group_name")
+	public WebElement edit_GroupName;
+
+	@FindBy(id = "id_CoworkerGroup")
+	public WebElement addGroupContacts;
+
+	@FindBy(id = "search_src_text")
+	public WebElement searchCoworkers;
+
+	@FindBy(id = "id_createGroup")
+	public WebElement createGroup;
+
+	@FindBy(id = "contact_name")
+	public List<WebElement> contactNames;
+
+	@FindBy(id = "star_image")
+	public List<WebElement> contacts_FavoriteIcon;
+
+	@FindBy(id = "star_image")
+	public WebElement favoriteIcon_toUnfavorite;
+
+	@FindBy(xpath = "//android.widget.TextView[@text='Done']")
+	public WebElement doneButton;
+
+	@FindBy(id = "group_name")
+	public List<WebElement> groupNames;
+
+	@FindBy(id = "group_name")
+	public WebElement singleGroupName;
+
+	@FindBy(id = "edit_icon")
+	public WebElement newGroup_EditIcon;
+
+	@FindBy(id = "tab_text")
+	public List<WebElement> tabTitles;
+
+	public void uiCheck() throws InterruptedException {
+		officeSuiteUCNavigation();
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuite");
+		vc.getMobileDriverUtils().printList(tabTitles, "OfficeSuite-TabTitles");	
+		vc.getMobileDriverUtils().clickMobileElement(contactIcon, "ContactIcon");
+		vc.getMobileDriverUtils().printList(tabTitles, "OfficeSuitContacts-TabTitles");
+
+	}
+
+	public void officeSuiteUCNavigation() throws InterruptedException {
+		vc.getMobileDriverUtils().clickMobileElement(WeConnect_LandingPage.HamburgerMenu, "HamburgerMenu");
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuiteUC");
+
+		if (vc.getMobileDriverUtils().elementAvailablity(Skipoption, "Skip")) {
+			vc.getMobileDriverUtils().clickMobileElement(Skipoption, "Skip");
+		}
+
+	}
+
+	/*public List<String> getNamesFromList(List<WebElement> contactNames) {
+
+		List<String> allNames = new ArrayList<String>();
+		for (int i = 0; i < contactNames.size(); i++) {
+			String namesList = contactNames.get(i).getText();
+			allNames.add(namesList);
+		}
+		return allNames;
+	}
+
+	*/
+	public boolean favoriteCommon(List<WebElement> recordList,String favoriteName) {
+
+		boolean favorited = false;
+
+		if (vc.getMobileDriverUtils().getNamesFromList(recordList).contains(favoriteName)) {
+			favorited = true;
+		} else {
+			favorited = false;
+		}
+		return favorited;
+	}
+	
+	public void addFavorite_Contact() throws InterruptedException {
+
+		vc.getMobileDriverUtils().clickMobileElement(WeConnect_LandingPage.HamburgerMenu, "HamburgerMenu");
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuiteUCOption");
+		if (vc.getMobileDriverUtils().elementAvailablity(contactName, "ContactList")) {
+			favoritedContact = contactNames.get(0).getText();
+			Reporter.log("CONTACT SELECTED FROM COWORKERS LIST IS " + favoritedContact.toUpperCase(), true);
+			vc.getMobileDriverUtils().clickMobileElement(contacts_FavoriteIcon.get(0), "Favorite");
+			vc.getWebDriverUtils().clickMobileElement(contactIcon, "ContactIcon");
+
+			if (favoriteCommon(contactNames, favoritedContact)) {
+				Reporter.log(favoritedContact.toUpperCase() + " IS SUCCESSFULLY ADDED TO FAVORITES ", true);
+				vc.getMobileDriverUtils().clickMobileElement(backKey, "Back");
+				vc.getMobileDriverUtils().elementAvailablity(contactName, "ContactList");
+				vc.getMobileDriverUtils().clickMobileElement(contacts_FavoriteIcon.get(0), "Unfavorite");
+				vc.getWebDriverUtils().clickMobileElement(contactIcon, "ContactIcon");
+				if (!favoriteCommon(contactNames, favoritedContact)) {
+					Reporter.log(favoritedContact.toUpperCase() + " IS SUCCESSFULLY REMOVED TO FAVORITES ", true);
+				} else {
+					Reporter.log(favoritedContact.toUpperCase() + " IS NOT REMOVED FROM FAVORITES ", true);
+					Assert.assertFalse(true);
+				}
+
+			} else {
+				Reporter.log(favoritedContact + " is not added to Favorites ", true);
+				Assert.assertFalse(true);
+			}
+
+		} else {
+			Reporter.log("Contacts not available", true);
+		}
+	}
+
+	
+
+	@FindBy(id = "favorite_icon")
+	public List<WebElement> groups_FavoriteIcon;
+
+	
+	public void addFavorite_Groups() throws InterruptedException {
+
+		vc.getMobileDriverUtils().clickMobileElement(WeConnect_LandingPage.HamburgerMenu, "HamburgerMenu");
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuiteUCOption");
+		vc.getMobileDriverUtils().clickMobileElement(contactIcon, "ContactIcon");
+		vc.getMobileDriverUtils().clickMobileElement(groupsTab, "Groups-Tab");
+
+		if (vc.getMobileDriverUtils().elementAvailablity(singleGroupName, "Groups")) {
+			favoritedGroup = groupNames.get(0).getText();
+			Reporter.log("Favorited GroupName is " + favoritedGroup, true);
+			vc.getMobileDriverUtils().clickMobileElement(groups_FavoriteIcon.get(0), "Favorite");
+
+			vc.getMobileDriverUtils().clickMobileElement(favoritesTab, "Favorites-Tab");
+			vc.getMobileDriverUtils().elementAvailablity(singleGroupName, "Groups");
+
+			if (favoriteCommon(groupNames, favoritedGroup)) {
+				Reporter.log(favoritedGroup + " is successfully added to Favorites ", true);
+				vc.getMobileDriverUtils().clickMobileElement(groupsTab, "Groups-Tab");
+				vc.getMobileDriverUtils().clickMobileElement(groups_FavoriteIcon.get(0), "UnFavorite");
+				vc.getMobileDriverUtils().clickMobileElement(favoritesTab, "Favorites-Tab");
+				if (!favoriteCommon(groupNames, favoritedGroup)) {
+					Reporter.log(favoritedGroup + " is successfully removed from Favorites ", true);
+				} else {
+					Reporter.log(favoritedGroup + " is not removed from Favorites ", true);
+					Assert.assertFalse(true);
+
+				}
+
+			} else {
+				Reporter.log(favoritedGroup + " is not added to Favorites ", true);
+				Assert.assertFalse(true);
+			}
+
+		} else {
+			Reporter.log("Groups not available", true);
+		}
+
+	}
+
+	public void search(String searchData) {
+		vc.getMobileDriverUtils().mobile_EnterText(searchCoworkers, searchData, "searchCoworkers");
+		driver.navigate().back();
+
+		if (vc.getMobileDriverUtils().elementAvailablity(contactName, "ContactNames")) {
+			Reporter.log("Search Result returned " + contactNames.size() + " records that starts with " + searchData,
+					true);
+
+		} else {
+			Reporter.log("Search results does not return any data", true);
+		}
+	}
+
+	public void searchCoworkers() throws InterruptedException {
+
+		vc.getMobileDriverUtils().clickMobileElement(WeConnect_LandingPage.HamburgerMenu, "HamburgerMenu");
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuiteUCOption");
+		vc.getMobileDriverUtils().elementAvailablity(searchCoworkers, "searchCoworkers");
+
+		Reporter.log("Search By Name", true);
+		search("weonlinetest");
+		Reporter.log("Search By Extension", true);
+		search("193");
+
+		clickPhoneIcon();
+
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter");
+		String text = sc.nextLine();
+		String ch = null;
+
+		Pattern p = Pattern.compile("is");
+		Matcher m = p.matcher(text);
+		int count = 0;
+
+		while (m.find()) {
+			ch = m.group();
+			System.out.println(ch);
+			count++;
+		}
+
+		System.out.println(count);
+	}
+
+	public boolean createGroup(String newGroupName,String editedGroupName) throws InterruptedException {
+
+		boolean addedGroupName = false;
+		vc.getMobileDriverUtils().clickMobileElement(WeConnect_LandingPage.HamburgerMenu, "HamburgerMenu");
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuiteUCOption");
+		vc.getWebDriverUtils().clickMobileElement(contactIcon, "ContactIcon");
+		vc.getMobileDriverUtils().clickMobileElement(groupsTab, "Groups-Tab");
+		vc.getMobileDriverUtils().clickMobileElement(createGroup, "createGroup");
+		vc.getMobileDriverUtils().mobile_EnterText(groupName, newGroupName, "Group name");
+		vc.getMobileDriverUtils().clickMobileElement(addGroupContacts, "Add group contacts");
+
+		if (vc.getMobileDriverUtils().elementAvailablity(favoriteIcon_toUnfavorite, "Contacts-Checkbox")) {
+			for (int i = 0; i < contacts_FavoriteIcon.size(); i++) {
+				contacts_FavoriteIcon.get(i).click();
+			}
+			vc.getMobileDriverUtils().clickMobileElement(doneButton, "DoneButton");
+			vc.getMobileDriverUtils().clickMobileElement(createnewGroup, "Create-Button");
+			if (vc.getMobileDriverUtils().elementAvailablity(singleGroupName, "GroupList")) {
+
+				if (vc.getMobileDriverUtils().getNamesFromList(groupNames).contains(newGroupName)) {
+					Reporter.log("NEW GROUP IS SUCCESSFULLY CREATED " + newGroupName.toUpperCase(), true);
+					deleteCreatedGroup(newGroupName, editedGroupName);
+				} else {
+					Reporter.log("Group is not created", true);
+					Assert.assertFalse(true);
+				}
+
+			} else {
+				Reporter.log("Group List is not available", true);
+			}
+
+		} else {
+			Reporter.log("Contacts not available to create Group", true);
+		}
+		return addedGroupName;
+
+	}
+
+	@FindBy(id = "back_key")
+	public static WebElement backKey;
+
+	@FindBy(xpath = "//*[@text='Delete']")
+	public WebElement deleteKey;
+
+	@FindBy(xpath = "//*[@text='DELETE']")
+	public WebElement deleteButton;
+
+	@FindBy(id = "snackbar_text")
+	public static WebElement toastMessage;
+
+	public void deleteCreatedGroup(String createdGroup, String editedGroupName) {
+
+		vc.getMobileDriverUtils().clickMobileElement(newGroup_EditIcon, "EditIcon");
+		/*
+		 * WebElement el = driver
+		 * .findElement(By.xpath("//*[@id='edit_icon']/preceding-sibling::*[@text='[" +
+		 * createdGroup + "]']]")); el.click();
+		 */
+		vc.getMobileDriverUtils().mobile_EnterText(edit_GroupName, editedGroupName, "Group name");
+		vc.getMobileDriverUtils().clickMobileElement(backKey, "Back");
+
+		vc.getMobileDriverUtils().elementAvailablity(singleGroupName, "GroupList");
+		vc.getWebDriverUtils().sleep(3000);
+		if (vc.getMobileDriverUtils().getNamesFromList(groupNames).contains(editedGroupName)) {
+			Reporter.log("GROUP NAME IS UPDATED FROM ==>" +createdGroup.toUpperCase() + " TO " + editedGroupName.toUpperCase(), true);
+			vc.getMobileDriverUtils().clickMobileElement(newGroup_EditIcon, "EditIcon");
+
+			vc.getMobileDriverUtils().clickMobileElement(deleteKey, "DeleteKey");
+			vc.getMobileDriverUtils().clickMobileElement(deleteButton, "Popup-DeleteButton");
+			if (vc.getMobileDriverUtils().elementAvailablity(toastMessage, "toastMessage")) {
+				Reporter.log(toastMessage.getText().toUpperCase(), true);
+				Assert.assertFalse(true);
+			}
+			vc.getMobileDriverUtils().elementAvailablity(singleGroupName, "GroupList");
+			vc.getWebDriverUtils().sleep(3000);
+			if (vc.getMobileDriverUtils().getNamesFromList(groupNames).contains(editedGroupName)) {
+				Reporter.log("Created Group is not deleted", true);
+				Assert.assertFalse(true);
+			} else {
+				Reporter.log(editedGroupName.toUpperCase() + " GROUP IS DELETED SUCCESSFULLY", true);
+			}
+
+		} else {
+			Reporter.log("Group name is not updated", true);
+		}
+	}
+
+
+
+	
+
+	@FindBy(id = "phone_image")
+	public WebElement phoneIcon;
+
+	@FindBy(id = "parentPanel")
+	public WebElement callPopUp;
+
+	@FindBy(xpath = "//android.widget.Button[@text='CANCEL']")
+	public WebElement cancelButton;
+
+	@FindBy(id = "deviceList")
+	public List<WebElement> extensionsList;
+
+	@FindBy(id = "deviceList")
+	public WebElement extensionList;
+
+	public void clickPhoneIcon() {
+		Reporter.log("***Check Extension Details are displayed on Click Phone icon***", true);
+		if (vc.getMobileDriverUtils().elementAvailablity(contactName, "ContactLists")) {
+			vc.getMobileDriverUtils().clickMobileElement(phoneIcon, "PhoneIcon");
+			if (vc.getMobileDriverUtils().elementAvailablity(extensionList, "ExtensionDetails")) {
+				for (WebElement extOptions : extensionsList) {
+					System.out.println("Extension Details available are");
+					Reporter.log(extOptions.getText(), true);
+				}
+
+			}
+
+			vc.getMobileDriverUtils().clickMobileElement(cancelButton, "CancelButton");
+
+		}
+	}
+
+	@FindBy(id = "caller_name")
+	public List<WebElement> voicemailCallerName;
+
+	@FindBy(id = "caller_name")
+	public WebElement CallerName;
+
+	@FindBy(id = "share_button")
+	public WebElement voicemailShare;
+
+	@FindBy(id = "delete_button")
+	public WebElement voicemailDelete;
+
+	@FindBy(id = "speaker_button")
+	public WebElement voicemailSpeakerButton;
+
+	@FindBy(id = "call_label")
+	public WebElement voicemailCallbackButton;
+
+	public void voicemailFunctionality() {
+		Reporter.log("***Verify Voicemail Tab Functionality***", true);
+		vc.getMobileDriverUtils().clickMobileElement(WeConnect_LandingPage.HamburgerMenu, "HamburgerMenu");
+		vc.getMobileDriverUtils().clickMobileElement(officeSuiteUC, "OfficeSuiteUCOption");
+		vc.getMobileDriverUtils().clickMobileElement(voicemailTab, "Voicemail-Tab");
+		if (vc.getMobileDriverUtils().elementAvailablity(CallerName, "VoicemailList")) {
+
+			vc.getMobileDriverUtils().clickFirstRecord(voicemailCallerName);
+			vc.getMobileDriverUtils().elementAvailablity(voicemailSpeakerButton, "SpeakerButton");
+			vc.getMobileDriverUtils().elementAvailablity(voicemailShare, "ShareButton");
+			vc.getMobileDriverUtils().elementAvailablity(voicemailDelete, "DeleteButton");
+			vc.getMobileDriverUtils().elementAvailablity(voicemailCallbackButton, "CallBackButton");
+
+		} else {
+			Reporter.log("Voicemail List is empty", true);
+		}
+	}
+
+	@FindBy(id = "contact_name")
+	public List<WebElement> callsContactName;
+
+	public void callsFunctionality() {
+		Reporter.log("***Verify Calls Tab Functionality***", true);
+		vc.getMobileDriverUtils().clickMobileElement(callsTab, "Calls-Tab");
+		if (vc.getMobileDriverUtils().elementAvailablity(contactName, "ContactName")) {
+			Reporter.log("Call History is available", true);
+			Reporter.log("Total call records displayed are " + callsContactName.size(), true);
+		} else {
+			Reporter.log("Call History is not available", true);
+		}
+
+	}
+
+	@FindBy(id = "conversation_name")
+	public List<WebElement> chatConverstionNames;
+
+	@FindBy(id = "conversation_name")
+	public WebElement chatConverstionName;
+
+	@FindBy(id = "chatbox")
+	public WebElement chatMessageField;
+
+	@FindBy(id = "send")
+	public WebElement chatSendButton;
+
+	@FindBy(id = "text_message_body")
+	public List<WebElement> chatMessageList;
+
+	public void chatFunctionality(String message) {
+		Reporter.log("***Verify Chat Tab Functionality***", true);
+		vc.getMobileDriverUtils().clickMobileElement(chatTab, "Chat-Tab");
+		if (vc.getMobileDriverUtils().elementAvailablity(chatConverstionName, "ChatList")) {
+			vc.getMobileDriverUtils().clickFirstRecord(chatConverstionNames);
+			vc.getMobileDriverUtils().mobile_EnterText(chatMessageField, message, "ChatMessage");
+			vc.getMobileDriverUtils().clickMobileElement(chatSendButton, "SendButton");
+
+			if (vc.getMobileDriverUtils().getNamesFromList(chatMessageList).contains(message)) {
+				Reporter.log(message + "Chat message has been sent Successfully", true);
+			} else {
+				Reporter.log("Chat message is not sent", true);
+			}
+
+		} else {
+			Reporter.log("Chat History is not available", true);
+		}
+
+	}
+}

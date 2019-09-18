@@ -1,0 +1,87 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_BillingReportsWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+	
+
+	public WE_BillingReportsWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//label[contains(.,'Billing Reports')]")
+	public WebElement billingReportscheckbox;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Reports']//button[@data-id='BillingAccountId']")
+	public WebElement billingDropdown;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Reports']//span[contains(.,'View Reports')]")
+	public WebElement viewReports;
+
+	@FindBy(xpath = "//div[@data-widgettitle='Billing Reports']//span[contains(.,'View/Pay My Bill')]")
+	public WebElement billingPayBillOption;
+	
+	@FindBy(xpath="//g[@class='raphael-group-115-dataset-Label-group']")
+	public WebElement monthList;
+	
+	@FindBy(xpath="//g[@class='raphael-group-159-datalabel']")
+	public WebElement monthlySpend;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Reports']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Billing Reports']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+	
+	
+	
+	public boolean isDropdownPresent(WebElement element,String dropDown) throws InterruptedException  {
+		boolean isDropdownPresent = false;
+
+		if(vc.getWebDriverUtils().elementAvailablity(element, dropDown)==true) {
+			isDropdownPresent=true;
+			Reporter.log("Dropdown is available",true);
+		}else {
+			isDropdownPresent=false;
+			Reporter.log("Dropdown not available",true);
+		}
+		
+		return isDropdownPresent;
+		
+	}
+
+	
+	public void viewReportNavigation() throws InterruptedException {
+		
+		vc.getWebDriverUtils().elementAvailablity(viewReports, "ViewReports-Button");
+		vc.getWebDriverUtils().clickElement(viewReports, "ViewReports");
+		vc.getWebDriverUtils().titleVerification(driver.getTitle(), "Billing Reports - Windstream Enterprise");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Billing Reports"));
+		driver.navigate().back();
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Billing Reports");
+		
+		
+	}
+
+}

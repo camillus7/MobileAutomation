@@ -1,0 +1,50 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE project>
+
+<project name="QAAutomation" basedir="." default="configure">
+
+	<property environment="env"/>
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	
+	<property name="config.file" value="src/test/resources/config.properties"/>
+	
+	<target name="configure" description="Configures the project">
+		<property name="externalUrl" value="${env.externalUrl}"/>
+		<property name="internalUrl" value="${env.internalUrl}"/>
+		<property name="role" value="${env.role}"/>
+		<property name="testdatapath" value="${env.testdatapath}"/>
+		<property name="browser" value="${env.browser}"/>
+		<property name="huburl" value="${env.huburl}"/>
+		<property name="runtimePlatform" value="grid"/>
+		
+		<replaceregexp file="${config.file}"
+			match="^externalUrl=(.*)"
+			replace="externalUrl=${externalUrl}"
+			byline="true"/>
+		<replaceregexp file="${config.file}"
+			match="^url=(.*)"
+			replace="url=${internalUrl}"
+			byline="true"/>
+		<replaceregexp file="${config.file}"
+			match="^role=(.*)"
+			replace="role=${role}"
+			byline="true"/>
+		<replaceregexp file="${config.file}"
+			match="^testdatapath=(.*)"
+			replace="testdatapath=${testdatapath}"
+			byline="true"/>
+		<replaceregexp file="${config.file}"
+			match="^browser=(.*)"
+			replace="browser=${browser}"
+			byline="true"/>
+		<replaceregexp file="${config.file}"
+			match="^huburl=(.*)"
+			replace="huburl=${huburl}"
+			byline="true"/>
+		<replaceregexp file="${config.file}"
+			match="^runtimePlatform=(.*)"
+			replace="runtimePlatform=${runtimePlatform}"
+			byline="true"/>
+	</target>
+	
+</project>

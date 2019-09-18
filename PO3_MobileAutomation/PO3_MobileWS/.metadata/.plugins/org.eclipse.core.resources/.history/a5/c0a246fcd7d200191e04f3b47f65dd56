@@ -1,0 +1,167 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_MusicOnHoldWidget {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	private WE_CommonWidgets cw;
+
+	public WE_MusicOnHoldWidget(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+		this.cw = new WE_CommonWidgets(driver);
+	}
+
+	@FindBy(xpath = "//button[@data-id='ddlMusic']")
+	public static WebElement mohDropdown;
+
+	@FindBy(id = "ddlMusic")
+	public WebElement mohDropdownSelect;
+
+	@FindBy(id = "btnMOHSave")
+	public WebElement mohSavebutton;
+
+	@FindBy(id = "btnUpload")
+	public WebElement mohUploadbutton;
+
+	@FindBy(xpath = "//label[contains(.,'Music On Hold')]")
+	public WebElement mohCheckbox;
+
+	@FindBy(id = "txtCustomMOH")
+	public WebElement mohSearch;
+
+	@FindBy(id = "saveUploadFile")
+	public WebElement mohSaveUploadFile;
+
+	@FindBy(xpath = "//span[contains(.,'Choose a file')]")
+	public WebElement mohChooseFile;
+
+	@FindBy(xpath = "//div[@class='close']")
+	public WebElement mohCloseIcon;
+
+	@FindBy(xpath = "//button[@class='audio_btn']")
+	public WebElement mohPlayButton;
+
+	@FindBy(xpath="//span[@class='audio_time']")
+	public WebElement audioTimer;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='Music On Hold']//div[@class='close']")
+	public WebElement mohClosebutton;
+
+	@FindBy(id = "invalidFileError")
+	public WebElement mohUploadInvalidFile;
+
+	@FindBy(xpath = "//p[contains(.,'The file successfully uploaded.')]")
+	public WebElement mohUploadmessage;
+
+	@FindBy(xpath = "//div[@id='txtMOHError']")
+	public WebElement emptyMusicName;
+
+	@FindBy(xpath = "//div[@id='invalidFileError']")
+	public WebElement emptyMusicFile;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Music On Hold']//p[contains(@class,'default-value')]")
+	public static WebElement selectMusic;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Music On Hold']/div[1]/button")
+	public WebElement settingsIcon;
+	
+	@FindBy(xpath="//div[@data-widgettitle='Music On Hold']//a[contains(.,'Remove Widget')]")
+	public WebElement removeWidgetOption;
+
+	
+
+	public void mohDropdownvalues(String noneRingtone1, String systemdefaultRingtone) throws InterruptedException {
+
+		Select select = new Select(mohDropdownSelect);
+
+		List<WebElement> options = select.getOptions();
+		List<String> listofStrings = new ArrayList<>();
+		for (int i = 0; i < options.size(); i++) {
+			String dropdownValues = options.get(i).getAttribute("innerHTML");
+			dropdownValues.toString();
+			listofStrings.add(dropdownValues);
+		}
+		for (int i = 0; i < listofStrings.size(); i++) {
+			Reporter.log("*********** Verify none&Default Ringtone is Available ********************",true);
+			if (listofStrings.contains(noneRingtone1) && listofStrings.contains(systemdefaultRingtone)) {
+				Reporter.log(noneRingtone1 + " and " + systemdefaultRingtone + " ringtone is Available ",true);
+				break;
+			} else if (listofStrings.contains(noneRingtone1) && listofStrings.get(i) != systemdefaultRingtone) {
+				Reporter.log(noneRingtone1 + " RINGTONE IS AVAILABLE ",true);
+				Reporter.log(systemdefaultRingtone + " RINGTONE NOT AVAILABLE ",true);
+				Assert.assertEquals(false, true);
+			} else if (listofStrings.contains(systemdefaultRingtone) && listofStrings.get(i) != noneRingtone1) {
+				Reporter.log(noneRingtone1 + " RINGTONE IS AVAILABLE ",true);
+				Reporter.log(systemdefaultRingtone + " RINGTONE NOT AVAILABLE ",true);
+				Assert.assertEquals(true, false);
+			}
+			break;
+		}
+
+	}
+
+	
+	
+	public void musicOnHold_Functionality() throws InterruptedException{
+		Reporter.log("********** Verify UI ************",true);
+		vc.getWebDriverUtils().elementAvailablity(mohDropdown, "Dropdown option");
+		vc.getWebDriverUtils().elementAvailablity(mohPlayButton, "Play button");
+		vc.getWebDriverUtils().elementAvailablity(mohSavebutton, "Save button");
+		vc.getWebDriverUtils().elementAvailablity(mohUploadbutton, "upload button");
+		vc.getWebDriverUtils().clickElement(mohUploadbutton, "UploadButton");
+		vc.getWebDriverUtils().elementAvailablity(mohSearch, "SearchField");
+		vc.getWebDriverUtils().elementAvailablity(mohChooseFile, "ChooseFileLink");
+		vc.getWebDriverUtils().elementAvailablity(mohSaveUploadFile, "SaveUploadFileButton");
+		vc.getWebDriverUtils().clickElement(mohClosebutton, "CloseIcon");		
+		vc.waitUntilTextIsPresent("Save");
+		
+		
+		Reporter.log("*********** Save Ringtone ********************",true);
+		vc.getWebDriverUtils().clickElement(mohSavebutton, "SaveButton");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("New settings applied successfully."));
+		Reporter.log("***********Validate Hint Message ********************",true);
+		vc.getWebDriverUtils().clickElement(mohUploadbutton, "UploadButton");
+		vc.getWebDriverUtils().clickElement(mohSaveUploadFile, "SaveButton");
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Please enter music name."));
+		Reporter.log("Alert message is displayed to enter Musicname",true);
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Please select a file."));
+		Reporter.log("Alert message is displayed to select File",true);
+		
+		Reporter.log("********** Verify play/Pause Functionality ************",true);
+		String timerCount = audioTimer.getText();
+		Reporter.log("Timer Count is" + " == " + timerCount,true);
+		driver.findElement(By.cssSelector("div[class='w-musiconhold center']")).click();
+		vc.getWebDriverUtils().elementAvailablity(driver.findElement(By.cssSelector("div[class='w-musiconhold center pause']")), "pausebutton");
+		String timercountafterPlay = audioTimer.getText();
+		Reporter.log("Timer Count after play is" + " == " + timercountafterPlay,true);
+		if(timerCount.equals(timercountafterPlay)) {
+			Reporter.log("Timer is not working",true);
+			Assert.assertFalse(true);
+		}else {
+			Reporter.log("Play_Pause successfully Executed",true);
+		}
+		
+		Reporter.log("********** Remove Widget ************",true);
+		cw.removeAddedWidget("Music On Hold");
+	}
+
+	
+	
+	
+}

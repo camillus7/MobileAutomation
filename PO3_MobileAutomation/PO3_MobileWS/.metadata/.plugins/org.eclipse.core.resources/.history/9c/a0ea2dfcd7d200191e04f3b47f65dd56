@@ -1,0 +1,98 @@
+package com.webautomation.pageobject.we_pages;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import com.webautomation.testdata.menu.Menu;
+import com.webautomation.validation.Validator;
+
+public class WE_LoginPage {
+
+	final WebDriver driver;
+
+	@FindBy(id = "username")
+	public WebElement userName;
+	
+	@FindBy(id = "password")
+	public WebElement password;
+
+	@FindBy(xpath = "//a[@title='Sign In']")
+	public WebElement signInBtn;
+	
+	@FindBy(xpath = "//img[@class='chatbot-ico']")
+	public WebElement chatBotIcon;
+
+	@FindBy(xpath = "//img[@class='_pendo-badge _pendo-badge_ triggered']")
+	public WebElement haveAQuestionBadge;
+	
+	
+	//@FindBy(xpath = "xpath=(//button[@id='_pendo-close-guide_'])[2]")
+	@FindBy(xpath = "//div[@class=\"_pendo-guide-container_ bottom _pendo-guide-container-bottom_\"]/button")
+	public WebElement haveAnIssueCheckOurAgentPopUpCloseX;
+	
+	@FindBy(xpath = "//button[@class='_pendo-close-guide_'][contains(.,'×')]")
+	public WebElement updatedFeatureAnnouncement;
+	
+	private Validator vc;
+
+	public WE_LoginPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	public void navigateTo_WEHome(Menu menu) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Username"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Password"));
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Remember my username"));
+
+		vc.getWebDriverUtils().enterText(userName, menu.getUsername(), "Username");
+		vc.getWebDriverUtils().enterText(password, menu.getPassword(), "Password");
+		vc.getWebDriverUtils().clickElement(signInBtn, "Sign In Button");
+		
+		vc.getWebDriverUtils().checkPageIsReady();
+		
+		try {
+			while (driver.findElement(By.xpath("//video[@autoplay='autoplay']")).isDisplayed()) {
+				System.out.println("Waiting for Home Page  - Video Auto Play");
+				Thread.sleep(1000);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		/*try {
+			if (!vc.getWebDriverUtils().elementAvailablity(haveAnIssueCheckOurAgentPopUpCloseX, "Have an Issue ? Check Our Agent Pop Up")) {
+				if (vc.getWebDriverUtils().elementAvailablity(updatedFeatureAnnouncement,"Updated Feature Announcement")) {
+					vc.getWebDriverUtils().clickElement(updatedFeatureAnnouncement, "Updated Feature Announcement - Close X");
+				}
+				vc.getWebDriverUtils().mouseHoveronElement(chatBotIcon);
+				Thread.sleep(1000);
+				vc.getWebDriverUtils().mouseHoveronElement(haveAQuestionBadge);
+				Thread.sleep(1000);
+				if (vc.getWebDriverUtils().elementAvailablity(haveAnIssueCheckOurAgentPopUpCloseX,"Have an Issue ? Check Our Agent Pop Up - Close X")) {
+					vc.getWebDriverUtils().clickElement(haveAnIssueCheckOurAgentPopUpCloseX, "Have an Issue ? Check Our Agent Pop Up - Close X");
+				}
+			} else {
+				vc.getWebDriverUtils().clickHiddenElement(haveAnIssueCheckOurAgentPopUpCloseX, "Have an Issue ? Check Our Agent Pop Up - Close X");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			driver.navigate().refresh();
+		}	*/	
+		
+		vc.waitUntilTextIsPresent("Dashboard");
+		vc.waitUntilTextIsPresent("Services");
+		
+		//Assert.assertTrue(vc.waitUntilTextIsPresent("Viewing Overview Dashboard"));
+		
+	}
+
+}

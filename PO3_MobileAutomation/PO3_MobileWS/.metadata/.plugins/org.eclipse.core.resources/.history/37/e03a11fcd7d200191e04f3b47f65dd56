@@ -1,0 +1,293 @@
+package com.webautomation.pageobject.we_pages.services;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import com.webautomation.validation.Validator;
+
+public class WE_BusinessHoursPage {
+
+	final WebDriver driver;
+
+	private Validator vc;
+
+	public WE_BusinessHoursPage(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+
+	@FindBy(id="addBusinessProfile")
+	public WebElement addBusinessHoursProfile;
+	
+	@FindBy(id="txtProfileName")
+	public WebElement profileNameSearch;
+	
+	@FindBy(id="btnFilterSubmit")
+	public WebElement applyFilters;
+	
+	@FindBy(id="btnFilterClear")
+	public WebElement clearFilters;
+	
+	@FindBy(id="profileName")
+	public WebElement profileNameText;
+	
+	@FindBy(xpath="//span[contains(.,'Associate Profile with Hours')]")
+	public WebElement associateProfileWithHours;	
+	
+	@FindBy(xpath="//span[contains(.,'Associate Profile with Incoming Numbers')]")
+	public WebElement associateProfileWithIncomingNumbers;	
+	
+	@FindBy(xpath="//span[contains(.,'Associate Profile with Locations')]")
+	public WebElement associateProfileWithLocations;	
+	
+	@FindBy(id="profileSubmit")
+	public WebElement submit;	
+	
+	@FindBy(id="btnCancelProfile")
+	public WebElement cancel;
+	
+	@FindBy(xpath="//button[@class='icon filter menu filterToggler']")
+	public WebElement filterOpen;
+	
+	@FindBy(xpath="//button[@class='icon filter menu filterToggler open']")
+	public WebElement filterClose;
+	
+	@FindBy(id="editBusinessHours")
+	public WebElement editBusinessHours;	
+	
+	@FindBy(xpath="//table/tbody/tr/td[1]")
+	public WebElement firstRecordBusinessHoursProfile;
+	
+	@FindBy(id="deleteBusinessHours")
+	public WebElement deleteBusinessHours;
+	
+	@FindBy(id="deleteProfileYes")
+	public WebElement deleteProfileOk;
+	
+	@FindBy(id="deleteProfileNo")
+	public WebElement deleteProfileCancel;
+	
+	@FindBy(id="btnHoursValidationOk")
+	public WebElement notificationOK;
+	
+	@FindBy(xpath="//p[@class='hoursValidationMsg']")
+	public WebElement notificationValidationMsg;
+	
+	//Associate Profile with Hours //
+	@FindBy(xpath="//table/tbody/tr[1]/td[1]/input")
+	public WebElement checkBoxMonday;
+	
+	@FindBy(xpath="//table/tbody/tr[2]/td[1]/input")
+	public WebElement checkBoxTuesday;
+	
+	@FindBy(xpath="//table/tbody/tr[3]/td[1]/input")
+	public WebElement checkBoxWednesday;
+	
+	@FindBy(xpath="//table/tbody/tr[4]/td[1]/input")
+	public WebElement checkBoxThursday;
+	
+	@FindBy(xpath="//table/tbody/tr[5]/td[1]/input")
+	public WebElement checkBoxFriday;
+	
+	@FindBy(xpath="//table/tbody/tr[6]/td[1]/input")
+	public WebElement checkBoxSaturday;
+	
+	@FindBy(xpath="//table/tbody/tr[7]/td[1]/input")
+	public WebElement checkBoxSunday;
+	
+	//Operating Hours From
+	@FindBy(xpath="//table/tbody/tr[1]/td[3]/span/span/span/input")
+	public WebElement operatingFromMonday;
+	
+	@FindBy(xpath="//table/tbody/tr[2]/td[3]/span/span/span/input")
+	public WebElement operatingFromTuesday;
+	
+	@FindBy(xpath="//table/tbody/tr[3]/td[3]/span/span/span/input")
+	public WebElement operatingFromWednesday;
+	
+	@FindBy(xpath="//table/tbody/tr[4]/td[3]/span/span/span/input")
+	public WebElement operatingFromThursday;
+	
+	@FindBy(xpath="//table/tbody/tr[5]/td[3]/span/span/span/input")
+	public WebElement operatingFromFriday;
+	
+	@FindBy(xpath="//table/tbody/tr[6]/td[3]/span/span/span/input")
+	public WebElement operatingFromSaturday;
+	
+	@FindBy(xpath="//table/tbody/tr[7]/td[3]/span/span/span/input")
+	public WebElement operatingFromSunday;
+	
+	//Operating Hours To
+	@FindBy(xpath="//table/tbody/tr[1]/td[6]/span/span/span/input")
+	public WebElement operatingToMonday;
+	
+	@FindBy(xpath="//table/tbody/tr[2]/td[6]/span/span/span/input")
+	public WebElement operatingToTuesday;
+	
+	@FindBy(xpath="//table/tbody/tr[3]/td[6]/span/span/span/input")
+	public WebElement operatingToWednesday;
+	
+	@FindBy(xpath="//table/tbody/tr[4]/td[6]/span/span/span/input")
+	public WebElement operatingToThursday;
+	
+	@FindBy(xpath="//table/tbody/tr[5]/td[6]/span/span/span/input")
+	public WebElement operatingToFriday;
+	
+	@FindBy(xpath="//table/tbody/tr[6]/td[6]/span/span/span/input")
+	public WebElement operatingToSaturday;
+	
+	@FindBy(xpath="//table/tbody/tr[7]/td[6]/span/span/span/input")
+	public WebElement operatingToSunday;
+	
+	//Lunch Hours From
+	@FindBy(xpath="//table/tbody/tr[1]/td[5]/span/span/span/input")
+	public WebElement lunchFromMonday;
+	
+	@FindBy(xpath="//table/tbody/tr[2]/td[5]/span/span/span/input")
+	public WebElement lunchFromTuesday;
+	
+	@FindBy(xpath="//table/tbody/tr[3]/td[5]/span/span/span/input")
+	public WebElement lunchFromWednesday;
+	
+	@FindBy(xpath="//table/tbody/tr[4]/td[5]/span/span/span/input")
+	public WebElement lunchFromThursday;
+	
+	@FindBy(xpath="//table/tbody/tr[5]/td[5]/span/span/span/input")
+	public WebElement lunchFromFriday;
+	
+	@FindBy(xpath="//table/tbody/tr[6]/td[5]/span/span/span/input")
+	public WebElement lunchFromSaturday;
+	
+	@FindBy(xpath="//table/tbody/tr[7]/td[5]/span/span/span/input")
+	public WebElement lunchFromSunday;
+	
+	//Lunch Hours To
+	@FindBy(xpath="//table/tbody/tr[1]/td[6]/span/span/span/input")
+	public WebElement lunchToMonday;
+	
+	@FindBy(xpath="//table/tbody/tr[2]/td[6]/span/span/span/input")
+	public WebElement lunchToTuesday;
+	
+	@FindBy(xpath="//table/tbody/tr[3]/td[6]/span/span/span/input")
+	public WebElement lunchToWednesday;
+	
+	@FindBy(xpath="//table/tbody/tr[4]/td[6]/span/span/span/input")
+	public WebElement lunchToThursday;
+	
+	@FindBy(xpath="//table/tbody/tr[5]/td[6]/span/span/span/input")
+	public WebElement lunchToFriday;
+	
+	@FindBy(xpath="//table/tbody/tr[6]/td[6]/span/span/span/input")
+	public WebElement lunchToSaturday;
+	
+	@FindBy(xpath="//table/tbody/tr[7]/td[6]/span/span/span/input")
+	public WebElement lunchToSunday;
+		
+	//Special Hours From
+		@FindBy(xpath="//table/tbody/tr[1]/td[7]/span/span/span/input")
+		public WebElement specialFromMonday;
+		
+		@FindBy(xpath="//table/tbody/tr[2]/td[7]/span/span/span/input")
+		public WebElement specialFromTuesday;
+		
+		@FindBy(xpath="//table/tbody/tr[3]/td[7]/span/span/span/input")
+		public WebElement specialFromWednesday;
+		
+		@FindBy(xpath="//table/tbody/tr[4]/td[7]/span/span/span/input")
+		public WebElement specialFromThursday;
+		
+		@FindBy(xpath="//table/tbody/tr[5]/td[7]/span/span/span/input")
+		public WebElement specialFromFriday;
+		
+		@FindBy(xpath="//table/tbody/tr[6]/td[7]/span/span/span/input")
+		public WebElement specialFromSaturday;
+		
+		@FindBy(xpath="//table/tbody/tr[7]/td[7]/span/span/span/input")
+		public WebElement specialFromSunday;
+		
+		//Special Hours To
+		@FindBy(xpath="//table/tbody/tr[1]/td[8]/span/span/span/input")
+		public WebElement specialToMonday;
+		
+		@FindBy(xpath="//table/tbody/tr[2]/td[8]/span/span/span/input")
+		public WebElement specialToTuesday;
+		
+		@FindBy(xpath="//table/tbody/tr[3]/td[8]/span/span/span/input")
+		public WebElement specialToWednesday;
+		
+		@FindBy(xpath="//table/tbody/tr[4]/td[8]/span/span/span/input")
+		public WebElement specialToThursday;
+		
+		@FindBy(xpath="//table/tbody/tr[5]/td[8]/span/span/span/input")
+		public WebElement specialToFriday;
+		
+		@FindBy(xpath="//table/tbody/tr[6]/td[8]/span/span/span/input")
+		public WebElement specialToSaturday;
+		
+		@FindBy(xpath="//table/tbody/tr[7]/td[8]/span/span/span/input")
+		public WebElement specialToSunday;
+		
+		@FindBy(css="button.checkbox")
+		public WebElement useThisProfileDefaultBusinessHoursCheckbox ;
+		
+	
+		@FindBy(id="btnHoursValidationOk")
+		public WebElement okValidationMsg;
+	
+		@FindBy(id="moveAllPhonenumAffected")
+		public WebElement selectAllPhonenum;
+		
+		@FindBy(id="moveAllPhonenumUnAffected")
+		public WebElement deSelectAllPhonenum;
+		
+		@FindBy(id="moveAllLocationAffected")
+		public WebElement selectAllLocation;
+		
+		@FindBy(id="moveAllLocationUnAffected")
+		public WebElement deSelectAllLocation;
+		
+		@FindBy(id="searchBoxOptionalPhoneNum']")
+		public WebElement searchBoxOptionalPhoneNum;
+		
+		@FindBy(id="searchBoxSelectedPhoneNum']")
+		public WebElement searchBoxSelectedPhoneNum;
+		
+		@FindBy(id="searchBoxAvailableLocation']")
+		public WebElement searchBoxAvailableLocation;
+		
+		@FindBy(id="searchBoxSelectedLocation']")
+		public WebElement searchBoxSelectedLocation;
+		
+		//button[@id='moveAllLocationAffected']
+	//button[@id='btnHoursValidationOk']
+	
+	//Lunch Hours From/To should not be an empty and equal for
+	/*4:00 AM
+	4:00 PM
+	6:00 AM
+	6:30 AM
+	9:00 AM
+	9:30 AM
+	
+	//p[contains(.,'Profile name already exists. Please try with another name.')]
+	//span[@class='floatwarningclose']
+	//span[@class='floatwarning']
+	//span[@class='floatwarning']
+	Profile Created Successfully
+	Profile edited Successfully
+	
+	.//*[@id='BusinessHoursProfileGrid']/div[2]/table/tbody/tr[6]/td[3] editBusinessHours
+	.//*[@id='BusinessHoursProfileGrid']/div[2]/table/tbody/tr[6]/td[6] deleteBusinessHours
+*/	
+}	
+
+
+
+
+

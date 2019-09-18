@@ -1,0 +1,339 @@
+package com.webautomation.dashboardwidgets.pageobjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.Reporter;
+
+import com.webautomation.validation.Validator;
+
+public class WE_CommonWidgets {
+
+	final WebDriver driver;
+
+	private Validator vc;
+	
+	public String widgetNames;
+
+	public WE_CommonWidgets(WebDriver driver) {
+		this.driver = driver;
+		this.vc = new Validator(driver);
+	}
+
+	@FindBy(id = "flyoutAddWidgets")
+	public static WebElement addWidgetButton;
+
+	@FindBy(id = "addWidgetsList")
+	public static WebElement widgetList;
+
+	@FindBy(id = "txtSearch")
+	public static WebElement widgetSearch;
+
+	@FindBy(id = "addWidgetsAction")
+	public static WebElement addWidgetstoDashboard;
+
+	@FindBy(xpath = "//button[contains(@class,'ws-icon settings ws-menu menu-down closed')]")
+	public static WebElement Settingicon_Closed;
+
+	@FindBy(xpath = "//button[@class='ws-icon settings ws-menu menu-down widgetopened open']")
+	public static WebElement settingIcon_Open;
+
+	@FindBy(xpath = "//a[contains(.,'Remove Widget')]")
+	public static WebElement removeWidgetOption;
+	
+	@FindBy(xpath="//button[@class='icon only close']")
+	public WebElement closeWidgetList;
+
+	@FindBy(xpath = "//p[contains(.,'New settings applied successfully.')]")
+	public static WebElement saveWidgetMessage;
+
+	@FindBy(className = "message")
+	public WebElement addWidgetMessage;
+	
+	@FindBy(xpath = "//div[@data-widgettitle='Call Groups']//div[@class='alert alert-error-widget ws-icon ico-alert']")
+	public WebElement errorLoadingWidget;
+	
+
+	
+	public void widgetsList() throws Exception {
+
+		//vc.getWebDriverUtils().clickElement(addWidgetButton, "AddWidgetButton");
+		driver.findElement(By.id("flyoutAddWidgets")).click();
+		List<WebElement> options = driver.findElements(By.id("addWidgetsList"));
+		Reporter.log("********** Get List of widgets in AddWidget ************",true);
+		if (options.isEmpty()) {
+			System.out.println("Widget List is Empty");
+		} else {
+			System.out.println("List of Widgets available are -->");
+			for (int i = 0; i < options.size(); i++) {
+				String list = options.get(i).getText();
+				System.out.println(list);
+				vc.getWebDriverUtils().clickElement(closeWidgetList, "Close-WidgetList");
+
+			}
+
+		}
+	}
+
+	public boolean getWidgetLists(String widgetname) throws InterruptedException {
+
+		Reporter.log("********** Verify widget availability in Add Widgets List ************",true);
+		boolean widgetavailable = false;
+		vc.getWebDriverUtils().elementAvailablity(addWidgetButton, "AddWidget-Button");
+		
+		vc.waitUntilTextIsPresent("Add Widgets");
+		driver.findElement(By.id("flyoutAddWidgets")).click();
+		vc.getWebDriverUtils().sleep(2000);
+		vc.waitUntilTextIsPresent("Search widgets");
+		driver.findElement(By.id("txtSearch")).sendKeys(widgetname);
+		Reporter.log("Entered " + widgetname + " in Search Field ",true);
+		List<WebElement> options = driver.findElements(By.id("addWidgetsList"));
+		Reporter.log("Searching for " + widgetname +  " widget ",true);
+		for (int i = 0; i < options.size(); i++) {
+			String list = options.get(i).getText();
+			if (list.contains(widgetname)) {
+				widgetavailable = true;
+				Reporter.log(widgetname + " Widget is available",true);
+				
+			} else {
+				widgetavailable = false;
+				Reporter.log(widgetname.toUpperCase() + " Widget is not available ",true);
+				Assert.assertFalse(true);
+				
+			}
+
+		}
+		return widgetavailable;
+	}
+
+	public boolean availableWidget(String widgetTitle) {
+			
+		boolean widgetAvailable = false;
+
+		List<WebElement> availableWidgets = driver.findElements(By.xpath("//*[@id='widgets']/div/div/div/h2"));
+		Reporter.log("Searching for " + widgetTitle +  " widget in Dashboard",true);
+		for (int i = 0; i < availableWidgets.size(); i++) {
+			String list = availableWidgets.get(i).getText();
+			if (list.contains(widgetTitle)) {
+				widgetAvailable = true;
+				String errorLoadingWidgetMessage = "//div[contains(@data-widgettitle,'" + widgetTitle
+						+ "')]//div[@class='alert alert-error-widget ws-icon ico-alert']";
+				Boolean isPresent = driver.findElements(By.xpath(errorLoadingWidgetMessage)).size() > 0;
+				if(isPresent){
+					Reporter.log("We're sorry, an error has occurred while loading the widget.", true);
+					Assert.assertFalse(true, "Widget not loaded");
+				}
+			}
+		}
+		return widgetAvailable;
+	}
+	
+	public boolean checkWidgetLoaded(String widgetName ){
+		boolean widgetLoaded = false;
+		
+		String errorLoadingWidgetMessage = "//div[contains(@data-widgettitle,'" + widgetName
+				+ "')]//div[@class='alert alert-error-widget ws-icon ico-alert']";
+		Boolean isPresent = driver.findElements(By.xpath(errorLoadingWidgetMessage)).size() > 0;
+		if(isPresent){
+			Reporter.log("We're sorry, an error has occurred while loading the widget.", true);
+		}
+		return widgetLoaded;
+	}
+	
+	
+	public void addWidget(String widgetName,WebElement checkbox, String widgetTitle) throws InterruptedException {
+
+		Reporter.log("********** Add Widget and verify it is added to Dashboard ************", true);
+		vc.waitUntilTextIsPresent(widgetName);
+		vc.getWebDriverUtils().selectCheckbox(checkbox, widgetName + " Checkbox ");
+		Reporter.log("Select add Widgets to Dashboard..", true);
+		vc.getWebDriverUtils().sleep(5000);
+		WebElement addWidgetElement = driver.findElement(By.id("addWidgetsAction"));
+		vc.getWebDriverUtils().clickHiddenElement(addWidgetElement, "Add " + widgetName + " to my Dashbaord");
+		vc.getWebDriverUtils().checkPageIsReady();
+		vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		Assert.assertTrue(vc.waitUntilTextIsPresent("Your dashboard was updated successfully!"));
+		Reporter.log("Searching for " + widgetName + " widget is added or not ", true);
+		//vc.getWebDriverUtils().pageRefresh();
+		waitForWidgetToLoad();
+
+		if (availableWidget(widgetTitle)) {
+			Reporter.log(widgetTitle + " Widget is added Successfully", true);
+
+			String errorLoadingWidgetMessage = "//div[contains(@data-widgettitle,'" + widgetName
+					+ "')]//div[@class='alert alert-error-widget ws-icon ico-alert']";
+			Boolean isPresent = driver.findElements(By.xpath(errorLoadingWidgetMessage)).size() > 0;
+			if (isPresent) {
+				Reporter.log("We're sorry, an error has occurred while loading the widget.", true);
+				Assert.assertFalse(true, "Widget not loaded");
+			}
+
+		} else {
+			Reporter.log(widgetTitle + " Widget is not added", true);
+			Assert.assertFalse(true, "Widget is not added");
+		}
+
+	}
+
+	public boolean addedWidgetList(String widgetname) throws InterruptedException {
+
+		boolean  addedWidget = false;
+
+		vc.getWebDriverUtils().clickElement(addWidgetButton, "AddWidgetButton");
+		List<WebElement> addedWidgetList = driver.findElements(By.xpath("//*[@id='widgets']/div/div/div/h2"));
+		for (int i = 0; i < addedWidgetList.size(); i++) {
+			String list = addedWidgetList.get(i).getText();
+			if (list.contains(widgetname)) {
+				 addedWidget = true;
+				Reporter.log(widgetname + " Widget is available",true);
+
+			} else {
+				 addedWidget = false;
+				
+			}
+
+		}
+		return  addedWidget;
+	}
+	
+	
+	public void getAddedWidget() {
+		Reporter.log("********** Get List of widgets which is already added ************",true);
+		List<WebElement> availableWidgets = driver.findElements(By.xpath("//*[@id='widgets']/div/div/div/h2"));
+		if (availableWidgets.isEmpty()) {
+			Reporter.log("No Widgets has been added",true);
+		} else {
+			System.out.println("Already added Widgets are -->");
+			for (int i = 0; i < availableWidgets.size(); i++) {
+				String list = availableWidgets.get(i).getText();
+				Reporter.log(list,true);
+			}
+		}
+	}
+	
+	/*public void removeAddedWidget(WebElement settingsIcon,WebElement removeWidget,String widgetName ) throws InterruptedException{
+		vc.getWebDriverUtils().elementAvailablity(settingsIcon, "SettingIcon");
+		vc.getWebDriverUtils().clickHiddenElement(settingsIcon, widgetName);
+		vc.getWebDriverUtils().clickElement(removeWidget, "Remove-Widget");
+		vc.getWebDriverUtils().checkPageIsReady();
+		List<WebElement> availableWidgets = driver.findElements(By.xpath("//*[@id='widgets']/div/div/div/h2"));
+		if(availableWidgets.contains(widgetName)){
+			Reporter.log("Widget is not Removed from Dashboard",true);
+		}else{
+			Reporter.log(widgetName + " Widget is Removed from Dashboard ",true);
+		}
+		
+	}*/
+	public void waitForWidgetToLoad() throws InterruptedException {
+		for (int i = 0; i < 30; i++) {
+			try {
+				if (driver.findElement(By.cssSelector(".lds-double-ring>div")).isDisplayed()) {
+					vc.getWebDriverUtils().sleep(2000);
+					Reporter.log("Waiting for Widget to load",true);
+					vc.getWebDriverUtils().pageRefresh();
+				} else {
+					break;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	public void removeAddedWidget(String widgetName) throws InterruptedException{
+		vc.getWebDriverUtils().pageRefresh();
+		
+		waitForWidgetToLoad();
+		
+//		String widgetXpath ="//h2[contains(.,'"+widgetName+"')]";
+//		WebElement widgetElement = driver.findElement(By.xpath(widgetXpath));
+		
+		//String settingsXpath="//div[@data-widgettitle='"+widgetName+"']/div[1]/button";
+		//SettingsIcon 
+		String settingsXpath="//div[contains(@data-widgettitle,'"+widgetName+"')]/div[1]/button";
+		WebElement settingsElement = driver.findElement(By.xpath(settingsXpath));
+		
+		//removeWidgetOption
+		String removeWidgetXpath="//div[contains(@data-widgettitle,'"+widgetName+"')]//a[contains(.,'Remove Widget')]";
+		WebElement removeWidgetElement = driver.findElement(By.xpath(removeWidgetXpath));
+	
+		Reporter.log("Verify Widget before removing", true);
+//		vc.getWebDriverUtils().elementAvailablity(widgetElement,"Widget:= "+widgetName);
+//		vc.getWebDriverUtils().scrollToViewElement(widgetElement, "Widget:= "+widgetName);
+		
+		vc.getWebDriverUtils().elementAvailablity(settingsElement, "SettingIcon");
+		vc.getWebDriverUtils().clickHiddenElement(settingsElement, widgetName);
+		vc.getWebDriverUtils().clickHiddenElement(removeWidgetElement, "Remove-Widget");
+		vc.getWebDriverUtils().checkPageIsReady();
+		//List<WebElement> availableWidgets = driver.findElements(By.xpath("//*[@id='widgets']/div/div/div/h2"));
+		if(availableWidget(widgetName)){
+			Reporter.log(widgetName + "Widget is not Removed from Dashboard",true);
+			Assert.assertTrue(false);
+		}else{
+			Reporter.log(widgetName + " Widget is Removed from Dashboard",true);
+		}
+		
+	}
+
+
+
+	public boolean isDropdownPresent(WebElement element,String dropDown) throws InterruptedException  {
+		boolean isDropdownPresent = false;
+		vc.getWebDriverUtils().waitUntilDoubleRingWheelExists();
+		if(vc.getWebDriverUtils().elementAvailablity(element, dropDown)) {
+			isDropdownPresent=true;
+			Reporter.log("Dropdown is available",true);
+		}else {
+			isDropdownPresent=false;
+			Reporter.log("Dropdown not available",true);
+		
+		}
+		return isDropdownPresent;
+		
+	}
+
+
+
+	public void deleteWidgets() throws InterruptedException {
+		//driver.navigate().refresh();
+		vc.getWebDriverUtils().checkPageIsReady();
+		List<WebElement> savedWidgets = driver
+				.findElements(By.xpath("//button[contains(@class,'ws-icon settings ws-menu menu-down closed')]"));								
+		System.out.println("No of widgets available are ==>" + savedWidgets.size());
+		if (savedWidgets.isEmpty()) {
+			System.out.println("Dashboard is empty");
+		} else {
+			java.util.Iterator<WebElement> itr = savedWidgets.iterator();
+			while (itr.hasNext()) {
+				vc.getWebDriverUtils().clickElement(Settingicon_Closed, "SetttinsOption");
+
+				vc.getWebDriverUtils().clickElement(removeWidgetOption, "Removewidget");
+
+				itr.next();
+			}
+			System.out.println("All the Widgets are deleted");
+		}
+	}
+
+	public void commonWidgetsUI() throws InterruptedException {
+		vc.getWebDriverUtils().elementAvailablity(Settingicon_Closed, "SettingsOption");
+		vc.getWebDriverUtils().clickElement(Settingicon_Closed, "SettingsOption");
+		vc.getWebDriverUtils().elementAvailablity(removeWidgetOption, "DeleteOption");
+		vc.getWebDriverUtils().clickElement(settingIcon_Open, "SettingsOption");
+
+	}
+	
+	public void moveWidget() {
+		WebElement drag = driver.findElement(By.xpath("//h2[contains(.,'Weather Alerts')]"));
+		WebElement drop = driver.findElement(By.xpath("//h2[contains(.,' Toll-Free Service')]"));
+		Actions act = new Actions(driver);
+		act.dragAndDrop(drag, drop).build().perform();
+		Reporter.log("Successfully dragged " + drag.getText() + " to " + drop.getText(),true);
+		
+	}
+
+}

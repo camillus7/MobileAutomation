@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression" parallel="tests" thread-count="16">
+<listeners> 
+	  <listener class-name="commonUtil.ExtentReporterNG" />
+      <listener class-name="com.webautomation.validation.RetryListener" />  
+</listeners>
+
+<test name="TC_WE_ELNK_Services_Tools_ActiveServices"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_ActiveServices"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Services_Tools_Locations"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_Locations"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Services_Tools_SpeedTest"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Tools_SpeedTest"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Services_Products_HostedCC"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_HostedContactCenter"/> </methods> </class> </classes> </test>  
+ 
+<test name="TC_WE_ELNK_Reporting_BillingReports"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Billing_BillingReports"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Reporting_NetworkLatency"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_NetworkLatency"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Reporting_ScheduledUtilizationReport"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_ScheduledUtilizationReports"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_ELNK_Reporting_QueuedReport"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_QueuedReports"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_ELNK_Reporting_TrafficStudy"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Network_TrafficStudy"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Reporting_VoiceUsage"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Reporting_Suite"> <methods> <include name="Reporting_Voice_VoiceUsage"/> </methods> </class> </classes> </test>
+
+<test name="TC_WE_ELNK_Billing_Autopay_Paynow"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_Autopay_Paynow_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Billing_BillingHistory"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_BillingHistory_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Billing_SchedulePayment"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_SchedulePayment_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Billing_ViewAndPaybill"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_ViewAndPaybill_ELNK"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_ELNK_Billing_ViewBillingHistory"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Billing_Suite"> <methods> <include name="Billing_ViewBillingHistory_ELNK"/> </methods> </class> </classes> </test>
+ 
+<test name="TC_WE_ELNK_Support_SupportRequests"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="SupportRequests_NewSupportRequest_FlyOut_ELNK"/> </methods> </class> </classes> </test> 
+<test name="TC_WE_ELNK_Support_Community"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_Community"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Support_ContactUs"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_ContactUs"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Support_GetHelp"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_GetHelp"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Support_NationwideStatus"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_NationwideStatus"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Support_CreateSupportRequest"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_NewSupportRequest_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_Support_EscalationProcess"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Support_Suite"> <methods> <include name="Support_EscalationProcess"/> </methods> </class> </classes> </test>
+
+<test name="TC_WE_Elnk_Downloads"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Downloads_Suite"> <methods> <include name="WE_Downloads_ELNK"/> </methods> </class> </classes> </test>
+
+<test name="TC_WE_ELNK_UserManager_UI"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_UI_ELNK"/></methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_UserManager_InviteUser"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Usermanager_Suite"> <methods><include name="Usermanager_Inviteuser_ELNK"/></methods> </class> </classes> </test>
+
+<test name="TC_WE_ELNK_General_ActivityLog"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ActivityLog_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_General_Themes"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_Themes_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_General_ContactInfo"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ContactInformation_ELNK"/> </methods> </class> </classes> </test>
+<test name="TC_WE_ELNK_General_ChangePassword"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_General_Suite"> <methods> <include name="MyProfile_ChangePassword_ELNK"/> </methods> </class> </classes> </test>
+ 
+<!--  <test name="TC_WE_ELNK_Services_Products_OnlineFax"> <classes> <class name="com.webautomation.tests.seleniumGrid.WE_Services_Suite"> <methods> <include name="Services_Products_OnlineFax"/> </methods> </class> </classes> </test>  
+  -->
+ 
+</suite>
